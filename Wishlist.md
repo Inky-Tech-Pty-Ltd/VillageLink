@@ -6,7 +6,9 @@ Ideas, experiments, questions and possible things to build.
 
 ## #1 — Pathway to relevance
 
-- [ ] Develop a strong answer to Sankarshan's question: **"What is the pathway to relevance for this technology?"**
+- [ ] **As the primary promoter of the project, Joe should have at his disposal our best efforts at a succinct, compelling set of elevator-pitch answers to the question: _"What is the pathway to relevance for this technology?"_** He should be able to produce those answers at a moment's notice, without fumbling, retreating into abstraction, or escaping into interesting but secondary ideas.
+- [ ] Treat this explicitly as a **marketing capability** the project must build, not merely as an architectural or philosophical question.
+- [ ] Develop versions of the answer for different levels of available attention: one sentence, 30 seconds, two minutes, and a deeper discussion.
 - [ ] Treat this as a scaling problem, not merely a statement of public benefit: **How do we get 100 people interested and involved? 1,000? 100,000? 10,000,000?**
 - [ ] Identify what motivates participation at each scale. The reasons the first 100 or 1,000 people care may be very different from the reasons a million people use the technology.
 - [ ] In particular, explore the bridge between **public-good motivation** and **tangible private advantage**. AI alignment, governance, provenance and healthier public infrastructure may be capable of attracting an early community; mass adoption probably requires Village Link to solve concrete problems for individual people, organisations or products.
