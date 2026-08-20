@@ -4,6 +4,16 @@ Ideas, experiments, questions and possible things to build.
 
 **Nothing in this document is a commitment.** Items move into the roadmap only when we deliberately decide to pursue them.
 
+## #1 — Pathway to relevance
+
+- [ ] Develop a strong answer to Sankarshan's question: **"What is the pathway to relevance for this technology?"**
+- [ ] Treat this as a scaling problem, not merely a statement of public benefit: **How do we get 100 people interested and involved? 1,000? 100,000? 10,000,000?**
+- [ ] Identify what motivates participation at each scale. The reasons the first 100 or 1,000 people care may be very different from the reasons a million people use the technology.
+- [ ] In particular, explore the bridge between **public-good motivation** and **tangible private advantage**. AI alignment, governance, provenance and healthier public infrastructure may be capable of attracting an early community; mass adoption probably requires Village Link to solve concrete problems for individual people, organisations or products.
+- [ ] Look for the case-by-case opportunities through which Village Link could spread in a massively contested attention environment: situations where adopting or creating a Village Link produces an immediate benefit for the adopter, without requiring the rest of the world to adopt first.
+- [ ] Revisit our existing documents and conversations and assemble the strongest pathways to relevance we have proposed so far, including identity/reputation portability, search and discovery, third-party verification, provenance, AI/alignment applications, marketplaces, and the possibility that the more general **double-headed hyperlink** has useful applications beyond Village Link itself.
+- [ ] Turn this eventually into a plausible adoption ladder: early collaborators → useful niche → repeatable private advantage → network effects → large-scale relevance.
+
 ## Data and examples
 
 - [ ] Create a simple Village Link database, initially one table, containing at least:
