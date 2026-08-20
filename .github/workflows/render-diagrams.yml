@@ -3,6 +3,7 @@ name: Render diagrams
 on:
   push:
     branches:
+      - main
       - puck/diagram-render
 
 permissions:
