@@ -21,6 +21,7 @@ Ideas, experiments, questions and possible things to build.
 - [ ] Return to Brendan Miller's email and test his assertion that the objects we need already exist within DTG.
 - [ ] Have a focused architectural discussion about the **star credential**, similar to the discussion that produced the current Village Link primitive.
 - [ ] Untangle the relationship between the Village Link primitive and the star credential: the star credential may now be *one important thing built using the primitive*, rather than the primitive itself.
+- [ ] Do a focused piece of thinking on whether what we have really developed is the **double-headed hyperlink**, with Village Link as just one instance of what can be built using that more general primitive.
 - [ ] Work through the architecture far enough to create some actual star credentials.
 - [ ] Investigate whether a **star credential ceremony** needs to be specified by Village Link, substantially demonstrated by us, or deliberately left to adopting systems.
 - [ ] Explore the implications of the double-headed hyperlink for search, filtering and ranking.
