@@ -33,7 +33,7 @@ def add_link(item: VillageLink, path: Path = DB_PATH) -> None:
     with connect(path) as connection:
         connection.execute(
             """
-            INSERT INTO village_links
+            INSERT OR IGNORE INTO village_links
                 (link, left_uri, right_uri, evidence_source, sampled_at, notes)
             VALUES (?, ?, ?, ?, ?, ?)
             """,
