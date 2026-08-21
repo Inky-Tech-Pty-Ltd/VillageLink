@@ -4,7 +4,7 @@ Ideas, experiments, questions and possible things to build.
 
 **Nothing in this document is a commitment.** Items move into the roadmap only when we deliberately decide to pursue them.
 
-## #1 — Pathway to relevance
+## [#1 — Pathway to relevance](docs/responses/01-pathway-to-relevance.md)
 
 - [ ] **As the primary promoter of the project, Joe should have at his disposal our best efforts at a succinct, compelling set of elevator-pitch answers to the question: _"What is the pathway to relevance for this technology?"_** He should be able to produce those answers at a moment's notice, without fumbling, retreating into abstraction, or escaping into interesting but secondary ideas.
 - [ ] Treat this explicitly as a **marketing capability** the project must build, not merely as an architectural or philosophical question.
