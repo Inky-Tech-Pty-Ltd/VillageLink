@@ -1,12 +1,35 @@
-# VillageLink
-When people and other entities move through memory systems, they leave a trace on those systems.
-We do not have a standard way to state that the trace left in memory system X was made by the same entity as the trace left in memory system Y.
+# Village Link
+This project began with an investigation into one question:
 
-This project will establish that standard.
+> What is governance?
+
+Also, if we discover an answer to that question that is sufficiently general,
+could we tackle a follow-up question:
+
+> Can we govern AI?
+
+Our working hypothesis is that governance evolved to solve a three-part problem
+for our species. Our species has to:
+
+1.  Develop and pass down technologies that can extract energy from any environment
+2.  Solve the problem of distributing the energy among a group
+3.  Defend the energy store against raiders, internal or external.
+
+Part of solving the problem is to create systems of memory. Memory systems store 
+technology, rules, and accountability.
+
+The project does not claim to have discovered any grandiose solution to the problem
+of governance, but we do think we have turned up a missing primitive. 
+
+The missing primitive arises because we don't have a standard way to make a statement 
+that one entity has left a trace in two different memory systems. The project is built
+on a single object. The object will create a way to make a statement:
+
+> Entity A in context X ...... _equals_ ...... entity B in context Y.
+
+We believe this statement will have consequences in many places.
 
 ## Village Link: A Web of Memory Systems
-
-### Abstract
 
 We humans spontaneously make rules for each other. We slowly build trust
 and a sense of belonging while the rules are observed. We become grumpy,
