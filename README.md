@@ -1,31 +1,10 @@
 # VillageLink
-When people and other entities move through different memory systems, they leave a trace on those systems.
+When people and other entities move through memory systems, they leave a trace on those systems.
 We do not have a standard way to state that the trace left in memory system X was made by the same entity as the trace left in memory system Y.
 
 This project will establish that standard.
 
-
-
-
-
-A private repo designed for: 
-
-Requirements -> Road Map -> Specification -> Demo 
-
-But probably not for:
-
-Deploy -> Scale.
-
----
-
-## Village Link: A Web of Reputation Systems
-
-Note that this document has been superseded. The new single source of
-truth is the ReadMe page of private GitHub repo here:
-
-> [<u>https://github.com/Inky-Tech-Pty-Ltd/VillageLink</u>](https://github.com/Inky-Tech-Pty-Ltd/VillageLink)
-
-Contact Joe to be connected into this repo.
+## Village Link: A Web of Memory Systems
 
 ### Abstract
 
@@ -74,20 +53,20 @@ The internet era has created huge repositories of shared history, of
 connection, and no standard way to link from one of those repositories
 to another. The Village Link project will create that standard.
 
-### Reputation Systems
+### Memory Systems
 
-The project deals with a very general concept called a *Reputation
-System*. A Reputation System arises when any group of people interact
+The project deals with a very general concept called a *Memory
+System*. A Memory System arises when any group of people interact
 and begin to form common understandings. The systems are scale-free, and
 can overlap in complex ways.
 
 At large scale, systems like *Christianity,* have common understandings
 about a hallowed set of stories, and the traditions that follow. The
-smallest possible scale is a reputation system of just two people -
+smallest possible scale is a memory system of just two people -
 let’s say a marriage - with its understandings about who is going to
 walk the dog, and who is going to put out the bins.
 
-Humans create reputation systems all the time. They emerge even in the
+Humans create memory systems all the time. They emerge even in the
 most difficult of circumstances. Consider, for example, the famous case
 of spontaneous truces breaking out between the trenches in WWI.
 
@@ -95,26 +74,15 @@ To disrupt those truces, generals learned to move groups of soldiers up
 and down the line. The strategy was to erase memory, to break the common
 understandings.
 
-Memory is key to a reputation system. How does the group *store* its
-understandings, its culture? What is the technology of memory?
-
 We have many ancient systems for storing our memories - song, language,
 story, the market square, law. More recently we have built systems on
 the internet, each with its own technology of memory - Wikipedia,
 GitHub, Facebook, Twitter.
 
-Often we have to deal with more than one reputation system at a time.
+Often we have to deal with more than one memory system at a time.
 Consider a social situation where family, friends, and workmates are
 present. All three sets of expectations are in play. This tends to pull
 us to the centre, to the expectations that the systems have in common.
-
-1.  Village Link is based on a general, scale-free object, called a
-    *reputation system*
-
-2.  Memory is key to reputation systems
-
-3.  When multiple systems are linked, there is a civilizing effect, a
-    pull to the political centre.
 
 <p align="center">
   <img src="docs/diagrams/rendered/Three%20Contexts.png" alt="Village Link diagram" width="450" />
@@ -122,7 +90,7 @@ us to the centre, to the expectations that the systems have in common.
 
 ### Links
 
-The objective is to link any reputation system to any other reputation
+The objective is to link any memory system to any other memory
 system … including connecting online systems like ‘GitHub’ to offline
 systems like ‘my workplace’. The task sounds ambitious, but *people* are
 the common link. With people as the points of connection, we can make a
@@ -153,7 +121,7 @@ centrepiece of the project:
 The centrepoint of this diagram, with its spokes, establishes a
 credential, *🞷JoeRasmussen*. We don’t need any specific technology to
 manage this credential - the technologies are managed out in the spokes,
-by the different reputation systems.
+by the different memory systems.
 
 The credential, *🞷JoeRasmussen*, is a collection of as many
 *@JoeRasmussens* as he wishes to add.
@@ -184,8 +152,8 @@ Note the civilising effect of Byrnes’ document: He has an account on
 Twitter, and is exposed to Twitter’s technology of memory. That
 technology is tuned for the commercial effect of clickbait. It tends to
 pull to tribalism, away from the political centre. But Byrnes, by
-explicitly linking his Twitter reputation to his broader set of
-reputation systems, is less likely to take up Twitter’s invitation to
+explicitly linking his reputation in Twitter to his broader set of
+memory systems, is less likely to take up Twitter’s invitation to
 misbehave.
 
 Byrnes has made it possible for his colleagues in the villages of
@@ -210,7 +178,7 @@ technologies. The project seeks wider applicability.
 
 For example, the two credentials, *🞷JoeRasmussen* and *🞷SteveByrnes*,
 might reveal that Joe and Steve are family. Families have deep
-reputation systems, designed originally by evolution as a survival
+memory systems, designed originally by evolution as a survival
 strategy for a harsh environment.
 
 ‘Family’ is a technology that relies on thousands of tiny threads that
@@ -247,8 +215,8 @@ coming from GitHub, rather than from the Village Link project:
 
 > [<u>gc.github.com/JoeRasmussen</u>](http://gc.github.com/JoeRasmussen)
 
-In the examples above, domain names are contexts - they are reputation
-systems. We also need a way to label offline reputation systems that do
+In the examples above, domain names are contexts - they are memory
+systems. We also need a way to label offline memory systems that do
 not own a domain - systems like ‘the ancestral home’:
 
 > <u>vc.village.link/AncestralHome</u>
@@ -265,13 +233,13 @@ but *any object*.
 
 > <u>a.context.for/a/label/for/[any/kind/of](http://any.kind.of)/object</u>
 
-This means we can fold any type of object into our web of reputation
-systems. Most obviously we are interested in the reputations of
+This means we can fold any type of object into our web of memory
+systems. Most obviously we are interested in the reputational traces of
 companies, governing bodies, and other types of organisation … but also
 servers, databases, applications … goods and services … and, critically,
 AI Agents.
 
-A reputation system is a set of constraints, of rules. It might be as
+A memory system is a set of constraints, of rules. It might be as
 formal as written law, or as informal as the understandings of a group
 of friends who meet for Friday drinks.
 
@@ -285,7 +253,7 @@ AI alignment.
 We want AIs to face constraints that are similar to the ancient
 constraints faced by humans. To achieve this, we need AI to have
 reputational ‘skin in the game’. That is to say, we want AIs that are
-subject to the evolving sets of rules that we are calling reputation
+subject to the evolving sets of rules that we are calling memory
 systems. We need them to experience risk in the face of the sanctions
 that are available to those systems.
 
@@ -312,7 +280,7 @@ The Village Link project is building a world where the best defence
 against fraud is a ‘star’ credential of the type *🞷HelpfulAI*.
 
 If *🞷HelpfulAI* is proposing a transaction with *🞷SteveByrnes,* Steve is
-going to apply his normal firewall. That means finding reputation
+going to apply his normal firewall. That means finding memory
 systems that Steve trusts, and where *🞷HelpfulAI* has left a memory
 trail of transactions that demonstrate added value.
 
@@ -347,7 +315,7 @@ and make some number of billions of statements of the form:
     [<u>www.facebook.com/joe.rasmussen.70</u>](http://www.facebook.com/joe.rasmussen.70)
 
 This set of statements, published by Village Link, will establish the
-web of reputation systems. It will give its users the new ‘star’
+web of memory systems. It will give its users the new ‘star’
 credential and make it easy to search for multiple authentication paths
 between entities. It will be useful on day one.
 
@@ -386,7 +354,7 @@ task.
 ### Search
 
 The key insight, from Larry Page in 1997, is that The Web is a
-reputation system. Inside that system, hyperlinks are votes. The diagram
+memory system that encodes reputation. Inside that system, hyperlinks are votes. The diagram
 below is taken from the Wikipedia entry for the PageRank search
 algorithm:
 
@@ -424,7 +392,7 @@ PageRank diagram:
     the real Joe Rasmussen”
 
 2.  Entities can construct a composite credential, *🞷JoeRasmussen*, with
-    arrows that face outwards to different reputation systems: In the
+    arrows that face outwards to different memory systems: In the
     diagram this is given by arrows from yellow to red, green, and
     purple
 
@@ -540,12 +508,12 @@ earlier in the paper:
 
 #### One
 
-In the first description of how we would make a link from one reputation
+In the first description of how we would make a link from one memory
 system to another, the paper drew attention to *people* as the common
 link. This statement was a useful first approximation, but it was not
 general enough.
 
-The project uses the URI to wrap a set of reputation systems around *any
+The project uses the URI to wrap a set of memory systems around *any
 object*. This can include a company, or any product or service. It can
 include AI Agents, especially if we form the habit of insisting that
 they approach us with a credential.
@@ -554,11 +522,11 @@ they approach us with a credential.
 
 Identity, authentication, and credentials were used as the ‘way in’ for
 this paper. But the reputational claim, “I am me,” is the least
-ambitious of the reputation claims we might make.
+ambitious of the claims we might make.
 
 The questions below are about the reputations of *people* and *other
 things*. Only the first question is about identity. The last question is
-a self-referential one about the reputation of reputation systems.
+a self-referential one about the reputation of a memory system.
 
 Are you who you say you are? … Where are my customers? Who will fund me?
 Who will employ me? What is the best product for my current need? What
