@@ -117,7 +117,7 @@ us to the centre, to the expectations that the systems have in common.
     pull to the political centre.
 
 <p align="center">
-  <img src="docs/diagrams/rendered/image3.jpg" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/Three%20Contexts.png" alt="Village Link diagram" />
 </p>
 
 ### Links
