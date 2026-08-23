@@ -15,6 +15,14 @@ for our species. Our species has to:
 2.  Solve the problem of distributing the energy among a group
 3.  Defend the energy store against raiders, internal or external.
 
+Notice that in the formulation, the deep driver of governance systems is that humans
+do not extract their own energy needs directly from the environment. Instead, our
+species extracts energy in collectives, and then solves distribution through sets of
+transactions under rules. It is also true that AIs do not harvest the energy they need
+directly from the environment. This creates the possibility that AIs could be 
+governed with mechanisms that stem from the same deep drivers that create governance 
+systems for humans.
+
 Part of solving the problem is to create systems of memory. Memory systems store 
 technology, rules, and accountability.
 
