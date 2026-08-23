@@ -117,7 +117,7 @@ us to the centre, to the expectations that the systems have in common.
     pull to the political centre.
 
 <p align="center">
-  <img src="docs/diagrams/rendered/Three%20Contexts.png" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/Three%20Contexts.png" alt="Village Link diagram" width="450" />
 </p>
 
 ### Links
@@ -481,10 +481,10 @@ One option is to treat the browser as infrastructure.
 
 The not-for-profit precedent is Mozilla. There is an argument for
 treating the browser as infrastructure, and heading down the bumpy track
-created by Mozilla and Firefox. This could be a third leg of the
-‘launch’ strategy - that there is a new browser that ‘understands’ that
-village links are a special case of hyperlinks. This browser would be
-optimised to look for and deal with the special objects, including:
+created by Mozilla and Firefox. This could be a third leg of the ‘launch’
+strategy - that there is a new browser that ‘understands’ that village
+links are a special case of hyperlinks. This browser would be optimised
+to look for and deal with the special objects, including:
 
 - Entities that claim global context
 
