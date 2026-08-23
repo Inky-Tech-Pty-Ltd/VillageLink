@@ -1,5 +1,5 @@
-# Village Link
-This project began with an investigation into one question:
+# Village Link: What is governance?
+This project begins with a question:
 
 > What is governance?
 
@@ -13,107 +13,61 @@ for our species. Our species has to:
 
 1.  Develop and pass down technologies that can extract energy from any environment
 2.  Solve the problem of distributing the energy among a group
-3.  Defend the energy store against raiders, internal or external.
+3.  Defend the store of energy against raiders, internal or external.
 
-Notice that in the formulation, the deep driver of governance systems is that humans
-do not extract their own energy needs directly from the environment. Instead, our
-species extracts energy in collectives, and then solves distribution through sets of
-transactions under rules. It is also true that AIs do not harvest the energy they need
-directly from the environment. This creates the possibility that AIs could be 
-governed with mechanisms that stem from the same deep drivers that create governance 
-systems for humans.
+In this formulation, the deep driver that forces the creation of governance systems is 
+that humans obtain their resources not alone, but in groups. Humans 
+have to solve the problem of distribution. 
 
-Part of solving the problem is to create systems of memory. Memory systems store 
-technology, rules, and accountability.
+AIs also cannot obtain the resources they require by themselves. They receive resources 
+through the same complex webs that deliver resources to humans. This creates the possibility 
+that AIs could be governed with mechanisms that come from the same deep drivers that 
+create governance systems for humans.
 
-The project does not claim to have discovered any grandiose solution to the problem
-of governance, but we do think we have turned up a missing primitive. 
+The project does not propose any new governance systems. Instead, it proposes a new primitive,
+a link, that can be used to connect any two existing governance systems. The project rests 
+on this single object. The object creates a standard way to make an assertion:
 
-The missing primitive arises because we don't have a standard way to make a statement 
-that one entity has left a trace in two different memory systems. The project is built
-on a single object. The object will create a way to make a statement:
+> Entity A in system X ...... _equals_ ...... entity B in system Y.
 
-> Entity A in context X ...... _equals_ ...... entity B in context Y.
+We believe this assertion will have consequences in many places.
 
-We believe this statement will have consequences in many places.
+## An Example
+Consider a guy, Alex, who wakes up with the answer to a problem that has been on his mind. 
+He immediately gets onto GitHub to create a pull request. He walks down to breakfast where 
+his partner and daughter are awake early. Alex is a bit of an over-achiever. It’s his habit 
+to grab just a coffee and a banana and strap in for five fast laps of the park circuit with 
+the group-ride crew. Back home for a shower and then out into the world where he swipes 
+onto the train for work. On the commute he scans group chat in Signal and WhatsApp. At 
+work he straps in to address the quota of unread emails.
 
-## Village Link: A Web of Memory Systems
+In this project, all of these are governance systems. The qualifying feature is that they
+have norms, and they create constraints for Alex. When he logs onto GitHub, he is engaging 
+with a formal system where some actions are possible, and other not supported. But GitHub
+is also a social system where some types of interaction signal 'community understanding'
+and other types are frowned upon.
 
-We humans spontaneously make rules for each other. We slowly build trust
-and a sense of belonging while the rules are observed. We become grumpy,
-and eventually impose sanctions, if the rules are breached.
+Alex's breakfast with his partner and daughter is also a systems of norms of behaviour with 
+sanctions for breach. So are the group-ride and his workplace. The train ticketing system,
+WhatsApp, Signal, and email are formal systems that rely on an 'Alex' identity that is proved
+in some formal way.
 
-The Village Link project treats this human capacity as a technology.
-It’s the technology of clubbing together and making a set of rules to
-suit the current circumstances. This technology evolved to solve an
-ancient problem, and is available to solve a series of modern problems.
+Governance, for Alex, is a complex layering of the constraints that come from all of these systems.
 
-The ancient problem was that, in order to survive, groups of humans had
-to:
+But we don't have a standard way of making linking assertions like:
 
-1.  Learn to extract energy from any environment
+> The Alex in Signal _is the same person_ as the Alex in WhatsApp
+> The Alex at breakfast _is the same person_ as Alex at Work
+> The Alex on the group ride _is the same person_ as Alex at Friday drinks.
 
-2.  Solve the problem of distributing the energy among the group
+And yet these links also form part of Alex's governance system. The norms of one system
+can bleed into another. If Alex behaves poorly on the group ride, he can face sanctions 
+at Friday drinks.
 
-3.  Defend the energy store against raiders, internal or external.
-
-The modern problems include:
-
-1.  Defence against scams and fraud
-
-2.  Governance of AI
-
-3.  Coordination of action at large scales and small
-
-4.  Management of cost and risk in transactions
-
-5.  … and a deeper problem of identity and authentication.
-
-In all cases the guide for the project is the ancient system. The ideal
-would be to uncover the key features of the existing technology, rather
-than inventing a new one.
-
-A critical event occurs when strangers meet. In this situation, our
-ancient habit is to tell stories of connectedness, of belonging. The
-ideal way to manage risk is for the parties to discover that they have
-connections in common. If the parties can discover connections in
-common, they can call on agreed systems of rules that include sanctions
-for breaches of trust.
-
-The internet era has created huge repositories of shared history, of
-connection, and no standard way to link from one of those repositories
-to another. The Village Link project will create that standard.
-
-### Memory Systems
-
-The project deals with a very general concept called a *Memory
-System*. A Memory System arises when any group of people interact
-and begin to form common understandings. The systems are scale-free, and
-can overlap in complex ways.
-
-At large scale, systems like *Christianity,* have common understandings
-about a hallowed set of stories, and the traditions that follow. The
-smallest possible scale is a memory system of just two people -
-let’s say a marriage - with its understandings about who is going to
-walk the dog, and who is going to put out the bins.
-
-Humans create memory systems all the time. They emerge even in the
-most difficult of circumstances. Consider, for example, the famous case
-of spontaneous truces breaking out between the trenches in WWI.
-
-To disrupt those truces, generals learned to move groups of soldiers up
-and down the line. The strategy was to erase memory, to break the common
-understandings.
-
-We have many ancient systems for storing our memories - song, language,
-story, the market square, law. More recently we have built systems on
-the internet, each with its own technology of memory - Wikipedia,
-GitHub, Facebook, Twitter.
-
-Often we have to deal with more than one memory system at a time.
-Consider a social situation where family, friends, and workmates are
-present. All three sets of expectations are in play. This tends to pull
-us to the centre, to the expectations that the systems have in common.
+More generally, it is often the case that multiple systems are in operation at once.
+Consider a social situation where family, friends, and workmates are present. All three 
+sets of expectations are in play. This tends to pull us to the centre, to the expectations 
+that the systems have in common.
 
 <p align="center">
   <img src="docs/diagrams/rendered/Three%20Contexts.png" alt="Village Link diagram" width="450" />
