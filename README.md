@@ -97,7 +97,7 @@ the common link. With people as the points of connection, we can make a
 data structure that works for any technology.
 
 <p align="center">
-  <img src="docs/diagrams/rendered/image8.jpg" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/Multiple%20Memberships%20Joe%20v1.png" alt="Multiple memberships — Joe, version 1" width="450" />
 </p>
 
 For our graph, we want the symmetry of connecting like-to-like. We can
@@ -108,7 +108,7 @@ achieve this with two tweaks to the above diagram:
 2.  Add ‘user profile’ dots to the other contexts.
 
 <p align="center">
-  <img src="docs/diagrams/rendered/image6.jpg" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/Multiple%20Memberships%20Joe%20v2.png" alt="Multiple memberships — Joe, version 2" width="450" />
 </p>
 
 Now we have the required elements to define the link that is the
@@ -131,7 +131,7 @@ The credential, *🞷JoeRasmussen*, is a collection of as many
 The screen-shot below does not belong to the project, but is useful[^1]:
 
 <p align="center">
-  <img src="docs/diagrams/rendered/image2.png" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/Steve%20Bynes%20homepage.png" alt="Steve Byrnes homepage" width="650" />
 </p>
 
 Byrnes is making a series of claims of fact. The project will make this
@@ -170,7 +170,7 @@ which technologies they have in common. They can establish two-, three-,
 or more-factor authentication through the paths of the web.
 
 <p align="center">
-  <img src="docs/diagrams/rendered/image5.jpg" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/Intersection%20of%20Joe%20and%20Steve.png" alt="Intersection of Joe and Steve" width="450" />
 </p>
 
 At this point it is easy to lock-on to thinking only about online
@@ -359,7 +359,7 @@ below is taken from the Wikipedia entry for the PageRank search
 algorithm:
 
 <p align="center">
-  <img src="docs/diagrams/rendered/image1.png" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/Wikipedia%20-%20PageRank.png" alt="Wikipedia PageRank diagram" width="550" />
 </p>
 
 In the diagram, the circles are web pages and the arrows are hyperlinks.
@@ -385,7 +385,7 @@ To compare village links with hyperlinks we can zoom in and adapt the
 PageRank diagram:
 
 <p align="center">
-  <img src="docs/diagrams/rendered/image7.jpg" alt="Village Link diagram" />
+  <img src="docs/diagrams/rendered/PageRank%20Diagram%20adapted.png" alt="Adapted PageRank diagram" width="550" />
 </p>
 
 1.  Some entities (yellow) assert that they have global context, “I am
