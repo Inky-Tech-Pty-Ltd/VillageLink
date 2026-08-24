@@ -1,4 +1,8 @@
 # Village Link: What is governance?
+Joe Rasmussen
+Village Link
+joe.rasmussen@village.link
+
 This project begins with a question:
 
 > What is governance?
@@ -19,10 +23,10 @@ In this formulation, the deep driver that forces the creation of governance syst
 that humans obtain their resources not alone, but in groups. Humans 
 have to solve the problem of distribution. 
 
-AIs also cannot obtain the resources they require by themselves. They receive resources 
-through the same complex webs that deliver resources to humans. This creates the possibility 
-that AIs could be governed with mechanisms that come from the same deep drivers that 
-create governance systems for humans.
+We share this feature with AI. An AI does not obtain its resources alone, but instead
+gains access to them through the through the same complex webs that deliver resources 
+to humans. This creates the possibility that AIs could be governed by mechanisms that
+stem from the same deep drivers that create governance systems for humans.
 
 The project does not propose any new governance systems. Instead, it proposes a new primitive,
 a link, that can be used to connect any two existing governance systems. The project rests 
@@ -34,34 +38,35 @@ We believe this assertion will have consequences in many places.
 
 ## An Example
 Consider a guy, Alex, who wakes up with the answer to a problem that has been on his mind. 
-He immediately gets onto GitHub to create a pull request. He walks down to breakfast where 
-his partner and daughter are awake early. Alex is a bit of an over-achiever. It’s his habit 
+He immediately gets onto GitHub to create a pull request. Then he walks down to breakfast where 
+his partner and daughter are awake early. Alex is a bit of an over-achiever: it is his habit 
 to grab just a coffee and a banana and strap in for five fast laps of the park circuit with 
-the group-ride crew. Back home for a shower and then out into the world where he swipes 
-onto the train for work. On the commute he scans group chat in Signal and WhatsApp. At 
-work he straps in to address the quota of unread emails.
+the local group-ride crew. Then back home for a shower and then out into the world where he 
+swipes onto the train ticketing system. On the commute he scans group chats in Signal and 
+WhatsApp. At work he settles in to address the quota of unread emails.
 
-In this project, all of these are governance systems. The qualifying feature is that they
-have norms, and they create constraints for Alex. When he logs onto GitHub, he is engaging 
-with a formal system where some actions are possible, and other not supported. But GitHub
-is also a social system where some types of interaction signal 'community understanding'
-and other types are frowned upon.
+In the Village Link project, all of these are encounters with governance systems. The 
+qualifying feature is that they have norms, and they create constraints for Alex. When he 
+logs onto GitHub, he is engaging with a formal system where some actions are possible, and 
+others are not. But GitHub is also a social system where some actions tend to confirm that
+Alex, 'gets it,' while other actions might be frowned upon.
 
-Alex's breakfast with his partner and daughter is also a systems of norms of behaviour with 
-sanctions for breach. So are the group-ride and his workplace. The train ticketing system,
-WhatsApp, Signal, and email are formal systems that rely on an 'Alex' identity that is proved
+Alex's breakfast with his partner and daughter is also a social system. It has of norms of 
+behaviour, and sometimes, sanctions for breach. The group-ride crew and Alex's workplace also
+exert social norms. The train ticketing system, WhatsApp, Signal, and Alex's email are formal 
+systems that both apply constraints, and rely on an 'Alex' login identity that is proved
 in some formal way.
 
 Governance, for Alex, is a complex layering of the constraints that come from all of these systems.
 
-But we don't have a standard way of making linking assertions like:
+Currently there is no standard way to make assertions like:
 
 > The Alex in Signal _is the same person_ as the Alex in WhatsApp
 > The Alex at breakfast _is the same person_ as Alex at Work
 > The Alex on the group ride _is the same person_ as Alex at Friday drinks.
 
-And yet these links also form part of Alex's governance system. The norms of one system
-can bleed into another. If Alex behaves poorly on the group ride, he can face sanctions 
+And yet these linkages also form part of Alex's governance system. The norms of one system
+can bleed into another. If Alex behaves poorly on the group ride, he might face sanctions 
 at Friday drinks.
 
 More generally, it is often the case that multiple systems are in operation at once.
@@ -73,35 +78,69 @@ that the systems have in common.
   <img src="docs/diagrams/rendered/Three%20Contexts.png" alt="Village Link diagram" width="450" />
 </p>
 
-### Links
+This effect can be spun either positively or negatively. the positive spin would be that the layering 
+produces a civilising effect, a pull to the political centre. The negative spin might note a chilling
+effect: that additional sets of eyes on Alex can encroach on his liberty.
 
-The objective is to link any memory system to any other memory
-system … including connecting online systems like ‘GitHub’ to offline
-systems like ‘my workplace’. The task sounds ambitious, but *people* are
-the common link. With people as the points of connection, we can make a
-data structure that works for any technology.
+Either way, the effect is conservative. It tends to connect actions to accountability. This is a
+counterbalance to the opposite effect in a 'clickbait' information ecology where actions are 
+deliberately isolated from accountability.
 
-<p align="center">
-  <img src="docs/diagrams/rendered/Multiple%20Memberships%20Joe%20v1.png" alt="Multiple memberships — Joe, version 1" width="450" />
-</p>
+## Links
 
-For our graph, we want the symmetry of connecting like-to-like. We can
-achieve this with two tweaks to the above diagram:
+The project introduces an odd-looking URI. The URI is an identifier of an edge in this graph. It is built from three pieces:
+1. A marker that this URI is a 'village link' and not a conventional hyperlink
+2. A complete, well-formed URI for the first entity
+3. A complete, well-formed URI for the second entity.
 
-1.  Establish a context for ‘the real’ Joe Rasmussen
+With this object in hand, the assertion:
 
-2.  Add ‘user profile’ dots to the other contexts.
+> Entity A in system X ...... _equals_ ...... entity B in system Y
+
+Becomes a single, two-ended hyperlink:
+
+> https://village.link/link/{left-uri}//{right-uri}
+> 
+> (Note there's nothing special about the domain name, 'village.link' in this example. _Any_ domain can make
+> assertions of this type.)
+
+This object _can_ resolve to a page that contains additional information about the edge, but it does
+not have to do this. It connects three parties, all of which are identified by the URI in a self-contained 
+way:
+
+1. The publisher of the link is identified by the web page on which it appears
+2. The _left-uri_ identifies the entities inside the first governance system
+3. The publisher is asserting that this is the _same_ entity as in the _right-uri_ ... but inside a different governance system. 
+
+The following URI is making an assertion about Joe Rasmussen, the author of this paper:
+
+> https://village.link/link/facebook.com/joerasmussen.70//github.com/Joe-Rasmussen
+
+## Global Context
+
+The project has to be able to connect offline systems like 'my workplace' with online
+systems like 'Facebook'. To achive this, we need a few additional lablelling conventions
+that belong properly in the specifications document. One of these is important enough to be
+mentioned here:
+
+We need a way to assert global context. That is to say, sometimes we want to make assertions 
+about 'the real' Joe Rasmussen - the physical presence in the world one that can make an
+appearance in _any_ of the other governance systems. This is achieved by adding a prefix 'gc'
+to the beginning of a URI.
+
+> <u>gc.village.link/JoeRasmussen</u>
+>
+>(Note that there is no central authority in this system - nothing special about the 'village.link' domain. 
+> _Any_ domain can make a global context assertion of this type.)
+
+## Star Credential
+
+A collection of links like this can be used to establish a 'star credential
 
 <p align="center">
   <img src="docs/diagrams/rendered/Multiple%20Memberships%20Joe%20v2.png" alt="Multiple memberships — Joe, version 2" width="450" />
 </p>
 
-Now we have the required elements to define the link that is the
-centrepiece of the project:
-
-> Entity A in context X ………… equals ………… entity B in context Y.
-
-### Credential
 
 The centrepoint of this diagram, with its spokes, establishes a
 credential, *🞷JoeRasmussen*. We don’t need any specific technology to
