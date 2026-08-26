@@ -61,13 +61,13 @@ in its graph, while introducing a new set of symmetries.
 
 ## Why this matters
 
-People, organisations and software agents already exist in many separate systems. Each system accumulates a partial history: accounts, memberships, transactions, permissions, sanctions, endorsements and other reputational traces.
+People, organisations and software agents already exist in many separate **memory systems**: systems capable of retaining traces associated with entities. A memory system may record accounts, memberships, transactions, permissions, observations, endorsements, sanctions or other history. It need not impose rules or exercise authority over the entity it remembers.
 
-Those systems are usually disconnected.
+Those memory systems are usually disconnected.
 
 Village Link provides a standard way to publish connections between them.
 
-A sufficiently rich set of connections can form a graph around an entity. We call this a **Star Credential**: not a new master identity issued by a central authority, but a collection of independently meaningful identities and reputational traces that can be traversed together.
+A sufficiently rich set of connections can form a graph around an entity. We call this a **Star Credential**: not a new master identity issued by a central authority, but a collection of independently meaningful identities and memory traces that can be traversed together.
 
 This may support applications including:
 
@@ -80,13 +80,15 @@ This may support applications including:
 
 These are possible consequences of the primitive, not requirements of the primitive itself.
 
-## Governance
+## Memory systems and governance
 
-Village Link uses **governance** in a broad sense: systems of rules, norms, permissions, constraints and sanctions that shape behaviour.
+A **memory system** is any system capable of retaining traces associated with entities. Some memory systems also contain norms about how entities should behave. Some record breaches of those norms or sanctions imposed in response. Others contain no norms, breach assessments or sanctions at all.
 
-A person can simultaneously participate in many such systems: family, workplace, professional communities, software platforms, clubs, legal jurisdictions and informal social groups. Organisations and AI agents can also be subject to overlapping systems of constraint.
+**Governance** is broader than any one such system. It arises when an entity is exposed, through one or more memory systems, to norms and to possible consequences associated with conformity or breach.
 
-The project asks whether making relationships between these systems explicit can improve accountability and make reputational information more portable without creating a new central identity authority.
+The relevant functions do not need to live in the same place. An action may occur in one system, be assessed against a norm somewhere else, and lead to a sanction recorded or imposed somewhere else again. A person, organisation or software agent may therefore be subject to complex, overlapping layers of governance without belonging to any single "governance system".
+
+Village Link does not itself perform governance. It makes it possible to publish connections between memories of the same entity across otherwise separate systems. A sufficiently rich graph may therefore make existing relationships of reputation, accountability and governance more visible and traversable without creating a new central identity authority.
 
 ## Current status
 
@@ -125,6 +127,6 @@ The project currently favours:
 
 The project is young enough that architecture, terminology and implementation remain open to challenge.
 
-Useful contributions include criticism of the primitive, edge cases, alternative architectures, privacy and abuse analysis, prototype code, test data, and examples from existing identity, reputation and governance systems.
+Useful contributions include criticism of the primitive, edge cases, alternative architectures, privacy and abuse analysis, prototype code, test data, and examples from existing identity, reputation, memory and governance systems.
 
 If the underlying assertion — **P asserts A ↔ B** — is useful, the next task is to discover where it breaks.
