@@ -32,13 +32,23 @@ In the core Village Link formulation, the assertion is that two independently me
 
 ---
 
+## Consequence
+
+**Definition:** An outcome associated with an entity's behaviour, including outcomes arising from assessment against a norm.
+
+Consequences may be favourable, adverse or neutral, and need not be deliberately imposed. A favourable consequence may function as a reward; an adverse consequence may function as a sanction.
+
+**Related terms:** Governance, Norm, Reward, Sanction.
+
+---
+
 ## Context
 
-**Definition:** The circumstances or system within which an identifier has meaning.
+**Definition:** The circumstances within which an identifier or memory trace has meaning.
 
-Context is not used as a synonym for *memory system*. A memory system may provide a context in which an identifier is meaningful, but the concepts are distinct.
+A context may be provided by, or represented within, a memory system. The concepts are distinct: *context* describes where something has meaning, while *memory system* describes a system capable of retaining traces. In informal project prose, *context* may sometimes stand for the relevant memory system where the distinction is unimportant.
 
-**Related terms:** Identifier, Memory system.
+**Related terms:** Identifier, Memory trace, Memory system.
 
 ---
 
@@ -54,13 +64,13 @@ Village Link does not require an entity to be a human or to possess a single can
 
 ## Governance
 
-**Definition:** A process by which norms and anticipated or actual consequences constrain or shape the behaviour of entities.
+**Definition:** A process by which norms and anticipated or actual consequences shape the behaviour of entities.
 
-Governance may operate across multiple memory systems. An action may occur in one system, be assessed against a norm somewhere else, and lead to a consequence or sanction recorded or imposed somewhere else again.
+Governance may operate across multiple memory systems. An action may occur in one system, be assessed against a norm somewhere else, and lead to a consequence recorded, conferred or imposed somewhere else again.
 
 Governance therefore does not require an entity to belong to a single *governance system*.
 
-**Related terms:** Memory system, Norm, Sanction.
+**Related terms:** Consequence, Memory system, Norm, Reward, Sanction.
 
 ---
 
@@ -68,9 +78,9 @@ Governance therefore does not require an entity to belong to a single *governanc
 
 **Status:** Discouraged as a generic project term.
 
-**Definition:** A system that participates in governance by establishing, applying or enforcing norms or consequences.
+**Definition:** A system that participates in governance by establishing or applying norms, assessing behaviour, or producing consequences.
 
-Earlier Village Link discussions sometimes used *governance system* for the broader category now called *memory system*. That usage is deprecated because a memory system need not contain norms or sanctions, and governance may emerge across several systems rather than reside in one.
+Earlier Village Link discussions sometimes used *governance system* for the broader category now called *memory system*. That usage is deprecated because a memory system need not contain norms or consequences, and governance may emerge across several systems rather than reside in one.
 
 **Preferred term:** Memory system, when referring to the generic system capable of retaining traces.
 
@@ -90,7 +100,7 @@ Village Link connects independently meaningful identifiers. The endpoint systems
 
 **Definition:** A system capable of retaining traces associated with entities.
 
-A memory system may record accounts, memberships, transactions, permissions, observations, endorsements, sanctions or other history. It may contain norms about how entities should behave, but it need not. It may record breaches or sanctions, but it need not.
+A memory system may record accounts, memberships, transactions, permissions, observations, endorsements, rewards, sanctions or other history. It may contain norms about how entities should behave, but it need not. It may record assessments or consequences, but it need not.
 
 A memory system therefore need not exercise authority over, or even interact directly with, the entity it remembers.
 
@@ -114,9 +124,9 @@ A trace need not be evaluative. Its existence does not establish that its conten
 
 **Definition:** An expectation, rule or standard concerning how an entity should behave.
 
-A norm may be formal or informal and need not be stored in the same memory system as the actions assessed against it or any resulting sanction.
+A norm may be formal or informal and need not be stored in the same memory system as the actions assessed against it or any resulting consequence.
 
-**Related terms:** Governance, Sanction, Memory system.
+**Related terms:** Consequence, Governance, Memory system.
 
 ---
 
@@ -154,13 +164,27 @@ A reputation system is therefore a kind of memory system, not the generic catego
 
 ---
 
+## Reward
+
+**Definition:** A favourable consequence associated with an entity's behaviour or with an assessment of that behaviour against a norm.
+
+A reward need not be deliberately conferred. Increased trust, status, access or opportunity may function as rewards even where no single actor administers them.
+
+**Broader term:** Consequence.
+
+**Related terms:** Governance, Norm, Sanction.
+
+---
+
 ## Sanction
 
-**Definition:** A consequence imposed or experienced in response to an assessed breach of a norm.
+**Definition:** An adverse consequence associated with an entity's behaviour or with an assessed breach of a norm.
 
-A sanction need not be imposed by the same system in which the relevant action occurred, the norm was expressed, or the breach was assessed.
+A sanction need not be deliberately imposed, and need not arise in the same system in which the relevant action occurred, the norm was expressed, or the behaviour was assessed.
 
-**Related terms:** Governance, Norm, Memory system.
+**Broader term:** Consequence.
+
+**Related terms:** Governance, Norm, Reward.
 
 ---
 
@@ -206,7 +230,7 @@ The following terms may appear in older project documents or discussions:
 
 | Earlier usage | Current treatment |
 | --- | --- |
-| **Context** as the name of the endpoint system | Use *memory system* for the generic system; retain *context* for the circumstances in which an identifier has meaning. |
+| **Context** as the name of the endpoint system | Prefer *memory system* when the system's capacity to retain traces matters. *Context* remains appropriate for the circumstances in which an identifier or trace has meaning, and may stand informally for the relevant memory system where the distinction is unimportant. |
 | **Governance system** as the generic endpoint system | Use *memory system*. Governance may operate across multiple memory systems. |
 | **Reputation system** as the generic endpoint system | Use *memory system*. A reputation system is a more specific kind of memory system. |
 
