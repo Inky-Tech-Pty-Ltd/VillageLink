@@ -26,6 +26,9 @@ For example, a publisher might assert that these two identifiers refer to the sa
 https://github.com/Joe-Rasmussen
 https://www.facebook.com/joe.rasmussen.70/
 ```
+Conceptually:
+
+`[Village Link identifier] [separator] [URI A] [separator] [URI B]`
 
 The architectural decision is recorded in [ADR-001](docs/adr/001-two-ended-uri.md).
 
@@ -36,6 +39,9 @@ The important properties are:
 - the publisher is identified by publication context rather than encoded as a third endpoint;
 - multiple publishers may make matching or conflicting assertions;
 - Village Link itself does not decide which assertions are true.
+
+This 'double headed hyperlink' retains the property that the graph of the web holds 
+reputational information, but it adds a new set of symmetries to that property.
 
 ## Why this matters
 
