@@ -1,7 +1,7 @@
 # Village Link Glossary
 
 **Status:** Working draft  
-**Last updated:** 26 August 2026
+**Last updated:** 27 August 2026
 
 ## Purpose
 
@@ -48,7 +48,7 @@ Consequences may be favourable, adverse or neutral, and need not be deliberately
 
 A context may be provided by, or represented within, a memory system. The concepts are distinct: *context* describes where something has meaning, while *memory system* describes a system capable of retaining traces. In informal project prose, *context* may sometimes stand for the relevant memory system where the distinction is unimportant.
 
-**Related terms:** Identifier, Memory trace, Memory system.
+**Related terms:** Global context, Identifier, Memory trace, Memory system.
 
 ---
 
@@ -59,6 +59,28 @@ A context may be provided by, or represented within, a memory system. The concep
 Village Link does not require an entity to be a human or to possess a single canonical identity.
 
 **Related terms:** Identifier, Memory trace, Star Credential.
+
+---
+
+## Global context
+
+**Definition:** The universal set, relative to the universe of discourse of the Village Link model.
+
+If an ordinary context `X` describes a set within which a representation has meaning, then global context `U` is the universal set containing all such contexts or entities within the relevant universe of discourse.
+
+Conceptually:
+
+`A ∈ X`
+
+and a representation claiming global context may be expressed as:
+
+`E ∈ U`
+
+A claim of global context does **not** imply that the representation is authoritative, canonical, verified or true. It is a claim about the scope of context.
+
+A representation claiming global context may be useful as the centre of a Star Credential, but the converse does not hold: the centre of a Star Credential need not claim global context.
+
+**Related terms:** Context, Entity, Identifier, Star Credential.
 
 ---
 
@@ -194,9 +216,11 @@ A sanction need not be deliberately imposed, and need not arise in the same syst
 
 A Star Credential is not a new master identity issued by a central authority. It is a structure that may emerge from multiple Village Links and the systems they connect.
 
+The centre of a Star Credential may be a representation that claims global context, but it need not be. Being the centre of a Star Credential does not itself imply a claim of global context.
+
 The architecture and terminology of the Star Credential remain under active development.
 
-**Related terms:** Village Link, Entity, Identifier, Memory system.
+**Related terms:** Village Link, Entity, Identifier, Memory system, Global context.
 
 ---
 
