@@ -40,10 +40,10 @@ The important properties are:
 - multiple publishers may make matching or conflicting assertions;
 - Village Link itself does not decide which assertions are true.
 
-This 'double headed hyperlink' retains the property that the graph of the web holds 
-reputational information, but it adds a new set of symmetries to that property.
+This double-headed hyperlink retains the web's capacity to encode reputational information 
+in its graph, while introducing a new set of symmetries.
 
-### The existing symmetries
+### The existing web
 
 <p align="center">
   <img src="docs/diagrams/rendered/Wikipedia%20-%20PageRank.png" alt="Wikipedia PageRank diagram" width="550" />
@@ -56,7 +56,7 @@ reputational information, but it adds a new set of symmetries to that property.
 <p align="center">
   <img src="docs/diagrams/rendered/PageRank%20Diagram%20adapted.png" alt="Adapted PageRank diagram" width="300" />
   <br>
-  <em>Two publishers, E and C, both make the assertion E ↔ F</em>
+  <em>Two publishers, E and C, both make the assertion E ↔ F. For publisher E, this is an assertion <strong>about itself.</strong></em>
 </p>
 
 ## Why this matters
