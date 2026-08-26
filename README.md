@@ -43,6 +43,22 @@ The important properties are:
 This 'double headed hyperlink' retains the property that the graph of the web holds 
 reputational information, but it adds a new set of symmetries to that property.
 
+### The existing symmetries
+
+<p align="center">
+  <img src="docs/diagrams/rendered/Wikipedia%20-%20PageRank.png" alt="Wikipedia PageRank diagram" width="550" />
+  <br>
+  <em>Taken from Wikipedia: PageRank. A one-headed hyperlink drives a ranking algorithm</em>
+</p>
+
+### New primitive, new symmetries
+
+<p align="center">
+  <img src="docs/diagrams/rendered/PageRank%20Diagram%20adapted.png" alt="Adapted PageRank diagram" width="300" />
+  <br>
+  <em>Two publishers, E and C, both make the assertion E ↔ F</em>
+</p>
+
 ## Why this matters
 
 People, organisations and software agents already exist in many separate systems. Each system accumulates a partial history: accounts, memberships, transactions, permissions, sanctions, endorsements and other reputational traces.
