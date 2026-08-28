@@ -1,7 +1,7 @@
 # Village Link Glossary
 
 **Status:** Working draft  
-**Last updated:** 27 August 2026
+**Last updated:** 29 August 2026
 
 ## Purpose
 
@@ -39,6 +39,18 @@ In the core Village Link formulation, the assertion is that two independently me
 Consequences may be favourable, adverse or neutral, and need not be deliberately imposed. A favourable consequence may function as a reward; an adverse consequence may function as a sanction.
 
 **Related terms:** Governance, Norm, Reward, Sanction.
+
+---
+
+## Constraint
+
+**Definition:** A limit or pressure on possible behaviour arising from norms and anticipated or actual consequences.
+
+An entity subject to multiple memory systems may experience multiple, overlapping constraints. The effects of those constraints may be beneficial, harmful or mixed. Overlap may, for example, produce a *civilising effect* by encouraging behaviour acceptable across several contexts, or a *chilling effect* by suppressing behaviour that might otherwise be legitimate or valuable.
+
+Constraint describes the mechanism without presuming whether its effects are desirable.
+
+**Related terms:** Consequence, Governance, Memory system, Norm.
 
 ---
 
