@@ -1,5 +1,17 @@
 # Village Link
 
+Consider your relationships with your partner, family, friends and workplace. Consider also your interactions with social media and other pieces of software. And add to that your interaction with formal, written law.
+
+In all these places you face constraints: social norms, the rules imposed by software, or the strictures of formal law.
+
+In this project, governance is not more and not less than the constraining effect of layered sets of rules.
+
+The connection between these sets of rules is the thing itself. This gives us a node-and-edge graph in which sets of rules are connected by things. Village Link builds that connector.
+
+With investigation, the governing effect becomes very general: ‘things’ are revealed as patterns in the world — memes.
+
+In the sense that memes are patterns encoded in media, genes are a special case of memes. Governance is the fitness landscape: the layered sets of constraints faced by the memes.
+
 Village Link proposes a small web primitive for publishing assertions that two independently meaningful identifiers refer to the same entity in different contexts.
 
 Conceptually:
