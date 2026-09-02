@@ -1,18 +1,8 @@
 # Village Link
 
-Consider your relationships with your partner, family, friends and workplace. Consider also your interactions with social media and other pieces of software. And add to that your interaction with formal, written law.
+Village Link proposes a small web primitive for publishing an assertion that two independently meaningful identifiers refer to the same entity in different contexts.
 
-In all these places you face constraints: social norms, the rules imposed by software, or the strictures of formal law.
-
-In this project, governance is not more and not less than the constraining effect of layered sets of rules.
-
-The connection between these sets of rules is the thing itself. This gives us a node-and-edge graph in which sets of rules are connected by things. Village Link builds that connector.
-
-With investigation, the governing effect becomes very general: ‘things’ are revealed as patterns in the world — memes.
-
-In the sense that memes are patterns encoded in media, genes are a special case of memes. Governance is the fitness landscape: the layered sets of constraints faced by the memes.
-
-Village Link proposes a small web primitive for publishing assertions that two independently meaningful identifiers refer to the same entity in different contexts.
+People, organisations and software agents already have identifiers and histories in many separate systems. Village Link does not replace those systems or establish a canonical identity. It provides a standard way for a publisher to connect two existing identifiers.
 
 Conceptually:
 
@@ -52,8 +42,7 @@ The important properties are:
 - multiple publishers may make matching or conflicting assertions;
 - Village Link itself does not decide which assertions are true.
 
-This double-headed hyperlink retains the web's capacity to encode reputational information 
-in its graph, while introducing a new set of symmetries.
+Like a conventional hyperlink, a Village Link carries information through both its endpoints and its publication context. Its two-ended form also creates graph structures that ordinary directed links do not express directly.
 
 ### The existing web
 
@@ -116,11 +105,14 @@ The syntax, indexing model, lifecycle rules, browser behaviour, evidence model a
 
 ## Project roles
 
-The work is being separated into three roles that should remain conceptually distinct:
+The work is being separated into four areas that should remain conceptually distinct:
 
 1. **Develop the standard** — define the primitive, syntax, semantics and supporting specifications.
-2. **Publish an initial graph** — create and test a corpus of Village Link assertions to establish useful data and expose practical problems.
-3. **Explore applications** — investigate products, services and institutions that might become possible if the standard and graph prove useful.
+2. **Publish and govern an initial graph** — use a MediaWiki to create and test a corpus of Village Link assertions.
+3. **Interpret the graph** — investigate reader-side discovery, filtering, ranking and trust through the [Trust Engine](trust-engine.md).
+4. **Manage disclosure** — investigate audience-specific presentation of star credentials through the [Star Credential Manager](star-credential-manager.md).
+
+In shorthand: **Define → Publish → Interpret → Disclose.**
 
 See [Roadmap](Roadmap.md) and [Wishlist](Wishlist.md) for the evolving work program.
 
