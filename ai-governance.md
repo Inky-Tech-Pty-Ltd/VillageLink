@@ -86,9 +86,7 @@ They change the environment in which strategies compete.
 
 A cooperative strategy can survive partly because communities remember cooperation. A destructive strategy can become less successful because communities remember destruction.
 
-Human governance therefore does something extraordinarily important:
-
-**it changes which behaviours succeed.**
+Human governance changes the conditions under which behaviours succeed.
 
 ## The fragmentation problem
 
@@ -160,7 +158,7 @@ It might be an entity for which useful categories do not yet exist.
 
 If an entity can act in multiple contexts, and those contexts can remember its behaviour, then establishing relationships between its representations can allow otherwise separate governance systems to become more composable.
 
-This is the Village Link contribution to AI governance.
+This is the proposed Village Link contribution to AI governance.
 
 Village Link does not attempt to design the governance system that will control artificial intelligence.
 
@@ -172,9 +170,9 @@ That may allow governance mechanisms developed for human communities — reputat
 
 The same infrastructure remains available to govern the people, organisations and institutions interacting with those actors.
 
-## The claim
+## Working hypothesis
 
-Village Link makes a large claim through a deliberately small technical object.
+The possible contribution can be stated as a hypothesis about a deliberately small technical object.
 
 Human governance has developed mechanisms that change the evolutionary environment in which behaviour succeeds.
 
