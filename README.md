@@ -97,7 +97,7 @@ Village Link is an early-stage experimental project. The repository currently co
 
 - the evolving project argument in this repository;
 - an accepted architectural decision for the two-ended hyperlink primitive;
-- roadmap and wishlist documents;
+- a [documentation map](DOCUMENTATION.md), roadmap and wishlist;
 - diagrams and worked examples;
 - prototype work toward publishing and browsing Village Links.
 
