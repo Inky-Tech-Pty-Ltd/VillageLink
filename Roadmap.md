@@ -66,11 +66,14 @@ The foundation documents have distinct jobs:
 
 | Document | Question answered |
 | --- | --- |
+| `DOCUMENTATION.md` | Where is the source of truth for each concept? |
 | `README.md` | What is Village Link, and why might it matter? |
 | `Roadmap.md` | In what order do we intend to learn, decide and build? |
 | `Requirements.md` | What must the system and project enable or constrain? |
 | `Specification.md` | What exactly is a conforming Village Link and how does it behave? |
 | `Wishlist.md` | What ideas should we preserve without committing to them? |
+| `trust-engine.md` | What can a reader compute from the graph? |
+| `star-credential-manager.md` | What should an entity or publisher disclose to an audience? |
 | Path to an audience | Who might care, why would they participate, and how could relevance grow? |
 | ADRs | Why were particular architectural decisions made? |
 
