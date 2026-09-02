@@ -18,15 +18,11 @@ Ideas, experiments, questions and possible things to build.
 
 ## Data and examples
 
-- [ ] Create a simple Village Link database, initially one table, containing at least:
-  - Village Link
-  - source
-  - date/time the source was sampled
-- [ ] Populate it with the examples from Steve Byrnes's home page.
-- [ ] Add Joe Rasmussen examples.
-- [ ] Add the Puck example.
-- [ ] Create some mock entities backed, where useful, by real accounts on existing systems.
-- [ ] Construct one or more small triangles between entities to explore/demonstrate third-party verification.
+- [ ] Define a manageable, low-risk subset of Wikipedia and Wikidata from which to derive initial entity pages and equivalence assertions.
+- [ ] Record the source, evidence, publisher and observation time for imported assertions without treating those fields as part of the core primitive.
+- [ ] Begin with public institutional entities, software agents and clearly labelled mock examples; avoid unnecessary correlation of ordinary people's identities.
+- [ ] Retain selected Steve Byrnes, Joe Rasmussen and Puck examples where they exercise a distinct technical case.
+- [ ] Construct small triangles, contradictions, stale identifiers and ambiguous cases to test interpretation rather than presenting only clean equivalences.
 
 ## Architecture and standards
 
@@ -48,11 +44,16 @@ Ideas, experiments, questions and possible things to build.
 - [ ] Consider whether search/filter behaviour can be demonstrated without allowing it to blow out the scope of the first demo.
 - [ ] Eventually explore a marketplace demonstration showing what portable, cross-system identity/reputation could do to incumbent marketplace models.
 
-## Infrastructure
+## Near-term implementation
 
-- [ ] Examine the existing cPanel/Linux VM environment.
-- [ ] Determine whether it is sufficient to host the early database and browser application.
-- [ ] Decide what additional infrastructure, if any, the first working demo actually requires.
+- [ ] Settle a prototype URI syntax, including escaping, reserved characters, round-trip parsing and comparison rules.
+- [ ] Install the reference MediaWiki on the available server.
+- [ ] Define the first entity-page and star-credential representation.
+- [ ] Build and document a controlled Wikipedia/Wikidata import process.
+- [ ] Populate the MediaWiki with the initial sandbox corpus.
+- [ ] Update the prototype browser to resolve Village Links through the MediaWiki and display both endpoints.
+- [ ] Use the working graph to investigate the first Trust Engine computations.
+- [ ] Use the working graph to clarify whether the Star Credential Manager requires Village Link-specific machinery.
 
 ## People and discovery
 
