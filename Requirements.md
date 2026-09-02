@@ -7,13 +7,14 @@
 
 This document states the current requirements for the Village Link project.
 
-Village Link is being developed through three conceptually distinct roles:
+Village Link is being developed through four conceptually distinct areas:
 
 1. **Develop the standard** — define the primitive, syntax, semantics and conformance rules.
-2. **Publish an initial graph** — publish a corpus of Village Link assertions to test the standard and establish useful data.
-3. **Explore applications** — build or investigate products, services and institutions that use Village Links and the resulting graph.
+2. **Publish and govern an initial graph** — publish a corpus of Village Link assertions to test the standard and establish useful data.
+3. **Interpret the graph** — investigate reader-side discovery, filtering, ranking and trust through Trust Engines.
+4. **Manage disclosure** — investigate how entities or publishers present audience-specific subsets of star credentials.
 
-The requirements are grouped accordingly. This separation is intentional: requirements imposed on the standard should not be confused with choices made by an initial publisher or by applications built on top of it.
+The requirements below are grouped into the standard, the reference publisher and consuming applications. The application requirements apply to both reader-side interpretation and disclosure tools where relevant; the separate concept documents define their different purposes. This separation is intentional: requirements imposed on the standard should not be confused with choices made by a publisher, Trust Engine or Star Credential Manager.
 
 Terms are used as defined in [Glossary.md](Glossary.md). The current architectural decision for the core primitive is recorded in [ADR-001](docs/adr/001-two-ended-uri.md).
 
@@ -139,9 +140,9 @@ Where practical, the initial corpus SHOULD make it possible to distinguish the V
 
 ---
 
-## 3. Requirements for applications
+## 3. Requirements for consuming applications
 
-These requirements apply to applications that interpret or use Village Links. They are deliberately modest: the project should leave room for applications to disagree about trust, reputation and usefulness.
+These requirements apply to applications that interpret, select or disclose Village Links. They are deliberately modest: the project should leave room for Trust Engines and Star Credential Managers to adopt different trust, reputation, audience and disclosure policies.
 
 **REQ-APP-001 — Preserve publisher distinction**  
 An application MUST NOT silently collapse identical endpoint pairs published by different publishers in a way that destroys information about who made each assertion.
