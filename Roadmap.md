@@ -2,7 +2,7 @@
 
 **Status:** Working draft  
 **Roadmap horizon:** August 2026 to February 2027  
-**Last updated:** 21 August 2026
+**Last updated:** 3 September 2026
 
 ## Purpose
 
@@ -20,29 +20,35 @@ By February 2027, Village Link should have:
 - credible open-source licensing, contribution and governance arrangements; and
 - materials suitable for conversations with standards bodies, academia, public-interest funders and commercial investors.
 
-## Project roles
+## Project areas
 
-Village Link currently contains three entangled project roles. Inky Tech and the early contributors may perform all three initially, but the roles should become visibly and institutionally distinct as soon as practical.
+Village Link currently contains four related areas of work. Inky Tech and the early contributors may work across them initially, but their responsibilities should remain visible and may require different institutional homes.
 
-### 1. Standards steward
+### 1. Developer of the Standard
 
 Develops and maintains the open Village Link standard, its terminology, conformance materials and public technical process.
 
-The intended direction is neutral, openly governed infrastructure. No commercial implementer should receive privileged control of the standard merely because it helped initiate the project.
+The intended direction is neutral, openly governed infrastructure. No publisher or application developer should receive privileged control of the standard merely because it helped initiate the project.
 
-### 2. Graph publisher
+### 2. Publisher
 
-Publishes an initial collection of Village Links sufficient to establish a useful graph, test the standard and make demonstrations possible.
+Publishes and governs collections of Village Links. The reference Role 2 implementation is a MediaWiki, chosen to reuse mature publication, revision and community-governance machinery.
 
-This role must earn trust as a publisher. A published assertion is not made true merely by appearing in the graph; provenance, evidence, sampling time and publisher identity remain important.
+A published assertion is not made true merely by appearing in the graph. Provenance, evidence, time and publisher identity remain relevant. Multiple independent publishers should remain possible.
 
-An open question is whether the initial publisher becomes durable infrastructure, is replaced by multiple independent publishers, or serves only as a bootstrap service.
+### 3. Trust Engine
 
-### 3. Commercial implementer
+Reads and interprets Village Link graphs for a user. Possible functions include discovery, filtering, ranking, comparison and trust assessment.
 
-Explores products and services made possible by the open standard and graph, potentially including browser, search, filtering, firewall and marketplace applications.
+Different Trust Engines may apply different policies and algorithms over the same published assertions. Their requirements must not be loaded into the core primitive.
 
-Inky Tech currently occupies this role. Commercial opportunity is legitimate, but it must not make public-interest contributors appear to be supplying free foundations for a privately controlled platform.
+### 4. Star Credential Manager
+
+Helps an entity or publisher construct and disclose audience-appropriate subsets of a broader star credential.
+
+This is the least mature area. Existing identity, access-control and selective-disclosure technologies may supply much or all of the required machinery. The Village Link primitive should not be enlarged merely to create a product in this area.
+
+The four areas can be summarised as **Define → Publish → Interpret → Disclose**.
 
 ## Operating principles
 
@@ -142,7 +148,7 @@ The roadmap is organised into six concurrent workstreams.
 **Target:** 21 August–15 September 2026
 
 - Create the foundation-document set: README, Roadmap, Wishlist, Requirements, Specification and Path to an Audience.
-- State the three project roles consistently across the documents.
+- State the four project areas consistently across the documents.
 - Reconcile the README's conceptual history with the current primitive.
 - Record unresolved architectural questions rather than hiding them in prose.
 - Establish minimal repository conventions: contribution guide, issue templates, decision process and document status labels.
@@ -219,7 +225,7 @@ The roadmap is organised into six concurrent workstreams.
 - Deliver a polished, repeatable demonstration with a meaningful sample graph.
 - Publish a clear draft specification and conformance examples.
 - Provide a packaged resource that others can use to run the demonstration or explain it accurately.
-- Present a proposal for formally separating the three project roles.
+- Present a proposal for assigning and, where necessary, formally separating the four project areas.
 - Prepare a public-interest resourcing case for the standards and shared-infrastructure work.
 - Prepare a separate commercial opportunity case for Inky Tech and prospective investors.
 - Begin targeted engagement with suitable forums such as IETF, W3C, IIW, Linux-related communities, academia and AI governance or alignment communities.
@@ -297,5 +303,5 @@ Each review should ask:
 1. What did we learn?
 2. Which assumptions failed?
 3. What has moved between Wishlist, Roadmap, Requirements and Specification?
-4. Are the three project roles becoming clearer or more entangled?
+4. Are the four project areas becoming clearer or more entangled?
 5. Is the next milestone still the smallest credible step toward a public, testable Village Link standard?
