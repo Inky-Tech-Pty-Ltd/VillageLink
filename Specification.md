@@ -1,7 +1,7 @@
 # Village Link Specification
 
 **Version:** Draft 0.1  
-**Date:** 26 August 2026  
+**Date:** 4 September 2026  
 **Status:** Experimental
 
 ## 1. Scope
@@ -16,13 +16,13 @@ Conceptually:
 
 This specification defines the semantics and current structural requirements of that assertion. It does not define a universal identity system, truth service, reputation algorithm, governance system or application architecture.
 
-The project requirements are recorded in [Requirements.md](Requirements.md). Terms are used as defined in [Glossary.md](Glossary.md). The architectural decision underlying this specification is recorded in [ADR-001](docs/adr/001-two-ended-uri.md).
+The project requirements are recorded in [Requirements.md](Requirements.md). Terms are used as defined in [Glossary.md](Glossary.md). The architectural decision underlying this specification is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). The current serialization candidate is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
 
 ## 2. Conventions
 
 The key words **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT** and **MAY** in this document indicate normative requirements for this draft.
 
-Because this is Draft 0.1, syntax and some conformance rules remain unsettled. Sections explicitly marked **Open** are informative and MUST NOT be interpreted as settled normative syntax.
+Because this is Draft 0.1, syntax and some conformance rules remain unsettled. Sections explicitly marked **Open** or **Proposed** are informative and MUST NOT be interpreted as settled normative syntax.
 
 ## 3. Conceptual model
 
@@ -58,7 +58,7 @@ The assertion does not mean that:
 - the publisher controls either endpoint; or
 - the assertion is objectively true.
 
-### 4.2 Symmetry
+### 4.2 Symmetry and encoded order
 
 At the semantic level:
 
@@ -66,7 +66,11 @@ At the semantic level:
 
 is symmetric.
 
-Neither endpoint is intrinsically the source or destination of the identity assertion. Implementations MAY retain an encoded ordering for parsing, canonicalisation or display, but MUST NOT infer semantic authority from that ordering unless additional application-specific information establishes it.
+The serialized order of A and B is nevertheless preserved. A Village Link-aware application MAY use that order for presentation, for example by displaying A in a left pane and B in a right pane. Naming conventions may also encourage a conventional order; for example, an unrestricted or global-context identifier may commonly be placed in A.
+
+The serializations `VL(A,B)` and `VL(B,A)` may therefore differ while expressing the same mathematical same-entity assertion.
+
+Implementations MUST NOT infer greater semantic authority merely from endpoint position unless additional application-specific information establishes it.
 
 ### 4.3 Publication
 
@@ -125,6 +129,49 @@ An endpoint may be unavailable because it has moved, requires authentication, is
 
 Endpoint availability MAY affect an application's assessment of the assertion.
 
+### 5.4 Endpoint naming conventions
+
+Existing URI identifiers MAY be used directly as Village Link endpoints.
+
+Where a suitable endpoint URI does not already exist, a publisher may mint one. Village Link proposes two useful naming conventions:
+
+- `gc` — **global context**: an identifier intended to identify a noun without restriction to a particular memory-system context; and
+- `vc` — **village context**: an identifier within a contextual namespace.
+
+For the reference publisher, examples include:
+
+```text
+https://gc.village.link/JoeRasmussen
+https://vc.village.link/FamilyChristmas/JoeRasmussen
+https://vc.village.link/FamilyChristmas/2025/JoeRasmussen
+```
+
+`gc` and `vc` are naming conventions, not privileged endpoint types in the Village Link primitive. In particular, `gc` does not assert that an identifier is true, uniquely canonical, legally privileged or endorsed by Village Link.
+
+The reference publisher uses conventional HTTPS and DNS syntax. Village Link does not introduce new `gc:` or `vc:` URI schemes.
+
+Other publishers MAY adopt the same conventions under domains they control, or MAY use different naming conventions. The core standard does not require registration with or permission from `village.link`.
+
+### 5.5 Recursive context hierarchy
+
+A contextual namespace MAY use a recursive or hierarchical path. For example:
+
+```text
+https://vc.village.link/FamilyChristmas/2025/JoeRasmussen
+```
+
+may represent a hierarchy of context, subcontext and noun.
+
+The core standard does not assign universal semantics to individual path segments. The namespace that mints an endpoint controls its internal naming structure.
+
+Memory systems and contexts are themselves nouns. They may therefore have their own endpoint identifiers, reputations and star credentials, and may participate in Village Links like other nouns.
+
+### 5.6 Reference-publisher naming assistance
+
+The reference publisher MAY provide human-facing facilities for endpoint naming, including friendly labels, redirects, disambiguation and context hierarchies.
+
+These facilities belong to the publisher layer and are not requirements of the core Village Link primitive.
+
 ## 6. Village Link representation
 
 ### 6.1 Self-contained two-ended form
@@ -134,32 +181,51 @@ A Village Link MUST be a single self-contained identifier containing representat
 Conceptually:
 
 ```text
-[Village Link identifier] [separator] [URI A] [separator] [URI B]
+[Village Link marker] [encoded URI A] [separator] [encoded URI B]
 ```
 
 A parser presented with the Village Link MUST be able to recover A and B without dereferencing a separate Village Link resource.
 
-### 6.2 Exact syntax — Open
+### 6.2 Candidate HTTPS serialization — Proposed
 
-The exact Draft 0.1 wire syntax is not yet standardised.
+The leading Draft 0.1 serialization candidate is:
 
-The specification still needs to define:
+```text
+https://vl.village.link/<encoded-A>!<encoded-B>
+```
 
-- the Village Link scheme, prefix or identifying form;
-- the separator between components;
-- escaping or encoding of arbitrary endpoint URIs;
-- treatment of fragments, queries and reserved characters;
-- canonicalisation, if any;
-- maximum practical length; and
-- rules for comparing two encoded Village Links.
+In this candidate:
 
-Until this section is resolved, prototype syntaxes are experimental and MUST NOT be represented as a stable Village Link standard.
+- `https` uses conventional URI and browser infrastructure;
+- `vl.village.link` identifies the reference Village Link form;
+- `!` is the structural boundary between A and B; and
+- the encoded order of A and B is preserved.
 
-### 6.3 No required dereferenceable link object
+A literal `!` belonging to A or B must be escaped so that it cannot be confused with the structural separator.
+
+The exact escaping algorithm for arbitrary endpoint URIs remains **Open**. The candidate MUST NOT be treated as accepted wire syntax until it passes URI-conformance, conventional-browser and exact round-trip tests as described in ADR-006.
+
+Opaque Base64url encoding is retained as a technically straightforward fallback, but is not preferred because it destroys useful human readability in endpoint URIs.
+
+### 6.3 Serialization acceptance criterion — Open
+
+For arbitrary valid endpoint URIs A and B, the eventual construction and parsing algorithms must satisfy:
+
+```text
+parse(make(A, B)) == (A, B)
+```
+
+Testing must exercise reserved characters, percent-encoded material, queries, fragments, Unicode or internationalised material, non-HTTP URI schemes and nested URI material.
+
+Representative output must also be tested in conventional browsers and URI libraries to establish that significant information is not unexpectedly reinterpreted, normalised or destroyed.
+
+### 6.4 No required dereferenceable link object
 
 A conforming Village Link MUST NOT require a separate resource to be dereferenced in order to discover A and B.
 
 A publisher or application MAY additionally provide a page, record, API resource, evidence bundle or other object describing the assertion. Such an object is supplementary and is not the core Village Link primitive.
+
+The reference `vl.village.link` service MAY provide useful dereferencing behaviour for conventional browsers. Such behaviour does not make dereferencing a requirement for parsing or interpreting the primitive.
 
 ## 7. Publisher attribution
 
@@ -279,14 +345,14 @@ A **conforming consumer**:
 2. MUST permit publisher attribution to remain distinct from the endpoint pair; and
 3. MUST NOT require cooperation from the endpoint systems merely to parse the Village Link.
 
-A more complete conformance model will be possible once syntax and publication-context rules are settled.
+A more complete conformance model will be possible once serialization and publication-context rules are settled.
 
 ## 15. Open specification issues
 
 The following issues are intentionally unresolved in Draft 0.1:
 
-1. exact URI syntax and separator;
-2. encoding and escaping of endpoint URIs;
+1. exact escaping of A and B within the proposed `https://vl.village.link/<encoded-A>!<encoded-B>` form;
+2. torture-test results for the proposed `!` separator;
 3. canonical representation and equality comparison;
 4. practical URI-length limits;
 5. precise publisher-attribution rules;
@@ -294,7 +360,7 @@ The following issues are intentionally unresolved in Draft 0.1:
 7. lifecycle, retraction, expiry and compromise;
 8. standard metadata and evidence formats;
 9. discovery and indexing conventions;
-10. browser and user-agent behaviour;
+10. final browser and user-agent behaviour;
 11. privacy and harms requirements; and
 12. useful conformance classes beyond the core primitive.
 
