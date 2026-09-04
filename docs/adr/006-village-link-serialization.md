@@ -38,7 +38,23 @@ Test the following Village Link serialization as the leading candidate:
 https://vl.village.link/<encoded-A>!<encoded-B>
 ```
 
-`vl.village.link` is the Village Link marker for the reference implementation.
+`vl.village.link` is the Village Link marker for the reference implementation. It is not a central registry, resolver or privileged authority.
+
+The first DNS label `vl` is the marker convention. A domain owner may operate the same serialization beneath an HTTPS authority it controls. For example, each of the following is an eligible marker:
+
+```text
+https://vl.village.link/
+https://vl.github.com/
+https://vl.example.org/
+```
+
+A complete serialization beneath another domain owner's marker may therefore take the form:
+
+```text
+https://vl.github.com/<encoded-A>!<encoded-B>
+```
+
+No registration with or permission from `village.link` is required. The marker identifies a candidate Village Link serialization; it does not establish that the assertion is true, trusted, authorised or published by either endpoint system. Control of the marker authority may form part of publication-context evidence, but P remains attributed under the publication rules.
 
 `!` is the candidate structural separator between endpoint A and endpoint B.
 
@@ -72,7 +88,9 @@ The complete Village Link serialization must conform to the applicable conventio
 
 Representative Village Links must be tested in conventional browsers and URI libraries to establish that significant information is not reinterpreted, normalised or destroyed unexpectedly.
 
-A conventional browser should recognise the outer form as an HTTPS URI. A Village Link-aware browser should additionally recognise the marker and parse the two endpoints locally.
+A conventional browser should recognise the outer form as an HTTPS URI. A Village Link-aware browser should recognise an HTTPS URI whose first DNS label is `vl` and first attempt to interpret it locally as a Village Link, before ordinary web dereferencing. Successful parsing must not depend on the marker host being dereferenceable. If local Village Link parsing fails, the browser should fall back to ordinary HTTPS handling.
+
+Marker recognition establishes only that the URI may use Village Link syntax. It does not establish truth, authority or trust.
 
 ### 3. Village Link round trip
 
@@ -101,7 +119,7 @@ Existing implementation tests produced by project contributors should be incorpo
 
 The outer Village Link will use conventional HTTPS and DNS machinery rather than a new URI scheme such as `vl:`.
 
-Conventional browsers will therefore have an ordinary HTTPS object to handle. The reference `vl.village.link` service may provide useful dereferencing behaviour, but dereferencing remains optional to the primitive: a Village Link-aware parser can recover A and B from the string itself.
+Conventional browsers will therefore have an ordinary HTTPS object to handle. Any marker operator may provide useful dereferencing behaviour, including the reference `vl.village.link` service, but dereferencing remains optional to the primitive: a Village Link-aware parser can recover A and B from the string itself.
 
 The syntax will remain substantially human-readable rather than encoding both endpoints as opaque Base64 text.
 

@@ -70,8 +70,8 @@ The core standard SHOULD impose no requirement that is necessary only for a part
 **REQ-STD-012 — No required central identity authority**  
 The standard MUST NOT require a central authority to establish a canonical identity for an entity.
 
-**REQ-STD-013 — No required Village Link registry**  
-Publication and interpretation of a Village Link MUST NOT depend on registration in a single central Village Link database or service.
+**REQ-STD-013 — No required Village Link registry or marker authority**  
+Publication and interpretation of a Village Link MUST NOT depend on registration in a single central Village Link database or service. `vl.village.link` MUST NOT be treated as the sole permitted marker authority: domain owners MUST be able to operate conforming HTTPS marker namespaces beneath domains they control without registering with or obtaining permission from `village.link`.
 
 **REQ-STD-014 — Existing identifiers**  
 The standard SHOULD permit existing identifiers to participate without modification wherever technically practical.
@@ -164,6 +164,9 @@ An application MUST NOT be required to construct or recognise a Star Credential 
 
 **REQ-APP-007 — Safety choices remain application-specific**  
 Applications MAY impose stronger privacy, consent, evidence, moderation or lifecycle policies than the core standard requires.
+
+**REQ-APP-008 — Marker-first interpretation by the reference browser**  
+The project's reference browser MUST first attempt to parse an HTTPS URI whose first DNS label is `vl` as a Village Link before ordinary web dereferencing. Successful parsing MUST NOT require the marker host to be dereferenceable. If Village Link parsing fails, the browser MUST fall back to ordinary HTTPS handling. Marker recognition MUST NOT be presented as evidence of truth, authority or trust.
 
 ---
 

@@ -201,6 +201,19 @@ In this candidate:
 - `!` is the structural boundary between A and B; and
 - the encoded order of A and B is preserved.
 
+`vl.village.link` is the reference marker, not a central registry, resolver or privileged authority. The first DNS label `vl` is the marker convention within an HTTPS authority controlled by a domain owner. Other domain owners MAY expose the same candidate serialization through marker authorities they control, for example:
+
+```text
+https://vl.github.com/<encoded-A>!<encoded-B>
+https://vl.example.org/<encoded-A>!<encoded-B>
+```
+
+No registration with or permission from `village.link` is required.
+
+The project's reference browser MUST, when it encounters an HTTPS URI whose first DNS label is `vl`, first attempt to parse it locally as a Village Link before ordinary web dereferencing. Successful parsing MUST NOT depend on dereferencing the marker host. If local Village Link parsing fails, the browser MUST fall back to ordinary HTTPS handling.
+
+A matching marker or successfully parsed Village Link form MUST NOT, by itself, be treated as evidence that the assertion is true, trusted, authorised or published by either endpoint system. Publisher attribution remains governed by publication context.
+
 A literal `!` belonging to A or B must be escaped so that it cannot be confused with the structural separator.
 
 The exact escaping algorithm for arbitrary endpoint URIs remains **Open**. The candidate MUST NOT be treated as accepted wire syntax until it passes URI-conformance, conventional-browser and exact round-trip tests as described in ADR-006.
@@ -225,7 +238,7 @@ A conforming Village Link MUST NOT require a separate resource to be dereference
 
 A publisher or application MAY additionally provide a page, record, API resource, evidence bundle or other object describing the assertion. Such an object is supplementary and is not the core Village Link primitive.
 
-The reference `vl.village.link` service MAY provide useful dereferencing behaviour for conventional browsers. Such behaviour does not make dereferencing a requirement for parsing or interpreting the primitive.
+A marker operator MAY provide useful dereferencing behaviour for conventional browsers. This includes the reference `vl.village.link` service and other marker authorities operated beneath domains their owners control. Such behaviour does not make dereferencing a requirement for parsing or interpreting the primitive.
 
 ## 7. Publisher attribution
 
