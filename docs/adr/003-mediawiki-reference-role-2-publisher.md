@@ -1,11 +1,11 @@
-# ADR-003: Implement the reference Role 2 publisher as a MediaWiki
+# ADR-003: Implement the reference publisher as a MediaWiki
 
 **Status:** Accepted  
 **Date:** 28 August 2026
 
 ## Context
 
-Role 2 Village Link projects publish collections of Village Links. Publication creates the possibility of harm: a publisher may publish mistaken, misleading or malicious equivalence assertions; evidence may change; assertions may become outdated; and aggregation itself may expose information about people or other entities in harmful ways.
+Village Link publishers publish collections of Village Links. Publication creates the possibility of harm: a publisher may publish mistaken, misleading or malicious equivalence assertions; evidence may change; assertions may become outdated; and aggregation itself may expose information about people or other entities in harmful ways.
 
 The Village Link project should not attempt to invent from first principles the governance of a large, collaboratively maintained public information system.
 
@@ -13,11 +13,11 @@ Wikipedia and the wider Wikimedia movement have accumulated approximately twenty
 
 MediaWiki embodies much of the technical machinery supporting that governance: revision histories, talk pages, user accounts, permissions, watchlists, recent changes, bots, redirects, disambiguation mechanisms, page protection and administrative tools.
 
-The opportunity is therefore stronger than using Wikipedia merely as inspiration. The reference Role 2 implementation can be built directly as a MediaWiki and can inherit Wikimedia governance practices by default.
+The opportunity is therefore stronger than using Wikipedia merely as inspiration. The reference publisher can be built directly as a MediaWiki and can inherit Wikimedia governance practices by default.
 
 ## Decision
 
-The reference Role 2 Village Link publisher will be implemented as a **MediaWiki**.
+The reference Village Link publisher will be implemented as a **MediaWiki**.
 
 Its fundamental organisational rule will be:
 
@@ -40,6 +40,34 @@ might contain assertions equivalent to:
 and so on.
 
 The page is therefore not primarily an encyclopaedic article about the entity. It is a human-governed publication surface for the entity's star credential.
+
+## Entity pages and Link pages
+
+The reference publisher may provide two complementary views of the same Village Link graph.
+
+An **Entity page** is a node-centred view. It presents the star credential formed by published Village Links involving that entity.
+
+A **Link page** is an edge-centred view. It presents one Village Link assertion together with material surrounding that assertion, which may include evidence, provenance, revision history, discussion and other publication metadata.
+
+An Entity page should therefore be understood principally as a **projection of published Link assertions**, rather than as an independently maintained credential document.
+
+In concise form:
+
+> **An Entity page is a node-centred projection of the graph; a Link page is an edge-centred projection of the same graph.**
+
+This distinction keeps the publication model close to the Village Link primitive. Editors may add, remove, challenge, correct or qualify individual equivalence assertions, while the star credential presented on an Entity page can be assembled from those governed assertions.
+
+The Link page is also the natural place for evidence supporting or challenging an edge. MediaWiki's revision history, discussion and governance machinery can therefore apply directly to the assertion itself rather than only to an aggregate entity page.
+
+## Dereferencing Village Links
+
+ADR-001 does not require a Village Link URI to dereference. That remains unchanged.
+
+A publisher may nevertheless choose to make a Village Link URI dereference to a human- or machine-readable representation of the assertion. In the reference MediaWiki publisher, that representation may be the corresponding Link page.
+
+This is a publication-layer convenience, not an enlargement of the Village Link primitive. The canonical Village Link remains the identifier of the assertion; the MediaWiki page is a representation supplied by a particular publisher.
+
+The reference implementation need not use the literal Village Link URI as a MediaWiki page title. It may map canonical Village Link URIs to internal Link-page identifiers where this is more practical.
 
 ## Publication and authority
 
@@ -77,15 +105,15 @@ Not every Wikimedia rule will map unchanged to Village Link. Some exist because 
 
 This is particularly important for harms mitigation. The fact that an identity can technically be discovered and linked does not imply that it should be aggregated into a public star credential. Wikimedia's long-developed distinctions around notability, privacy, sourcing and living people provide a starting governance framework for deciding what belongs in a public memory system.
 
-## Human governance, machine consumption
+## Human governance and human or machine consumption
 
-Village Link entity pages may be comparatively dry for human readers. That is acceptable.
+Village Link entity pages may be useful to human readers as well as machines.
 
-Unlike a Wikipedia article, the primary page is not principally intended to provide a narrative account of its subject. Its principal function is to expose a structured, governed set of identity assertions.
+Unlike a Wikipedia article, an Entity page is not principally intended to provide a narrative account of its subject. Its principal function is to expose a structured, governed set of identity assertions. That need not make the page visually uninteresting: implementations may present the rays of a star credential alongside recognisable representations, previews or other useful views of their target resources.
 
-The page and its history provide a surface through which humans can add evidence, correct errors, challenge assertions, revert vandalism and govern the graph. Talk pages provide a natural location for the human discussion surrounding those decisions.
+The page and its history provide a surface through which humans can add evidence, correct errors, challenge assertions, revert vandalism and govern the graph. Link pages allow that governance to be focused on individual assertions. Talk pages provide a natural location for the human discussion surrounding those decisions.
 
-The resulting star credentials are expected to be particularly useful to machine consumers, including AI agents and systems such as a future Village Link Trust Engine.
+The resulting star credentials are also expected to be useful to machine consumers, including AI agents and systems such as a future Village Link Trust Engine.
 
 ## Disambiguation and entity boundaries
 
@@ -133,7 +161,7 @@ Particular attention should be given to the relationship between Village Link an
 
 ## Long-term Wikimedia Foundation adoption
 
-The long-term aspiration for the reference Role 2 publisher is:
+The long-term aspiration for the reference publisher is:
 
 1. build it as a MediaWiki;
 2. establish useful standing, content and community in the world; and
@@ -145,14 +173,15 @@ Design choices should nevertheless favour compatibility with that possible futur
 
 ## Consequences
 
-This decision substantially narrows the implementation space for the reference Role 2 publisher. It deliberately trades freedom to invent a bespoke publication platform for access to a mature technical and governance ecosystem.
+This decision substantially narrows the implementation space for the reference publisher. It deliberately trades freedom to invent a bespoke publication platform for access to a mature technical and governance ecosystem.
 
 It also makes governance part of the implementation architecture rather than an external policy document added later.
 
 Important work remains, including:
 
-- defining the exact representation of a star credential within a MediaWiki page;
-- determining how Village Link assertions, evidence and provenance are stored and exposed to machine consumers;
+- defining the exact representation of Entity pages and Link pages within MediaWiki;
+- determining how Village Link assertions, evidence and provenance are stored and exposed to human and machine consumers;
+- defining the mapping between canonical Village Link URIs and optional dereferenceable Link-page representations;
 - investigating Wikidata overlap and interoperability;
 - designing multilingual naming and search;
 - determining which Wikimedia policies transfer unchanged and documenting necessary departures;
@@ -168,12 +197,13 @@ ADR-001 defines Village Link as a self-contained, two-ended hyperlink.
 
 ADR-002 restricts the primitive to equivalence between representations of the same entity.
 
-This ADR defines a reference Role 2 publication architecture around that deliberately small primitive.
+This ADR defines the reference Publisher architecture around that deliberately small primitive.
 
-The layers remain distinct:
+The current project is organised into four principal components:
 
-- **Role 1:** defines the Village Link primitive;
-- **Role 2:** publishes and governs collections of Village Links; and
-- **Role 3:** builds systems that consume the resulting graph, including search, filtering, reputation and trust mechanisms.
+1. **Standard** — defines the Village Link primitive;
+2. **Publisher** — publishes and governs collections of Village Links;
+3. **Browser + Trust Engine** — consumes and interprets the resulting graph; and
+4. **Star Credential Manager** — manages audience-specific publication or disclosure of star credentials.
 
-MediaWiki does not enlarge the Role 1 primitive. It provides a mature human governance environment around its publication at Role 2.
+MediaWiki does not enlarge the Standard. It provides a mature human governance environment around publication.
