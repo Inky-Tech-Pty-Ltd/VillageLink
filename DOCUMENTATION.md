@@ -1,7 +1,7 @@
 # Documentation map
 
 **Status:** Maintained
-**Last updated:** 3 September 2026
+**Last updated:** 4 September 2026
 
 This page identifies the natural home of each Village Link concept. Other documents may summarise a concept and link to its source, but should not silently redefine it.
 
@@ -14,7 +14,7 @@ This page identifies the natural home of each Village Link concept. Other docume
 | Accepted architectural decisions | [docs/adr/](docs/adr/) | Decision, rationale, alternatives and consequences |
 | Sequence of committed work | [Roadmap.md](Roadmap.md) | Targets, gates and work already chosen |
 | Uncommitted ideas and experiments | [Wishlist.md](Wishlist.md) | Possibilities that have not entered the roadmap |
-| Reference publisher | [ADR-003](docs/adr/003-mediawiki-reference-role-2-publisher.md) | MediaWiki publication and governance architecture |
+| Reference publisher | [ADR-003](docs/adr/003-mediawiki-reference-publisher.md) | MediaWiki publication and governance architecture |
 | Reader-side interpretation | [trust-engine.md](trust-engine.md) | Trust Engine problem and design space |
 | Audience-specific disclosure | [star-credential-manager.md](star-credential-manager.md) | Star Credential Manager problem and design space |
 | Governance across memory systems | [emergent-governance.md](emergent-governance.md) | Exploratory consequences, not protocol requirements |
