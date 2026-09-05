@@ -1,7 +1,8 @@
-# ADR-006: Use an HTTPS Village Link form with `!` as the candidate endpoint separator
+# ADR-006: Use an HTTPS Village Link form with `wab` marker and `!` as the candidate endpoint separator
 
 **Status:** Proposed  
-**Date:** 4 September 2026
+**Date:** 4 September 2026  
+**Marker decision adopted:** 6 September 2026
 
 ## Context
 
@@ -20,65 +21,55 @@ The remaining problem is serialization: given arbitrary valid endpoint URIs A an
 7. works predictably in conventional browsers; and
 8. preserves useful human readability where practical.
 
+The project adopts `wab` as the HTTPS marker prefix for the two-ended primitive. The prefix is deliberately not derived from the Village Link project name: a neutral marker reduces unnecessary project branding in a convention intended for broad adoption by independent or competing parties. The letters also provide a compact visual mnemonic for the primitive: W between endpoints A and B, corresponding to **A ← W → B**.
+
 An opaque Base64url encoding of each endpoint would make the boundary and round trip straightforward, for example:
 
 ```text
-https://vl.village.link/<base64url(A)>/<base64url(B)>
+https://wab.village.link/<base64url(A)>/<base64url(B)>
 ```
 
 but would turn recognisable material such as `gc.village.link`, `facebook.com` and `JoeRasmussen` into opaque text. Human readability is valuable enough that Base64url should be treated as a known fallback rather than the preferred representation unless a readable encoding proves impractical.
 
 RFC URI syntax provides reserved characters for use as delimiters. Among the available candidates, `!` is visually distinctive and has relatively little competing structural meaning in an ordinary URI path.
 
-## Proposed decision
+## Adopted marker and proposed separator
 
-Test the following Village Link serialization as the leading candidate:
+The marker prefix is **adopted** as `wab`. Test the following serialization, with `!` as the leading candidate endpoint separator:
 
 ```text
-https://vl.village.link/<encoded-A>!<encoded-B>
+https://wab.village.link/<encoded-A>!<encoded-B>
 ```
 
-`vl.village.link` is the Village Link marker for the reference implementation. It is not a central registry, resolver or privileged authority.
+`wab.village.link` is the reference marker implementation. It is not a central registry, resolver or privileged authority.
 
-The first DNS label `vl` is the marker convention. A domain owner may operate the same serialization beneath an HTTPS authority it controls. For example, each of the following is an eligible marker:
+The first DNS label `wab` is the marker convention. A domain owner may operate the same serialization beneath an HTTPS authority it controls. For example, each of the following is an eligible marker:
 
 ```text
-https://vl.village.link/
-https://vl.github.com/
-https://vl.example.org/
+https://wab.village.link/
+https://wab.github.com/
+https://wab.example.org/
 ```
 
 A complete serialization beneath another domain owner's marker may therefore take the form:
 
 ```text
-https://vl.github.com/<encoded-A>!<encoded-B>
+https://wab.github.com/<encoded-A>!<encoded-B>
 ```
 
-No registration with or permission from `village.link` is required. The marker identifies a candidate Village Link serialization; it does not establish that the assertion is true, trusted, authorised or published by either endpoint system. Control of the marker authority may form part of publication-context evidence, but P remains attributed under the publication rules.
+No registration with or permission from `village.link` is required. The marker identifies the two-ended form; it does not establish that the statement is true, trusted or authorised by either endpoint system.
 
 `!` is the candidate structural separator between endpoint A and endpoint B.
 
-The encoded order is preserved. Therefore:
-
-```text
-VL(A,B)
-```
-
-and:
-
-```text
-VL(B,A)
-```
-
-may be different serializations even though the underlying same-entity assertion is semantically symmetric. By default, a Village Link-aware browser may use the serialized order for presentation, for example A in the left pane and B in the right pane. Applications MUST NOT infer greater semantic authority merely from that ordering.
+The encoded order is preserved. Therefore `VL(A,B)` and `VL(B,A)` may be different serializations even though the underlying same-entity statement is semantically symmetric. By default, a Village Link-aware browser may use the serialized order for presentation, for example A in the left pane and B in the right pane. Applications MUST NOT infer greater semantic authority merely from that ordering.
 
 A literal `!` belonging to A or B must not be confused with the structural separator and therefore must be escaped by the endpoint encoding.
 
 The exact endpoint escaping algorithm is deliberately **not yet accepted**. It must be derived and tested against arbitrary valid endpoint URIs rather than selected by inspection.
 
-## Acceptance tests
+## Acceptance tests for the remaining serialization
 
-This ADR remains Proposed until the candidate syntax passes three classes of test.
+The `wab` marker decision is adopted. This ADR remains Proposed because the separator and endpoint-escaping syntax still require three classes of test.
 
 ### 1. URI conformance
 
@@ -88,7 +79,7 @@ The complete Village Link serialization must conform to the applicable conventio
 
 Representative Village Links must be tested in conventional browsers and URI libraries to establish that significant information is not reinterpreted, normalised or destroyed unexpectedly.
 
-A conventional browser should recognise the outer form as an HTTPS URI. A Village Link-aware browser should recognise an HTTPS URI whose first DNS label is `vl` and first attempt to interpret it locally as a Village Link, before ordinary web dereferencing. Successful parsing must not depend on the marker host being dereferenceable. If local Village Link parsing fails, the browser should fall back to ordinary HTTPS handling.
+A conventional browser should recognise the outer form as an HTTPS URI. A Village Link-aware browser should recognise an HTTPS URI whose first DNS label is `wab` and first attempt to interpret it locally as a Village Link, before ordinary web dereferencing. Successful parsing must not depend on the marker host being dereferenceable. If local Village Link parsing fails, the browser should fall back to ordinary HTTPS handling.
 
 Marker recognition establishes only that the URI may use Village Link syntax. It does not establish truth, authority or trust.
 
@@ -100,34 +91,27 @@ For a torture set of endpoint URIs, construction and parsing must satisfy:
 parse(make(A, B)) == (A, B)
 ```
 
-The torture set should include endpoints containing or exercising at least:
-
-- `/`;
-- `?`;
-- `#`;
-- `%` and already percent-encoded material;
-- literal `!`;
-- Unicode / internationalised material;
-- query parameters;
-- fragments;
-- non-HTTP URI schemes such as `urn:` and `mailto:`; and
-- embedded or nested URI material.
+The torture set should include endpoints containing or exercising at least `/`, `?`, `#`, `%`, already percent-encoded material, literal `!`, Unicode/internationalised material, query parameters, fragments, non-HTTP URI schemes and embedded or nested URI material.
 
 Existing implementation tests produced by project contributors should be incorporated rather than replaced. Applicable standards-derived test cases should also be used where available.
 
-## Consequences if accepted
+## Consequences if the remaining syntax is accepted
 
-The outer Village Link will use conventional HTTPS and DNS machinery rather than a new URI scheme such as `vl:`.
+The outer Village Link will use conventional HTTPS and DNS machinery rather than a new URI scheme such as `wab:`.
 
-Conventional browsers will therefore have an ordinary HTTPS object to handle. Any marker operator may provide useful dereferencing behaviour, including the reference `vl.village.link` service, but dereferencing remains optional to the primitive: a Village Link-aware parser can recover A and B from the string itself.
+Conventional browsers will therefore have an ordinary HTTPS object to handle. Any marker operator may provide useful dereferencing behaviour, including the reference `wab.village.link` service, but dereferencing remains optional to the primitive: a Village Link-aware parser can recover A and B from the string itself.
 
 The syntax will remain substantially human-readable rather than encoding both endpoints as opaque Base64 text.
 
 ## Alternatives considered
 
-### New `vl:` URI scheme
+### `vl` marker prefix
 
-Rejected as the current direction because it would require a new scheme and corresponding software adoption when conventional HTTPS syntax appears capable of carrying the primitive.
+Superseded. Although compact, `vl` is an abbreviation of Village Link and therefore carries project branding into a convention intended to be usable by independent or competing adopters. `wab` is preferred because it is project-neutral and provides a mnemonic for the A–W–B structure.
+
+### New `vl:` or `wab:` URI scheme
+
+Rejected as the current direction because a new scheme would require corresponding software adoption when conventional HTTPS syntax appears capable of carrying the primitive.
 
 ### Base64url endpoint encoding
 
@@ -143,4 +127,4 @@ ADR-001 establishes the self-contained two-ended URI primitive.
 
 ADR-005 establishes endpoint URI and naming conventions.
 
-This ADR addresses only the serialization of those two endpoint URIs into one Village Link identifier.
+This ADR adopts the `wab` marker prefix and continues to test the serialization of the two endpoint URIs into one Village Link identifier.
