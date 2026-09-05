@@ -50,7 +50,7 @@ The important properties are:
 - the statement can be understood without dereferencing a separate link object;
 - the webpage W supplies the web context in which the statement is found rather than being encoded as a third endpoint;
 - multiple webpages may contain matching or conflicting statements;
-- Village Link itself does not decide which statements are true.
+- the _truth_, or perhaps better to say the _weight_ of the statement is an emergent property of the graph.
 
 Like a conventional hyperlink, a Village Link carries information through both its endpoints and the web resource in which it occurs. Its two-ended form also creates graph structures that ordinary directed links do not express directly.
 
