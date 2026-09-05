@@ -1,22 +1,31 @@
 # Village Link
 
-Village Link proposes a small web primitive for publishing an assertion that two independently meaningful identifiers refer to the same entity in different contexts.
+A typical first conversation between strangers will contain an exchange of biographical information. 
+The conversation might establish that the strangers have contexts in common. It may reveal mutual acquaintances.
+A curriculum vitae is a formal example of the same ritual.
 
-People, organisations and software agents already have identifiers and histories in many separate systems. Village Link does not replace those systems or establish a canonical identity. It provides a standard way for a publisher to connect two existing identifiers.
+Accountability necessarily rests upon the trail of memories that entities have left behind in different contexts.
+The constraints that we call _governance_ emerge from the consequences of accountability.
 
-Conceptually:
+Parties have an incentive to reveal context, and to accept the constraints of governance, because it assists in the reduction of transaction costs.
 
-**P asserts A ↔ B.**
+To date the web has not given us a standard way to state that an entity in one memory system is the same as an entity in another.
+
+Village Link proposes a small web primitive for making a statement that two independently meaningful identifiers in different memory systems refer to the same entity
+
+Conceptually, for a webpage, W:
+
+**W states A ↔ B.**
 
 Where:
 
 - **A** is an identifier in one system;
 - **B** is an identifier in another system; and
-- **P** is the publisher making the assertion.
+- **W** is web resource where the statement is found.
 
-A conventional hyperlink says, in effect, **P points to A**. A Village Link extends that pattern: **P connects A and B**.
+A conventional hyperlink says, in effect, **W points to one resource, A**. A Village Link extends that pattern: **W points to two resources, A ← W → B**.
 
-The project is exploring what becomes possible when these assertions can be published, discovered, compared and combined at web scale.
+The project is exploring what becomes possible when this primitive is available at web scale.
 
 ## The primitive
 
