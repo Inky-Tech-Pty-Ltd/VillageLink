@@ -23,7 +23,9 @@ Where:
 - **B** is an identifier in another system; and
 - **W** is the web resource where the statement is found.
 
-A conventional hyperlink says, in effect, **W points to one resource, A**. A Village Link extends that pattern: **A ← W → B**.
+A conventional hyperlink says, in effect, **W points to one resource, A**. 
+
+A Village Link extends that pattern, **W points to two resources, A ← W → B**.
 
 The project is exploring what becomes possible when this primitive is available at web scale.
 
