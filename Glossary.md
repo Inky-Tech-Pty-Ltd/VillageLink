@@ -5,17 +5,13 @@
 
 ## Purpose
 
-This glossary records how the Village Link project currently uses important terms.
-
-The definitions are intended to make project documents internally consistent and to expose conceptual disagreements rather than hide them behind ambiguous language. They are not, by themselves, conformance requirements. Where a term acquires a normative meaning in the Village Link specification, the specification takes precedence.
+This glossary records how the Village Link project currently uses important terms. The definitions are intended to make project documents internally consistent. Where a term acquires a normative meaning in the specification, the specification takes precedence.
 
 ## Terminology principles
 
 - Prefer one term for one concept.
-- Distinguish ordinary-language uses from project-specific meanings where ambiguity matters.
-- Reuse established external terminology where it fits rather than creating unnecessary Village Link vocabulary.
+- Reuse established external terminology where it fits.
 - Record deprecated or superseded terms when older project material may still contain them.
-- Treat definitions as revisable while the architecture remains experimental.
 - Do not infer truth merely from the existence of a statement or memory trace.
 
 ---
@@ -24,9 +20,7 @@ The definitions are intended to make project documents internally consistent and
 
 **Definition:** An outcome associated with an entity's behaviour, including outcomes arising from assessment against a norm.
 
-Consequences may be favourable, adverse or neutral, and need not be deliberately imposed. A favourable consequence may function as a reward; an adverse consequence may function as a sanction.
-
-**Related terms:** Governance, Norm, Reward, Sanction.
+Consequences may be favourable, adverse or neutral. A favourable consequence may function as a reward; an adverse consequence may function as a sanction.
 
 ---
 
@@ -34,11 +28,7 @@ Consequences may be favourable, adverse or neutral, and need not be deliberately
 
 **Definition:** A limit or pressure on possible behaviour arising from norms and anticipated or actual consequences.
 
-An entity subject to multiple memory systems may experience multiple, overlapping constraints. The effects of those constraints may be beneficial, harmful or mixed. Overlap may, for example, produce a *civilising effect* by encouraging behaviour acceptable across several contexts, or a *chilling effect* by suppressing behaviour that might otherwise be legitimate or valuable.
-
-Constraint describes the mechanism without presuming whether its effects are desirable.
-
-**Related terms:** Consequence, Governance, Memory system, Norm.
+An entity subject to multiple memory systems may experience overlapping constraints, including civilising and chilling effects.
 
 ---
 
@@ -46,9 +36,7 @@ Constraint describes the mechanism without presuming whether its effects are des
 
 **Definition:** The circumstances within which an identifier or memory trace has meaning.
 
-A context may be provided by, or represented within, a memory system. The concepts are distinct: *context* describes where something has meaning, while *memory system* describes a system capable of retaining traces. In informal project prose, *context* may sometimes stand for the relevant memory system where the distinction is unimportant.
-
-**Related terms:** Global context, Identifier, Memory trace, Memory system.
+A context may be provided by, or represented within, a memory system. *Context* describes where something has meaning; *memory system* describes a system capable of retaining traces.
 
 ---
 
@@ -56,9 +44,7 @@ A context may be provided by, or represented within, a memory system. The concep
 
 **Definition:** A person, organisation, software agent, object or other thing that can be referred to by identifiers and about which memory traces may exist.
 
-Village Link does not require an entity to be a human or to possess a single canonical identity.
-
-**Related terms:** Identifier, Memory trace, Star Credential.
+Village Link does not require an entity to be human or to possess a single canonical identity.
 
 ---
 
@@ -66,21 +52,11 @@ Village Link does not require an entity to be a human or to possess a single can
 
 **Definition:** The universal set, relative to the universe of discourse of the Village Link model.
 
-If an ordinary context `X` describes a set within which a representation has meaning, then global context `U` is the universal set containing all such contexts or entities within the relevant universe of discourse.
+A claim of global context does **not** imply that a representation is authoritative, canonical, verified or true. It is a claim about scope of context.
 
-Conceptually:
+**Prefix convention:** `gc.`
 
-`A ∈ X`
-
-and a representation claiming global context may be expressed as:
-
-`E ∈ U`
-
-A claim of global context does **not** imply that the representation is authoritative, canonical, verified or true. It is a claim about the scope of context.
-
-A representation claiming global context may be useful as the centre of a Star Credential, but the converse does not hold: the centre of a Star Credential need not claim global context.
-
-**Related terms:** Context, Entity, Identifier, Star Credential.
+A URI beneath a `gc.` namespace may identify a noun without restriction to a particular memory-system context, for example `https://gc.village.link/JoeRasmussen`.
 
 ---
 
@@ -88,11 +64,7 @@ A representation claiming global context may be useful as the centre of a Star C
 
 **Definition:** A process by which norms and anticipated or actual consequences shape the behaviour of entities.
 
-Governance may operate across multiple memory systems. An action may occur in one system, be assessed against a norm somewhere else, and lead to a consequence recorded, conferred or imposed somewhere else again.
-
-Governance therefore does not require an entity to belong to a single *governance system*.
-
-**Related terms:** Consequence, Memory system, Norm, Reward, Sanction.
+Governance may operate across multiple memory systems.
 
 ---
 
@@ -100,11 +72,7 @@ Governance therefore does not require an entity to belong to a single *governanc
 
 **Status:** Discouraged as a generic project term.
 
-**Definition:** A system that participates in governance by establishing or applying norms, assessing behaviour, or producing consequences.
-
-Earlier Village Link discussions sometimes used *governance system* for the broader category now called *memory system*. That usage is deprecated because a memory system need not contain norms or consequences, and governance may emerge across several systems rather than reside in one.
-
-**Preferred term:** Memory system, when referring to the generic system capable of retaining traces.
+Earlier Village Link discussions sometimes used *governance system* for the broader category now called *memory system*. That usage is deprecated.
 
 ---
 
@@ -112,9 +80,7 @@ Earlier Village Link discussions sometimes used *governance system* for the broa
 
 **Definition:** A reference that identifies or denotes an entity within a context.
 
-Village Link connects independently meaningful identifiers. The endpoint systems do not need to share an identifier scheme or implement Village Link.
-
-**Related terms:** Entity, Context, URI, Village Link.
+Village Link connects independently meaningful identifiers. Endpoint systems do not need to share an identifier scheme or implement Village Link.
 
 ---
 
@@ -122,11 +88,7 @@ Village Link connects independently meaningful identifiers. The endpoint systems
 
 **Definition:** A system capable of retaining traces associated with entities.
 
-A memory system may record accounts, memberships, transactions, permissions, observations, endorsements, rewards, sanctions or other history. It may contain norms about how entities should behave, but it need not. It may record assessments or consequences, but it need not.
-
-A memory system therefore need not exercise authority over, or even interact directly with, the entity it remembers.
-
-**Related terms:** Memory trace, Governance, Reputation system, Context.
+A memory system may record accounts, memberships, transactions, permissions, observations, endorsements, rewards, sanctions or other history. It need not exercise authority over, or interact directly with, the entity it remembers.
 
 ---
 
@@ -136,19 +98,11 @@ A memory system therefore need not exercise authority over, or even interact dir
 
 A trace need not be evaluative. Its existence does not establish that its contents are true, current or authoritative.
 
-**Short form:** Trace.
-
-**Related terms:** Memory system, Entity, Reputation.
-
 ---
 
 ## Norm
 
 **Definition:** An expectation, rule or standard concerning how an entity should behave.
-
-A norm may be formal or informal and need not be stored in the same memory system as the actions assessed against it or any resulting consequence.
-
-**Related terms:** Consequence, Governance, Memory system.
 
 ---
 
@@ -156,9 +110,7 @@ A norm may be formal or informal and need not be stored in the same memory syste
 
 **Definition:** An evaluative understanding of an entity derived from memories, observations, statements or other evidence.
 
-Village Link does not itself calculate or determine reputation. Reputation may be inferred by observers or applications from traces distributed across one or more memory systems.
-
-**Related terms:** Memory trace, Reputation system, Governance.
+Village Link does not itself calculate or determine reputation.
 
 ---
 
@@ -166,11 +118,7 @@ Village Link does not itself calculate or determine reputation. Reputation may b
 
 **Definition:** A memory system whose retained traces are used to support evaluative judgments about entities.
 
-A reputation system is therefore a kind of memory system, not the generic category. Earlier Village Link material sometimes used *reputation system* more broadly; that usage is deprecated.
-
-**Broader term:** Memory system.
-
-**Related terms:** Reputation, Memory trace.
+A reputation system is a kind of memory system, not the generic category.
 
 ---
 
@@ -178,23 +126,11 @@ A reputation system is therefore a kind of memory system, not the generic catego
 
 **Definition:** A favourable consequence associated with an entity's behaviour or with an assessment of that behaviour against a norm.
 
-A reward need not be deliberately conferred. Increased trust, status, access or opportunity may function as rewards even where no single actor administers them.
-
-**Broader term:** Consequence.
-
-**Related terms:** Governance, Norm, Sanction.
-
 ---
 
 ## Sanction
 
 **Definition:** An adverse consequence associated with an entity's behaviour or with an assessed breach of a norm.
-
-A sanction need not be deliberately imposed, and need not arise in the same system in which the relevant action occurred, the norm was expressed, or the behaviour was assessed.
-
-**Broader term:** Consequence.
-
-**Related terms:** Governance, Norm, Reward.
 
 ---
 
@@ -202,13 +138,7 @@ A sanction need not be deliberately imposed, and need not arise in the same syst
 
 **Definition:** A graph of independently meaningful identifiers and associated memory traces that can be traversed together as referring to the same entity.
 
-A Star Credential is not a new master identity issued by a central authority. It is a structure that may emerge from multiple Village Links and the systems they connect.
-
-The centre of a Star Credential may be a representation that claims global context, but it need not be. Being the centre of a Star Credential does not itself imply a claim of global context.
-
-The architecture and terminology of the Star Credential remain under active development.
-
-**Related terms:** Village Link, Entity, Identifier, Memory system, Global context.
+A Star Credential is not a new master identity issued by a central authority. Its centre may claim global context, but need not.
 
 ---
 
@@ -216,11 +146,9 @@ The architecture and terminology of the Star Credential remain under active deve
 
 **Definition:** The same-entity relation expressed by a Village Link found on a web resource.
 
-In the core Village Link formulation, a webpage or other web resource **W states A ↔ B**: two independently meaningful identifiers in different memory systems refer to the same entity.
+In the core formulation, a webpage or other web resource **W states A ↔ B**.
 
 The word *states* does not imply that W is a moral agent, that the statement is true, or that the operator or author of W warrants it.
-
-**Related terms:** Village Link, Web resource, Entity, Identifier.
 
 ---
 
@@ -230,7 +158,17 @@ The word *states* does not imply that W is a moral agent, that the statement is 
 
 Village Link currently uses URIs for its two independently meaningful endpoints.
 
-**Related terms:** Identifier, Village Link.
+---
+
+## Village context
+
+**Definition:** A contextual namespace in which an identifier has meaning within a particular context or hierarchy of contexts.
+
+**Prefix convention:** `vc.`
+
+A `vc.` namespace may use recursive path structure, for example `https://vc.village.link/FamilyChristmas/2025/JoeRasmussen`.
+
+The path structure is controlled by the namespace and is not assigned universal semantics by the core standard.
 
 ---
 
@@ -242,11 +180,23 @@ Conceptually: **W states A ↔ B**.
 
 Diagrammatically: **A ← W → B**.
 
-The current architectural direction represents a Village Link as a single, self-contained, two-ended hyperlink containing both endpoint URIs. W is the web resource in which the statement is found rather than a third endpoint encoded in the link.
+The current architecture represents a Village Link as a single, self-contained, two-ended hyperlink containing both endpoint URIs. W is the web resource in which the statement is found rather than a third endpoint encoded in the link.
 
-A Village Link states a relation; it is not an authoritative determination of identity or truth.
+---
 
-**Related terms:** Statement, Web resource, Identifier, Entity, URI.
+## WAB marker
+
+**Definition:** The adopted DNS-prefix convention `wab.` identifying the two-ended Village Link form within an HTTPS authority.
+
+Reference example: `https://wab.village.link/<encoded-A>!<encoded-B>`.
+
+The prefix is deliberately not an abbreviation of *Village Link*. This reduces project-specific branding in a convention intended for adoption by independent or competing parties.
+
+`wab` also acts as a compact mnemonic for the primitive: A–W–B, corresponding to **A ← W → B**.
+
+`wab.` is a marker convention, not a central registry, resolver, trust authority or new URI scheme. Other domain owners may use the convention beneath authorities they control.
+
+The `wab.` marker is adopted; the current `!` separator and endpoint escaping remain under test.
 
 ---
 
@@ -254,37 +204,39 @@ A Village Link states a relation; it is not an authoritative determination of id
 
 **Definition:** The web resource in which a Village Link statement is found.
 
-**Symbol:** **W** in the formulation **W states A ↔ B**.
+**Symbol:** **W** in **W states A ↔ B**.
 
-For an ordinary hyperlink, the corresponding structural relationship can be represented as **W → A**. For a Village Link it becomes **A ← W → B**.
+For an ordinary hyperlink, the structural relationship can be represented as **W → A**. For a Village Link it becomes **A ← W → B**.
 
 The existence of the statement on W does not by itself establish who authored, controls or endorses W, or whether the statement is true.
 
-**Related terms:** Statement, Village Link.
+---
+
+## Adopted prefix family
+
+The project uses three conventional DNS prefixes:
+
+| Prefix | Meaning |
+| --- | --- |
+| `wab.` | Marker for the two-ended Village Link form; mnemonic for A–W–B. |
+| `gc.` | Global-context endpoint naming. |
+| `vc.` | Village-context endpoint naming. |
+
+These are conventions within ordinary HTTPS/DNS naming, not new URI schemes.
 
 ---
 
 ## Deprecated and historical terminology
 
-The following terms may appear in older project documents or discussions:
-
 | Earlier usage | Current treatment |
 | --- | --- |
-| **Assertion / asserts** for the core Village Link relation | Prefer *statement / states*: **W states A ↔ B**. *Assertion* may still be used in ordinary prose where agency or evidentiary claims are specifically intended. |
-| **Publisher (P)** as a component of the core primitive | Superseded by the web-resource formulation **W states A ↔ B**. Questions of authorship, control, provenance and endorsement of W are separate from the primitive. |
-| **Context** as the name of the endpoint system | Prefer *memory system* when the system's capacity to retain traces matters. *Context* remains appropriate for the circumstances in which an identifier or trace has meaning, and may stand informally for the relevant memory system where the distinction is unimportant. |
-| **Governance system** as the generic endpoint system | Use *memory system*. Governance may operate across multiple memory systems. |
+| **Assertion / asserts** for the core Village Link relation | Prefer *statement / states*: **W states A ↔ B**. |
+| **Publisher (P)** as a component of the core primitive | Superseded by **W states A ↔ B**. Publisher remains valid for actual publication roles and processes. |
+| **`vl.`** as the Village Link marker prefix | Superseded by **`wab.`**. `vl.` carried unnecessary Village Link branding; `wab.` is project-neutral and mnemonic of A–W–B. |
+| **Context** as the generic endpoint system | Prefer *memory system* where the system's capacity to retain traces matters. |
+| **Governance system** as the generic endpoint system | Use *memory system*. |
 | **Reputation system** as the generic endpoint system | Use *memory system*. A reputation system is a more specific kind of memory system. |
 
 ## Future terminology tooling
 
-If the glossary becomes sufficiently stable or Village Link moves further into standards work, consider migrating these definitions to **Spec-Up-T** or compatible terminology tooling. A migration should preserve, where useful:
-
-- preferred terms and definitions;
-- aliases and deprecated terms;
-- relationships between terms;
-- links from specifications and other documents to definitions;
-- references to externally governed definitions; and
-- machine-readable terminology outputs.
-
-Migration should not require changing the conceptual definitions merely to satisfy the tool.
+If the glossary becomes sufficiently stable or Village Link moves further into standards work, consider migrating these definitions to Spec-Up-T or compatible terminology tooling.
