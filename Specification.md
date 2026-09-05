@@ -1,144 +1,111 @@
 # Village Link Specification
 
 **Version:** Draft 0.1  
-**Date:** 5 September 2026  
+**Date:** 6 September 2026  
 **Status:** Experimental
 
 ## 1. Scope
 
 This document specifies the current Village Link core primitive and the abstract structure of a Star Credential built from Village Links.
 
-Village Link provides a way for a publisher to publish an assertion that two independently meaningful identifiers refer to the same entity.
+A Village Link is a two-ended hyperlink found on a web resource W, stating that two independently meaningful identifiers refer to the same entity.
 
 Conceptually:
 
-**P asserts A ↔ B.**
+**W states A ↔ B.**
 
-This specification defines the semantics and current structural requirements of that assertion. It does not define a universal identity system, truth service, reputation algorithm, governance system or application architecture.
+Diagrammatically:
 
-The project requirements are recorded in [Requirements.md](Requirements.md). Terms are used as defined in [Glossary.md](Glossary.md). The architectural decision underlying the Village Link primitive is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). The Star Credential data model is recorded in [ADR-004](docs/adr/004-star-credential-data-model.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). The current Village Link serialization candidate is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
+**A ← W → B**
+
+This specification defines the semantics and current structural requirements of that statement. It does not define a universal identity system, truth service, reputation algorithm, governance system or application architecture.
+
+The project requirements are recorded in [Requirements.md](Requirements.md). Terms are used as defined in [Glossary.md](Glossary.md). The architectural decision underlying the Village Link primitive is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). The Star Credential data model is recorded in [ADR-004](docs/adr/004-star-credential-data-model.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). Serialization is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
 
 ## 2. Conventions
 
-The key words **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT** and **MAY** in this document indicate normative requirements for this draft.
+The key words **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT** and **MAY** indicate normative requirements for this draft.
 
 Because this is Draft 0.1, syntax and some conformance rules remain unsettled. Sections explicitly marked **Open** or **Proposed** are informative and MUST NOT be interpreted as settled normative syntax.
 
 ## 3. Conceptual model
 
-A Village Link involves four concepts:
+A Village Link involves:
 
-- **P — Publisher:** the entity publishing the assertion.
+- **W — Web resource:** the resource on which the Village Link statement is found.
 - **A — Endpoint A:** an independently meaningful identifier.
 - **B — Endpoint B:** another independently meaningful identifier.
-- **E — Entity:** the entity that P asserts is referred to by both A and B.
+- **E — Entity:** the entity referred to by both A and B.
 
-The core assertion is:
+The core statement is:
 
-> P asserts that A and B refer to the same E.
+> W states that A and B refer to the same E.
 
 E is semantic rather than a required encoded field. A Village Link does not require a separate canonical identifier for E.
 
-P is also not encoded as a third endpoint in the core primitive. P is established by publication context.
+W is not encoded as a third endpoint in the Village Link. A and B are encoded in the link itself; W is the web resource in which the link is found.
 
-A and B are encoded in the Village Link itself.
+The structural relationship is therefore **A ← W → B**.
 
 ## 4. Village Link semantics
 
-### 4.1 Same-entity assertion
+### 4.1 Same-entity statement
 
-A conforming Village Link asserts equivalence of reference for its two endpoints: the publisher is asserting that A and B identify or denote the same entity in their respective contexts.
+A conforming Village Link states equivalence of reference for its two endpoints: A and B identify or denote the same entity in their respective contexts.
 
-The assertion does not mean that:
+The statement does not mean that:
 
 - A and B are textually identical;
 - the endpoint systems are equivalent;
 - all information associated with A applies to B;
-- either endpoint system endorses the assertion;
-- the publisher controls either endpoint; or
-- the assertion is objectively true.
+- either endpoint system endorses the statement;
+- the operator, author or publisher of W controls either endpoint; or
+- the statement is objectively true.
 
 ### 4.2 Symmetry and encoded order
 
-At the semantic level:
+At the semantic level **A ↔ B** is symmetric.
 
-**A ↔ B**
+The serialized order of A and B is nevertheless preserved. A Village Link-aware application MAY use that order for presentation, for example by displaying A in a left pane and B in a right pane. A global-context identifier may commonly be placed in A.
 
-is symmetric.
-
-The serialized order of A and B is nevertheless preserved. A Village Link-aware application MAY use that order for presentation, for example by displaying A in a left pane and B in a right pane. Naming conventions may also encourage a conventional order; for example, an unrestricted or global-context identifier may commonly be placed in A.
-
-The serializations `VL(A,B)` and `VL(B,A)` may therefore differ while expressing the same mathematical same-entity assertion.
-
-Implementations MUST NOT infer greater semantic authority merely from endpoint position unless additional application-specific information establishes it.
+Two serializations containing A,B and B,A may therefore differ while expressing the same mathematical same-entity statement. Implementations MUST NOT infer greater semantic authority merely from endpoint position.
 
 ### 4.3 Publication
 
-The act of publication is part of the meaning of a Village Link.
+A Village Link statement occurs on W. Publication, authorship, control and provenance of W are distinct questions from the minimal relation stated by the link.
 
-A bare endpoint pair does not by itself identify P. An observer interprets the assertion in a publication context that supplies evidence about who published it.
+The same encoded A ↔ B pair may occur on multiple web resources. Applications and indexes SHOULD preserve the identity of W where provenance, publication or trust is relevant.
 
-Accordingly, the same encoded A ↔ B pair published by P1 and P2 represents two publisher-attributed assertions:
-
-**P1 asserts A ↔ B**
-
-**P2 asserts A ↔ B**
-
-Applications and indexes MUST be able to preserve that distinction where publisher attribution is relevant.
+A publisher may publish W, but the publisher is not a component or symbol of the core primitive.
 
 ### 4.4 Truth and authority
 
-Conformance to this specification establishes only that an assertion is expressed as a Village Link.
-
-It does not establish that the assertion is:
-
-- true;
-- current;
-- authorised by the entity;
-- authorised by either endpoint system;
-- supported by evidence; or
-- worthy of trust.
-
-Those judgments belong to publishers, observers, evidence systems and applications.
+Conformance establishes only that a statement is expressed as a Village Link. It does not establish that the statement is true, current, authorised, supported by evidence or worthy of trust.
 
 ## 5. Endpoint requirements
 
 ### 5.1 URI endpoints
 
-In Draft 0.1, A and B MUST each be represented by a URI.
-
-Each endpoint URI MUST be independently meaningful: an observer that encounters the URI outside the Village Link must be able, in principle, to interpret it as an identifier within its own context.
-
-The endpoint URI does not have to be publicly dereferenceable.
+A and B MUST each be represented by a URI. Each endpoint URI MUST be independently meaningful outside the Village Link itself. The endpoint URI does not have to be publicly dereferenceable.
 
 ### 5.2 Endpoint-system independence
 
-A system responsible for an endpoint URI is not required to:
-
-- know that Village Link exists;
-- expose a Village Link API;
-- modify the endpoint resource;
-- publish reciprocal information; or
-- approve the Village Link assertion.
+An endpoint system is not required to know that Village Link exists, expose a Village Link API, modify the endpoint resource, publish reciprocal information or approve the Village Link statement.
 
 ### 5.3 Endpoint availability
 
-Failure to dereference A or B MUST NOT, by itself, make the Village Link syntactically invalid.
+Failure to dereference A or B MUST NOT, by itself, make the Village Link syntactically invalid. Endpoint availability MAY affect an application's assessment of the statement.
 
-An endpoint may be unavailable because it has moved, requires authentication, is temporarily offline, has been deleted, uses a non-HTTP URI scheme, or for other reasons.
-
-Endpoint availability MAY affect an application's assessment of the assertion.
-
-### 5.4 Endpoint naming conventions
+### 5.4 Adopted endpoint prefix conventions
 
 Existing URI identifiers MAY be used directly as Village Link endpoints.
 
-Where a suitable endpoint URI does not already exist, a publisher may mint one. Village Link proposes two useful naming conventions:
+Where a suitable endpoint URI does not already exist, the project adopts two conventional DNS prefixes:
 
-- `gc` — **global context**: an identifier intended to identify a noun without restriction to a particular memory-system context; and
-- `vc` — **village context**: an identifier within a contextual namespace.
+- `gc.` — **global context**: an identifier intended to identify a noun without restriction to a particular memory-system context; and
+- `vc.` — **village context**: an identifier within a contextual namespace.
 
-For the reference publisher, examples include:
+Reference examples include:
 
 ```text
 https://gc.village.link/JoeRasmussen
@@ -146,31 +113,19 @@ https://vc.village.link/FamilyChristmas/JoeRasmussen
 https://vc.village.link/FamilyChristmas/2025/JoeRasmussen
 ```
 
-`gc` and `vc` are naming conventions, not privileged endpoint types in the Village Link primitive. In particular, `gc` does not assert that an identifier is true, uniquely canonical, legally privileged or endorsed by Village Link.
+`gc.` and `vc.` are naming conventions, not privileged endpoint types. `gc.` does not assert truth, unique canonicality, legal privilege or endorsement by Village Link.
 
-The reference publisher uses conventional HTTPS and DNS syntax. Village Link does not introduce new `gc:` or `vc:` URI schemes.
-
-Other publishers MAY adopt the same conventions under domains they control, or MAY use different naming conventions. The core standard does not require registration with or permission from `village.link`.
+These are conventional HTTPS/DNS prefixes, not new `gc:` or `vc:` URI schemes. Other domain owners may adopt the same conventions beneath domains they control. The core standard does not require registration with or permission from `village.link`.
 
 ### 5.5 Recursive context hierarchy
 
-A contextual namespace MAY use a recursive or hierarchical path. For example:
+A `vc.` namespace MAY use a recursive or hierarchical path. The core standard does not assign universal semantics to individual path segments; the namespace that mints an endpoint controls its internal naming structure.
 
-```text
-https://vc.village.link/FamilyChristmas/2025/JoeRasmussen
-```
+Memory systems and contexts are themselves nouns and may participate in Village Links like other nouns.
 
-may represent a hierarchy of context, subcontext and noun.
+### 5.6 Naming assistance
 
-The core standard does not assign universal semantics to individual path segments. The namespace that mints an endpoint controls its internal naming structure.
-
-Memory systems and contexts are themselves nouns. They may therefore have their own endpoint identifiers, reputations and star credentials, and may participate in Village Links like other nouns.
-
-### 5.6 Reference-publisher naming assistance
-
-The reference publisher MAY provide human-facing facilities for endpoint naming, including friendly labels, redirects, disambiguation and context hierarchies.
-
-These facilities belong to the publisher layer and are not requirements of the core Village Link primitive.
+A publisher MAY provide human-facing facilities for endpoint naming, including friendly labels, redirects, disambiguation and context hierarchies. These facilities belong to the publisher layer and are not requirements of the core primitive.
 
 ## 6. Village Link representation
 
@@ -181,44 +136,43 @@ A Village Link MUST be a single self-contained identifier containing representat
 Conceptually:
 
 ```text
-[Village Link marker] [encoded URI A] [separator] [encoded URI B]
+[wab marker] [encoded URI A] [separator] [encoded URI B]
 ```
 
-A parser presented with the Village Link MUST be able to recover A and B without dereferencing a separate Village Link resource.
+A parser MUST be able to recover A and B without dereferencing a separate Village Link resource.
 
-### 6.2 Candidate HTTPS serialization — Proposed
+### 6.2 Adopted `wab.` marker; candidate separator
 
-The leading Draft 0.1 serialization candidate is:
+The project adopts `wab.` as the DNS marker prefix for the two-ended Village Link form. The prefix is deliberately independent of Village Link branding and provides a compact mnemonic for **A ← W → B**.
+
+The reference form is currently:
 
 ```text
-https://vl.village.link/<encoded-A>!<encoded-B>
+https://wab.village.link/<encoded-A>!<encoded-B>
 ```
 
-In this candidate:
+In this form:
 
 - `https` uses conventional URI and browser infrastructure;
-- `vl.village.link` identifies the reference Village Link form;
-- `!` is the structural boundary between A and B; and
+- `wab.` is the adopted marker convention;
+- `wab.village.link` is the reference marker implementation;
+- `!` is the **proposed** structural boundary between A and B; and
 - the encoded order of A and B is preserved.
 
-`vl.village.link` is the reference marker, not a central registry, resolver or privileged authority. The first DNS label `vl` is the marker convention within an HTTPS authority controlled by a domain owner. Other domain owners MAY expose the same candidate serialization through marker authorities they control, for example:
+`wab.village.link` is not a central registry, resolver or privileged authority. Other domain owners MAY expose the same marker convention through authorities they control, for example:
 
 ```text
-https://vl.github.com/<encoded-A>!<encoded-B>
-https://vl.example.org/<encoded-A>!<encoded-B>
+https://wab.github.com/<encoded-A>!<encoded-B>
+https://wab.example.org/<encoded-A>!<encoded-B>
 ```
 
 No registration with or permission from `village.link` is required.
 
-The project's reference browser MUST, when it encounters an HTTPS URI whose first DNS label is `vl`, first attempt to parse it locally as a Village Link before ordinary web dereferencing. Successful parsing MUST NOT depend on dereferencing the marker host. If local Village Link parsing fails, the browser MUST fall back to ordinary HTTPS handling.
+The project's reference browser MUST, when it encounters an HTTPS URI whose first DNS label is `wab`, first attempt to parse it locally as a Village Link before ordinary web dereferencing. Successful parsing MUST NOT depend on dereferencing the marker host. If local parsing fails, the browser MUST fall back to ordinary HTTPS handling.
 
-A matching marker or successfully parsed Village Link form MUST NOT, by itself, be treated as evidence that the assertion is true, trusted, authorised or published by either endpoint system. Publisher attribution remains governed by publication context.
+Marker recognition MUST NOT be treated as evidence that the statement is true, trusted or authorised.
 
-A literal `!` belonging to A or B must be escaped so that it cannot be confused with the structural separator.
-
-The exact escaping algorithm for arbitrary endpoint URIs remains **Open**. The candidate MUST NOT be treated as accepted wire syntax until it passes URI-conformance, conventional-browser and exact round-trip tests as described in ADR-006.
-
-Opaque Base64url encoding is retained as a technically straightforward fallback, but is not preferred because it destroys useful human readability in endpoint URIs.
+A literal `!` belonging to A or B must be escaped so that it cannot be confused with the structural separator. The exact escaping algorithm remains **Open**. The `wab.` marker is adopted; the `!` separator and endpoint escaping MUST NOT be treated as accepted wire syntax until the tests described in ADR-006 pass.
 
 ### 6.3 Serialization acceptance criterion — Open
 
@@ -230,52 +184,31 @@ parse(make(A, B)) == (A, B)
 
 Testing must exercise reserved characters, percent-encoded material, queries, fragments, Unicode or internationalised material, non-HTTP URI schemes and nested URI material.
 
-Representative output must also be tested in conventional browsers and URI libraries to establish that significant information is not unexpectedly reinterpreted, normalised or destroyed.
-
 ### 6.4 No required dereferenceable link object
 
 A conforming Village Link MUST NOT require a separate resource to be dereferenced in order to discover A and B.
 
-A publisher or application MAY additionally provide a page, record, API resource, evidence bundle or other object describing the assertion. Such an object is supplementary and is not the core Village Link primitive.
+A publisher or application MAY additionally provide a page, record, API resource, evidence bundle or other object describing the statement. Such an object is supplementary.
 
-A marker operator MAY provide useful dereferencing behaviour for conventional browsers. This includes the reference `vl.village.link` service and other marker authorities operated beneath domains their owners control. Such behaviour does not make dereferencing a requirement for parsing or interpreting the primitive.
+A marker operator MAY provide useful dereferencing behaviour for conventional browsers, including at `wab.village.link`. Such behaviour does not make dereferencing a requirement for parsing the primitive.
 
-## 7. Publisher attribution
+## 7. Web resource, publication and provenance
 
-### 7.1 Publication context
+### 7.1 W
 
-P is established by the context in which the Village Link is published.
+W is the web resource on which the Village Link statement is found.
 
-Examples may include publication on a web page, in a signed document, in a repository, through an authenticated service, or through another medium capable of providing evidence of provenance.
+The primitive does not by itself establish who authored, controls, publishes or endorses W. Those are provenance questions about W rather than an additional endpoint of the link.
 
-### 7.2 Attribution mechanism — Open
+### 7.2 Provenance mechanism — Open
 
-Draft 0.1 does not yet prescribe a universal mechanism for proving the identity of P.
-
-A later revision MUST clarify the minimum publication-context information necessary for useful attribution and the treatment of:
-
-- copied links;
-- quotations;
-- mirrors;
-- syndication;
-- caches;
-- archives;
-- screenshots and other representations; and
-- compromised or transferred publishing contexts.
-
-The intended distinction is between **P making an assertion** and **Q reporting that P made an assertion**.
+Draft 0.1 does not prescribe a universal mechanism for proving authorship or control of W. A later revision should clarify treatment of copied links, quotations, mirrors, syndication, caches, archives, screenshots and compromised or transferred publishing contexts.
 
 ## 8. Multiplicity and conflict
 
-Village Link is intentionally multi-publisher.
+The same A ↔ B statement MAY occur on multiple web resources. Web resources MAY also contain statements which, when combined, are inconsistent or disputed.
 
-Multiple publishers MAY publish the same A ↔ B assertion.
-
-Publishers MAY also publish assertions which, when combined, are inconsistent or disputed. For example, graph data may imply incompatible identity relationships.
-
-The core Village Link standard does not resolve such conflicts.
-
-An application MAY use publisher reputation, evidence, timestamps, graph structure, endpoint properties or other information to evaluate competing assertions.
+The core standard does not resolve such conflicts. An application MAY use provenance, publisher reputation, evidence, timestamps, graph structure, endpoint properties or other information to evaluate competing statements.
 
 No universal trust weighting is specified.
 
@@ -283,187 +216,92 @@ No universal trust weighting is specified.
 
 Evidence, timestamps, observations, confidence values and similar metadata are useful but are not currently fields of the minimal Village Link primitive.
 
-Publishers and indexes MAY associate such metadata with an assertion.
-
-Where metadata is retained, an implementation SHOULD distinguish:
-
-1. the Village Link assertion itself;
-2. evidence offered in support of the assertion;
-3. evidence of who published it;
-4. the time at which it was published or observed; and
-5. later observations about its status.
-
-A future specification may standardise some or all of these structures without changing the semantics of the two-ended primitive.
+Publishers and indexes MAY associate such metadata with a statement. Implementations SHOULD distinguish the Village Link statement itself from supporting evidence, provenance evidence, observation/publication time and later observations about its status.
 
 ## 10. Lifecycle
 
-A Village Link assertion may outlive the conditions under which it was made.
-
-Relevant changes may include:
-
-- transfer of control of an endpoint;
-- compromise of an endpoint or publisher;
-- abandonment of an identifier;
-- deletion or reassignment of an account;
-- change in the entity represented by an identifier;
-- retraction by a publisher; or
-- loss of the publication context needed to attribute P.
+A Village Link statement may outlive the conditions under which it appeared. Relevant changes may include transfer or compromise of an endpoint, abandonment or reassignment of an identifier, change in the represented entity, retraction or alteration of W, or loss of provenance information.
 
 **Open:** Draft 0.1 does not yet specify lifecycle states, revocation, retraction or expiry mechanisms.
-
-Consumers MUST therefore avoid assuming that a historically observed Village Link remains current merely because its encoded form still exists.
 
 ## 11. Star Credentials and graph interpretation
 
 ### 11.1 Graph interpretation
 
-Village Links can be combined into a graph.
-
-If P1 publishes A ↔ B and P2 publishes B ↔ C, an application may investigate whether A, B and C refer to the same entity. The core specification does not require that conclusion: transitive inference is an application-level judgment because the underlying assertions may differ in publisher, evidence, age and trustworthiness.
+Village Links can be combined into a graph. If W1 states A ↔ B and W2 states B ↔ C, an application may investigate whether A, B and C refer to the same entity. The core specification does not require that conclusion: transitive inference remains an application-level judgment.
 
 ### 11.2 Star Credential definition
 
-A **Star Credential** consists of:
+A **Star Credential** consists of one distinguished centre noun A and a finite unordered set of nouns B.
 
-1. one distinguished centre noun, designated **A**; and
-2. a finite unordered set of nouns, designated **B**.
+If the B set is `S = {B1, B2, ... Bn}`, then the credential is `SC(A, S)` and states `{ A ↔ B | B is a member of S }` through its constituent Village Links.
 
-Each noun MUST be represented by a URI endpoint identifier satisfying Section 5.
-
-If the B set is:
-
-```text
-S = {B1, B2, ... Bn}
-```
-
-then the credential is:
-
-```text
-SC(A, S)
-```
-
-and asserts:
-
-```text
-{ A ↔ B | B is a member of S }
-```
-
-The abstract structure of the credential is therefore:
+The abstract structure is:
 
 ```text
 [A]{[B1], [B2], ... [Bn]}
 ```
 
-A MUST be recorded once as the centre. Each B MUST be recorded as a member of the associated set.
-
-For every B in the set, the credential asserts one Village Link between A and B. Each such Village Link retains the semantics and requirements specified elsewhere in this document, including symmetric equivalence and publisher attribution through publication context.
+Each noun MUST be represented by a URI endpoint identifier satisfying Section 5. A MUST be recorded once as the centre. Each B MUST be recorded as a member of the associated set.
 
 ### 11.3 Unordered membership
 
-The B nouns form a set, not an ordered list.
+The B nouns form a set, not an ordered list. Implementations MUST NOT assign semantic significance to their order. A B noun MUST NOT occur more than once.
 
-Implementations MUST NOT assign semantic significance to the order in which Bs are serialized, stored or presented.
-
-A B noun MUST NOT occur more than once in a Star Credential. Repetition MUST NOT be interpreted as an additional assertion, additional evidence or additional weight.
-
-Accordingly:
-
-```text
-SC(A, {B1, B2}) = SC(A, {B2, B1})
-```
-
-at the credential-content level.
-
-A renderer MAY impose an order for presentation. Such ordering is not part of the Star Credential's meaning.
+Accordingly `SC(A, {B1, B2}) = SC(A, {B2, B1})` at the credential-content level.
 
 ### 11.4 Status of the centre
 
-A is distinguished because it is the centre of this Star Credential.
-
-That structural role does not make the Village Links directional. For each member B, the asserted relation remains:
-
-**A ↔ B**
-
-Implementations MUST NOT infer greater truth, authority or importance from the placement of a noun at the centre.
+A is distinguished because it is the centre of this Star Credential. That structural role does not make the constituent Village Links directional: for each member B, the relation remains **A ↔ B**.
 
 ### 11.5 Serialization and presentation — Open
 
-Draft 0.1 specifies the abstract Star Credential structure but does not prescribe a concrete serialization.
-
-A future serialization MUST preserve the distinction between A and the unordered B set. JSON, XML, CSV and other representations remain implementation or future specification choices.
-
-A table, wiki page or other human-facing view MAY present a Star Credential but is not the credential's normative machine-readable definition.
-
-The minimum number of Bs required for a publishable Star Credential, canonical byte representation, metadata, evidence, provenance and signing remain **Open**.
-
-A Star Credential is not required for conformance as an individual Village Link.
+Draft 0.1 specifies the abstract Star Credential structure but does not prescribe a concrete serialization. A future serialization MUST preserve the distinction between A and the unordered B set.
 
 ## 12. Relationship to memory systems and governance
 
 Village Link endpoints may identify entities within memory systems: systems capable of retaining traces associated with entities.
 
-Village Link does not require an endpoint system to be a reputation system or governance system. Nor does Village Link itself calculate reputation, establish norms, assess behaviour or impose consequences.
-
-Applications may use Village Link graphs to make relationships among memories, reputation and governance more traversable. Those uses remain outside the core primitive.
+Village Link does not itself calculate reputation, establish norms, assess behaviour or impose consequences. Applications may use Village Link graphs to make relationships among memories, reputation and governance more traversable.
 
 ## 13. Privacy, abuse and harms
 
-Publishing a connection between identifiers can reveal information that was previously difficult to correlate.
+Publishing a connection between identifiers can reveal information that was previously difficult to correlate. Potential harms include unwanted identity correlation, impersonation, stalking, discrimination, amplification of inaccurate statements, exposure of abandoned identities and graph-based inference.
 
-Potential harms include unwanted identity correlation, impersonation, stalking, discrimination, amplification of inaccurate assertions, exposure of abandoned identities, and graph-based inference beyond what any individual publisher intended.
-
-Conformance to the Village Link syntax does not imply that publication is safe, ethical or lawful.
-
-**Open:** The project has not yet determined which protections belong in the core standard, in publisher practice, or in consuming applications. This question should be informed by explicit harms assessment rather than resolved implicitly through implementation choices.
+Conformance to Village Link syntax does not imply that publication is safe, ethical or lawful.
 
 ## 14. Conformance
-
-Draft 0.1 defines only provisional core conformance.
 
 A **conforming Village Link**:
 
 1. contains exactly two endpoint URIs;
 2. permits both endpoints to be recovered without dereferencing a separate Village Link resource;
-3. represents the publisher's assertion that both endpoints refer to the same entity; and
-4. does not encode the publisher as a third endpoint.
+3. states that both endpoints refer to the same entity; and
+4. is found on a web resource W, which is not encoded as a third endpoint.
 
-A **conforming consumer**:
+A **conforming consumer** MUST NOT interpret syntactic conformance as proof of truth and MUST NOT require cooperation from endpoint systems merely to parse the Village Link.
 
-1. MUST NOT interpret syntactic conformance as proof of truth;
-2. MUST permit publisher attribution to remain distinct from the endpoint pair; and
-3. MUST NOT require cooperation from the endpoint systems merely to parse the Village Link.
-
-A conforming **Star Credential**:
-
-1. designates exactly one centre noun A;
-2. contains a finite unordered set of B nouns;
-3. records A once as the centre;
-4. contains no duplicate B nouns;
-5. asserts one conforming Village Link A ↔ B for every B in the set; and
-6. assigns no semantic significance to the serialized or presented order of the Bs.
-
-A more complete conformance model will be possible once serialization and publication-context rules are settled.
+A conforming **Star Credential** designates exactly one centre noun A, contains a finite unordered set of B nouns without duplicates, and states one conforming Village Link A ↔ B for every B in the set.
 
 ## 15. Open specification issues
 
-The following issues are intentionally unresolved in Draft 0.1:
+The following issues remain unresolved in Draft 0.1:
 
-1. exact escaping of A and B within the proposed `https://vl.village.link/<encoded-A>!<encoded-B>` form;
+1. exact escaping of A and B within the `https://wab.village.link/<encoded-A>!<encoded-B>` form;
 2. torture-test results for the proposed `!` separator;
 3. canonical representation and equality comparison;
 4. practical URI-length limits;
-5. precise publisher-attribution rules;
+5. provenance rules for W;
 6. copying, quotation, syndication and archival semantics;
 7. lifecycle, retraction, expiry and compromise;
 8. standard metadata and evidence formats;
 9. discovery and indexing conventions;
 10. final browser and user-agent behaviour;
-11. privacy and harms requirements;
-12. Star Credential serialization, minimum cardinality, canonical byte representation, metadata and signing; and
-13. useful conformance classes beyond the core primitive.
-
-These are specification work, not reasons to enlarge the core assertion prematurely.
+11. privacy and harms requirements; and
+12. Star Credential serialization and signing.
 
 The current centre of the design remains deliberately small:
 
-**P asserts A ↔ B.**
+**W states A ↔ B.**
+
+**A ← W → B**
