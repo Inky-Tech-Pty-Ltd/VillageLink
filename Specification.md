@@ -1,12 +1,12 @@
 # Village Link Specification
 
 **Version:** Draft 0.1  
-**Date:** 4 September 2026  
+**Date:** 5 September 2026  
 **Status:** Experimental
 
 ## 1. Scope
 
-This document specifies the current Village Link core primitive.
+This document specifies the current Village Link core primitive and the abstract structure of a Star Credential built from Village Links.
 
 Village Link provides a way for a publisher to publish an assertion that two independently meaningful identifiers refer to the same entity.
 
@@ -16,7 +16,7 @@ Conceptually:
 
 This specification defines the semantics and current structural requirements of that assertion. It does not define a universal identity system, truth service, reputation algorithm, governance system or application architecture.
 
-The project requirements are recorded in [Requirements.md](Requirements.md). Terms are used as defined in [Glossary.md](Glossary.md). The architectural decision underlying this specification is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). The current serialization candidate is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
+The project requirements are recorded in [Requirements.md](Requirements.md). Terms are used as defined in [Glossary.md](Glossary.md). The architectural decision underlying the Village Link primitive is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). The Star Credential data model is recorded in [ADR-004](docs/adr/004-star-credential-data-model.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). The current Village Link serialization candidate is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
 
 ## 2. Conventions
 
@@ -313,15 +313,90 @@ Relevant changes may include:
 
 Consumers MUST therefore avoid assuming that a historically observed Village Link remains current merely because its encoded form still exists.
 
-## 11. Graph interpretation
+## 11. Star Credentials and graph interpretation
+
+### 11.1 Graph interpretation
 
 Village Links can be combined into a graph.
 
 If P1 publishes A ↔ B and P2 publishes B ↔ C, an application may investigate whether A, B and C refer to the same entity. The core specification does not require that conclusion: transitive inference is an application-level judgment because the underlying assertions may differ in publisher, evidence, age and trustworthiness.
 
-A sufficiently rich graph may support a **Star Credential**: a traversable structure of independently meaningful identifiers and associated memory traces referring to an entity.
+### 11.2 Star Credential definition
 
-A Star Credential is not required for Village Link conformance and is not specified further in Draft 0.1.
+A **Star Credential** consists of:
+
+1. one distinguished centre noun, designated **A**; and
+2. a finite unordered set of nouns, designated **B**.
+
+Each noun MUST be represented by a URI endpoint identifier satisfying Section 5.
+
+If the B set is:
+
+```text
+S = {B1, B2, ... Bn}
+```
+
+then the credential is:
+
+```text
+SC(A, S)
+```
+
+and asserts:
+
+```text
+{ A ↔ B | B is a member of S }
+```
+
+The abstract structure of the credential is therefore:
+
+```text
+[A]{[B1], [B2], ... [Bn]}
+```
+
+A MUST be recorded once as the centre. Each B MUST be recorded as a member of the associated set.
+
+For every B in the set, the credential asserts one Village Link between A and B. Each such Village Link retains the semantics and requirements specified elsewhere in this document, including symmetric equivalence and publisher attribution through publication context.
+
+### 11.3 Unordered membership
+
+The B nouns form a set, not an ordered list.
+
+Implementations MUST NOT assign semantic significance to the order in which Bs are serialized, stored or presented.
+
+A B noun MUST NOT occur more than once in a Star Credential. Repetition MUST NOT be interpreted as an additional assertion, additional evidence or additional weight.
+
+Accordingly:
+
+```text
+SC(A, {B1, B2}) = SC(A, {B2, B1})
+```
+
+at the credential-content level.
+
+A renderer MAY impose an order for presentation. Such ordering is not part of the Star Credential's meaning.
+
+### 11.4 Status of the centre
+
+A is distinguished because it is the centre of this Star Credential.
+
+That structural role does not make the Village Links directional. For each member B, the asserted relation remains:
+
+**A ↔ B**
+
+Implementations MUST NOT infer greater truth, authority or importance from the placement of a noun at the centre.
+
+### 11.5 Serialization and presentation — Open
+
+Draft 0.1 specifies the abstract Star Credential structure but does not prescribe a concrete serialization.
+
+A future serialization MUST preserve the distinction between A and the unordered B set. JSON, XML, CSV and other representations remain implementation or future specification choices.
+
+A table, wiki page or other human-facing view MAY present a Star Credential but is not the credential's normative machine-readable definition.
+
+The minimum number of Bs required for a publishable Star Credential, canonical byte representation, metadata, evidence, provenance and signing remain **Open**.
+
+A Star Credential is not required for conformance as an individual Village Link.
 
 ## 12. Relationship to memory systems and governance
 
@@ -358,6 +433,15 @@ A **conforming consumer**:
 2. MUST permit publisher attribution to remain distinct from the endpoint pair; and
 3. MUST NOT require cooperation from the endpoint systems merely to parse the Village Link.
 
+A conforming **Star Credential**:
+
+1. designates exactly one centre noun A;
+2. contains a finite unordered set of B nouns;
+3. records A once as the centre;
+4. contains no duplicate B nouns;
+5. asserts one conforming Village Link A ↔ B for every B in the set; and
+6. assigns no semantic significance to the serialized or presented order of the Bs.
+
 A more complete conformance model will be possible once serialization and publication-context rules are settled.
 
 ## 15. Open specification issues
@@ -374,8 +458,9 @@ The following issues are intentionally unresolved in Draft 0.1:
 8. standard metadata and evidence formats;
 9. discovery and indexing conventions;
 10. final browser and user-agent behaviour;
-11. privacy and harms requirements; and
-12. useful conformance classes beyond the core primitive.
+11. privacy and harms requirements;
+12. Star Credential serialization, minimum cardinality, canonical byte representation, metadata and signing; and
+13. useful conformance classes beyond the core primitive.
 
 These are specification work, not reasons to enlarge the core assertion prematurely.
 
