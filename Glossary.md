@@ -1,15 +1,13 @@
 # Village Link Glossary
 
 **Status:** Working draft  
-**Last updated:** 29 August 2026
+**Last updated:** 6 September 2026
 
 ## Purpose
 
 This glossary records how the Village Link project currently uses important terms.
 
 The definitions are intended to make project documents internally consistent and to expose conceptual disagreements rather than hide them behind ambiguous language. They are not, by themselves, conformance requirements. Where a term acquires a normative meaning in the Village Link specification, the specification takes precedence.
-
-The glossary is deliberately maintained as simple Markdown while the terminology is still evolving. Entries are structured so that they can later be migrated to a terminology-aware specification tool such as **Spec-Up-T**, and aligned or cross-referenced with external glossaries where appropriate.
 
 ## Terminology principles
 
@@ -18,17 +16,7 @@ The glossary is deliberately maintained as simple Markdown while the terminology
 - Reuse established external terminology where it fits rather than creating unnecessary Village Link vocabulary.
 - Record deprecated or superseded terms when older project material may still contain them.
 - Treat definitions as revisable while the architecture remains experimental.
-- Do not infer truth merely from the existence of an assertion or memory trace.
-
----
-
-## Assertion
-
-**Definition:** A claim made by a publisher.
-
-In the core Village Link formulation, the assertion is that two independently meaningful identifiers refer to the same entity: **P asserts A ↔ B**.
-
-**Related terms:** Publisher, Village Link, Entity, Identifier.
+- Do not infer truth merely from the existence of a statement or memory trace.
 
 ---
 
@@ -164,21 +152,9 @@ A norm may be formal or informal and need not be stored in the same memory syste
 
 ---
 
-## Publisher
-
-**Definition:** The entity that publishes a Village Link assertion.
-
-Publication records that the publisher made the assertion; it does not make the assertion true. Multiple publishers may make matching, overlapping or conflicting assertions.
-
-**Symbol:** **P** in the formulation **P asserts A ↔ B**.
-
-**Related terms:** Assertion, Village Link.
-
----
-
 ## Reputation
 
-**Definition:** An evaluative understanding of an entity derived from memories, observations, assertions or other evidence.
+**Definition:** An evaluative understanding of an entity derived from memories, observations, statements or other evidence.
 
 Village Link does not itself calculate or determine reputation. Reputation may be inferred by observers or applications from traces distributed across one or more memory systems.
 
@@ -236,6 +212,18 @@ The architecture and terminology of the Star Credential remain under active deve
 
 ---
 
+## Statement
+
+**Definition:** The same-entity relation expressed by a Village Link found on a web resource.
+
+In the core Village Link formulation, a webpage or other web resource **W states A ↔ B**: two independently meaningful identifiers in different memory systems refer to the same entity.
+
+The word *states* does not imply that W is a moral agent, that the statement is true, or that the operator or author of W warrants it.
+
+**Related terms:** Village Link, Web resource, Entity, Identifier.
+
+---
+
 ## URI
 
 **Definition:** Uniform Resource Identifier.
@@ -248,15 +236,31 @@ Village Link currently uses URIs for its two independently meaningful endpoints.
 
 ## Village Link
 
-**Definition:** A published assertion connecting two independently meaningful identifiers as referring to the same entity.
+**Definition:** A two-ended hyperlink, found on a web resource W, stating that two independently meaningful identifiers refer to the same entity.
 
-Conceptually: **P asserts A ↔ B**.
+Conceptually: **W states A ↔ B**.
 
-The current architectural direction represents a Village Link as a single, self-contained, two-ended hyperlink containing both endpoint URIs. The publisher is identified by publication context rather than encoded as a third endpoint.
+Diagrammatically: **A ← W → B**.
 
-A Village Link records an assertion, not an authoritative determination of identity or truth.
+The current architectural direction represents a Village Link as a single, self-contained, two-ended hyperlink containing both endpoint URIs. W is the web resource in which the statement is found rather than a third endpoint encoded in the link.
 
-**Related terms:** Assertion, Publisher, Identifier, Entity, URI.
+A Village Link states a relation; it is not an authoritative determination of identity or truth.
+
+**Related terms:** Statement, Web resource, Identifier, Entity, URI.
+
+---
+
+## Web resource
+
+**Definition:** The web resource in which a Village Link statement is found.
+
+**Symbol:** **W** in the formulation **W states A ↔ B**.
+
+For an ordinary hyperlink, the corresponding structural relationship can be represented as **W → A**. For a Village Link it becomes **A ← W → B**.
+
+The existence of the statement on W does not by itself establish who authored, controls or endorses W, or whether the statement is true.
+
+**Related terms:** Statement, Village Link.
 
 ---
 
@@ -266,6 +270,8 @@ The following terms may appear in older project documents or discussions:
 
 | Earlier usage | Current treatment |
 | --- | --- |
+| **Assertion / asserts** for the core Village Link relation | Prefer *statement / states*: **W states A ↔ B**. *Assertion* may still be used in ordinary prose where agency or evidentiary claims are specifically intended. |
+| **Publisher (P)** as a component of the core primitive | Superseded by the web-resource formulation **W states A ↔ B**. Questions of authorship, control, provenance and endorsement of W are separate from the primitive. |
 | **Context** as the name of the endpoint system | Prefer *memory system* when the system's capacity to retain traces matters. *Context* remains appropriate for the circumstances in which an identifier or trace has meaning, and may stand informally for the relevant memory system where the distinction is unimportant. |
 | **Governance system** as the generic endpoint system | Use *memory system*. Governance may operate across multiple memory systems. |
 | **Reputation system** as the generic endpoint system | Use *memory system*. A reputation system is a more specific kind of memory system. |
