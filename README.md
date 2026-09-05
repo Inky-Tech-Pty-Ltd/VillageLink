@@ -9,8 +9,6 @@ The constraints that we call _governance_ emerge from the consequences of accoun
 
 Parties have an incentive to reveal context, and to accept the constraints of governance, because it assists in the reduction of transaction costs.
 
-To date the web has not given us a standard way to link memory systems.
-
 Village Link proposes a small web primitive for making a statement that two independently meaningful identifiers in different memory systems refer to the same entity.
 
 Conceptually, for a webpage, W:
