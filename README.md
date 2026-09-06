@@ -40,7 +40,7 @@ https://www.facebook.com/joe.rasmussen.70/
 
 Conceptually:
 
-`[Village Link identifier] [separator] [URI A] [separator] [URI B]`
+`[wab identifier] [separator] [URI A] [separator] [URI B]`
 
 The architectural decision is recorded in [ADR-001](docs/adr/001-two-ended-uri.md).
 
