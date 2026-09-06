@@ -52,7 +52,7 @@ The important properties are:
 - multiple webpages may contain matching or conflicting statements;
 - the _truth_, or perhaps better to say the _weight_ of the statement is an emergent property of the graph.
 
-Like a conventional hyperlink, a Village Link carries information through both its endpoints and the web resource in which it occurs. Its two-ended form also creates graph structures that ordinary directed links do not express directly.
+Like a conventional hyperlink, a Village Link carries information both through its endpoints and from the web resource in which it occurs. Its two-ended form creates graph structures that ordinary directed links do not express directly.
 
 ### The existing web
 
