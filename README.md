@@ -7,7 +7,7 @@ A curriculum vitae is a formal example of the same ritual.
 Accountability necessarily rests upon the trail of memories that entities have left behind in different contexts.
 The constraints that we call _governance_ emerge from the consequences of accountability.
 
-Parties have an incentive to reveal context, and to accept the constraints of governance, because it assists in the reduction of transaction costs.
+Parties have an incentive to reveal context, and to accept the constraints of governance, to reduce transaction costs.
 
 Village Link proposes a small web primitive for making a statement that two independently meaningful identifiers in different memory systems refer to the same entity.
 
