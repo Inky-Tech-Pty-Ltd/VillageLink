@@ -34,6 +34,18 @@ In its shortest form:
 
 This is distinct from **Composer**, which merely constructs village links or star credentials from inputs supplied by a user and need not discover, rank, publish or retain anything.
 
+## Opening the reader's own memory
+
+A URI in a Village Link is an identifier, not necessarily a destination.
+
+For example, `mailto:alice@example.com` conventionally invites an application to compose an email to Alice. A Village Link-aware application may instead use the address as a key for querying one or more email memory systems authorised by the reader.
+
+The address does not itself identify or select the memory system. Bob's client determines which of Bob's mailboxes may be searched and what Bob is authorised to see.
+
+The result is therefore reader-relative. When Bob follows Alice's email identifier, he may not be opening a public resource belonging to Alice. He may be opening **his own memory of Alice**.
+
+The same principle may apply to `tel:` identifiers and authorised call, message or contact histories.
+
 ## The existing territory
 
 On the conventional Web, several classes of system perform pieces of this work.
