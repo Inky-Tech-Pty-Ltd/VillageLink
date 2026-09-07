@@ -7,6 +7,7 @@ on:
     paths:
       - "anna/**"
       - "tools/publish_anna.py"
+      - "tools/capture_anna_thumbnails.py"
       - ".github/workflows/publish-anna.yml"
 
 permissions:
@@ -23,6 +24,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Install thumbnail dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright requests
+          python -m playwright install --with-deps chromium
+
+      - name: Capture contextual thumbnails
+        run: python tools/capture_anna_thumbnails.py
 
       - name: Publish pages to Anna
         env:
