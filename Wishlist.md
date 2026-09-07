@@ -53,7 +53,7 @@ Ideas, experiments, questions and possible things to build.
 - [ ] Populate the MediaWiki with the initial sandbox corpus.
 - [ ] Update the prototype browser to resolve Village Links through the MediaWiki and display both endpoints.
 - [ ] Use the working graph to investigate the first Trust Engine computations.
-- [ ] Use the working graph to clarify whether the Star Credential Manager requires Village Link-specific machinery.
+- [ ] Build the first stateless **Composer** for constructing village links and machine-readable star credentials without retaining user inputs or outputs.
 
 ## People and discovery
 
