@@ -48,6 +48,32 @@ def api(params: dict[str, str], *, post: bool = False) -> dict:
     return payload
 
 
+def page_exists(title: str) -> bool:
+    payload = api({"action": "query", "titles": title})
+    pages = payload.get("query", {}).get("pages", [])
+    return bool(pages) and not pages[0].get("missing", False)
+
+
+def move_page(source: str, target: str, csrf: str, reason: str) -> None:
+    if page_exists(target):
+        print(f"{source} -> {target}: target already exists; skipping move")
+        return
+
+    result = api(
+        {
+            "action": "move",
+            "from": source,
+            "to": target,
+            "token": csrf,
+            "reason": reason,
+            "movetalk": "1",
+        },
+        post=True,
+    )
+    moved = result.get("move", {})
+    print(f"{source} -> {target}: moved={moved.get('to', target)}")
+
+
 def upload_file(filename: str, source: Path, csrf: str, comment: str) -> None:
     if not ACCESS_TOKEN:
         raise RuntimeError("ANNA_OAUTH_ACCESS_TOKEN is not set")
@@ -89,6 +115,7 @@ def upload_file(filename: str, source: Path, csrf: str, comment: str) -> None:
 
 def main() -> int:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    moves = manifest.get("moves", [])
     pages = manifest.get("pages", [])
     uploads = manifest.get("uploads", [])
 
@@ -99,14 +126,16 @@ def main() -> int:
 
     csrf = api({"action": "query", "meta": "tokens", "type": "csrf"})["query"]["tokens"]["csrftoken"]
 
-    for upload in uploads:
-        upload_file(
-            upload["filename"],
-            Path(upload["source"]),
+    for move in moves:
+        move_page(
+            move["from"],
+            move["to"],
             csrf,
-            upload.get("comment", "Publish generated Anna thumbnail"),
+            move.get("reason", "Move page from VillageLink GitHub repository"),
         )
 
+    # Publish text pages before optional image uploads so an upload-permission
+    # problem cannot block ordinary wiki content updates.
     for page in pages:
         title = page["title"]
         source = Path(page["source"])
@@ -127,6 +156,14 @@ def main() -> int:
 
         edit = result.get("edit", {})
         print(f"{title}: {edit.get('result', 'UNKNOWN')} rev={edit.get('newrevid', '-')}")
+
+    for upload in uploads:
+        upload_file(
+            upload["filename"],
+            Path(upload["source"]),
+            csrf,
+            upload.get("comment", "Publish generated Anna thumbnail"),
+        )
 
     return 0
 
