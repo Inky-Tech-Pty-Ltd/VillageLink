@@ -7,6 +7,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+import requests
+
 API_URL = os.environ.get("ANNA_API_URL", "https://village.link/wiki/api.php")
 ACCESS_TOKEN = os.environ.get("ANNA_OAUTH_ACCESS_TOKEN")
 MANIFEST = Path(os.environ.get("ANNA_MANIFEST", "anna/manifest.json"))
@@ -39,9 +41,45 @@ def api(params: dict[str, str], *, post: bool = False) -> dict:
     return payload
 
 
+def upload_file(filename: str, source: Path, csrf: str, comment: str) -> None:
+    if not ACCESS_TOKEN:
+        raise RuntimeError("ANNA_OAUTH_ACCESS_TOKEN is not set")
+
+    headers = {
+        "Authorization": f"Bearer {ACCESS_TOKEN}",
+        "User-Agent": USER_AGENT,
+    }
+    data = {
+        "action": "upload",
+        "filename": filename,
+        "token": csrf,
+        "comment": comment,
+        "ignorewarnings": "1",
+        "format": "json",
+        "formatversion": "2",
+    }
+
+    with source.open("rb") as handle:
+        response = requests.post(
+            API_URL,
+            headers=headers,
+            data=data,
+            files={"file": (filename, handle, "image/png")},
+            timeout=120,
+        )
+    response.raise_for_status()
+    payload = response.json()
+    if "error" in payload:
+        raise RuntimeError(json.dumps(payload["error"], indent=2))
+
+    upload = payload.get("upload", {})
+    print(f"File:{filename}: {upload.get('result', 'UNKNOWN')}")
+
+
 def main() -> int:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     pages = manifest.get("pages", [])
+    uploads = manifest.get("uploads", [])
 
     userinfo = api({"action": "query", "meta": "userinfo"})["query"]["userinfo"]
     username = userinfo.get("name")
@@ -49,6 +87,14 @@ def main() -> int:
         raise RuntimeError(f"Expected OAuth identity Puck-GPT, got {username!r}")
 
     csrf = api({"action": "query", "meta": "tokens", "type": "csrf"})["query"]["tokens"]["csrftoken"]
+
+    for upload in uploads:
+        upload_file(
+            upload["filename"],
+            Path(upload["source"]),
+            csrf,
+            upload.get("comment", "Publish generated Anna thumbnail"),
+        )
 
     for page in pages:
         title = page["title"]
