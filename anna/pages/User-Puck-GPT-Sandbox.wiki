@@ -1,0 +1,5 @@
+== GitHub → Anna bridge test ==
+
+This page was published from the VillageLink GitHub repository by the Puck-GPT OAuth identity.
+
+If this text appears in Anna, the bridge is working end-to-end.
