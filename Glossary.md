@@ -1,7 +1,7 @@
 # Village Link Glossary
 
 **Status:** Working draft  
-**Last updated:** 6 September 2026
+**Last updated:** 7 September 2026
 
 ## Purpose
 
@@ -81,6 +81,8 @@ Earlier Village Link discussions sometimes used *governance system* for the broa
 **Definition:** A reference that identifies or denotes an entity within a context.
 
 Village Link connects independently meaningful identifiers. Endpoint systems do not need to share an identifier scheme or implement Village Link.
+
+An identifier may also serve as a key by which an application queries a memory system; the identifier does not, by itself, select that memory system.
 
 ---
 
