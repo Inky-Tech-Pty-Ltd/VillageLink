@@ -1,24 +1,21 @@
-== Star credential ==
+== Star credential: ✱Puck ==
 
-'''Puck''' is the centre of this star credential.
+'''Puck''' is the centre of this demonstration star credential.
 
 {| class="wikitable"
-! Role !! Resource
+! Village Link !! Memory system !! Image
 |-
-| A — centre || [https://chatgpt.com/ Puck in ChatGPT / OpenAI]
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FPuck!https%3A%2F%2Fchatgpt.com%2F ↔]
+| chatgpt.com
+| 
 |-
-| B || [https://github.com/apps/puck-gpt Puck in GitHub]
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FPuck!https%3A%2F%2Fgithub.com%2Fapps%2Fpuck-gpt ↔]
+| github.com
+| 
 |-
-| B || [[User:Puck-GPT|Puck-GPT in Anna]]
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FPuck!https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FUser%3APuck-GPT ↔]
+| village.link
+| 
 |}
-
-=== Machine form ===
-<pre>
-[https://chatgpt.com/]
-[https://github.com/apps/puck-gpt]
-[https://village.link/wiki/index.php/User:Puck-GPT]
-</pre>
-
-The centre is distinguished by convention; the B resources are an unordered set. This page asserts that these resources refer to the same entity in different memory systems.
 
 See [[VillageLink:Star credential]].
