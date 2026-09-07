@@ -1,0 +1,31 @@
+name: Publish Anna pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "anna/**"
+      - "tools/publish_anna.py"
+      - ".github/workflows/publish-anna.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Publish pages to Anna
+        env:
+          ANNA_API_URL: https://village.link/wiki/api.php
+          ANNA_OAUTH_ACCESS_TOKEN: ${{ secrets.ANNA_OAUTH_ACCESS_TOKEN }}
+        run: python tools/publish_anna.py
