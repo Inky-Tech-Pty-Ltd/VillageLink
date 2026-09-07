@@ -191,7 +191,7 @@ Important work remains, including:
 
 These are implementation and governance questions arising from the decision. They do not alter the architectural choice recorded here.
 
-## Relationship to ADR-001 and ADR-002
+## Relationship to ADR-001, ADR-002 and ADR-007
 
 ADR-001 defines Village Link as a self-contained, two-ended hyperlink.
 
@@ -199,11 +199,11 @@ ADR-002 restricts the primitive to equivalence between representations of the sa
 
 This ADR defines the reference Publisher architecture around that deliberately small primitive.
 
-The current project is organised into four principal components:
+ADR-007 subsequently replaced the proposed persistent Star Credential Manager role with a stateless Composer. The current project is therefore organised into four principal components:
 
 1. **Standard** — defines the Village Link primitive;
 2. **Publisher** — publishes and governs collections of Village Links;
 3. **Browser + Trust Engine** — consumes and interprets the resulting graph; and
-4. **Star Credential Manager** — manages audience-specific publication or disclosure of star credentials.
+4. **Composer** — constructs village links and star credentials without becoming their persistent custodian.
 
 MediaWiki does not enlarge the Standard. It provides a mature human governance environment around publication.
