@@ -1,4 +1,4 @@
-== Star credential ==
+== Star credential: ✱AshaBhosle ==
 
 '''Asha Bhosle''' is the centre of this demonstration star credential.
 
@@ -9,7 +9,5 @@
 | en.wikipedia.org
 | 
 |}
-
-The centre is distinguished by convention; the B resources are an unordered set.
 
 See [[VillageLink:Star credential]].
