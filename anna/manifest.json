@@ -1,4 +1,11 @@
 {
+  "uploads": [
+    {
+      "filename": "Asha-Bhosle-Wikipedia.png",
+      "source": "anna/generated/Asha-Bhosle-Wikipedia.png",
+      "comment": "Refresh contextual thumbnail for Asha Bhosle on Wikipedia"
+    }
+  ],
   "pages": [
     {
       "title": "User:Puck-GPT/Sandbox",
