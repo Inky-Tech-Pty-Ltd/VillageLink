@@ -2,7 +2,7 @@
 
 **Status:** Working draft  
 **Roadmap horizon:** August 2026 to February 2027  
-**Last updated:** 3 September 2026
+**Last updated:** 7 September 2026
 
 ## Purpose
 
@@ -36,25 +36,26 @@ Publishes and governs collections of Village Links. The reference Role 2 impleme
 
 A published assertion is not made true merely by appearing in the graph. Provenance, evidence, time and publisher identity remain relevant. Multiple independent publishers should remain possible.
 
-### 3. Trust Engine
+### 3. Browser + Trust Engine
 
 Reads and interprets Village Link graphs for a user. Possible functions include discovery, filtering, ranking, comparison and trust assessment.
 
 Different Trust Engines may apply different policies and algorithms over the same published assertions. Their requirements must not be loaded into the core primitive.
 
-### 4. Star Credential Manager
+### 4. Composer
 
-Helps an entity or publisher construct and disclose audience-appropriate subsets of a broader star credential.
+Constructs village links and machine-readable star credentials from identifiers supplied for the operation.
 
-This is the least mature area. Existing identity, access-control and selective-disclosure technologies may supply much or all of the required machinery. The Village Link primitive should not be enlarged merely to create a product in this area.
+Composer is deliberately small and stateless. It is not a persistent identity or credential manager and should not require custody of a user's private identity graph. ADR-007 records the decision to separate this construction function from the previously proposed Star Credential Manager.
 
-The four areas can be summarised as **Define → Publish → Interpret → Disclose**.
+The four areas can be summarised as **Define → Publish → Interpret → Compose**.
 
 ## Operating principles
 
 - **Public infrastructure first.** The standard, reference materials and technical discussion should develop with impeccable open-source credentials.
 - **Separate standard from implementation.** The specification defines expected behaviour; the reference implementation demonstrates one way to achieve it.
 - **Separate assertion from truth.** A Village Link records that a publisher made an assertion. Its credibility depends on provenance, evidence and the surrounding graph.
+- **Avoid unnecessary custody.** Software should not centralise private cross-context equivalence data merely because it can.
 - **Working software should test ideas.** Early implementations are experiments and may be discarded.
 - **Scope stays deliberately small.** The initial project does not need to solve identity, governance, search, AI alignment or online trust in full.
 - **Roles should delineate over time.** Organisational separation is a planned outcome, not an inconvenience to address after commercial value emerges.
@@ -73,7 +74,7 @@ The foundation documents have distinct jobs:
 | `Specification.md` | What exactly is a conforming Village Link and how does it behave? |
 | `Wishlist.md` | What ideas should we preserve without committing to them? |
 | `trust-engine.md` | What can a reader compute from the graph? |
-| `star-credential-manager.md` | What should an entity or publisher disclose to an audience? |
+| `composer.md` | How does the reference tool construct village links and star credentials without retaining them? |
 | Path to an audience | Who might care, why would they participate, and how could relevance grow? |
 | ADRs | Why were particular architectural decisions made? |
 
@@ -96,6 +97,7 @@ The roadmap is organised into six concurrent workstreams.
 - Build a minimal database and API.
 - Build a lightweight browser or browser-like interface.
 - Resolve a Village Link into a side-by-side view of its two endpoints.
+- Build a minimal stateless Composer for constructing village links and machine-readable star credentials.
 - Produce a repeatable, progressively polished demonstration.
 - Keep reference code distinct from prospective commercial products.
 
@@ -114,6 +116,7 @@ The roadmap is organised into six concurrent workstreams.
 - Identify privacy, harassment, impersonation and unwanted-correlation risks.
 - Set data-publication rules for the test graph.
 - Ensure the demo does not imply that graph assertions are authoritative facts.
+- Treat persistent storage of private cross-context equivalence relationships as a distinct high-risk architecture rather than an incidental application feature.
 
 ### E. Community and audience
 
@@ -170,11 +173,12 @@ The roadmap is organised into six concurrent workstreams.
 - Store at least the link, publisher, source or evidence, and sampling datetime.
 - Implement create, retrieve and display operations.
 - Build a minimal browser interface in which conventional links behave conventionally and a Village Link opens its endpoints side by side.
+- Build a first stateless Composer so developers and editors do not need to hand-encode Village Links or star credentials.
 - Populate a small test graph using Steve Byrnes examples, Joe examples, the Puck example and clearly labelled mock entities.
 - Add automated tests for the simplest valid and invalid cases.
 - Document how another developer can run the system locally.
 
-**Exit criteria:** a fresh developer environment can run a documented demonstration that creates, stores, retrieves and displays a small set of Village Links.
+**Exit criteria:** a fresh developer environment can run a documented demonstration that creates, stores, retrieves and displays a small set of Village Links, and can construct conforming examples using Composer.
 
 ### Phase 3 — Test the model, not merely the software
 
@@ -277,6 +281,7 @@ Proceed when the relevant role has a defined custodian, programme of work, budge
 - Privacy and abuse concerns may constrain graph publication and demonstration data.
 - A useful graph may require more publisher diversity than the bootstrap project can initially supply.
 - Community credibility depends on early and enforceable separation between open infrastructure and private advantage.
+- A service that centralises private equivalence relationships would create a substantially different and potentially severe security risk; it is not part of the current architecture.
 - Joe's availability and health are project constraints; the roadmap should support sustainable progress rather than depend on continuous founder effort.
 - A small contributor base creates key-person risk for both technical work and project memory.
 - Standards engagement has long time horizons and should not be confused with product validation.
@@ -291,11 +296,12 @@ Unless promoted through a deliberate decision, the first six months do not commi
 - proving the truth of identity or equivalence claims;
 - delivering a production browser, search engine, firewall or marketplace;
 - finalising the star credential;
+- building a persistent Star Credential Manager or central private identity graph;
 - selecting a permanent standards institution;
 - solving AI alignment or internet governance generally; or
 - deploying production infrastructure suitable for mass use.
 
-These ideas remain legitimate parts of the project's ambition and Wishlist. The purpose of the roadmap is to create the smallest credible path by which they can be investigated.
+These ideas remain legitimate subjects for future investigation. The purpose of the roadmap is to create the smallest credible path by which they can be investigated without turning every visible problem into a product commitment.
 
 ## Updating this roadmap
 
