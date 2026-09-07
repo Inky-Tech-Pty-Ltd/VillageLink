@@ -1,7 +1,7 @@
 # Village Link Requirements
 
 **Status:** Draft 0.1  
-**Date:** 6 September 2026
+**Date:** 7 September 2026
 
 ## Purpose
 
@@ -12,7 +12,7 @@ Village Link is being developed through four conceptually distinct areas:
 1. **Develop the standard** — define the primitive, syntax, semantics and conformance rules.
 2. **Publish and govern an initial graph** — publish a corpus of Village Link statements to test the standard and establish useful data.
 3. **Interpret the graph** — investigate reader-side discovery, filtering, ranking and trust through Trust Engines.
-4. **Manage disclosure** — investigate how entities or publishers present audience-specific subsets of Star Credentials.
+4. **Compose artefacts** — provide a small, stateless reference tool for constructing village links and Star Credentials without taking custody of a user's private identity graph.
 
 The requirements below are grouped into the standard, the reference publisher and consuming applications. Terms are used as defined in [Glossary.md](Glossary.md).
 
@@ -171,7 +171,31 @@ The project's reference browser MUST first attempt to parse an HTTPS URI whose f
 
 ---
 
-## 4. Non-requirements
+## 4. Requirements for Composer
+
+These requirements apply to the project's reference Composer. Composer is application software, not part of the Village Link primitive.
+
+**REQ-COM-001 — Construct village links**  
+Composer MUST be able to construct a conforming village link from the inputs required by the current specification.
+
+**REQ-COM-002 — Construct Star Credentials**  
+Composer SHOULD be able to construct a machine-readable Star Credential from supplied identifiers, including a JSON representation once that representation is specified.
+
+**REQ-COM-003 — Stateless operation**  
+Composer MUST NOT require persistent storage of user inputs or generated artefacts in order to perform its core composition functions.
+
+**REQ-COM-004 — No quiet custody**  
+The reference Composer MUST NOT add accounts, saved private identity graphs, audience profiles, synchronisation or cloud credential storage without a new architectural decision and security review.
+
+**REQ-COM-005 — Local operation preferred**  
+Where technically practical, Composer SHOULD be capable of operating client-side without transmitting supplied identifiers to a Village Link service.
+
+**REQ-COM-006 — Independent implementation**  
+The standard MUST remain sufficiently complete that an independent implementation can construct conforming artefacts without using Composer or contacting `village.link`.
+
+---
+
+## 5. Non-requirements
 
 The following are explicitly not current requirements of the Village Link primitive:
 
@@ -187,12 +211,14 @@ The following are explicitly not current requirements of the Village Link primit
 - persistence or dereferenceability of a separate Village Link object; or
 - agreement among publishers.
 
+Persistent management of a user's private Village Links, Star Credentials, audience profiles or cross-context identity graph is also not a current project requirement. ADR-007 records the decision to avoid making that high-risk custody problem a natural extension of Composer.
+
 These capabilities may be provided by publishers, applications or later standards without being properties of the core primitive.
 
 ---
 
-## 5. Open requirements questions
+## 6. Open requirements questions
 
-Draft 0.1 deliberately leaves several requirements unresolved, including lifecycle mechanisms, responsible-publication controls, URI encoding and transport constraints, historical observations, harms controls and useful conformance classes.
+Draft 0.1 deliberately leaves several requirements unresolved, including lifecycle mechanisms, responsible-publication controls, URI encoding and transport constraints, historical observations, harms controls, useful conformance classes and the exact machine-readable Star Credential representation emitted by Composer.
 
 These questions are intended to be challenged through prototype implementation, harms analysis and external review.
