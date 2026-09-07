@@ -1,7 +1,7 @@
 # Documentation map
 
 **Status:** Maintained  
-**Last updated:** 6 September 2026
+**Last updated:** 7 September 2026
 
 This page identifies the natural home of each Village Link concept. Other documents may summarise a concept and link to its source, but should not silently redefine it.
 
@@ -18,7 +18,7 @@ This page identifies the natural home of each Village Link concept. Other docume
 | Uncommitted ideas and experiments | [Wishlist.md](Wishlist.md) | Possibilities that have not entered the roadmap |
 | Reference publisher | [ADR-003](docs/adr/003-mediawiki-reference-publisher.md) | MediaWiki publication and governance architecture |
 | Reader-side interpretation | [trust-engine.md](trust-engine.md) | Trust Engine problem and design space |
-| Audience-specific disclosure | [star-credential-manager.md](star-credential-manager.md) | Star Credential Manager problem and design space |
+| Stateless construction | [composer.md](composer.md) and [ADR-007](docs/adr/007-stateless-composer.md) | Composer and the decision not to make it a persistent credential manager |
 | Governance across memory systems | [emergent-governance.md](emergent-governance.md) | Exploratory consequences, not protocol requirements |
 | AI governance | [ai-governance.md](ai-governance.md) | Possible application of the wider model to artificial agents |
 | Adoption and explanation | [docs/responses/01-pathway-to-relevance.md](docs/responses/01-pathway-to-relevance.md) | Audience-specific explanation and pathway to relevance |
@@ -31,8 +31,10 @@ The current project model is:
 
 1. **Define** — Developer of the Standard.
 2. **Publish** — Publisher, with MediaWiki as the reference implementation.
-3. **Interpret** — Trust Engine.
-4. **Disclose** — Star Credential Manager.
+3. **Interpret** — Browser + Trust Engine.
+4. **Compose** — Composer, a small stateless reference tool for constructing village links and star credentials.
+
+The previously proposed **Star Credential Manager** is not a current project area. ADR-007 records why persistent management of private identity relationships was separated from composition and left outside the current architecture.
 
 These areas can influence one another, but requirements from a later area should not be added to the primitive without a separate architectural decision.
 
