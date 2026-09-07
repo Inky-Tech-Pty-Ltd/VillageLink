@@ -120,9 +120,11 @@ The work is being separated into four areas that should remain conceptually dist
 1. **Develop the standard** — define the primitive, syntax, semantics and supporting specifications.
 2. **Build and govern an initial graph** — use a MediaWiki to create and test a corpus of Village Link statements.
 3. **Interpret the graph** — investigate reader-side discovery, filtering, ranking and trust through the [Trust Engine](trust-engine.md).
-4. **Manage disclosure** — investigate audience-specific presentation of star credentials through the [Star Credential Manager](star-credential-manager.md).
+4. **Compose artefacts** — provide a small, stateless [Composer](composer.md) for constructing village links and star credentials without taking custody of a user's private identity graph.
 
-In shorthand: **Define → Build → Interpret → Disclose.**
+In shorthand: **Define → Publish → Interpret → Compose.**
+
+The project previously considered a persistent **Star Credential Manager** for audience-specific identity and credential management. [ADR-007](docs/adr/007-stateless-composer.md) records the decision to separate simple composition from that much higher-risk problem and to leave persistent credential management outside the current architecture.
 
 See [Roadmap](Roadmap.md) and [Wishlist](Wishlist.md) for the evolving work program.
 
