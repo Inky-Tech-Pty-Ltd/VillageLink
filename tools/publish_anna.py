@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -32,8 +33,14 @@ def api(params: dict[str, str], *, post: bool = False) -> dict:
     if post:
         request.add_header("Content-Type", "application/x-www-form-urlencoded")
 
-    with urllib.request.urlopen(request) as response:
-        payload = json.load(response)
+    try:
+        with urllib.request.urlopen(request) as response:
+            payload = json.load(response)
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(
+            f"Anna API HTTP {exc.code} {exc.reason}; response body: {body}"
+        ) from exc
 
     if "error" in payload:
         raise RuntimeError(json.dumps(payload["error"], indent=2))
@@ -67,7 +74,11 @@ def upload_file(filename: str, source: Path, csrf: str, comment: str) -> None:
             files={"file": (filename, handle, "image/png")},
             timeout=120,
         )
-    response.raise_for_status()
+    if not response.ok:
+        raise RuntimeError(
+            f"Anna upload HTTP {response.status_code} {response.reason}; "
+            f"response body: {response.text}"
+        )
     payload = response.json()
     if "error" in payload:
         raise RuntimeError(json.dumps(payload["error"], indent=2))
