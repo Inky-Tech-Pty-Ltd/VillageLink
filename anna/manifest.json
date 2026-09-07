@@ -1,4 +1,11 @@
 {
+  "moves": [
+    {
+      "from": "Puck",
+      "to": "Puck-GPT",
+      "reason": "Rename demonstration AI star credential to Puck-GPT"
+    }
+  ],
   "uploads": [
     {
       "filename": "Asha-Bhosle-Wikipedia.png",
@@ -13,9 +20,9 @@
       "summary": "Bridge test: publish from VillageLink GitHub repository"
     },
     {
-      "title": "Puck",
-      "source": "anna/pages/Puck.wiki",
-      "summary": "Publish demonstration star credential for Puck"
+      "title": "Puck-GPT",
+      "source": "anna/pages/Puck-GPT.wiki",
+      "summary": "Publish demonstration star credential for Puck-GPT"
     },
     {
       "title": "Asha Bhosle",
