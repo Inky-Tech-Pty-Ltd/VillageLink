@@ -2,4 +2,6 @@
 
 This page was published from the VillageLink GitHub repository by the Puck-GPT OAuth identity.
 
+Bridge trigger after repository secret configuration: 2026-09-07.
+
 If this text appears in Anna, the bridge is working end-to-end.
