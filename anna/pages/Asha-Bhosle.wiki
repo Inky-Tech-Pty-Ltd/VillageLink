@@ -8,6 +8,26 @@
 | [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAsha_Bhosle ↔]
 | en.wikipedia.org
 | 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fwww.wikidata.org%2Fwiki%2FQ38393 ↔]
+| www.wikidata.org
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fopen.spotify.com%2Fartist%2F5as8A4G47Ohu9NSWs3Je8U ↔]
+| open.spotify.com
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fmusic.apple.com%2Fus%2Fartist%2Fasha-bhosle%2F2581435 ↔]
+| music.apple.com
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fwww.imdb.com%2Fname%2Fnm0080427%2F ↔]
+| www.imdb.com
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fmusicbrainz.org%2Fartist%2F79c5547a-e098-495c-8dac-7e99546aa46b ↔]
+| musicbrainz.org
+| 
 |}
 
 See [[VillageLink:Star credential]].
