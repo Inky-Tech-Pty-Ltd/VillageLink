@@ -1,0 +1,17 @@
+== Village link ==
+
+A '''village link''' is a two-ended web object expressing a same-entity assertion between two resources.
+
+Conceptually:
+
+<pre>
+A ← W → B
+</pre>
+
+where '''W''' is the village link and '''A''' and '''B''' are its two endpoints.
+
+A conventional hyperlink points from one web object to one resource. A village link points from one web object to two resources. The relationship asserted between those endpoints is equivalence of entity: they are presented as references to the same entity in different contexts or memory systems.
+
+The reference publisher records these assertions; interpretation and decisions about whether to trust them remain separate concerns.
+
+See also [[VillageLink:Star credential]].

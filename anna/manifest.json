@@ -4,6 +4,26 @@
       "title": "User:Puck-GPT/Sandbox",
       "source": "anna/pages/User-Puck-GPT-Sandbox.wiki",
       "summary": "Bridge test: publish from VillageLink GitHub repository"
+    },
+    {
+      "title": "Puck",
+      "source": "anna/pages/Puck.wiki",
+      "summary": "Publish demonstration star credential for Puck"
+    },
+    {
+      "title": "Asha Bhose",
+      "source": "anna/pages/Asha-Bhose.wiki",
+      "summary": "Publish demonstration star credential scaffold for Asha Bhose"
+    },
+    {
+      "title": "VillageLink:Star credential",
+      "source": "anna/pages/VillageLink-Star-credential.wiki",
+      "summary": "Publish supporting page for star credentials"
+    },
+    {
+      "title": "VillageLink:Village link",
+      "source": "anna/pages/VillageLink-Village-link.wiki",
+      "summary": "Publish supporting page for village links"
     }
   ]
 }
