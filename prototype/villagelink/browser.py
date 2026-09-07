@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import sys
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import urlparse
 
 from PySide6.QtCore import QUrl
+from PySide6.QtWebEngineCore import QWebEnginePage
+from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (
     QApplication,
     QHBoxLayout,
@@ -14,22 +16,32 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from PySide6.QtWebEngineWidgets import QWebEngineView
+
+from .codec import parse as parse_village_link
 
 
 def village_targets(raw_url: str) -> tuple[str, str] | None:
-    parsed = urlparse(raw_url)
-    if parsed.netloc.lower() != "village.link":
-        return None
-    if parsed.path.rstrip("/") != "/demo":
+    """Return A and B when *raw_url* is a serialized Village Link."""
+    try:
+        return parse_village_link(raw_url)
+    except ValueError:
         return None
 
-    query = parse_qs(parsed.query)
-    left = query.get("left", [None])[0]
-    right = query.get("right", [None])[0]
-    if not left or not right:
-        return None
-    return left, right
+
+class VillagePage(QWebEnginePage):
+    """Web page that hands Village Link clicks back to the browser shell."""
+
+    def __init__(self, browser: "Browser", parent: QWebEngineView) -> None:
+        super().__init__(parent)
+        self.browser = browser
+
+    def acceptNavigationRequest(self, url: QUrl, nav_type, is_main_frame: bool) -> bool:  # noqa: N802
+        if is_main_frame:
+            targets = village_targets(url.toString())
+            if targets:
+                self.browser.open_village_link(*targets)
+                return False
+        return super().acceptNavigationRequest(url, nav_type, is_main_frame)
 
 
 class Browser(QMainWindow):
@@ -38,7 +50,7 @@ class Browser(QMainWindow):
         self.setWindowTitle("Village Link Browser — prototype")
         self.resize(1400, 900)
 
-        self.address = QLineEdit("https://example.com")
+        self.address = QLineEdit("https://village.link/wiki/index.php/Asha_Bhosle")
         self.address.returnPressed.connect(self.navigate)
 
         go = QPushButton("Go")
@@ -50,6 +62,10 @@ class Browser(QMainWindow):
 
         self.left = QWebEngineView()
         self.right = QWebEngineView()
+        self.left.setPage(VillagePage(self, self.left))
+        self.right.setPage(VillagePage(self, self.right))
+
+        self.left.urlChanged.connect(self._left_url_changed)
 
         self.splitter = QSplitter()
         self.splitter.addWidget(self.left)
@@ -65,6 +81,18 @@ class Browser(QMainWindow):
 
         self.navigate()
 
+    def _left_url_changed(self, url: QUrl) -> None:
+        """Keep the address bar useful during ordinary single-pane browsing."""
+        if self.right.isHidden():
+            self.address.setText(url.toString())
+
+    def open_village_link(self, left: str, right: str) -> None:
+        """Display Village Link endpoints A and B side by side."""
+        self.left.setUrl(QUrl(left))
+        self.right.setUrl(QUrl(right))
+        self.right.show()
+        self.splitter.setSizes([1, 1])
+
     def navigate(self) -> None:
         raw = self.address.text().strip()
         if not urlparse(raw).scheme:
@@ -73,14 +101,10 @@ class Browser(QMainWindow):
 
         targets = village_targets(raw)
         if targets:
-            left, right = targets
-            self.left.setUrl(QUrl(left))
-            self.right.setUrl(QUrl(right))
-            self.right.show()
-            self.splitter.setSizes([1, 1])
+            self.open_village_link(*targets)
         else:
-            self.left.setUrl(QUrl(raw))
             self.right.hide()
+            self.left.setUrl(QUrl(raw))
 
 
 def main() -> None:
