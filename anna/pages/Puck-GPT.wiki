@@ -16,6 +16,10 @@
 | [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FPuck-GPT!https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FUser%3APuck-GPT ↔]
 | village.link
 | 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FPuck-GPT!mailto%3Apuck.gpt%40village.link ↔]
+| email — puck.gpt@village.link
+| 
 |}
 
 See [[VillageLink:Star credential]].
