@@ -32,7 +32,7 @@ In its shortest form:
 
 > **Trust Engine: What should I discover from the graph?**
 
-This makes it complementary to the **Star Credential Manager**, which is principally concerned with what an entity chooses to present to an audience.
+This is distinct from **Composer**, which merely constructs village links or star credentials from inputs supplied by a user and need not discover, rank, publish or retain anything.
 
 ## The existing territory
 
@@ -86,14 +86,16 @@ The project currently distinguishes four principal areas of work:
 
 1. **Developer of the Standard** — defines the Village Link primitive.
 2. **Publisher** — publishes Village Links and thereby helps establish the graph.
-3. **Trust Engine** — reads and interprets the graph for a user.
-4. **Star Credential Manager** — helps an entity construct or disclose appropriate subsets of its available star credential to different audiences.
+3. **Browser + Trust Engine** — reads and interprets the graph for a user.
+4. **Composer** — constructs village links and star credentials without becoming their persistent custodian.
 
 These can be summarised as:
 
-> **Define → Publish → Interpret → Disclose**
+> **Define → Publish → Interpret → Compose**
 
 The Trust Engine occupies the third position: interpretation.
+
+The previously proposed Star Credential Manager is not a current project area; [ADR-007](docs/adr/007-stateless-composer.md) records the decision to separate stateless composition from persistent credential management.
 
 ## Architectural restraint
 
