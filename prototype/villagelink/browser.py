@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 from urllib.parse import urlparse
 
-from PySide6.QtCore import QUrl
+from PySide6.QtCore import QTimer, QUrl
 from PySide6.QtWebEngineCore import QWebEnginePage
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (
@@ -39,7 +39,13 @@ class VillagePage(QWebEnginePage):
         if is_main_frame:
             targets = village_targets(url.toString())
             if targets:
-                self.browser.open_village_link(*targets)
+                # Do not change either QWebEngineView synchronously from inside
+                # Qt's navigation-acceptance callback. On Windows/QtWebEngine this
+                # can terminate the process in native code before Python gets a
+                # chance to print a traceback. Hand the work back to the event
+                # loop instead.
+                left, right = targets
+                QTimer.singleShot(0, lambda: self.browser.open_village_link(left, right))
                 return False
         return super().acceptNavigationRequest(url, nav_type, is_main_frame)
 
