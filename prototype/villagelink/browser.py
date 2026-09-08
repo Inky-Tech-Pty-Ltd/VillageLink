@@ -173,17 +173,52 @@ class Browser(QMainWindow):
             self.open_village_link(state.left, state.right)
 
     def go_back(self) -> None:
-        """Undo shell transitions first; otherwise use the active page's web history."""
-        if self._state_history:
+        """Go back one human-visible step, including across split/single transitions."""
+        saved = self._state_history[-1] if self._state_history else None
+
+        if self.is_split():
+            # While exploring the right-hand memory system, ordinary web history
+            # is the nearest thing behind us. Only restore an earlier structural
+            # state once that local history is exhausted.
+            if self.right.history().canGoBack():
+                self.right.back()
+                return
+            if saved is not None:
+                self.restore_state(self._state_history.pop())
+            return
+
+        # In single-pane mode, a saved split may be the boundary immediately
+        # behind the current ordinary browsing run. Preserve ordinary one-page-at-
+        # a-time history until the next Back would cross that boundary.
+        if saved is not None and saved.right is not None:
+            current = self.left.url().toString()
+
+            # Promote-right copies B into the left pane. In that case the split is
+            # immediately behind the promoted page, regardless of older left-pane
+            # web history retained by Qt.
+            if current == saved.right:
+                self.restore_state(self._state_history.pop())
+                return
+
+            history = self.left.history()
+            if history.canGoBack():
+                previous = history.backItem().url().toString()
+                if previous == saved.left:
+                    self.restore_state(self._state_history.pop())
+                    return
+                self.left.back()
+                return
+
             self.restore_state(self._state_history.pop())
             return
 
-        # Once structural history is exhausted, behave like a conventional Back
-        # button. In split mode the right pane is the active exploratory context;
-        # in single mode the left pane is the browser.
-        active = self.right if self.is_split() else self.left
-        if active.history().canGoBack():
-            active.back()
+        # No split boundary is pending: behave like a conventional browser.
+        if self.left.history().canGoBack():
+            self.left.back()
+            return
+
+        if saved is not None:
+            self.restore_state(self._state_history.pop())
 
     def promote_right(self) -> None:
         """Make the current right-hand page the new ordinary browsing context."""
