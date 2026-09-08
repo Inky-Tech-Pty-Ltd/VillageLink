@@ -50,6 +50,13 @@ class VillagePage(QWebEnginePage):
                 QTimer.singleShot(0, lambda: self.browser.open_village_link(left, right))
                 return False
 
+            # When open_village_link() deliberately loads the A endpoint into the
+            # left pane, that internal navigation must not be mistaken for a human
+            # clicking an ordinary left-hand hyperlink. Consume the expected URL
+            # once and allow the navigation to proceed while split mode remains.
+            if self.side == "left" and self.browser.consume_internal_left_navigation(url):
+                return super().acceptNavigationRequest(url, nav_type, is_main_frame)
+
             # In split view the left pane is the browsing context from which the
             # comparison was opened. Following an ordinary link there ends the
             # comparison and returns to ordinary single-pane browsing. Ordinary
@@ -67,6 +74,7 @@ class Browser(QMainWindow):
         super().__init__()
         self.setWindowTitle("Village Link Browser — prototype")
         self.resize(1400, 900)
+        self._internal_left_url: str | None = None
 
         self.address = QLineEdit("https://village.link/wiki/index.php/Asha_Bhosle")
         self.address.returnPressed.connect(self.navigate)
@@ -108,6 +116,15 @@ class Browser(QMainWindow):
     def is_split(self) -> bool:
         return not self.right.isHidden()
 
+    def consume_internal_left_navigation(self, url: QUrl) -> bool:
+        """Return True once for the left URL intentionally loaded by the browser shell."""
+        if self._internal_left_url is None:
+            return False
+        if url.toString() != self._internal_left_url:
+            return False
+        self._internal_left_url = None
+        return True
+
     def _left_url_changed(self, url: QUrl) -> None:
         """Keep the address bar useful during ordinary single-pane browsing."""
         if not self.is_split():
@@ -115,6 +132,7 @@ class Browser(QMainWindow):
 
     def open_single(self, url: str) -> None:
         """End comparison mode and browse one URL at full width."""
+        self._internal_left_url = None
         self.right.hide()
         self.promote.hide()
         self.address.setText(url)
@@ -122,6 +140,7 @@ class Browser(QMainWindow):
 
     def open_village_link(self, left: str, right: str) -> None:
         """Display Village Link endpoints A and B side by side."""
+        self._internal_left_url = QUrl(left).toString()
         self.left.setUrl(QUrl(left))
         self.right.setUrl(QUrl(right))
         self.right.show()
