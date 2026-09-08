@@ -4,6 +4,7 @@ import sys
 from urllib.parse import urlparse
 
 from PySide6.QtCore import QTimer, QUrl
+from PySide6.QtGui import QGuiApplication
 from PySide6.QtWebEngineCore import QWebEnginePage
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (
@@ -144,10 +145,26 @@ class Browser(QMainWindow):
         else:
             self.open_single(raw)
 
+    def place_on_screen(self) -> None:
+        """Fit and centre the prototype inside the primary screen's usable area."""
+        screen = QGuiApplication.primaryScreen()
+        if screen is None:
+            return
+
+        available = screen.availableGeometry()
+        width = min(self.width(), available.width())
+        height = min(self.height(), available.height())
+        self.resize(width, height)
+        self.move(
+            available.x() + (available.width() - width) // 2,
+            available.y() + (available.height() - height) // 2,
+        )
+
 
 def main() -> None:
     app = QApplication(sys.argv)
     browser = Browser()
+    browser.place_on_screen()
     browser.show()
     raise SystemExit(app.exec())
 
