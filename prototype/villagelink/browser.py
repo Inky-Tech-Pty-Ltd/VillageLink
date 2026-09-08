@@ -29,11 +29,12 @@ def village_targets(raw_url: str) -> tuple[str, str] | None:
 
 
 class VillagePage(QWebEnginePage):
-    """Web page that hands Village Link clicks back to the browser shell."""
+    """Web page that hands main-frame navigation back to the browser shell."""
 
-    def __init__(self, browser: "Browser", parent: QWebEngineView) -> None:
+    def __init__(self, browser: "Browser", parent: QWebEngineView, side: str) -> None:
         super().__init__(parent)
         self.browser = browser
+        self.side = side
 
     def acceptNavigationRequest(self, url: QUrl, nav_type, is_main_frame: bool) -> bool:  # noqa: N802
         if is_main_frame:
@@ -47,6 +48,16 @@ class VillagePage(QWebEnginePage):
                 left, right = targets
                 QTimer.singleShot(0, lambda: self.browser.open_village_link(left, right))
                 return False
+
+            # In split view the left pane is the browsing context from which the
+            # comparison was opened. Following an ordinary link there ends the
+            # comparison and returns to ordinary single-pane browsing. Ordinary
+            # navigation within the right pane remains exploratory and stays split.
+            if self.side == "left" and self.browser.is_split():
+                raw_url = url.toString()
+                QTimer.singleShot(0, lambda: self.browser.open_single(raw_url))
+                return False
+
         return super().acceptNavigationRequest(url, nav_type, is_main_frame)
 
 
@@ -62,14 +73,20 @@ class Browser(QMainWindow):
         go = QPushButton("Go")
         go.clicked.connect(self.navigate)
 
+        self.promote = QPushButton("Promote right")
+        self.promote.setToolTip("Make the right-hand page the ordinary full-width browsing context")
+        self.promote.clicked.connect(self.promote_right)
+        self.promote.hide()
+
         toolbar = QHBoxLayout()
         toolbar.addWidget(self.address)
         toolbar.addWidget(go)
+        toolbar.addWidget(self.promote)
 
         self.left = QWebEngineView()
         self.right = QWebEngineView()
-        self.left.setPage(VillagePage(self, self.left))
-        self.right.setPage(VillagePage(self, self.right))
+        self.left.setPage(VillagePage(self, self.left, "left"))
+        self.right.setPage(VillagePage(self, self.right, "right"))
 
         self.left.urlChanged.connect(self._left_url_changed)
 
@@ -87,17 +104,33 @@ class Browser(QMainWindow):
 
         self.navigate()
 
+    def is_split(self) -> bool:
+        return not self.right.isHidden()
+
     def _left_url_changed(self, url: QUrl) -> None:
         """Keep the address bar useful during ordinary single-pane browsing."""
-        if self.right.isHidden():
+        if not self.is_split():
             self.address.setText(url.toString())
+
+    def open_single(self, url: str) -> None:
+        """End comparison mode and browse one URL at full width."""
+        self.right.hide()
+        self.promote.hide()
+        self.address.setText(url)
+        self.left.setUrl(QUrl(url))
 
     def open_village_link(self, left: str, right: str) -> None:
         """Display Village Link endpoints A and B side by side."""
         self.left.setUrl(QUrl(left))
         self.right.setUrl(QUrl(right))
         self.right.show()
+        self.promote.show()
         self.splitter.setSizes([1, 1])
+
+    def promote_right(self) -> None:
+        """Make the current right-hand page the new ordinary browsing context."""
+        if self.is_split():
+            self.open_single(self.right.url().toString())
 
     def navigate(self) -> None:
         raw = self.address.text().strip()
@@ -109,8 +142,7 @@ class Browser(QMainWindow):
         if targets:
             self.open_village_link(*targets)
         else:
-            self.right.hide()
-            self.left.setUrl(QUrl(raw))
+            self.open_single(raw)
 
 
 def main() -> None:
