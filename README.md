@@ -57,7 +57,7 @@ Like a conventional hyperlink, a Village Link carries information both through i
 ### The existing web
 
 <p align="center">
-  <img src="docs/diagrams/rendered/Wikipedia%20-%20PageRank.png" alt="Wikipedia PageRank diagram" width="550" />
+  <img src="docs/diagrams/rendered/wikipedia%20-%20pagerank.png" alt="Wikipedia PageRank diagram" width="550" />
   <br>
   <em>Taken from Wikipedia: PageRank. A one-headed hyperlink drives a ranking algorithm</em>
 </p>
@@ -65,7 +65,7 @@ Like a conventional hyperlink, a Village Link carries information both through i
 ### New primitive, new symmetries
 
 <p align="center">
-  <img src="docs/diagrams/rendered/PageRank%20Diagram%20adapted.png" alt="Adapted PageRank diagram" width="300" />
+  <img src="docs/diagrams/rendered/pagerank%20diagram%20adapted.png" alt="Adapted PageRank diagram" width="300" />
   <br>
   <em>Two web resources, E and C, both state the relation E ↔ F. For webpage E, this is a statement <strong>about itself.</strong></em>
 </p>
@@ -107,7 +107,7 @@ Village Link is an early-stage experimental project. The repository currently co
 
 - the evolving project argument in this repository;
 - an accepted architectural decision for the two-ended hyperlink primitive;
-- a [documentation map](DOCUMENTATION.md), roadmap and wishlist;
+- a [documentation map](documentation.md), roadmap and wishlist;
 - diagrams and worked examples;
 - prototype work toward creating and browsing Village Links.
 
@@ -126,7 +126,7 @@ In shorthand: **Define → Publish → Interpret → Compose.**
 
 The project previously considered a persistent **Star Credential Manager** for audience-specific identity and credential management. [ADR-007](docs/adr/007-stateless-composer.md) records the decision to separate simple composition from that much higher-risk problem and to leave persistent credential management outside the current architecture.
 
-See [Roadmap](Roadmap.md) and [Wishlist](Wishlist.md) for the evolving work program.
+See [Roadmap](roadmap.md) and [Wishlist](wishlist.md) for the evolving work program.
 
 ## Design principles
 

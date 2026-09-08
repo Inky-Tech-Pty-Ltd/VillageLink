@@ -47,4 +47,4 @@ In shorthand:
 
 > **Define → Publish → Interpret → Compose**
 
-For the current architecture, see [DOCUMENTATION.md](DOCUMENTATION.md), [composer.md](composer.md) and [ADR-007](docs/adr/007-stateless-composer.md).
+For the current architecture, see [documentation.md](documentation.md), [composer.md](composer.md) and [ADR-007](docs/adr/007-stateless-composer.md).

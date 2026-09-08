@@ -53,7 +53,7 @@ Human beings have been constructing these graphs for a very long time. We have s
 A collection of Village Links around an entity forms what this project calls a **Star Credential**.
 
 <p align="center">
-  <img src="diagrams/rendered/Multiple%20Memberships%20Joe%20v2.png" alt="A Star Credential linking one entity across multiple contexts" width="450" />
+  <img src="diagrams/rendered/multiple%20memberships%20joe%20v2.png" alt="A Star Credential linking one entity across multiple contexts" width="450" />
 </p>
 
 A Star Credential is not a master identity issued by Village Link. Its spokes point outward to identities and reputational traces maintained by independent systems. Those systems retain their own rules, evidence and authority. The credential gains strength from plurality rather than centralisation.
@@ -88,7 +88,7 @@ The project currently separates its work into three roles:
 
 These roles have different objectives and constraints. Keeping them separate is part of the project design.
 
-See the [Roadmap](../Roadmap.md), [Wishlist](../Wishlist.md), and [ADR-001](adr/001-two-ended-uri.md) for current work and architectural decisions.
+See the [Roadmap](../roadmap.md), [Wishlist](../wishlist.md), and [ADR-001](adr/001-two-ended-uri.md) for current work and architectural decisions.
 
 ## What happens next
 

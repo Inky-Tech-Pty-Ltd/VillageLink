@@ -8,14 +8,14 @@ This page identifies the natural home of each Village Link concept. Other docume
 | Subject | Source of truth | Purpose |
 | --- | --- | --- |
 | Project overview | [README.md](README.md) | Short explanation of the proposal, its boundaries and current status |
-| Terms | [Glossary.md](Glossary.md) | Current project vocabulary and deprecated usages |
-| Normative project requirements | [Requirements.md](Requirements.md) | Requirements for the standard, reference publisher and consuming applications |
-| Primitive semantics and syntax | [Specification.md](Specification.md) | Conformance rules for an individual Village Link |
+| Terms | [glossary.md](glossary.md) | Current project vocabulary and deprecated usages |
+| Normative project requirements | [requirements.md](requirements.md) | Requirements for the standard, reference publisher and consuming applications |
+| Primitive semantics and syntax | [specification.md](specification.md) | Conformance rules for an individual Village Link |
 | Endpoint prefixes `gc.` and `vc.` | [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md) | Adopted endpoint naming conventions |
 | Two-ended marker `wab.` and serialization | [ADR-006](docs/adr/006-village-link-serialization.md) | Adopted marker prefix and proposed endpoint separator/escaping |
 | Accepted architectural decisions | [docs/adr/](docs/adr/) | Decision, rationale, alternatives and consequences |
-| Sequence of committed work | [Roadmap.md](Roadmap.md) | Targets, gates and work already chosen |
-| Uncommitted ideas and experiments | [Wishlist.md](Wishlist.md) | Possibilities that have not entered the roadmap |
+| Sequence of committed work | [roadmap.md](roadmap.md) | Targets, gates and work already chosen |
+| Uncommitted ideas and experiments | [wishlist.md](wishlist.md) | Possibilities that have not entered the roadmap |
 | Reference publisher | [ADR-003](docs/adr/003-mediawiki-reference-publisher.md) | MediaWiki publication and governance architecture |
 | Reader-side interpretation | [trust-engine.md](trust-engine.md) | Trust Engine problem and design space |
 | Stateless construction | [composer.md](composer.md) and [ADR-007](docs/adr/007-stateless-composer.md) | Composer and the decision not to make it a persistent credential manager |

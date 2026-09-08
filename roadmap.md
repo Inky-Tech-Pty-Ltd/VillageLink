@@ -67,18 +67,18 @@ The foundation documents have distinct jobs:
 
 | Document | Question answered |
 | --- | --- |
-| `DOCUMENTATION.md` | Where is the source of truth for each concept? |
+| `documentation.md` | Where is the source of truth for each concept? |
 | `README.md` | What is Village Link, and why might it matter? |
-| `Roadmap.md` | In what order do we intend to learn, decide and build? |
-| `Requirements.md` | What must the system and project enable or constrain? |
-| `Specification.md` | What exactly is a conforming Village Link and how does it behave? |
-| `Wishlist.md` | What ideas should we preserve without committing to them? |
+| `roadmap.md` | In what order do we intend to learn, decide and build? |
+| `requirements.md` | What must the system and project enable or constrain? |
+| `specification.md` | What exactly is a conforming Village Link and how does it behave? |
+| `wishlist.md` | What ideas should we preserve without committing to them? |
 | `trust-engine.md` | What can a reader compute from the graph? |
 | `composer.md` | How does the reference tool construct village links and star credentials without retaining them? |
 | Path to an audience | Who might care, why would they participate, and how could relevance grow? |
 | ADRs | Why were particular architectural decisions made? |
 
-An item belongs in this roadmap only after the project has deliberately chosen to pursue it. Uncommitted possibilities belong in `Wishlist.md`.
+An item belongs in this roadmap only after the project has deliberately chosen to pursue it. Uncommitted possibilities belong in `wishlist.md`.
 
 ## Workstreams
 

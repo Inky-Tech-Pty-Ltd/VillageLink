@@ -86,7 +86,7 @@ The work is being separated into three roles that should remain conceptually dis
 2. **Publish an initial graph** — create and test a corpus of Village Link assertions to establish useful data and expose practical problems.
 3. **Explore applications** — investigate products, services and institutions that might become possible if the standard and graph prove useful.
 
-See [Roadmap](../Roadmap.md) and [Wishlist](../Wishlist.md) for the evolving work program.
+See [Roadmap](../roadmap.md) and [Wishlist](../wishlist.md) for the evolving work program.
 
 ## Design principles
 

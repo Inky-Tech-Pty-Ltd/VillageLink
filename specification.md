@@ -20,7 +20,7 @@ Diagrammatically:
 
 This specification defines the semantics and current structural requirements of that statement. It does not define a universal identity system, truth service, reputation algorithm, governance system or application architecture.
 
-The project requirements are recorded in [Requirements.md](Requirements.md). Terms are used as defined in [Glossary.md](Glossary.md). The architectural decision underlying the Village Link primitive is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). The Star Credential data model is recorded in [ADR-004](docs/adr/004-star-credential-data-model.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). Serialization is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
+The project requirements are recorded in [requirements.md](requirements.md). Terms are used as defined in [glossary.md](glossary.md). The architectural decision underlying the Village Link primitive is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). The Star Credential data model is recorded in [ADR-004](docs/adr/004-star-credential-data-model.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). Serialization is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
 
 ## 2. Conventions
 

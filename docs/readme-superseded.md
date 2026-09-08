@@ -75,7 +75,7 @@ sets of expectations are in play. This tends to pull us to the centre, to the ex
 that the systems have in common.
 
 <p align="center">
-  <img src="diagrams/rendered/Three%20Contexts.png" alt="Village Link diagram" width="450" />
+  <img src="diagrams/rendered/three%20contexts.png" alt="Village Link diagram" width="450" />
 </p>
 
 This effect can be spun either positively or negatively. the positive spin would be that the layering 
@@ -138,7 +138,7 @@ to the beginning of a URI.
 A collection of links like this can be used to establish a 'star credential
 
 <p align="center">
-  <img src="diagrams/rendered/Multiple%20Memberships%20Joe%20v2.png" alt="Multiple memberships — Joe, version 2" width="450" />
+  <img src="diagrams/rendered/multiple%20memberships%20joe%20v2.png" alt="Multiple memberships — Joe, version 2" width="450" />
 </p>
 
 
@@ -155,7 +155,7 @@ The credential, *🞷JoeRasmussen*, is a collection of as many
 The screen-shot below does not belong to the project, but is useful[^1]:
 
 <p align="center">
-  <img src="diagrams/rendered/Steve%20Bynes%20homepage.png" alt="Steve Byrnes homepage" width="650" />
+  <img src="diagrams/rendered/steve%20bynes%20homepage.png" alt="Steve Byrnes homepage" width="650" />
 </p>
 
 Byrnes is making a series of claims of fact. The project will make this
@@ -194,7 +194,7 @@ which technologies they have in common. They can establish two-, three-,
 or more-factor authentication through the paths of the web.
 
 <p align="center">
-  <img src="diagrams/rendered/Intersection%20of%20Joe%20and%20Steve.png" alt="Intersection of Joe and Steve" width="450" />
+  <img src="diagrams/rendered/intersection%20of%20joe%20and%20steve.png" alt="Intersection of Joe and Steve" width="450" />
 </p>
 
 At this point it is easy to lock-on to thinking only about online
@@ -383,7 +383,7 @@ below is taken from the Wikipedia entry for the PageRank search
 algorithm:
 
 <p align="center">
-  <img src="diagrams/rendered/Wikipedia%20-%20PageRank.png" alt="Wikipedia PageRank diagram" width="550" />
+  <img src="diagrams/rendered/wikipedia%20-%20pagerank.png" alt="Wikipedia PageRank diagram" width="550" />
 </p>
 
 In the diagram, the circles are web pages and the arrows are hyperlinks.
@@ -409,7 +409,7 @@ To compare village links with hyperlinks we can zoom in and adapt the
 PageRank diagram:
 
 <p align="center">
-  <img src="diagrams/rendered/PageRank%20Diagram%20adapted.png" alt="Adapted PageRank diagram" width="550" />
+  <img src="diagrams/rendered/pagerank%20diagram%20adapted.png" alt="Adapted PageRank diagram" width="550" />
 </p>
 
 1.  Some entities (yellow) assert that they have global context, “I am

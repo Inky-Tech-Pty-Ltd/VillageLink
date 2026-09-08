@@ -1,6 +1,6 @@
 # Pathway to Relevance
 
-This document is the evolving response to [Wishlist item #1](../../Wishlist.md#1--pathway-to-relevance). It is not yet a finished pitch. Its job is to preserve the strongest current thinking and evolve toward succinct, compelling answers to the question: **What is the pathway to relevance for Village Link?**
+This document is the evolving response to [Wishlist item #1](../../wishlist.md#1--pathway-to-relevance). It is not yet a finished pitch. Its job is to preserve the strongest current thinking and evolve toward succinct, compelling answers to the question: **What is the pathway to relevance for Village Link?**
 
 ## Current direction
 

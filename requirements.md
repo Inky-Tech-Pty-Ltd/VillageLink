@@ -14,7 +14,7 @@ Village Link is being developed through four conceptually distinct areas:
 3. **Interpret the graph** — investigate reader-side discovery, filtering, ranking and trust through Trust Engines.
 4. **Compose artefacts** — provide a small, stateless reference tool for constructing village links and Star Credentials without taking custody of a user's private identity graph.
 
-The requirements below are grouped into the standard, the reference publisher and consuming applications. Terms are used as defined in [Glossary.md](Glossary.md).
+The requirements below are grouped into the standard, the reference publisher and consuming applications. Terms are used as defined in [glossary.md](glossary.md).
 
 Normative keywords **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT** and **MAY** indicate the intended strength of requirements.
 

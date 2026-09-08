@@ -72,7 +72,7 @@ Separating the abstract object from its serialization allows the same credential
 
 ## Consequences
 
-The normative definition belongs in [Specification.md](../../Specification.md). This ADR records the decision and its rationale.
+The normative definition belongs in [specification.md](../../specification.md). This ADR records the decision and its rationale.
 
 A concrete serialization must preserve the distinction between A and the B set and must not assign meaning to the serialized order of the Bs.
 
