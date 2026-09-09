@@ -1,5 +1,20 @@
 # Village Link
 
+## Elevator pitch
+
+In the Village Link project, we’ve been thinking about all of the trust graphs—digital and analogue.
+
+We have two questions:
+
+**A:** How do they connect?  
+**B:** How do the layers add up to governance?
+
+We have a candidate for **A**. 
+
+It might open a path to **B**.
+
+## Memory and trust
+
 A typical first conversation between strangers will contain an exchange of biographical information. 
 The conversation might establish that the strangers have contexts in common. It may reveal mutual acquaintances.
 A curriculum vitae is a formal example of the same ritual.
