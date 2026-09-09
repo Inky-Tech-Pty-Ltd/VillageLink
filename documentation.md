@@ -1,13 +1,14 @@
 # Documentation map
 
 **Status:** Maintained  
-**Last updated:** 7 September 2026
+**Last updated:** 10 September 2026
 
 This page identifies the natural home of each Village Link concept. Other documents may summarise a concept and link to its source, but should not silently redefine it.
 
 | Subject | Source of truth | Purpose |
 | --- | --- | --- |
 | Project overview | [README.md](README.md) | Short explanation of the proposal, its boundaries and current status |
+| Contribution and participation | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute, how decisions are made and the current stewardship boundary |
 | Terms | [glossary.md](glossary.md) | Current project vocabulary and deprecated usages |
 | Normative project requirements | [requirements.md](requirements.md) | Requirements for the standard, reference publisher and consuming applications |
 | Primitive semantics and syntax | [specification.md](specification.md) | Conformance rules for an individual Village Link |
