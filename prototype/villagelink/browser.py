@@ -42,7 +42,7 @@ HOME_HTML = """<!doctype html>
   main {
     width: min(760px, calc(100vw - 64px));
     text-align: center;
-    transform: translateY(-6vh);
+    transform: translateY(-3vh);
   }
   .mark {
     font-size: 64px;
@@ -51,7 +51,7 @@ HOME_HTML = """<!doctype html>
     color: #d81b86;
   }
   h1 {
-    margin: 0 0 34px;
+    margin: 0 0 30px;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: -1px;
@@ -75,6 +75,59 @@ HOME_HTML = """<!doctype html>
     font-size: 25px;
     color: #5f6368;
   }
+  .composer {
+    margin-top: 30px;
+    text-align: left;
+  }
+  .composer-title {
+    margin: 0 0 12px 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #5f6368;
+  }
+  .endpoint {
+    width: 100%;
+    height: 44px;
+    margin: 7px 0;
+    padding: 0 15px;
+    border: 1px solid #dadce0;
+    border-radius: 22px;
+    outline: none;
+    font-size: 14px;
+    color: #202124;
+  }
+  .endpoint:focus {
+    border-color: #9aa0a6;
+    box-shadow: 0 1px 4px rgba(32, 33, 36, .12);
+  }
+  .compose-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  button {
+    padding: 10px 18px;
+    border: 1px solid #dadce0;
+    border-radius: 18px;
+    background: #f8f9fa;
+    color: #3c4043;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button:hover { background: #f1f3f4; }
+  #result {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+  #result a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  #result a:hover { text-decoration: underline; }
   .bookmarks {
     display: flex;
     justify-content: center;
@@ -92,9 +145,7 @@ HOME_HTML = """<!doctype html>
     background: #f8f9fa;
     font-size: 14px;
   }
-  .bookmark:hover {
-    background: #f1f3f4;
-  }
+  .bookmark:hover { background: #f1f3f4; }
 </style>
 </head>
 <body>
@@ -102,11 +153,52 @@ HOME_HTML = """<!doctype html>
     <div class="mark">✱</div>
     <h1>Village Link</h1>
     <div class="trust">Trust engine</div>
+
+    <section class="composer" aria-label="Compose a Village Link">
+      <div class="composer-title">Compose a Village Link</div>
+      <input id="endpoint-a" class="endpoint" type="url" placeholder="A — first URL" autocomplete="off">
+      <input id="endpoint-b" class="endpoint" type="url" placeholder="B — second URL" autocomplete="off">
+      <div class="compose-row">
+        <button type="button" onclick="composeVillageLink()">Compose</button>
+        <div id="result" aria-live="polite"></div>
+      </div>
+    </section>
+
     <div class="bookmarks">
       <a class="bookmark" href="https://village.link/wiki/index.php/Asha_Bhosle">Asha Bhosle</a>
       <a class="bookmark" href="https://village.link/wiki/index.php/Puck-GPT">Puck-GPT</a>
     </div>
   </main>
+
+<script>
+  const marker = "https://wab.village.link/";
+
+  function encodeEndpoint(value) {
+    // Match Python urllib.parse.quote(..., safe=RFC3986-unreserved).
+    return encodeURIComponent(value).replace(/[!'()*]/g, c =>
+      '%' + c.charCodeAt(0).toString(16).toUpperCase()
+    );
+  }
+
+  function composeVillageLink() {
+    const a = document.getElementById('endpoint-a').value.trim();
+    const b = document.getElementById('endpoint-b').value.trim();
+    const result = document.getElementById('result');
+
+    if (!a || !b) {
+      result.textContent = 'Enter both URLs.';
+      return;
+    }
+
+    const link = marker + encodeEndpoint(a) + '!' + encodeEndpoint(b);
+    result.innerHTML = '';
+    const anchor = document.createElement('a');
+    anchor.href = link;
+    anchor.textContent = 'Open Village Link';
+    anchor.title = link;
+    result.appendChild(anchor);
+  }
+</script>
 </body>
 </html>
 """
