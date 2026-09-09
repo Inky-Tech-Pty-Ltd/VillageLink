@@ -22,6 +22,96 @@ from PySide6.QtWidgets import (
 from .codec import parse as parse_village_link
 
 
+HOME_HTML = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Village Link</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #ffffff;
+    color: #202124;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  main {
+    width: min(760px, calc(100vw - 64px));
+    text-align: center;
+    transform: translateY(-6vh);
+  }
+  .mark {
+    font-size: 64px;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: #d81b86;
+  }
+  h1 {
+    margin: 0 0 34px;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -1px;
+  }
+  .trust {
+    width: 100%;
+    height: 54px;
+    border: 1px solid #dfe1e5;
+    border-radius: 27px;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, .18);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: #9aa0a6;
+    font-size: 17px;
+    text-align: left;
+  }
+  .trust::before {
+    content: "⌕";
+    margin-right: 14px;
+    font-size: 25px;
+    color: #5f6368;
+  }
+  .bookmarks {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .bookmark {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #dadce0;
+    border-radius: 18px;
+    color: #3c4043;
+    text-decoration: none;
+    background: #f8f9fa;
+    font-size: 14px;
+  }
+  .bookmark:hover {
+    background: #f1f3f4;
+  }
+</style>
+</head>
+<body>
+  <main>
+    <div class="mark">✱</div>
+    <h1>Village Link</h1>
+    <div class="trust">Trust engine</div>
+    <div class="bookmarks">
+      <a class="bookmark" href="https://village.link/wiki/index.php/Asha_Bhosle">Asha Bhosle</a>
+      <a class="bookmark" href="https://village.link/wiki/index.php/Puck-GPT">Puck-GPT</a>
+    </div>
+  </main>
+</body>
+</html>
+"""
+
+
 def village_targets(raw_url: str) -> tuple[str, str] | None:
     """Return A and B when *raw_url* is a serialized Village Link."""
     try:
@@ -79,7 +169,8 @@ class Browser(QMainWindow):
         self.back.setToolTip("Go back, restoring a Village Link split when necessary")
         self.back.clicked.connect(self.go_back)
 
-        self.address = QLineEdit("https://village.link/wiki/index.php/Asha_Bhosle")
+        self.address = QLineEdit()
+        self.address.setPlaceholderText("Enter a URL or Village Link")
         self.address.returnPressed.connect(self.navigate)
 
         go = QPushButton("Go")
@@ -115,7 +206,7 @@ class Browser(QMainWindow):
         container.setLayout(layout)
         self.setCentralWidget(container)
 
-        self.navigate()
+        self.show_home()
 
     def is_split(self) -> bool:
         return not self.right.isHidden()
@@ -143,6 +234,14 @@ class Browser(QMainWindow):
     def _left_url_changed(self, url: QUrl) -> None:
         if not self.is_split():
             self.address.setText(url.toString())
+
+    def show_home(self) -> None:
+        """Show the deliberately minimal demo landing page."""
+        self._internal_left_url = None
+        self.right.hide()
+        self.promote.hide()
+        self.address.clear()
+        self.left.setHtml(HOME_HTML, QUrl("https://home.village.link/"))
 
     def open_single(self, url: str, *, remember: bool = False) -> None:
         """Browse one URL at full width, optionally remembering the state being left."""
@@ -228,6 +327,10 @@ class Browser(QMainWindow):
 
     def navigate(self) -> None:
         raw = self.address.text().strip()
+        if not raw:
+            self.show_home()
+            return
+
         if not urlparse(raw).scheme:
             raw = "https://" + raw
             self.address.setText(raw)
