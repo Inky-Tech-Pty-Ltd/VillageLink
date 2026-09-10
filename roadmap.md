@@ -2,7 +2,7 @@
 
 **Status:** Working draft  
 **Roadmap horizon:** August 2026 to February 2027  
-**Last updated:** 7 September 2026
+**Last updated:** 10 September 2026
 
 ## Purpose
 
@@ -186,6 +186,8 @@ The roadmap is organised into six concurrent workstreams.
 
 - Construct examples of first-person, reciprocal and third-party assertions.
 - Construct small verification triangles and at least one contradictory-claim example.
+- Define a paired G0/G1 experimental model generated from the same hidden world, with a credible current-frontier G0 baseline.
+- Build a minimal simulator with honest, mistaken and adversarial publishers, then measure existence, identity, attribute inference, discovery and transaction costs.
 - Revisit whether the primitive is best understood as a Village Link, a general double-headed hyperlink, or one application of a more general object.
 - Revisit the alternative assertion-object architecture raised by Sankarshan.
 - Test Brendan Miller's assertion that required objects may already exist within DTG.
