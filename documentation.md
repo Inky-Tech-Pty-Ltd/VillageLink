@@ -19,6 +19,7 @@ This page identifies the natural home of each Village Link concept. Other docume
 | Uncommitted ideas and experiments | [wishlist.md](wishlist.md) | Possibilities that have not entered the roadmap |
 | Reference publisher | [ADR-003](docs/adr/003-mediawiki-reference-publisher.md) | MediaWiki publication and governance architecture |
 | Reader-side interpretation | [trust-engine.md](trust-engine.md) | Trust Engine problem and design space |
+| Trust Engine experimental model | [Research 002](docs/research/002-modelling-g1.md) | Paired G0/G1 model, evaluation tasks and falsifiable hypothesis |
 | Stateless construction | [composer.md](composer.md) and [ADR-007](docs/adr/007-stateless-composer.md) | Composer and the decision not to make it a persistent credential manager |
 | Governance across memory systems | [emergent-governance.md](emergent-governance.md) | Exploratory consequences, not protocol requirements |
 | AI governance | [ai-governance.md](ai-governance.md) | Possible application of the wider model to artificial agents |
