@@ -4,21 +4,158 @@
 
 Concept document.
 
-The Trust Engine is one of the principal Village Link concepts. It describes a possible reader-side application of the Village Link graph. This document defines the problem and the emerging design direction; it is not yet a technical specification.
+The Trust Engine is one of the principal Village Link concepts. It describes a possible reader-side application of the Village Link graph. This document defines the problem and the emerging design direction; it is not yet a technical specification or a commitment to one algorithm.
 
 ## The idea
 
-A Village Link publisher creates a graph of assertions of the form:
+A Village Link publisher creates an assertion of the form:
 
-> **P asserts A ↔ B**
+> **W states A ↔ B**
 
-Once enough Village Links exist, a different problem appears:
+Once enough such assertions exist, a different problem appears:
 
 > **Given a graph of Village Links, what can a reader compute that cannot be computed — or cannot be computed in the same way — from the conventional Web?**
 
 The working name for the machine that answers this question is the **Trust Engine**.
 
 The name is intended to evoke a **search engine**, while deliberately describing a broader problem.
+
+## From webpages to represented objects
+
+A conventional search engine principally retrieves and ranks representations: webpages, documents, images, products and other indexed resources.
+
+Village Link introduces the possibility of reasoning across several representations of the same underlying noun.
+
+`Joe Rasmussen` in one memory system is not the whole person Joe Rasmussen. Nor is `Joe Rasmussen` in another memory system. A Village Link states that two such inscriptions purport to refer to the same thing.
+
+A graph of those assertions may allow a reader to construct a provisional, addressable object such as:
+
+> **[Joe Rasmussen]**
+
+The brackets do not claim that a perfect or canonical digital Joe exists. They denote a proposed object inferred from a mountain of representations, memories and assertions.
+
+The Trust Engine's question is therefore not merely:
+
+> How important is this webpage?
+
+It is closer to:
+
+> Given what this graph says or implies about this proposed object, what may this reader reasonably believe or do?
+
+The graph contains representations and assertions. The represented object is never handed to the engine as revealed truth.
+
+## PageRank: precedent, not benchmark
+
+PageRank demonstrated that relational structure contains information that cannot be recovered by examining each webpage independently. In particular, hyperlink structure supplied an authority-like signal alongside the contents of pages.
+
+That insight matters to Village Link. The original PageRank calculation does not define the Trust Engine, however, and PageRank is not the performance target.
+
+Modern web search combines many ranking, learning, semantic, contextual and safety signals. The relevant comparison is therefore not:
+
+```text
+our algorithm versus PageRank
+```
+
+It is:
+
+```text
+best available inference over G1
+versus
+best available inference over G0
+```
+
+Where:
+
+- **G0** is the conventional Web and its existing trust machinery; and
+- **G1** is the same information environment augmented by Village Links and star credentials.
+
+The primary proposed innovation is **representational**, not algorithmic. Village Link changes what the graph can state explicitly. The Trust Engine should be free to use the strongest available algorithms, including methods developed long after PageRank and methods not yet invented.
+
+## A reader, an object and a purpose
+
+Trust is ordinarily trust **for something**, in some context, from some point of view.
+
+A useful abstract interface is:
+
+```text
+TrustEngine(searcher, proposed object, purpose, graph)
+    -> claims, confidence, provenance, disagreement and possible action
+```
+
+The **searcher** may bring goals, location, permissions, prior knowledge, preferences and risk tolerance.
+
+The **proposed object** may be a person, organisation, product, document, software agent or other noun. It may itself need to be resolved from partial or ambiguous input.
+
+The **purpose** matters. A reader deciding whether to read a document, hire a plumber, install software or authenticate to a bank may legitimately ask different questions of the same graph.
+
+The result should not be presumed to be one universal trust score. It may instead be an evidence-weighted account containing:
+
+- proposed attributes and relationships;
+- confidence or uncertainty;
+- provenance and evidence paths;
+- corroboration and contradiction;
+- alternative identity resolutions; and
+- actions appropriate to the reader's purpose.
+
+## Existing trust engines
+
+The Trust Engine enters territory already occupied by sophisticated systems.
+
+Search engines infer intent and rank likely destinations. Browsers, DNS, certificate authorities, threat filters and password managers help a user reach and authenticate the intended endpoint. Marketplaces combine identity, reputation, reviews, transaction history and platform rules. Personal devices and applications use private histories to recognise people and places.
+
+These layers often operate as an emergent, distributed trust engine even when no component uses that name.
+
+For example, an Australian user may type only `COMM` before a search service proposes the Commonwealth Bank. The user can select the result and proceed to enter banking credentials with almost no conscious investigation.
+
+This apparently simple interaction may perform several functions at once:
+
+- infer the searcher and likely purpose;
+- resolve an abbreviated expression to **[Commonwealth Bank of Australia]**;
+- identify a canonical web representation;
+- route the user to it;
+- apply several machine security checks; and
+- support a high-stakes action at very low cognitive cost.
+
+That is already excellent Trust Engine performance. Village Link should be evaluated against the current Web's whole trust stack, not against PageRank or any other historical algorithm in isolation.
+
+## Why Village Link changes the problem
+
+The conventional Web is built primarily from directed links between resources. A conventional hyperlink roughly says:
+
+> This resource points to that resource.
+
+Village Link adds a different relation:
+
+> This publisher states that these two representations denote the same object.
+
+The assertion has two distinct structural properties:
+
+- the proposed equivalence **A ↔ B** is symmetric; and
+- the provenance **W states** is not.
+
+A Trust Engine must not collapse A and B into truth merely because an assertion exists. It can instead ask who published the assertion, what evidence accompanies it, which independent paths corroborate it, which claims conflict with it and how the relevant contexts have behaved.
+
+This may permit reasoning across independently governed memory systems without requiring any one system to become the canonical identity provider, reputation service or marketplace.
+
+The graph may then carry evidence about an underlying noun that none of its representations contains alone.
+
+## The long tail
+
+The existing Web's trust machinery is exceptionally effective for many prominent entities. A major bank, global company or famous institution may already have a well-ranked canonical domain, familiar branding, extensive links and strong security infrastructure. Such cases form a useful ceiling test: G1 must not degrade excellent existing performance.
+
+The larger opportunity may lie in the long tail:
+
+- people whose histories are scattered across contexts;
+- small or local organisations;
+- new, obscure or overseas entities;
+- contributors, sellers and counterparties outside dominant marketplaces;
+- software agents acting in several systems;
+- contested identities and claims; and
+- things important to a particular reader but not important enough for a global platform to model well.
+
+In that territory, trust is often carried socially and memory remains fragmented.
+
+> **Village Link may give the long tail a memory.**
 
 ## A reader-side technology
 
@@ -46,51 +183,26 @@ The result is therefore reader-relative. When Bob follows Alice's email identifi
 
 The same principle may apply to `tel:` identifiers and authorised call, message or contact histories.
 
-## The existing territory
+## A falsifiable hypothesis
 
-On the conventional Web, several classes of system perform pieces of this work.
+The central claim can be tested without first building a production Trust Engine.
 
-### Search engines
+Construct a hidden experimental world, then generate two observed graphs from it:
 
-Search engines help a reader find information in a very large collection of published material. They rank results according to relevance, authority and many other signals.
+- G0 contains conventional representations, content and links;
+- G1 contains the same environment plus provenance-bearing Village Links and star credentials.
 
-### Filters and firewalls
+The algorithms do not see the hidden world. The experiment does, allowing their inferences to be scored against known truth.
 
-Filters and firewalls determine what information, entities or interactions should be admitted, excluded or treated with caution.
+Three comparisons are useful:
 
-### Marketplaces
+1. the best available methods operating over G0;
+2. matched methods with access to the additional G1 structure; and
+3. G1-native methods designed around equivalence assertions, provenance, corroboration and conflict.
 
-Marketplaces help participants discover and evaluate other participants. They commonly incorporate identity, reputation, reviews, transaction history and rules particular to the marketplace.
+Candidate evaluation tasks include existence, identity resolution, attribute inference, opportunity discovery, scam resistance and the total cost of reaching a sufficiently confident decision.
 
-These systems solve different problems, but all are concerned in some way with selecting useful or trustworthy possibilities from a much larger universe.
-
-The Trust Engine is intended to explore the territory across these categories rather than reproduce any one of them.
-
-## Why Village Link changes the problem
-
-The conventional Web is built primarily from directed links between resources.
-
-Village Link introduces a different primitive: a publisher makes an assertion connecting two representations of an entity across contexts.
-
-The graph therefore contains explicit information about sameness, correspondence and context. Its symmetries are different from those of the conventional Web.
-
-That difference may change the optimisation problem.
-
-For example, a reader may be able to reason across multiple independent memory systems without requiring any one of those systems to become the canonical identity provider, reputation service or marketplace.
-
-A useful reputation signal may emerge from the shape of the graph itself: which contexts connect, who publishes the connections, which assertions agree, which conflict, and what paths exist between independently governed systems.
-
-Exactly which computations prove useful is an open research and design question.
-
-## Trust is contextual
-
-The working title should not be taken to imply that the Trust Engine computes a universal trust score.
-
-Trust is ordinarily trust **for something**, in some context, from some point of view.
-
-A reader looking for a plumber, a research paper, an employee, a software package, a seller, an AI agent or a source of political information may legitimately apply different criteria to the same graph.
-
-Village Link should preserve that plurality rather than collapse it into a single authoritative ranking.
+The formal model is developed in [Research 002: Modelling G1](docs/research/002-modelling-g1.md).
 
 ## Relationship to the Village Link roles
 
@@ -117,9 +229,7 @@ A central architectural objective of Village Link is to keep the underlying prim
 
 The Trust Engine should therefore be treated as software operating **over** the graph, not as functionality that must be encoded **into** every Village Link.
 
-Different Trust Engines should be possible.
-
-They may use different algorithms, policies, economic models and definitions of relevance or trust while operating over the same underlying graph.
+Different Trust Engines should be possible. They may use different algorithms, policies, economic models and definitions of relevance or trust while operating over the same underlying graph.
 
 That plurality is a feature.
 
@@ -127,13 +237,16 @@ That plurality is a feature.
 
 Important unresolved questions include:
 
+- Which current graph, reputation, entity-resolution and inference methods provide the strongest G0 baseline?
 - Which graph properties produce useful trust or discovery signals?
+- What advantage comes from the new information in G1, and what advantage comes from a particular algorithm?
 - How should the identity and reputation of publishers affect interpretation of their assertions?
 - How should agreement, contradiction and uncertainty be represented to a reader?
 - What useful computations arise specifically from the symmetry of Village Links?
 - How much can be inferred without centralising identity or reputation?
 - How should a Trust Engine expose its ranking or filtering rules?
 - What adversarial behaviours emerge once Trust Engines have economic value?
+- Where does G1 improve long-tail performance, and where is the existing Web already near the ceiling?
 - Where do search, filtering, firewall and marketplace functions genuinely converge, and where should they remain separate?
 
 ## Working hypothesis
@@ -142,6 +255,12 @@ The Trust Engine is not presently a promised product or a settled architecture.
 
 It is a hypothesis:
 
-> **A sufficiently rich graph of Village Links will support useful reader-side computations that differ materially from those available on the conventional Web.**
+> **For relevant classes of objects, readers and purposes, the best available inference over G1 will produce lower error and lower decision costs than the best available inference over G0.**
 
-The next task is to discover what those computations are.
+The purpose of the experimental programme is to discover whether that is true, under what conditions, and where it fails.
+
+## References
+
+- Sergey Brin and Lawrence Page, [*The Anatomy of a Large-Scale Hypertextual Web Search Engine*](https://research.google/pubs/the-anatomy-of-a-large-scale-hypertextual-web-search-engine/), 1998.
+- Google Search Central, [*A guide to Google Search ranking systems*](https://developers.google.com/search/docs/appearance/ranking-systems-guide).
+- Google Search Help, [*How Google autocomplete predictions work*](https://support.google.com/websearch/answer/7368877).
