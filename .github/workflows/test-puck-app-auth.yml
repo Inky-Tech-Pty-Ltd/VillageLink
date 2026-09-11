@@ -2,12 +2,19 @@ name: Test Puck-GPT App authentication
 
 on:
   workflow_dispatch:
+  issue_comment:
+    types: [created]
 
 permissions:
   contents: read
 
 jobs:
   test-puck-auth:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.number == 10 &&
+       github.event.comment.body == '/puck-auth-test')
     runs-on: ubuntu-latest
     steps:
       - name: Create Puck-GPT installation token
@@ -25,4 +32,4 @@ jobs:
         run: |
           gh issue comment 10 \
             --repo Inky-Tech-Pty-Ltd/VillageLink \
-            --body "Authentication test successful: this comment was made by Puck-GPT through GitHub Actions using the repository-held GitHub App credential."
+            --body "Trigger test successful: Puck-in-ChatGPT caused this GitHub Action, which authenticated as the Puck-GPT App and posted this comment."
