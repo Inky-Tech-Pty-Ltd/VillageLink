@@ -1,0 +1,28 @@
+name: Test Puck-GPT App authentication
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-puck-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Puck-GPT installation token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: '4708095'
+          private-key: ${{ secrets.PUCK_GPT_PRIVATE_KEY }}
+          owner: Inky-Tech-Pty-Ltd
+          repositories: VillageLink
+
+      - name: Comment on attribution test issue as Puck-GPT
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh issue comment 10 \
+            --repo Inky-Tech-Pty-Ltd/VillageLink \
+            --body "Authentication test successful: this comment was made by Puck-GPT through GitHub Actions using the repository-held GitHub App credential."
