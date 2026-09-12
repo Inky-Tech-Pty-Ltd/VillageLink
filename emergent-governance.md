@@ -19,6 +19,10 @@ The ideas are preliminary. In particular, this document describes possible conse
 
 ## 1. Governance through constraints
 
+**Governance is neither more nor less than the layered effect of constraints and consequences operating across systems.**
+
+Constraints need not be social or intentional. Physical and computational environments also determine what actions are possible and what consequences follow: a tree stops a running dog in a physical park, while a tree in a simulated world may not. Such conditions become part of governance when their consequences are remembered or anticipated and thereby shape future behaviour.
+
 A memory system may contain norms: formal or informal expectations about behaviour.
 
 Those norms may create **constraints** on entities whose behaviour can be observed, assessed or remembered in relation to them. Consequences may be favourable, adverse or neutral, and may arise in systems different from the one in which the relevant behaviour occurred.
