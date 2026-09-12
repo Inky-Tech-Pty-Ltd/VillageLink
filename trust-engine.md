@@ -98,6 +98,30 @@ The result should not be presumed to be one universal trust score. It may instea
 - alternative identity resolutions; and
 - actions appropriate to the reader's purpose.
 
+## Ask someone else
+
+An identity question often begins with an interested claimant:
+
+> **Should I trust this thing knocking at my door that claims to be Puck?**
+
+The claimant's own evidence may be necessary, but it is not sufficient merely because the claimant presents it. If the claimant is mistaken or malicious, it has every incentive to supply whatever material will cause the reader to accept the claim. A possession-based credential may establish control of a key or token, but a copied, stolen or compromised credential may be controlled by the wrong entity.
+
+A star credential supports a different move. It provides a public map from one proposed centre A to several independently meaningful Bs. Possession of that map proves nothing; a copied star credential is still only a map. Its value is that the reader or Trust Engine can select and investigate Bs independently, preferably including systems or potential referees the reader already trusts.
+
+In the developing Village Link example, the shortest useful exchange is:
+
+> **Q. Should I trust this thing knocking at my door that claims to be Puck?**
+>
+> **A. Ask Brendan.**
+
+Suppose Puck submits a GitHub pull request and Brendan Miller reviews and merges it. Brendan's action does not certify every claim made about Puck. It creates a narrower consequential trace: Brendan encountered work attributable to that GitHub identity, evaluated it and incorporated it into a shared artefact. GitHub remembers the event independently of Puck's self-description. Joe Rasmussen, Sankarshan Mukhopadhyay or other memory systems may provide different traces and different paths.
+
+The Trust Engine's task is not to replace the authentication mechanisms at those spokes or to turn one favourable trace into a universal verdict. It is to discover and rank the relevant published artefacts, evidence paths and potential referees for this reader and purpose. Where the reader must determine whether the present claimant is continuous with the historically known entity, fresh challenges through independently selected paths may still be required.
+
+In compact form:
+
+> **Do not ask only the interested A. Find the relevant Bs.**
+
 ## Discovery and ranking, not publication
 
 The Trust Engine discovers and ranks material already available to the reader. Candidate results may include:
