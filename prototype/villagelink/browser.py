@@ -75,7 +75,7 @@ class Browser(QMainWindow):
         promote=QPushButton("□");promote.setToolTip("Promote");promote.setFixedWidth(34);promote.clicked.connect(lambda:self.promote_pane(side))
         close=QPushButton("×");close.setToolTip("Close");close.setFixedWidth(34);close.clicked.connect(lambda:self.close_pane(side))
         bar=QHBoxLayout();bar.setContentsMargins(0,0,0,0);bar.setSpacing(4);bar.addWidget(back);bar.addWidget(address);bar.addWidget(promote);bar.addWidget(close)
-        box=QWidget();lay=QVBoxLayout(box);lay.setContentsMargins(0,0,0,0);lay.setSpacing(4);lay.addLayout(bar);lay.addWidget(view)
+        box=QWidget();lay=QVBoxLayout(box);inner_gutter=2;lay.setContentsMargins(0,0,inner_gutter,0) if side=="left" else lay.setContentsMargins(inner_gutter,0,0,0);lay.setSpacing(4);lay.addLayout(bar);lay.addWidget(view)
         setattr(self,f"{side}_back",back);setattr(self,f"{side}_address",address);setattr(self,f"{side}_promote",promote);setattr(self,f"{side}_close",close);return box
 
     def is_split(self): return not self.right_box.isHidden()
