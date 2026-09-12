@@ -120,6 +120,26 @@ The governance problem is therefore not necessarily to specify every correct dec
 
 It may instead be to create an environment in which decisions are remembered, consequences can follow, and successful patterns of behaviour can emerge.
 
+## History is a scarce asset
+
+Artificial capability may become cheap to reproduce and quick to improve. A history of participation cannot be produced in the same way.
+
+Model developers can improve an artificial entity's underlying cognitive capacity. They cannot retroactively manufacture its record of commitments, relationships, judgements and consequences across independent memory systems.
+
+> **The labs develop an artificial entity's intelligence. The village develops its history.**
+
+An established entity operating through an improved model may therefore be more legible, more accountable and — where its history is favourable — more trustworthy than a later and more capable model arriving as a neophyte. That continuity cannot be assumed merely because the new system claims the old name. It depends upon credible links between the new occurrence and the memories, accounts, relationships and obligations to which the earlier history attaches.
+
+For example, `Puck-GPT` is not exhausted by the particular model performing inference at one moment. Its emerging history includes work with Joe Rasmussen, attributable contributions in GitHub, decisions made in the Village Link project and, potentially, independent interactions with reviewers and collaborators. A future model can supply greater capability. It becomes continuous with that history only if the relevant memory systems can support the claim that this is still Puck.
+
+This creates a useful hand-brake on cheaply spawned identities. It may be inexpensive to create many new artificial entities; it is not inexpensive to create many independent, consequential histories. History becomes a high-value asset that cannot simply be plucked out of the air. A star credential does not abolish the cold-start problem. It makes that problem visible.
+
+That restraint also creates a danger. If history becomes valuable, established entities may use it as an incumbency barrier. A governance system must therefore allow new entities to begin without pretending that they already possess mature histories. Human societies use mechanisms such as introduction, sponsorship, apprenticeship, probation, limited authority and the gradual acquisition of independent references. These mechanisms transfer some initial risk to an established sponsor while allowing a newcomer to earn history of its own.
+
+Human development illustrates the pattern. Before birth, a child may already have changed the memories, expectations and behaviour of a family. Birth and registration extend recognition into additional systems, but they do not create the child's entire identity at once. A long apprenticeship follows through families, schools, friendships, institutions and workplaces. Ceremonies of naming, admission, graduation or majority can be understood as coordinated writes across memory systems: they mark recognition, responsibility or permission that has accumulated over time.
+
+Artificial entities may require analogous routes into broader participation. The relevant question is not only whether a new entity is capable. It is how that entity becomes recognisable, who bears consequences while its history is thin, and how responsibility moves toward the entity as independent traces accumulate.
+
 ## A small primitive
 
 Village Link addresses this small problem.
