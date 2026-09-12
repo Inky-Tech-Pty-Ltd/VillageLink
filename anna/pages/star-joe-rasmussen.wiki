@@ -1,0 +1,29 @@
+== Star credential: ✱JoeRasmussen ==
+
+'''Joe Rasmussen''' is the centre of this demonstration star credential.
+
+{| class="wikitable"
+! Village Link !! Memory system !! Image
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FStarJoeRasmussen!https%3A%2F%2Fgithub.com%2FJoe-Rasmussen ↔]
+| github.com
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FStarJoeRasmussen!https%3A%2F%2Fwww.facebook.com%2Fjoe.rasmussen.70%2F ↔]
+| facebook.com
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FStarJoeRasmussen!https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUser%3AJoerasmussen ↔]
+| wikipedia.org
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FStarJoeRasmussen!mailto%3Ajoe.rasmussen%40inky.tech ↔]
+| email — joe.rasmussen@inky.tech
+| 
+|-
+| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FStarJoeRasmussen!mailto%3Ajoe.rasmussen%40village.link ↔]
+| email — joe.rasmussen@village.link
+| 
+|}
+
+See [[VillageLink:Star credential]].
