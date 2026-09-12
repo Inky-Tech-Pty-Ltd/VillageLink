@@ -13,13 +13,87 @@ from PySide6.QtWidgets import QApplication, QHBoxLayout, QLineEdit, QMainWindow,
 from .codec import parse as parse_village_link
 
 HOME_URL = "https://home.village.link/"
+STAR_CREDENTIAL_URL = "https://home.village.link/star-credential"
 MARKER = "https://wab.village.link/"
 
 HOME_HTML = """<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Village Link</title>
 <style>
 :root{color-scheme:light}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#fff;color:#202124;font-family:Arial,Helvetica,sans-serif}main{width:min(760px,calc(100vw - 64px));text-align:center;transform:translateY(-3vh)}.mark{font-size:64px;line-height:1;margin-bottom:10px;color:#d81b86}h1{margin:0 0 30px;font-size:48px;font-weight:400;letter-spacing:-1px}.trust{width:100%;height:54px;border:1px solid #dfe1e5;border-radius:27px;box-shadow:0 1px 6px rgba(32,33,36,.18);display:flex;align-items:center;padding:0 20px;color:#9aa0a6;font-size:17px;text-align:left}.trust::before{content:"⌕";margin-right:14px;font-size:25px;color:#5f6368}.composer{margin-top:30px;text-align:left}.composer-title{margin:0 0 12px 4px;font-size:15px;font-weight:600;color:#5f6368}.endpoint{width:100%;height:44px;margin:7px 0;padding:0 15px;border:1px solid #dadce0;border-radius:22px;outline:none;font-size:14px;color:#202124}.endpoint:focus{border-color:#9aa0a6;box-shadow:0 1px 4px rgba(32,33,36,.12)}.compose-row{display:flex;align-items:center;gap:12px;margin-top:10px}button{padding:10px 18px;border:1px solid #dadce0;border-radius:18px;background:#f8f9fa;color:#3c4043;font-size:14px;cursor:pointer}button:hover{background:#f1f3f4}#result{flex:1;min-width:0;display:none;align-items:center}#result a{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a73e8;text-decoration:none;padding:9px 12px;border:1px solid #dadce0;border-radius:18px}#result a:hover{background:#f8f9fa;text-decoration:underline}.bookmarks{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}.bookmark{display:inline-block;padding:10px 15px;border:1px solid #dadce0;border-radius:18px;color:#3c4043;text-decoration:none;background:#f8f9fa;font-size:14px}.bookmark:hover{background:#f1f3f4}
-</style></head><body><main><div class="mark">✱</div><h1>Village Link</h1><div class="trust">Trust engine</div><section class="composer"><div class="composer-title">Compose a Village Link</div><input id="endpoint-a" class="endpoint" type="url" placeholder="A — first URL"><input id="endpoint-b" class="endpoint" type="url" placeholder="B — second URL"><div class="compose-row"><button type="button" onclick="composeVillageLink()">Compose</button><div id="result"><a id="result-link"></a></div></div></section><div class="bookmarks"><a class="bookmark" href="https://village.link/wiki/index.php/Asha_Bhosle">Asha Bhosle</a><a class="bookmark" href="https://village.link/wiki/index.php/Puck-GPT">Puck-GPT</a><a class="bookmark" href="https://village.link/wiki/index.php/Joe_Rasmussen">Joe Rasmussen</a></div></main>
+</style></head><body><main><div class="mark">✱</div><h1>Village Link</h1><div class="trust">Trust engine</div><section class="composer"><div class="composer-title">Compose a Village Link</div><input id="endpoint-a" class="endpoint" type="url" placeholder="A — first URL"><input id="endpoint-b" class="endpoint" type="url" placeholder="B — second URL"><div class="compose-row"><button type="button" onclick="composeVillageLink()">Compose</button><div id="result"><a id="result-link"></a></div></div></section><div class="bookmarks"><a class="bookmark" href="https://home.village.link/star-credential">Compose Star Credential</a></div><div class="bookmarks"><a class="bookmark" href="https://village.link/wiki/index.php/Asha_Bhosle">Asha Bhosle</a><a class="bookmark" href="https://village.link/wiki/index.php/Puck-GPT">Puck-GPT</a><a class="bookmark" href="https://village.link/wiki/index.php/Joe_Rasmussen">Joe Rasmussen</a></div></main>
 <script>const marker="https://wab.village.link/";function encodeEndpoint(v){return encodeURIComponent(v).replace(/[!'()*]/g,c=>'%' + c.charCodeAt(0).toString(16).toUpperCase())}function composeVillageLink(){const a=document.getElementById('endpoint-a').value.trim(),b=document.getElementById('endpoint-b').value.trim(),r=document.getElementById('result'),l=document.getElementById('result-link');if(!a||!b){r.style.display='flex';l.removeAttribute('href');l.textContent='Enter both URLs.';return}const composed=marker+encodeEndpoint(a)+'!'+encodeEndpoint(b);l.href=composed;l.textContent=composed;l.title=composed;r.style.display='flex'}</script></body></html>"""
+
+STAR_CREDENTIAL_HTML = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compose a Star Credential — Village Link</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#fff;color:#202124;font-family:Arial,Helvetica,sans-serif;padding:44px 32px}main{width:min(760px,100%);margin:0 auto}.brand{text-align:center}.mark{font-size:52px;line-height:1;margin-bottom:8px;color:#d81b86}h1{margin:0;font-size:38px;font-weight:400;letter-spacing:-.6px}.intro{margin:12px auto 30px;max-width:560px;color:#5f6368;line-height:1.5}.field-label{display:block;margin:18px 0 7px 4px;font-size:14px;font-weight:600;color:#5f6368}.endpoint{width:100%;height:44px;padding:0 15px;border:1px solid #dadce0;border-radius:22px;outline:none;font-size:14px;color:#202124}.endpoint:focus{border-color:#9aa0a6;box-shadow:0 1px 4px rgba(32,33,36,.12)}.b-row{display:flex;gap:8px;margin:9px 0}.b-row .endpoint{flex:1}.remove{width:44px;min-width:44px;padding:0;border-radius:22px}.actions{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}button,.button{padding:10px 18px;border:1px solid #dadce0;border-radius:18px;background:#f8f9fa;color:#3c4043;font-size:14px;cursor:pointer;text-decoration:none}button:hover,.button:hover{background:#f1f3f4}.primary{background:#d81b86;border-color:#d81b86;color:#fff}.primary:hover{background:#be1675}.message{min-height:20px;margin:14px 4px 0;color:#b3261e;font-size:14px}.result{display:none;margin-top:22px}.result-header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}.result-title{font-size:14px;font-weight:600;color:#5f6368}.candidate{font-size:12px;color:#80868b}pre{margin:0;padding:18px;border:1px solid #dadce0;border-radius:14px;background:#f8f9fa;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.5 Consolas,"Courier New",monospace}.privacy{margin:28px 4px 0;padding-top:18px;border-top:1px solid #eee;color:#5f6368;font-size:13px;line-height:1.5}.footer{margin-top:22px;text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <header class="brand">
+    <div class="mark">✱</div>
+    <h1>Compose a Star Credential</h1>
+    <p class="intro">Enter one centre noun A and any number of nouns B. The B set is de-duplicated and sorted for stable display; its order has no semantic meaning.</p>
+  </header>
+  <section aria-label="Star Credential inputs">
+    <label class="field-label" for="centre-a">A — centre URI</label>
+    <input id="centre-a" class="endpoint" type="text" inputmode="url" placeholder="https://gc.example.org/A" autocomplete="off">
+    <div class="field-label">B — associated URI set</div>
+    <div id="b-fields"></div>
+    <div class="actions">
+      <button type="button" onclick="addB()">+ Add B</button>
+      <button class="primary" type="button" onclick="composeStarCredential()">Compose JSON</button>
+    </div>
+    <div id="message" class="message" role="alert" aria-live="polite"></div>
+  </section>
+  <section id="result" class="result" aria-label="Candidate JSON output">
+    <div class="result-header"><span class="result-title">Candidate JSON</span><span class="candidate">Concrete serialization remains open in Draft 0.1.</span></div>
+    <pre id="json-output"></pre>
+    <div class="actions"><button type="button" onclick="copyJson()">Copy JSON</button><span id="copy-status" class="candidate" aria-live="polite"></span></div>
+  </section>
+  <p class="privacy">Composition happens entirely on this page. Inputs and output are not sent anywhere or retained by Village Link.</p>
+  <div class="footer"><a class="button" href="https://home.village.link/">← Village Link home</a></div>
+</main>
+<script>
+function isUri(value){return /^[A-Za-z][A-Za-z0-9+.-]*:/.test(value)}
+function addB(value=''){
+  const row=document.createElement('div');row.className='b-row';
+  const input=document.createElement('input');input.className='endpoint b-endpoint';input.type='text';input.inputMode='url';input.placeholder='URI for B';input.autocomplete='off';input.value=value;
+  const remove=document.createElement('button');remove.type='button';remove.className='remove';remove.title='Remove this B';remove.setAttribute('aria-label','Remove this B');remove.textContent='×';remove.onclick=()=>row.remove();
+  row.append(input,remove);document.getElementById('b-fields').appendChild(row);input.focus();
+}
+function composeStarCredential(){
+  const message=document.getElementById('message');message.textContent='';
+  const a=document.getElementById('centre-a').value.trim();
+  const entered=[...document.querySelectorAll('.b-endpoint')].map(input=>input.value.trim()).filter(Boolean);
+  if(!a){message.textContent='Enter the centre URI A.';return}
+  if(!isUri(a)){message.textContent='A must be a URI with a scheme, such as https:, mailto: or urn:.';return}
+  const invalid=entered.find(value=>!isUri(value));
+  if(invalid){message.textContent='Every B must be a URI with a scheme.';return}
+  const members=[...new Set(entered)].sort();
+  const credential={type:'StarCredential',A:a,B:members};
+  document.getElementById('json-output').textContent=JSON.stringify(credential,null,2);
+  document.getElementById('result').style.display='block';
+  document.getElementById('copy-status').textContent='';
+}
+async function copyJson(){
+  const value=document.getElementById('json-output').textContent;
+  if(!value)return;
+  const status=document.getElementById('copy-status');
+  try{await navigator.clipboard.writeText(value);status.textContent='Copied.'}
+  catch(error){
+    const area=document.createElement('textarea');area.value=value;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();
+    status.textContent=document.execCommand('copy')?'Copied.':'Select the JSON and copy it manually.';area.remove();
+  }
+}
+addB();
+</script>
+</body>
+</html>"""
 
 
 def village_targets(raw_url: str) -> tuple[str, str] | None:
@@ -44,6 +118,10 @@ class VillagePage(QWebEnginePage):
         super().__init__(parent); self.browser=browser; self.side=side
     def acceptNavigationRequest(self, url: QUrl, nav_type, is_main_frame: bool) -> bool:  # noqa: N802
         if is_main_frame:
+            if self.side=="left" and url.toString().rstrip("/")==STAR_CREDENTIAL_URL.rstrip("/"):
+                QTimer.singleShot(0,lambda:self.browser.show_star_credential_composer(remember=True));return False
+            if self.side=="left" and url.toString().rstrip("/")==HOME_URL.rstrip("/") and self.browser._composer_visible:
+                QTimer.singleShot(0,lambda:self.browser.show_home(remember=True));return False
             targets=village_targets(url.toString())
             if targets:
                 QTimer.singleShot(0,lambda:self.browser.open_village_link(*targets,village_link=url.toString(),remember=True));return False
@@ -54,7 +132,7 @@ class VillagePage(QWebEnginePage):
 class Browser(QMainWindow):
     def __init__(self) -> None:
         super().__init__();self.setWindowTitle("Village Link Browser — prototype");self.resize(1400,900)
-        self._internal_left_url=None;self._state_history=[];self._current_village_link=None;self._home_visible=False
+        self._internal_left_url=None;self._state_history=[];self._current_village_link=None;self._home_visible=False;self._composer_visible=False
 
         self.home=QPushButton("⌂");self.home.setToolTip("Home");self.home.setFixedWidth(38);self.home.clicked.connect(lambda:self.show_home(remember=True))
         self.global_back=QPushButton("←");self.global_back.setToolTip("Back");self.global_back.setFixedWidth(38);self.global_back.clicked.connect(self.go_global_back)
@@ -82,6 +160,7 @@ class Browser(QMainWindow):
     def is_split(self): return not self.right_box.isHidden()
     def current_state(self):
         if self._home_visible:return BrowserState("home")
+        if self._composer_visible:return BrowserState("star-credential-composer")
         if self.is_split():return BrowserState("split",self.left.url().toString(),self.right.url().toString(),self._current_village_link)
         return BrowserState("single",self.left.url().toString())
     def remember_state(self):
@@ -95,19 +174,25 @@ class Browser(QMainWindow):
         self.left_box.findChildren(QPushButton)[0].setVisible(visible);self.left_address.setVisible(visible);self.left_promote.setVisible(visible);self.left_close.setVisible(visible)
     def show_home(self,*,remember=False):
         if remember and not self._home_visible:self.remember_state()
-        self._home_visible=True;self._current_village_link=None;self._internal_left_url=None;self.right_box.hide();self.copy_link.hide();self.dismiss_w.hide();self.global_address.setText(HOME_URL)
+        self._home_visible=True;self._composer_visible=False;self._current_village_link=None;self._internal_left_url=None;self.right_box.hide();self.copy_link.hide();self.dismiss_w.hide();self.global_address.setText(HOME_URL)
         for w in (self.left_back,self.left_address,self.left_promote,self.left_close):w.hide()
         self.left.setHtml(HOME_HTML,QUrl(HOME_URL))
+    def show_star_credential_composer(self,*,remember=False):
+        if remember and not self._composer_visible:self.remember_state()
+        self._home_visible=False;self._composer_visible=True;self._current_village_link=None;self._internal_left_url=None;self.right_box.hide();self.copy_link.hide();self.dismiss_w.hide();self.global_address.setText(STAR_CREDENTIAL_URL)
+        for w in (self.left_back,self.left_address,self.left_promote,self.left_close):w.hide()
+        self.left.setHtml(STAR_CREDENTIAL_HTML,QUrl(STAR_CREDENTIAL_URL))
     def open_single(self,url,*,remember=False):
         if remember:self.remember_state()
-        self._home_visible=False;self._current_village_link=None;self._internal_left_url=QUrl(url).toString();self.right_box.hide();self.copy_link.hide();self.dismiss_w.hide();self.global_address.setText(url)
+        self._home_visible=False;self._composer_visible=False;self._current_village_link=None;self._internal_left_url=QUrl(url).toString();self.right_box.hide();self.copy_link.hide();self.dismiss_w.hide();self.global_address.setText(url)
         for w in (self.left_back,self.left_address,self.left_promote,self.left_close):w.hide()
         self.left.setUrl(QUrl(url))
     def open_village_link(self,left,right,*,village_link=None,remember=False):
         if remember:self.remember_state()
-        self._home_visible=False;self._current_village_link=village_link or compose_village_link(left,right);self.global_address.setText(self._current_village_link);self._internal_left_url=QUrl(left).toString();self.left.setUrl(QUrl(left));self.right.setUrl(QUrl(right));self._show_split_chrome(True);self.splitter.setSizes([1,1])
+        self._home_visible=False;self._composer_visible=False;self._current_village_link=village_link or compose_village_link(left,right);self.global_address.setText(self._current_village_link);self._internal_left_url=QUrl(left).toString();self.left.setUrl(QUrl(left));self.right.setUrl(QUrl(right));self._show_split_chrome(True);self.splitter.setSizes([1,1])
     def restore_state(self,s):
         if s.kind=="home":self.show_home()
+        elif s.kind=="star-credential-composer":self.show_star_credential_composer()
         elif s.kind=="split" and s.right is not None:self.open_village_link(s.left,s.right,village_link=s.village_link)
         else:self.open_single(s.left)
     def go_global_back(self):
@@ -115,6 +200,7 @@ class Browser(QMainWindow):
     def navigate_global(self):
         raw=self.global_address.text().strip()
         if not raw or raw==HOME_URL:self.show_home(remember=True);return
+        if raw.rstrip("/")==STAR_CREDENTIAL_URL.rstrip("/"):self.show_star_credential_composer(remember=True);return
         if not urlparse(raw).scheme:raw="https://"+raw;self.global_address.setText(raw)
         targets=village_targets(raw)
         if targets:self.open_village_link(*targets,village_link=raw,remember=True)
