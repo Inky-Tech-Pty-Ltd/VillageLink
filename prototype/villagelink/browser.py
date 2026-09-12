@@ -74,8 +74,9 @@ class Browser(QMainWindow):
         address=QLineEdit();address.returnPressed.connect(lambda:self.navigate_pane(side))
         promote=QPushButton("□");promote.setToolTip("Promote");promote.setFixedWidth(34);promote.clicked.connect(lambda:self.promote_pane(side))
         close=QPushButton("×");close.setToolTip("Close");close.setFixedWidth(34);close.clicked.connect(lambda:self.close_pane(side))
-        bar=QHBoxLayout();bar.setContentsMargins(0,0,0,0);bar.setSpacing(4);bar.addWidget(back);bar.addWidget(address);bar.addWidget(promote);bar.addWidget(close)
-        box=QWidget();lay=QVBoxLayout(box);lay.setContentsMargins(0,0,2 if side=="left" else 0,0) if side=="left" else lay.setContentsMargins(2,0,0,0);lay.setSpacing(4);lay.addLayout(bar);lay.addWidget(view)
+        bar=QHBoxLayout();bar.setSpacing(4);bar.setContentsMargins(0,0,2 if side=="left" else 0,0) if side=="left" else bar.setContentsMargins(2,0,0,0);bar.addWidget(back);bar.addWidget(address);bar.addWidget(promote);bar.addWidget(close)
+        view_box=QWidget();view_lay=QVBoxLayout(view_box);view_lay.setSpacing(0);view_lay.setContentsMargins(0,0,4 if side=="left" else 0,0) if side=="left" else view_lay.setContentsMargins(4,0,0,0);view_lay.addWidget(view)
+        box=QWidget();lay=QVBoxLayout(box);lay.setContentsMargins(0,0,0,0);lay.setSpacing(4);lay.addLayout(bar);lay.addWidget(view_box)
         setattr(self,f"{side}_back",back);setattr(self,f"{side}_address",address);setattr(self,f"{side}_promote",promote);setattr(self,f"{side}_close",close);return box
 
     def is_split(self): return not self.right_box.isHidden()
