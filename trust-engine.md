@@ -78,8 +78,9 @@ Trust is ordinarily trust **for something**, in some context, from some point of
 A useful abstract interface is:
 
 ```text
-TrustEngine(searcher, proposed object, purpose, graph)
-    -> claims, confidence, provenance, disagreement and possible action
+TrustEngine(searcher, query or proposed object, purpose, graph)
+    -> ranked published artefacts, evidence paths, potential referees,
+       confidence, disagreement and possible action
 ```
 
 The **searcher** may bring goals, location, permissions, prior knowledge, preferences and risk tolerance.
@@ -96,6 +97,36 @@ The result should not be presumed to be one universal trust score. It may instea
 - corroboration and contradiction;
 - alternative identity resolutions; and
 - actions appropriate to the reader's purpose.
+
+## Discovery and ranking, not publication
+
+The Trust Engine discovers and ranks material already available to the reader. Candidate results may include:
+
+- published star credentials;
+- published Village Links; and
+- potential referees surfaced by existing paths through the graph.
+
+A query such as `Puck-GPT` may first need to be resolved into several candidate objects. The Trust Engine may rank those candidates, but it must not silently convert a name or partial identifier into one canonical entity.
+
+A star credential or Village Link remains a statement made by its publisher. The Trust Engine should not construct and present an inferred or provisional star credential by joining discovered links. Doing so would make the Trust Engine the publisher of a new bundle of identity assertions and collapse the distinction between **Interpret** and **Publish**. Labelling the bundle provisional would express uncertainty, but would not remove the moral significance of publishing it.
+
+The Trust Engine may form candidate resolutions and clusters internally in order to search and rank. Its outward claim should remain narrower:
+
+> **Given this searcher, query, purpose, graph and ranking method, these published artefacts and potential referees rank highest.**
+
+It should not silently write a derived equivalence or credential back into the graph. If a user deliberately chooses to create or publish a new Village Link or star credential, that is a separate act performed through an accountable publisher.
+
+A potential referee is likewise an engine recommendation, not a new graph fact. The result should explain the existing path or evidence that caused the person or entity to be surfaced. It does not appoint that party as a referee, imply consent or constitute an endorsement.
+
+## Relationship to conventional web search
+
+Webpages remain indispensable to the Trust Engine. A webpage may be W, an endpoint, an evidence source or the place where a published artefact is discovered.
+
+The Trust Engine does not therefore need to reproduce general-purpose webpage search as its principal job. It may use conventional search and retrieval systems to discover relevant resources, while organising its own results around proposed objects, published graph artefacts, provenance and possible routes for further inquiry.
+
+In short:
+
+> **Use the Web; do not silently replace its representations with inferred identity objects.**
 
 ## Existing trust engines
 
@@ -171,6 +202,22 @@ In its shortest form:
 
 This is distinct from **Composer**, which merely constructs village links or star credentials from inputs supplied by a user and need not discover, rank, publish or retain anything.
 
+The Trust Engine does not create new Village Links or star credentials as a side effect of interpretation.
+
+## Ranking is an accountable act
+
+Although the Trust Engine does not publish the underlying graph claims, discovery, filtering and ranking remain consequential acts. Ranking changes what a reader is likely to see, believe, investigate or ignore. Suppression and omission may matter as much as the first result.
+
+The reference Trust Engine algorithm should therefore be open source and inspectable. A reader or independent reviewer should be able to determine, at an appropriate level of explanation:
+
+- why one credential, link or potential referee ranked above another;
+- which graph paths, publisher signals, contradictions and contextual inputs affected the result;
+- which uncertainty remains;
+- which filtering or safety rules were applied; and
+- how a different searcher or purpose might produce a different ordering.
+
+Open source does not make a ranking neutral or harmless. It makes the ranking process available for scrutiny, challenge, reproduction and replacement.
+
 ## Opening the reader's own memory
 
 A URI in a Village Link is an identifier, not necessarily a destination.
@@ -244,7 +291,10 @@ Important unresolved questions include:
 - How should agreement, contradiction and uncertainty be represented to a reader?
 - What useful computations arise specifically from the symmetry of Village Links?
 - How much can be inferred without centralising identity or reputation?
+- How should published star credentials, individual Village Links and potential referees be compared and ranked?
+- What makes an entity a relevant potential referee for a particular searcher and purpose?
 - How should a Trust Engine expose its ranking or filtering rules?
+- How can sensitive graph paths be used safely in ranking without turning an inferred cluster into a de facto published credential?
 - What adversarial behaviours emerge once Trust Engines have economic value?
 - Where does G1 improve long-tail performance, and where is the existing Web already near the ceiling?
 - Where do search, filtering, firewall and marketplace functions genuinely converge, and where should they remain separate?
