@@ -1,0 +1,110 @@
+name: Publish Puck-GPT changes
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: >-
+      github.event.issue.number == 10 &&
+      github.event.comment.user.login == 'Joe-Rasmussen' &&
+      startsWith(github.event.comment.body, '/puck-publish ')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Parse request
+        id: request
+        shell: bash
+        env:
+          BODY: ${{ github.event.comment.body }}
+        run: |
+          set -euo pipefail
+          source_branch="${BODY#/puck-publish }"
+
+          if [[ "$source_branch" =~ ^puck-staging/(direct|pr)/[A-Za-z0-9._/-]+$ ]]; then
+            mode="${BASH_REMATCH[1]}"
+          else
+            echo "Invalid request. Expected /puck-publish puck-staging/{direct|pr}/<name>" >&2
+            exit 1
+          fi
+
+          echo "source_branch=$source_branch" >> "$GITHUB_OUTPUT"
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+
+      - name: Create Puck-GPT installation token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: '4708095'
+          private-key: ${{ secrets.PUCK_GPT_PRIVATE_KEY }}
+          owner: Inky-Tech-Pty-Ltd
+          repositories: VillageLink
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Publish as Puck-GPT
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          SOURCE_BRANCH: ${{ steps.request.outputs.source_branch }}
+          MODE: ${{ steps.request.outputs.mode }}
+        run: |
+          set -euo pipefail
+
+          git fetch origin \
+            "refs/heads/$SOURCE_BRANCH:refs/remotes/origin/$SOURCE_BRANCH" \
+            "refs/heads/main:refs/remotes/origin/main"
+
+          main_sha="$(git rev-parse origin/main)"
+          merge_base="$(git merge-base origin/main "origin/$SOURCE_BRANCH")"
+
+          if [[ "$merge_base" != "$main_sha" ]]; then
+            echo "Staging branch is not based on current main. Restage the change before publishing." >&2
+            exit 1
+          fi
+
+          commit_message="$(git log -1 --format=%s "origin/$SOURCE_BRANCH")"
+          if [[ -z "$commit_message" ]]; then
+            commit_message="Puck-GPT change"
+          fi
+
+          git config user.name 'puck-gpt[bot]'
+          git config user.email '320794343+puck-gpt[bot]@users.noreply.github.com'
+
+          if [[ "$MODE" == "direct" ]]; then
+            git checkout -B main origin/main
+            git diff --binary origin/main "origin/$SOURCE_BRANCH" | git apply --index
+            git diff --cached --quiet && { echo "No staged changes to publish." >&2; exit 1; }
+            git commit -m "$commit_message"
+            git push origin HEAD:main
+            destination="main"
+          else
+            suffix="${SOURCE_BRANCH#puck-staging/pr/}"
+            target_branch="puck/$suffix"
+            git checkout -B "$target_branch" origin/main
+            git diff --binary origin/main "origin/$SOURCE_BRANCH" | git apply --index
+            git diff --cached --quiet && { echo "No staged changes to publish." >&2; exit 1; }
+            git commit -m "$commit_message"
+            git push --force-with-lease origin "HEAD:refs/heads/$target_branch"
+            gh pr create \
+              --repo Inky-Tech-Pty-Ltd/VillageLink \
+              --base main \
+              --head "$target_branch" \
+              --title "$commit_message" \
+              --body "Proposed by Puck-GPT through the repository attribution workflow. Joe Rasmussen can review, test, and merge this change."
+            destination="$target_branch"
+          fi
+
+          git push origin --delete "$SOURCE_BRANCH"
+
+          gh issue comment 10 \
+            --repo Inky-Tech-Pty-Ltd/VillageLink \
+            --body "Published $SOURCE_BRANCH as Puck-GPT to $destination."
