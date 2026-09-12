@@ -66,7 +66,7 @@ class Browser(QMainWindow):
         self.left=QWebEngineView();self.right=QWebEngineView();self.left.setPage(VillagePage(self,self.left,"left"));self.right.setPage(VillagePage(self,self.right,"right"))
         self.left_box=self._make_pane("left",self.left);self.right_box=self._make_pane("right",self.right)
         self.left.urlChanged.connect(lambda u:self.left_address.setText(u.toString()));self.right.urlChanged.connect(lambda u:self.right_address.setText(u.toString()))
-        self.splitter=QSplitter();self.splitter.setChildrenCollapsible(False);self.splitter.addWidget(self.left_box);self.splitter.addWidget(self.right_box)
+        self.splitter=QSplitter();self.splitter.setChildrenCollapsible(False);self.splitter.setStyleSheet("QSplitter::handle { background: #d0d0d0; width: 1px; }");self.splitter.addWidget(self.left_box);self.splitter.addWidget(self.right_box)
         layout=QVBoxLayout();layout.addLayout(global_bar);layout.addWidget(self.splitter);container=QWidget();container.setLayout(layout);self.setCentralWidget(container);self.show_home()
 
     def _make_pane(self,side,view):
