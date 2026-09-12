@@ -66,7 +66,7 @@ class Browser(QMainWindow):
         self.left=QWebEngineView();self.right=QWebEngineView();self.left.setPage(VillagePage(self,self.left,"left"));self.right.setPage(VillagePage(self,self.right,"right"))
         self.left_box=self._make_pane("left",self.left);self.right_box=self._make_pane("right",self.right)
         self.left.urlChanged.connect(lambda u:self.left_address.setText(u.toString()));self.right.urlChanged.connect(lambda u:self.right_address.setText(u.toString()))
-        self.splitter=QSplitter();self.splitter.setChildrenCollapsible(False);self.splitter.setStyleSheet("QSplitter::handle { background: #d0d0d0; width: 1px; }");self.splitter.addWidget(self.left_box);self.splitter.addWidget(self.right_box)
+        self.splitter=QSplitter();self.splitter.setChildrenCollapsible(False);self.splitter.setStyleSheet("QSplitter::handle { width: 5px; background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:0.39 #ffffff, stop:0.40 #d0d0d0, stop:0.60 #d0d0d0, stop:0.61 #ffffff, stop:1 #ffffff); }");self.splitter.addWidget(self.left_box);self.splitter.addWidget(self.right_box)
         layout=QVBoxLayout();layout.addLayout(global_bar);layout.addWidget(self.splitter);container=QWidget();container.setLayout(layout);self.setCentralWidget(container);self.show_home()
 
     def _make_pane(self,side,view):
@@ -75,7 +75,7 @@ class Browser(QMainWindow):
         promote=QPushButton("□");promote.setToolTip("Promote");promote.setFixedWidth(34);promote.clicked.connect(lambda:self.promote_pane(side))
         close=QPushButton("×");close.setToolTip("Close");close.setFixedWidth(34);close.clicked.connect(lambda:self.close_pane(side))
         bar=QHBoxLayout();bar.setContentsMargins(0,0,0,0);bar.setSpacing(4);bar.addWidget(back);bar.addWidget(address);bar.addWidget(promote);bar.addWidget(close)
-        box=QWidget();lay=QVBoxLayout(box);inner_gutter=2;lay.setContentsMargins(0,0,inner_gutter,0) if side=="left" else lay.setContentsMargins(inner_gutter,0,0,0);lay.setSpacing(4);lay.addLayout(bar);lay.addWidget(view)
+        box=QWidget();lay=QVBoxLayout(box);lay.setContentsMargins(0,0,0,0);lay.setSpacing(4);lay.addLayout(bar);lay.addWidget(view)
         setattr(self,f"{side}_back",back);setattr(self,f"{side}_address",address);setattr(self,f"{side}_promote",promote);setattr(self,f"{side}_close",close);return box
 
     def is_split(self): return not self.right_box.isHidden()
