@@ -18,82 +18,22 @@ MARKER = "https://wab.village.link/"
 
 HOME_HTML = """<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Village Link</title>
 <style>
-:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#fff;color:#202124;font-family:Arial,Helvetica,sans-serif}.favorites-bar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:8px 14px;background:#f8f9fa;border-bottom:1px solid #e3e6ea;z-index:10}.favorite{display:inline-flex;align-items:center;height:34px;padding:0 14px;border:1px solid #d9dde3;border-radius:6px;background:#fff;color:#3c4043;text-decoration:none;font-size:14px;white-space:nowrap}.favorite:hover{background:#f1f3f4}.favorite:active{background:#e8eaed}main{width:min(760px,calc(100vw - 64px));text-align:center;transform:translateY(-1vh)}.mark{font-size:64px;line-height:1;margin-bottom:10px;color:#d81b86}h1{margin:0 0 30px;font-size:48px;font-weight:400;letter-spacing:-1px}.trust{width:100%;height:54px;border:1px solid #dfe1e5;border-radius:27px;box-shadow:0 1px 6px rgba(32,33,36,.18);display:flex;align-items:center;padding:0 20px;color:#9aa0a6;font-size:17px;text-align:left}.trust::before{content:"⌕";margin-right:14px;font-size:25px;color:#5f6368}.composer{margin-top:30px;text-align:left}.composer-title{margin:0 0 14px 4px;font-size:15px;font-weight:600;color:#5f6368}.endpoint{width:100%;height:44px;margin:0 0 14px;padding:0 15px;border:1px solid #dadce0;border-radius:22px;outline:none;font-size:14px;color:#202124}.endpoint:focus{border-color:#9aa0a6;box-shadow:0 1px 4px rgba(32,33,36,.12)}.compose-actions{display:flex;justify-content:flex-start;align-items:center;margin-top:0}.star-action{display:flex;justify-content:flex-start;margin-top:18px}button{padding:10px 18px;border:1px solid #dadce0;border-radius:18px;background:#f8f9fa;color:#3c4043;font-size:14px;cursor:pointer}button:hover{background:#f1f3f4}#result{flex:1;min-width:0;display:none;align-items:center;margin-left:12px}#result a{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a73e8;text-decoration:none;padding:9px 12px;border:1px solid #dadce0;border-radius:18px}#result a:hover{background:#f8f9fa;text-decoration:underline}.bookmark{display:inline-block;padding:10px 15px;border:1px solid #dadce0;border-radius:18px;color:#3c4043;text-decoration:none;background:#f8f9fa;font-size:14px}.bookmark:hover{background:#f1f3f4}
-</style></head><body><nav class="favorites-bar" aria-label="Favourites"><a class="favorite" href="https://village.link/wiki/index.php/Asha_Bhosle">Asha Bhosle</a><a class="favorite" href="https://village.link/wiki/index.php/Puck-GPT">Puck-GPT</a><a class="favorite" href="https://village.link/wiki/index.php/Joe_Rasmussen">Joe Rasmussen</a></nav><main><div class="mark">✱</div><h1>Village Link</h1><div class="trust">Trust engine</div><section class="composer"><div class="composer-title">Compose a village link:</div><input id="endpoint-a" class="endpoint" type="url" placeholder="A — first URL"><input id="endpoint-b" class="endpoint" type="url" placeholder="B — second URL"><div class="compose-actions"><button type="button" onclick="composeVillageLink()">Compose village link</button><div id="result"><a id="result-link"></a></div></div><div class="star-action"><a class="bookmark" href="https://home.village.link/star-credential">Compose a star credential ...</a></div></section></main>
-<script>const marker="https://wab.village.link/";function encodeEndpoint(v){return encodeURIComponent(v).replace(/[!'()*]/g,c=>'%' + c.charCodeAt(0).toString(16).toUpperCase())}function composeVillageLink(){const a=document.getElementById('endpoint-a').value.trim(),b=document.getElementById('endpoint-b').value.trim(),r=document.getElementById('result'),l=document.getElementById('result-link');if(!a||!b){r.style.display='flex';l.removeAttribute('href');l.textContent='Enter both URLs.';return}const composed=marker+encodeEndpoint(a)+'!'+encodeEndpoint(b);l.href=composed;l.textContent=composed;l.title=composed;r.style.display='flex'}</script></body></html>"""
-
-STAR_CREDENTIAL_HTML = """<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compose a Star Credential — Village Link</title>
-<style>
-:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#fff;color:#202124;font-family:Arial,Helvetica,sans-serif;padding:44px 32px}main{width:min(760px,100%);margin:0 auto}.brand{text-align:center}.mark{font-size:52px;line-height:1;margin-bottom:8px;color:#d81b86}h1{margin:0;font-size:38px;font-weight:400;letter-spacing:-.6px}.intro{margin:12px auto 30px;max-width:560px;color:#5f6368;line-height:1.5}.field-label{display:block;margin:18px 0 7px 4px;font-size:14px;font-weight:600;color:#5f6368}.endpoint{width:100%;height:44px;padding:0 15px;border:1px solid #dadce0;border-radius:22px;outline:none;font-size:14px;color:#202124}.endpoint:focus{border-color:#9aa0a6;box-shadow:0 1px 4px rgba(32,33,36,.12)}.b-row{display:flex;gap:8px;margin:9px 0}.b-row .endpoint{flex:1}.remove{width:44px;min-width:44px;padding:0;border-radius:22px}.actions{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}button,.button{padding:10px 18px;border:1px solid #dadce0;border-radius:18px;background:#f8f9fa;color:#3c4043;font-size:14px;cursor:pointer;text-decoration:none}button:hover,.button:hover{background:#f1f3f4}.primary{background:#d81b86;border-color:#d81b86;color:#fff}.primary:hover{background:#be1675}.message{min-height:20px;margin:14px 4px 0;color:#b3261e;font-size:14px}.result{display:none;margin-top:22px}.result-header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}.result-title{font-size:14px;font-weight:600;color:#5f6368}.candidate{font-size:12px;color:#80868b}pre{margin:0;padding:18px;border:1px solid #dadce0;border-radius:14px;background:#f8f9fa;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.5 Consolas,"Courier New",monospace}.privacy{margin:28px 4px 0;padding-top:18px;border-top:1px solid #eee;color:#5f6368;font-size:13px;line-height:1.5}.footer{margin-top:22px;text-align:center}
-</style>
-</head>
-<body>
-<main>
-  <header class="brand">
-    <div class="mark">✱</div>
-    <h1>Compose a Star Credential</h1>
-    <p class="intro">Enter one centre noun A and any number of nouns B. The B set is de-duplicated and sorted for stable display; its order has no semantic meaning.</p>
-  </header>
-  <section aria-label="Star Credential inputs">
-    <label class="field-label" for="centre-a">A — centre URI</label>
-    <input id="centre-a" class="endpoint" type="text" inputmode="url" placeholder="https://gc.example.org/A" autocomplete="off">
-    <div class="field-label">B — associated URI set</div>
-    <div id="b-fields"></div>
-    <div class="actions">
-      <button type="button" onclick="addB()">+ Add B</button>
-      <button class="primary" type="button" onclick="composeStarCredential()">Compose JSON</button>
-    </div>
-    <div id="message" class="message" role="alert" aria-live="polite"></div>
-  </section>
-  <section id="result" class="result" aria-label="Candidate JSON output">
-    <div class="result-header"><span class="result-title">Candidate JSON</span><span class="candidate">Concrete serialization remains open in Draft 0.1.</span></div>
-    <pre id="json-output"></pre>
-    <div class="actions"><button type="button" onclick="copyJson()">Copy JSON</button><span id="copy-status" class="candidate" aria-live="polite"></span></div>
-  </section>
-  <p class="privacy">Composition happens entirely on this page. Inputs and output are not sent anywhere or retained by Village Link.</p>
-  <div class="footer"><a class="button" href="https://home.village.link/">← Village Link home</a></div>
-</main>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#fff;color:#202124;font-family:Arial,Helvetica,sans-serif}.favorites-bar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:8px 14px;background:#f8f9fa;border-bottom:1px solid #e3e6ea;z-index:10}.favorite{display:inline-flex;align-items:center;height:34px;padding:0 14px;border:1px solid #d9dde3;border-radius:6px;background:#fff;color:#3c4043;text-decoration:none;font-size:14px;white-space:nowrap}.favorite:hover{background:#f1f3f4}.favorite:active{background:#e8eaed}main{width:min(760px,calc(100vw - 64px));text-align:center;transform:translateY(-1vh)}.mark{font-size:64px;line-height:1;margin-bottom:10px;color:#d81b86}h1{margin:0 0 30px;font-size:48px;font-weight:400;letter-spacing:-1px}.trust{width:100%;height:54px;border:1px solid #dfe1e5;border-radius:27px;box-shadow:0 1px 6px rgba(32,33,36,.18);display:flex;align-items:center;padding:0 20px;color:#9aa0a6;font-size:17px;text-align:left}.trust::before{content:"⌕";margin-right:14px;font-size:25px;color:#5f6368}.composer{margin-top:30px;text-align:left}.composer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 4px 14px}.mode-select{border:0;background:transparent;color:#3c4043;font:600 15px Arial,Helvetica,sans-serif;padding:0 22px 0 0;cursor:pointer;outline:none}.compose-button{padding:10px 18px;border:1px solid #dadce0;border-radius:18px;background:#f8f9fa;color:#3c4043;font-size:14px;cursor:pointer}.compose-button:hover,.more-button:hover{background:#f1f3f4}.endpoint{width:100%;height:44px;margin:0 0 14px;padding:0 15px;border:1px solid #dadce0;border-radius:22px;outline:none;font-size:14px;color:#202124}.endpoint:focus{border-color:#9aa0a6;box-shadow:0 1px 4px rgba(32,33,36,.12)}.more-button{display:none;padding:10px 14px;border:1px solid #dadce0;border-radius:18px;background:#f8f9fa;color:#3c4043;font-size:14px;cursor:pointer;margin:0 0 14px}.message{min-height:20px;margin:2px 4px 0;color:#b3261e;font-size:14px}.result{display:none;margin-top:14px}.result a{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a73e8;text-decoration:none;padding:9px 12px;border:1px solid #dadce0;border-radius:18px}.result pre{margin:0;padding:16px;border:1px solid #dadce0;border-radius:14px;background:#f8f9fa;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.5 Consolas,"Courier New",monospace}
+</style></head><body><nav class="favorites-bar" aria-label="Favourites"><a class="favorite" href="https://village.link/wiki/index.php/Asha_Bhosle">Asha Bhosle</a><a class="favorite" href="https://village.link/wiki/index.php/Puck-GPT">Puck-GPT</a><a class="favorite" href="https://village.link/wiki/index.php/Joe_Rasmussen">Joe Rasmussen</a></nav><main><div class="mark">✱</div><h1>Village Link</h1><div class="trust">Trust engine</div><section class="composer"><div class="composer-head"><select id="mode" class="mode-select" onchange="setComposerMode(this.value)"><option value="link">Compose a village link:</option><option value="star">Compose a star credential:</option></select><button class="compose-button" type="button" onclick="composeCurrent()">Compose</button></div><input id="endpoint-a" class="endpoint" type="text" inputmode="url" placeholder="A — first URL"><div id="b-fields"></div><button id="more-b" class="more-button" type="button" onclick="addB()">+ more links if required ...</button><div id="message" class="message" role="alert" aria-live="polite"></div><div id="result" class="result"></div></section></main>
 <script>
+const marker="https://wab.village.link/";
+function encodeEndpoint(v){return encodeURIComponent(v).replace(/[!'()*]/g,c=>'%' + c.charCodeAt(0).toString(16).toUpperCase())}
 function isUri(value){return /^[A-Za-z][A-Za-z0-9+.-]*:/.test(value)}
-function addB(value=''){
-  const row=document.createElement('div');row.className='b-row';
-  const input=document.createElement('input');input.className='endpoint b-endpoint';input.type='text';input.inputMode='url';input.placeholder='URI for B';input.autocomplete='off';input.value=value;
-  const remove=document.createElement('button');remove.type='button';remove.className='remove';remove.title='Remove this B';remove.setAttribute('aria-label','Remove this B');remove.textContent='×';remove.onclick=()=>row.remove();
-  row.append(input,remove);document.getElementById('b-fields').appendChild(row);input.focus();
-}
-function composeStarCredential(){
-  const message=document.getElementById('message');message.textContent='';
-  const a=document.getElementById('centre-a').value.trim();
-  const entered=[...document.querySelectorAll('.b-endpoint')].map(input=>input.value.trim()).filter(Boolean);
-  if(!a){message.textContent='Enter the centre URI A.';return}
-  if(!isUri(a)){message.textContent='A must be a URI with a scheme, such as https:, mailto: or urn:.';return}
-  const invalid=entered.find(value=>!isUri(value));
-  if(invalid){message.textContent='Every B must be a URI with a scheme.';return}
-  const members=[...new Set(entered)].sort();
-  const credential={type:'StarCredential',A:a,B:members};
-  document.getElementById('json-output').textContent=JSON.stringify(credential,null,2);
-  document.getElementById('result').style.display='block';
-  document.getElementById('copy-status').textContent='';
-}
-async function copyJson(){
-  const value=document.getElementById('json-output').textContent;
-  if(!value)return;
-  const status=document.getElementById('copy-status');
-  try{await navigator.clipboard.writeText(value);status.textContent='Copied.'}
-  catch(error){
-    const area=document.createElement('textarea');area.value=value;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();
-    status.textContent=document.execCommand('copy')?'Copied.':'Select the JSON and copy it manually.';area.remove();
-  }
-}
-addB();
-</script>
-</body>
-</html>"""
+function makeInput(id,placeholder,value=''){const input=document.createElement('input');input.id=id;input.className='endpoint b-endpoint';input.type='text';input.inputMode='url';input.placeholder=placeholder;input.autocomplete='off';input.value=value;return input}
+function renderLinkFields(){const fields=document.getElementById('b-fields');fields.replaceChildren(makeInput('endpoint-b','B — second URL'));document.getElementById('endpoint-a').placeholder='A — first URL';document.getElementById('more-b').style.display='none'}
+function renderStarFields(){const fields=document.getElementById('b-fields');fields.replaceChildren(makeInput('b1','B1 — the first link'),makeInput('b2','B2 — the second link'),makeInput('b3','B3 — the third link'));document.getElementById('endpoint-a').placeholder='A — a URL for the centre of the star';document.getElementById('more-b').style.display='inline-block'}
+function addB(){const fields=document.getElementById('b-fields'),n=fields.querySelectorAll('.b-endpoint').length+1;fields.appendChild(makeInput('b'+n,'B'+n+' — another link'))}
+function setComposerMode(mode){document.getElementById('message').textContent='';document.getElementById('result').style.display='none';document.getElementById('result').replaceChildren();if(mode==='star')renderStarFields();else renderLinkFields()}
+function composeCurrent(){if(document.getElementById('mode').value==='star')composeStarCredential();else composeVillageLink()}
+function composeVillageLink(){const a=document.getElementById('endpoint-a').value.trim(),b=document.getElementById('endpoint-b').value.trim(),message=document.getElementById('message'),result=document.getElementById('result');message.textContent='';if(!a||!b){message.textContent='Enter both URLs.';return}const composed=marker+encodeEndpoint(a)+'!'+encodeEndpoint(b);const link=document.createElement('a');link.href=composed;link.textContent=composed;link.title=composed;result.replaceChildren(link);result.style.display='block'}
+function composeStarCredential(){const a=document.getElementById('endpoint-a').value.trim(),entered=[...document.querySelectorAll('.b-endpoint')].map(input=>input.value.trim()).filter(Boolean),message=document.getElementById('message'),result=document.getElementById('result');message.textContent='';if(!a){message.textContent='Enter the centre URI A.';return}if(!isUri(a)){message.textContent='A must be a URI with a scheme, such as https:, mailto: or urn:.';return}const invalid=entered.find(value=>!isUri(value));if(invalid){message.textContent='Every B must be a URI with a scheme.';return}const members=[...new Set(entered)].sort(),credential={type:'StarCredential',A:a,B:members},pre=document.createElement('pre');pre.textContent=JSON.stringify(credential,null,2);result.replaceChildren(pre);result.style.display='block'}
+const initialMode=location.pathname.includes('star-credential')?'star':'link';document.getElementById('mode').value=initialMode;setComposerMode(initialMode);
+</script></body></html>"""
 
 
 def village_targets(raw_url: str) -> tuple[str, str] | None:
@@ -176,7 +116,7 @@ class Browser(QMainWindow):
 
     def show_star_credential_composer(self,remember:bool)->None:
         if remember:self.remember_current_state()
-        self._home_visible=False;self._composer_visible=True;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self.left_back.hide();self.left_address.hide();self.left.setZoomFactor(1.0);self.left.setHtml(STAR_CREDENTIAL_HTML,QUrl(STAR_CREDENTIAL_URL));self.set_global_address(STAR_CREDENTIAL_URL)
+        self._home_visible=False;self._composer_visible=True;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self.left_back.hide();self.left_address.hide();self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(STAR_CREDENTIAL_URL));self.set_global_address(STAR_CREDENTIAL_URL)
 
     def navigate_global(self)->None:
         raw=self.global_address.text().strip()
