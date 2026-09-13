@@ -58,6 +58,8 @@ class VillagePage(QWebEnginePage):
         super().__init__(parent); self.browser=browser; self.side=side
     def acceptNavigationRequest(self, url: QUrl, nav_type, is_main_frame: bool) -> bool:  # noqa: N802
         if is_main_frame:
+            if self.side=="left" and url.scheme()=="data":
+                return super().acceptNavigationRequest(url,nav_type,is_main_frame)
             if self.side=="left" and url.toString().rstrip("/")==STAR_CREDENTIAL_URL.rstrip("/"):
                 QTimer.singleShot(0,lambda:self.browser.show_star_credential_composer(remember=True));return False
             if self.side=="left" and url.toString().rstrip("/")==HOME_URL.rstrip("/") and self.browser._composer_visible:
@@ -85,7 +87,7 @@ class Browser(QMainWindow):
 
         self.left=QWebEngineView();self.right=QWebEngineView();self.left.setPage(VillagePage(self,self.left,"left"));self.right.setPage(VillagePage(self,self.right,"right"))
         self.left_box=self._make_pane("left",self.left);self.right_box=self._make_pane("right",self.right)
-        self.left.urlChanged.connect(lambda u:self.left_address.setText(u.toString()));self.right.urlChanged.connect(lambda u:self.right_address.setText(u.toString()))
+        self.left.urlChanged.connect(self.on_left_url_changed);self.right.urlChanged.connect(lambda u:self.right_address.setText(u.toString()))
         self.splitter=QSplitter();self.splitter.setChildrenCollapsible(False);self.splitter.setHandleWidth(1);self.splitter.setStyleSheet("QSplitter::handle { background: #d0d0d0; }");self.splitter.addWidget(self.left_box);self.splitter.addWidget(self.right_box);self.splitter.setSizes([700,700])
 
         root=QWidget();layout=QVBoxLayout(root);layout.setContentsMargins(8,8,8,8);layout.setSpacing(6);layout.addLayout(global_bar);layout.addWidget(self.splitter);self.setCentralWidget(root);self.show_home(remember=False)
@@ -97,6 +99,12 @@ class Browser(QMainWindow):
         else:self.right_back=back;self.right_address=address
         bar=QHBoxLayout();bar.setContentsMargins(0,0,0,0);bar.addWidget(back);bar.addWidget(address)
         box=QWidget();box_layout=QVBoxLayout(box);box_layout.setContentsMargins(0,0,0,0);box_layout.setSpacing(4);box_layout.addLayout(bar);box_layout.addWidget(view);return box
+
+    def on_left_url_changed(self,url:QUrl)->None:
+        value=url.toString();self.left_address.setText(value)
+        if self._home_visible:self.set_global_address(HOME_URL);return
+        if self._composer_visible:self.set_global_address(STAR_CREDENTIAL_URL);return
+        if not self.right_box.isVisible():self.set_global_address(value)
 
     def current_state(self) -> BrowserState:
         if self._composer_visible:return BrowserState("composer")
