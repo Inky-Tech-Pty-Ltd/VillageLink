@@ -66,6 +66,8 @@ class VillagePage(QWebEnginePage):
             if targets:
                 QTimer.singleShot(0,lambda:self.browser.open_village_link(*targets,village_link=url.toString(),remember=True));return False
             if self.side=="left" and self.browser.consume_internal_left_navigation(url): return super().acceptNavigationRequest(url,nav_type,is_main_frame)
+            if self.side=="left" and (self.browser._home_visible or self.browser._composer_visible):
+                target=url.toString();QTimer.singleShot(0,lambda target=target:self.browser.open_single(target,remember=True));return False
         return super().acceptNavigationRequest(url,nav_type,is_main_frame)
 
 
@@ -147,6 +149,7 @@ class Browser(QMainWindow):
         else:self.open_single(state.left,remember=False)
     def go_global_back(self)->None:
         if self._state_history:self.restore_state(self._state_history.pop())
+
     def place_on_screen(self)->None:
         screen=QGuiApplication.primaryScreen()
         if screen is None:return
