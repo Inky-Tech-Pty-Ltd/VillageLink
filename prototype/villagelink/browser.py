@@ -136,7 +136,7 @@ class Browser(QMainWindow):
         view.setUrl(QUrl.fromUserInput(raw))
     def open_single(self,url:str,remember:bool)->None:
         if remember:self.remember_current_state()
-        self._prepare_standard();self.right_box.hide();self.left_back.show();self.left_address.show();q=QUrl.fromUserInput(url);self.load_left(q);self.set_global_address(q.toString())
+        self._prepare_standard();self.right_box.hide();self.left_back.hide();self.left_address.hide();q=QUrl.fromUserInput(url);self.load_left(q);self.set_global_address(q.toString())
     def open_village_link(self,left:str,right:str,village_link:str|None=None,remember:bool=True)->None:
         if remember:self.remember_current_state()
         self._prepare_standard();self._current_village_link=village_link or compose_village_link(left,right);self.right_box.show();self.left_back.show();self.left_address.show();self.left.setZoomFactor(0.85);self.right.setZoomFactor(0.85);self.load_left(QUrl(left));self.right.setUrl(QUrl(right));self.splitter.setSizes([700,700]);self.copy_link.show();self.dismiss_w.show();self.set_global_address(self._current_village_link)
