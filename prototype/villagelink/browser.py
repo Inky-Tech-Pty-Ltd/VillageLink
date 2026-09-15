@@ -93,12 +93,22 @@ class Browser(QMainWindow):
         root=QWidget();layout=QVBoxLayout(root);layout.setContentsMargins(8,8,8,8);layout.setSpacing(6);layout.addLayout(global_bar);layout.addWidget(self.splitter);self.setCentralWidget(root);self.show_home(remember=False)
 
     def _make_pane(self, side: str, view: QWebEngineView) -> QWidget:
-        back=QPushButton("←");back.setFixedWidth(38);back.clicked.connect(view.back)
+        back=QPushButton("←");back.setToolTip("Back");back.setFixedWidth(38);back.clicked.connect(view.back)
         address=QLineEdit();address.returnPressed.connect(lambda s=side:self.navigate_pane(s))
-        if side=="left":self.left_back=back;self.left_address=address
-        else:self.right_back=back;self.right_address=address
-        bar=QHBoxLayout();bar.setContentsMargins(0,0,0,0);bar.addWidget(back);bar.addWidget(address)
-        box=QWidget();box_layout=QVBoxLayout(box);box_layout.setContentsMargins(0,0,0,0);box_layout.setSpacing(4);box_layout.addLayout(bar);box_layout.addWidget(view);return box
+        promote=QPushButton("□");promote.setToolTip("Promote");promote.setFixedWidth(38);promote.clicked.connect(lambda _=False,s=side:self.promote_pane(s))
+        close=QPushButton("×");close.setToolTip("Close");close.setFixedWidth(38);close.clicked.connect(lambda _=False,s=side:self.close_pane(s))
+        bar=QHBoxLayout();bar.setSpacing(4)
+        if side=="left":bar.setContentsMargins(0,0,2,0)
+        else:bar.setContentsMargins(2,0,0,0)
+        bar.addWidget(back);bar.addWidget(address);bar.addWidget(promote);bar.addWidget(close)
+        view_box=QWidget();view_layout=QVBoxLayout(view_box);view_layout.setSpacing(0)
+        if side=="left":view_layout.setContentsMargins(0,0,4,0)
+        else:view_layout.setContentsMargins(4,0,0,0)
+        view_layout.addWidget(view)
+        box=QWidget();box_layout=QVBoxLayout(box);box_layout.setContentsMargins(0,0,0,0);box_layout.setSpacing(4);box_layout.addLayout(bar);box_layout.addWidget(view_box)
+        if side=="left":self.left_back=back;self.left_address=address;self.left_promote=promote;self.left_close=close
+        else:self.right_back=back;self.right_address=address;self.right_promote=promote;self.right_close=close
+        return box
 
     def on_left_url_changed(self,url:QUrl)->None:
         value=url.toString();self.left_address.setText(value)
@@ -120,13 +130,16 @@ class Browser(QMainWindow):
     def set_global_address(self,value:str)->None:self.global_address.setText(value)
     def _prepare_standard(self)->None:self._home_visible=False;self._composer_visible=False;self.left.setZoomFactor(1.0);self.right.setZoomFactor(1.0);self.copy_link.hide();self.dismiss_w.hide()
 
+    def _set_left_pane_chrome(self,visible:bool)->None:
+        for widget in (self.left_back,self.left_address,self.left_promote,self.left_close):widget.setVisible(visible)
+
     def show_home(self,remember:bool)->None:
         if remember:self.remember_current_state()
-        self._home_visible=True;self._composer_visible=False;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self.left_back.hide();self.left_address.hide();self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(HOME_URL));self.set_global_address(HOME_URL)
+        self._home_visible=True;self._composer_visible=False;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self._set_left_pane_chrome(False);self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(HOME_URL));self.set_global_address(HOME_URL)
 
     def show_star_credential_composer(self,remember:bool)->None:
         if remember:self.remember_current_state()
-        self._home_visible=False;self._composer_visible=True;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self.left_back.hide();self.left_address.hide();self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(STAR_CREDENTIAL_URL));self.set_global_address(STAR_CREDENTIAL_URL)
+        self._home_visible=False;self._composer_visible=True;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self._set_left_pane_chrome(False);self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(STAR_CREDENTIAL_URL));self.set_global_address(STAR_CREDENTIAL_URL)
 
     def navigate_global(self)->None:
         raw=self.global_address.text().strip()
@@ -144,10 +157,16 @@ class Browser(QMainWindow):
         view.setUrl(QUrl.fromUserInput(raw))
     def open_single(self,url:str,remember:bool)->None:
         if remember:self.remember_current_state()
-        self._prepare_standard();self.right_box.hide();self.left_back.hide();self.left_address.hide();q=QUrl.fromUserInput(url);self.load_left(q);self.set_global_address(q.toString())
+        self._prepare_standard();self.right_box.hide();self._set_left_pane_chrome(False);q=QUrl.fromUserInput(url);self.load_left(q);self.set_global_address(q.toString())
     def open_village_link(self,left:str,right:str,village_link:str|None=None,remember:bool=True)->None:
         if remember:self.remember_current_state()
-        self._prepare_standard();self._current_village_link=village_link or compose_village_link(left,right);self.right_box.show();self.left_back.show();self.left_address.show();self.left.setZoomFactor(0.85);self.right.setZoomFactor(0.85);self.load_left(QUrl(left));self.right.setUrl(QUrl(right));self.splitter.setSizes([700,700]);self.copy_link.show();self.dismiss_w.show();self.set_global_address(self._current_village_link)
+        self._prepare_standard();self._current_village_link=village_link or compose_village_link(left,right);self.right_box.show();self._set_left_pane_chrome(True);self.left.setZoomFactor(0.85);self.right.setZoomFactor(0.85);self.load_left(QUrl(left));self.right.setUrl(QUrl(right));self.splitter.setSizes([700,700]);self.copy_link.show();self.dismiss_w.show();self.set_global_address(self._current_village_link)
+    def promote_pane(self,side:str)->None:
+        if not self.right_box.isVisible():return
+        view=self.left if side=="left" else self.right;self.open_single(view.url().toString(),remember=True)
+    def close_pane(self,side:str)->None:
+        if not self.right_box.isVisible():return
+        survivor=self.right if side=="left" else self.left;self.open_single(survivor.url().toString(),remember=True)
     def copy_village_link(self)->None:
         if self._current_village_link:QGuiApplication.clipboard().setText(self._current_village_link)
     def restore_state(self,state:BrowserState)->None:
