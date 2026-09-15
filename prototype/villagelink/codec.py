@@ -1,13 +1,14 @@
 """Draft Village Link serialization codec.
 
-This implements the conservative candidate encoding described in ADR-006:
-endpoint URIs are UTF-8 percent-encoded with only RFC 3986 unreserved
-characters left literal, then separated by a single literal ``!``.
+Endpoint URIs are UTF-8 percent-encoded with only RFC 3986 unreserved
+characters left literal, then separated by a single literal ``!``.  The
+publishing domain is part of the serialized form; ``village.link`` is only
+the reference default.
 """
 
-from urllib.parse import quote, unquote
+from urllib.parse import quote, unquote, urlparse
 
-DEFAULT_MARKER = "https://wab.village.link/"
+DEFAULT_DOMAIN = "village.link"
 _UNRESERVED = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
 
 
@@ -21,17 +22,29 @@ def decode_endpoint(encoded: str) -> str:
     return unquote(encoded, encoding="utf-8", errors="strict")
 
 
-def make(a: str, b: str, marker: str = DEFAULT_MARKER) -> str:
-    """Compose a Village Link from endpoint URIs A and B."""
-    return f"{marker}{encode_endpoint(a)}!{encode_endpoint(b)}"
+def marker_for(domain: str = DEFAULT_DOMAIN) -> str:
+    """Return the HTTPS ``wab`` marker for a publishing domain."""
+    domain = domain.strip().lower().rstrip(".")
+    if not domain or "/" in domain or ":" in domain or " " in domain:
+        raise ValueError("domain must be a bare DNS domain such as village.link")
+    return f"https://wab.{domain}/"
 
 
-def parse(link: str, marker: str = DEFAULT_MARKER) -> tuple[str, str]:
-    """Parse a Village Link and return the original endpoint URI pair."""
-    if not link.startswith(marker):
-        raise ValueError("not a Village Link for the expected marker")
+def make(a: str, b: str, domain: str = DEFAULT_DOMAIN) -> str:
+    """Compose a Village Link from publishing domain and endpoint URIs A and B."""
+    return f"{marker_for(domain)}{encode_endpoint(a)}!{encode_endpoint(b)}"
 
-    payload = link[len(marker) :]
+
+def parse_with_domain(link: str) -> tuple[str, str, str]:
+    """Parse a Village Link and return ``(domain, A, B)``."""
+    parsed = urlparse(link)
+    host = (parsed.hostname or "").lower()
+    if parsed.scheme != "https" or not host.startswith("wab.") or len(host) <= 4:
+        raise ValueError("not a Village Link marker")
+    if parsed.params or parsed.query or parsed.fragment:
+        raise ValueError("Village Link marker must not contain params, query or fragment")
+
+    payload = parsed.path.lstrip("/")
     if payload.count("!") != 1:
         raise ValueError("Village Link payload must contain exactly one literal ! separator")
 
@@ -39,4 +52,10 @@ def parse(link: str, marker: str = DEFAULT_MARKER) -> tuple[str, str]:
     if not encoded_a or not encoded_b:
         raise ValueError("Village Link endpoints must not be empty")
 
-    return decode_endpoint(encoded_a), decode_endpoint(encoded_b)
+    return host[4:], decode_endpoint(encoded_a), decode_endpoint(encoded_b)
+
+
+def parse(link: str) -> tuple[str, str]:
+    """Parse a Village Link and return the original endpoint URI pair."""
+    _, a, b = parse_with_domain(link)
+    return a, b
