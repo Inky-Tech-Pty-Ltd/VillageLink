@@ -48,9 +48,9 @@ Maintainers, contributors and advisers may participate at different levels and m
 
 ## Licence and contributions
 
-The current working proposal is to release the repository under the MIT Licence. The `LICENSE` file, once added, will be authoritative; public visibility alone should not be treated as a grant of rights.
+Village Link is licensed under the scheme described in `LICENSE.md`: software and implementation material are licensed under the Apache License 2.0, while documentation and conceptual material are licensed under CC BY-SA 4.0. The boundary rules in `LICENSE.md` determine which licence applies to particular material.
 
-Before outside contributions are accepted, this section will be updated to state the applicable contribution terms clearly.
+Contributions accepted into the repository are made available under the licence that applies to the material they modify or add, as described in `LICENSE.md`, unless a particular file or directory explicitly states otherwise.
 
 ## Working together
 
