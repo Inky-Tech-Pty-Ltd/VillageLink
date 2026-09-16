@@ -1,7 +1,7 @@
 # Village Link Glossary
 
 **Status:** Working draft  
-**Last updated:** 7 September 2026
+**Last updated:** 16 September 2026
 
 ## Purpose
 
@@ -136,6 +136,14 @@ A reputation system is a kind of memory system, not the generic category.
 
 ---
 
+## Split screen
+
+**Definition:** The reference browser view that displays the two endpoint resources of a Village Link simultaneously, with A in one pane and B in the other.
+
+The split screen is a browser interaction convention, not part of the Village Link primitive itself. Either pane may subsequently be promoted to ordinary single-page browsing.
+
+---
+
 ## Star Credential
 
 **Definition:** A graph of independently meaningful identifiers and associated memory traces that can be traversed together as referring to the same entity.
@@ -151,6 +159,14 @@ A Star Credential is not a new master identity issued by a central authority. It
 In the core formulation, a webpage or other web resource **W states A ↔ B**.
 
 The word *states* does not imply that W is a moral agent, that the statement is true, or that the operator or author of W warrants it.
+
+---
+
+## Triple bar
+
+**Definition:** The reference browser chrome used when displaying a Village Link: one bar for the Village Link URI and one address bar for each of its two endpoint panes.
+
+The triple bar makes the composite edge and its two independently navigable endpoints simultaneously visible. It is a reference-browser interaction convention, not part of the Village Link primitive itself.
 
 ---
 
