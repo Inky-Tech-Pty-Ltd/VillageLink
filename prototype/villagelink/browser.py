@@ -6,6 +6,7 @@ from urllib.parse import quote, urlparse
 
 from PySide6.QtCore import QTimer, QUrl
 from PySide6.QtGui import QGuiApplication
+from PySide6.QtNetwork import QNetworkAccessManager, QNetworkRequest
 from PySide6.QtWebEngineCore import QWebEnginePage
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import QApplication, QHBoxLayout, QLineEdit, QMainWindow, QPushButton, QSplitter, QVBoxLayout, QWidget
@@ -60,6 +61,8 @@ class VillagePage(QWebEnginePage):
         if is_main_frame:
             if self.side=="left" and url.scheme()=="data":
                 return super().acceptNavigationRequest(url,nav_type,is_main_frame)
+            if self.side=="left" and self.browser.consume_resource_navigation(url):
+                return super().acceptNavigationRequest(url,nav_type,is_main_frame)
             if self.side=="left" and url.toString().rstrip("/")==STAR_CREDENTIAL_URL.rstrip("/"):
                 QTimer.singleShot(0,lambda:self.browser.show_star_credential_composer(remember=True));return False
             if self.side=="left" and url.toString().rstrip("/")==HOME_URL.rstrip("/") and self.browser._composer_visible:
@@ -76,14 +79,16 @@ class VillagePage(QWebEnginePage):
 class Browser(QMainWindow):
     def __init__(self) -> None:
         super().__init__();self.setWindowTitle("Village Link Browser — prototype");self.resize(1400,900)
-        self._internal_left_url=None;self._state_history=[];self._current_village_link=None;self._home_visible=False;self._composer_visible=False
+        self._internal_left_url=None;self._resource_navigation_url=None;self._state_history=[];self._current_village_link=None;self._home_visible=False;self._composer_visible=False
+        self.network=QNetworkAccessManager(self)
 
         self.home=QPushButton("⌂");self.home.setToolTip("Home");self.home.setFixedWidth(38);self.home.clicked.connect(lambda:self.show_home(remember=True))
         self.global_back=QPushButton("←");self.global_back.setToolTip("Back");self.global_back.setFixedWidth(38);self.global_back.clicked.connect(self.go_global_back)
         self.global_address=QLineEdit();self.global_address.setPlaceholderText("URL or Village Link");self.global_address.returnPressed.connect(self.navigate_global)
+        self.open_resource=QPushButton("↗");self.open_resource.setToolTip("Open published Village Link resource");self.open_resource.setFixedWidth(38);self.open_resource.clicked.connect(self.open_village_link_resource);self.open_resource.hide()
         self.copy_link=QPushButton("⧉");self.copy_link.setToolTip("Copy Village Link");self.copy_link.setFixedWidth(38);self.copy_link.clicked.connect(self.copy_village_link);self.copy_link.hide()
         self.dismiss_w=QPushButton("×");self.dismiss_w.setToolTip("Dismiss and return Home");self.dismiss_w.setFixedWidth(38);self.dismiss_w.clicked.connect(lambda:self.show_home(remember=True));self.dismiss_w.hide()
-        global_bar=QHBoxLayout();global_bar.setContentsMargins(0,0,0,0);global_bar.addWidget(self.home);global_bar.addWidget(self.global_back);global_bar.addWidget(self.global_address);global_bar.addWidget(self.copy_link);global_bar.addWidget(self.dismiss_w)
+        global_bar=QHBoxLayout();global_bar.setContentsMargins(0,0,0,0);global_bar.addWidget(self.home);global_bar.addWidget(self.global_back);global_bar.addWidget(self.global_address);global_bar.addWidget(self.open_resource);global_bar.addWidget(self.copy_link);global_bar.addWidget(self.dismiss_w)
 
         self.left=QWebEngineView();self.right=QWebEngineView();self.left.setPage(VillagePage(self,self.left,"left"));self.right.setPage(VillagePage(self,self.right,"right"))
         self.left_box=self._make_pane("left",self.left);self.right_box=self._make_pane("right",self.right)
@@ -126,20 +131,23 @@ class Browser(QMainWindow):
     def consume_internal_left_navigation(self, url: QUrl) -> bool:
         if self._internal_left_url and url==self._internal_left_url:self._internal_left_url=None;return True
         return False
+    def consume_resource_navigation(self,url:QUrl)->bool:
+        if self._resource_navigation_url and url==self._resource_navigation_url:self._resource_navigation_url=None;return True
+        return False
     def load_left(self,url:QUrl)->None:self._internal_left_url=url;self.left.setUrl(url)
     def set_global_address(self,value:str)->None:self.global_address.setText(value)
-    def _prepare_standard(self)->None:self._home_visible=False;self._composer_visible=False;self.left.setZoomFactor(1.0);self.right.setZoomFactor(1.0);self.copy_link.hide();self.dismiss_w.hide()
+    def _prepare_standard(self)->None:self._home_visible=False;self._composer_visible=False;self.left.setZoomFactor(1.0);self.right.setZoomFactor(1.0);self.open_resource.hide();self.copy_link.hide();self.dismiss_w.hide()
 
     def _set_left_pane_chrome(self,visible:bool)->None:
         for widget in (self.left_back,self.left_address,self.left_promote,self.left_close):widget.setVisible(visible)
 
     def show_home(self,remember:bool)->None:
         if remember:self.remember_current_state()
-        self._home_visible=True;self._composer_visible=False;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self._set_left_pane_chrome(False);self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(HOME_URL));self.set_global_address(HOME_URL)
+        self._home_visible=True;self._composer_visible=False;self._current_village_link=None;self.open_resource.hide();self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self._set_left_pane_chrome(False);self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(HOME_URL));self.set_global_address(HOME_URL)
 
     def show_star_credential_composer(self,remember:bool)->None:
         if remember:self.remember_current_state()
-        self._home_visible=False;self._composer_visible=True;self._current_village_link=None;self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self._set_left_pane_chrome(False);self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(STAR_CREDENTIAL_URL));self.set_global_address(STAR_CREDENTIAL_URL)
+        self._home_visible=False;self._composer_visible=True;self._current_village_link=None;self.open_resource.hide();self.copy_link.hide();self.dismiss_w.hide();self.right_box.hide();self._set_left_pane_chrome(False);self.left.setZoomFactor(1.0);self.left.setHtml(HOME_HTML,QUrl(STAR_CREDENTIAL_URL));self.set_global_address(STAR_CREDENTIAL_URL)
 
     def navigate_global(self)->None:
         raw=self.global_address.text().strip()
@@ -160,7 +168,16 @@ class Browser(QMainWindow):
         self._prepare_standard();self.right_box.hide();self._set_left_pane_chrome(False);q=QUrl.fromUserInput(url);self.load_left(q);self.set_global_address(q.toString())
     def open_village_link(self,left:str,right:str,village_link:str|None=None,remember:bool=True)->None:
         if remember:self.remember_current_state()
-        self._prepare_standard();self._current_village_link=village_link or compose_village_link(left,right);self.right_box.show();self._set_left_pane_chrome(True);self.left.setZoomFactor(0.85);self.right.setZoomFactor(0.85);self.load_left(QUrl(left));self.right.setUrl(QUrl(right));self.splitter.setSizes([700,700]);self.copy_link.show();self.dismiss_w.show();self.set_global_address(self._current_village_link)
+        self._prepare_standard();self._current_village_link=village_link or compose_village_link(left,right);self.right_box.show();self._set_left_pane_chrome(True);self.left.setZoomFactor(0.85);self.right.setZoomFactor(0.85);self.load_left(QUrl(left));self.right.setUrl(QUrl(right));self.splitter.setSizes([700,700]);self.copy_link.show();self.dismiss_w.show();self.set_global_address(self._current_village_link);self.probe_village_link_resource(self._current_village_link)
+    def probe_village_link_resource(self,url:str)->None:
+        self.open_resource.hide();reply=self.network.head(QNetworkRequest(QUrl(url)))
+        reply.finished.connect(lambda reply=reply,url=url:self.finish_resource_probe(reply,url))
+    def finish_resource_probe(self,reply,url:str)->None:
+        status=reply.attribute(QNetworkRequest.HttpStatusCodeAttribute);reply.deleteLater()
+        if self.right_box.isVisible() and self._current_village_link==url and status is not None and 200<=int(status)<400:self.open_resource.show()
+    def open_village_link_resource(self)->None:
+        if not self._current_village_link or not self.open_resource.isVisible():return
+        self.remember_current_state();url=QUrl(self._current_village_link);self._prepare_standard();self.right_box.hide();self._set_left_pane_chrome(False);self._resource_navigation_url=url;self.left.setUrl(url);self.set_global_address(url.toString())
     def promote_pane(self,side:str)->None:
         if not self.right_box.isVisible():return
         view=self.left if side=="left" else self.right;self.open_single(view.url().toString(),remember=True)
