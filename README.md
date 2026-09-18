@@ -13,6 +13,10 @@ We have a candidate for **A**.
 
 It might open a path to **B**.
 
+## Sibling project
+
+Village Link and [Information is life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life) emerged from the same body of work and have now speciated into sibling projects. Information is life develops the broader evolutionary thesis; Village Link develops a deliberately small technical primitive. Each can be evaluated independently.
+
 ## Memory and trust
 
 A typical first conversation between strangers will contain an exchange of biographical information. 
