@@ -19,8 +19,9 @@ A typical first conversation between strangers will contain an exchange of biogr
 The conversation might establish that the strangers have contexts in common. It may reveal mutual acquaintances.
 A curriculum vitae is a formal example of the same ritual.
 
-Accountability necessarily rests upon the trail of memories that entities have left behind in different contexts.
-The constraints that we call _governance_ emerge from the consequences of accountability.
+An entity may leave traces in many memory systems, both online and offline. Village Link treats those systems as nodes in a graph. An edge makes a statement about an entity represented in more than one memory system: an identifier in one system refers to the same entity as an identifier in another.
+
+Our thesis is that, for an entity, _governance_ is neither more nor less than the consequences that arise from the memory systems in which it has left a trace.
 
 Parties have an incentive to reveal context, and to accept the constraints of governance, in order to reduce transaction costs.
 
@@ -110,7 +111,7 @@ These are possible consequences of the primitive, not requirements of the primit
 
 A **memory system** is any system capable of retaining traces associated with entities. Some memory systems also contain norms about how entities should behave. Some record breaches of those norms or sanctions imposed in response. Others contain no norms, breach assessments or sanctions at all.
 
-**Governance** is broader than any one such system. It arises when an entity is exposed, through one or more memory systems, to norms and to possible consequences associated with conformity or breach.
+For an entity, **governance** is neither more nor less than the consequences that arise from the memory systems in which it has left a trace.
 
 The relevant functions do not need to live in the same place. An action may occur in one system, be assessed against a norm somewhere else, and lead to a sanction recorded or imposed somewhere else again. A person, organisation or software agent may therefore be subject to complex, overlapping layers of governance without belonging to any single "governance system".
 

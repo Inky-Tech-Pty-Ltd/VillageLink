@@ -1,7 +1,7 @@
 # Emergent Governance
 
 **Status:** Working draft  
-**Last updated:** 29 August 2026
+**Last updated:** 16 September 2026
 
 ## Purpose
 
@@ -19,7 +19,7 @@ The ideas are preliminary. In particular, this document describes possible conse
 
 ## 1. Governance through constraints
 
-**Governance is neither more nor less than the layered effect of constraints and consequences operating across systems.**
+**For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a trace.**
 
 Constraints need not be social or intentional. Physical and computational environments also determine what actions are possible and what consequences follow: a tree stops a running dog in a physical park, while a tree in a simulated world may not. Such conditions become part of governance when their consequences are remembered or anticipated and thereby shape future behaviour.
 

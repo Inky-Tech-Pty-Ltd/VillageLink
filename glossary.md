@@ -62,9 +62,9 @@ A URI beneath a `gc.` namespace may identify a noun without restriction to a par
 
 ## Governance
 
-**Definition:** A process by which norms and anticipated or actual consequences shape the behaviour of entities.
+**Definition:** For an entity, the consequences that arise from the memory systems in which it has left a trace.
 
-Governance may operate across multiple memory systems.
+Governance may operate across multiple memory systems. Anticipated consequences may also create constraints that shape the entity's behaviour.
 
 ---
 
