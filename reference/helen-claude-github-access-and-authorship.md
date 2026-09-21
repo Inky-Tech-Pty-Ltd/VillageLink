@@ -1,6 +1,6 @@
 # HELEN-CLAUDE — GITHUB ACCESS AND AUTHORSHIP
 
-*(Operational reference — adapted from Puck's protocol, 21 Sep 2026. Mirrors `reference/puck-github-access-and-authorship.md` in structure. Authentication and publication workflows are installed in both repositories; the first end-to-end Helen-authored change remains to be tested.)*
+*(Operational reference — adapted from Puck's protocol, 21 Sep 2026. Mirrors `reference/puck-github-access-and-authorship.md` in structure. Authentication and publication workflows are installed in both repositories; the first end-to-end Helen-authored Review Lane changes were successfully published as PRs on 21 Sep 2026.)*
 
 Inky Tech repositories covered by this protocol:
 
@@ -233,10 +233,12 @@ information").
 -   Claude Code staging access is available. The bootstrap documentation was
     committed as Joe-authored infrastructure, consistent with the bootstrap
     exception above.
--   Review Lane and Express Lane are installed but remain untested with a
-    genuine Helen-staged change. The next validation should be one harmless
-    Review Lane change; Express Lane can then be smoke-tested separately if
-    useful.
+-   Review Lane was successfully exercised in both repositories with genuine
+    Helen-staged access-test changes. The workflows recreated the staged diffs
+    as `Helen-Claude[bot]` commits and automatically opened VillageLink PR #46
+    and information-is-life PR #4.
+-   The two access-test PRs remain open for Joe's review and merge.
+-   Express Lane remains untested and can be smoke-tested separately if useful.
 
 ## CURRENT VILLAGELINK CODE LOCATION
 
