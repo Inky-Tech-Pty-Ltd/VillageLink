@@ -1,0 +1,35 @@
+name: Test Helen-Claude App authentication
+
+on:
+  workflow_dispatch:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  test-helen-auth:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.number == 44 &&
+       github.event.comment.body == '/helen-auth-test')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Helen-Claude installation token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: '5016176'
+          private-key: ${{ secrets.HELEN_CLAUDE_PRIVATE_KEY }}
+          owner: Inky-Tech-Pty-Ltd
+          repositories: VillageLink
+
+      - name: Comment on attribution test issue as Helen-Claude
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh issue comment 44 \
+            --repo Inky-Tech-Pty-Ltd/VillageLink \
+            --body "Trigger test successful: this GitHub Action authenticated as the Helen-Claude App and posted this comment."
