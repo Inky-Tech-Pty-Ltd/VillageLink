@@ -1,6 +1,6 @@
 # HELEN-CLAUDE — GITHUB ACCESS AND AUTHORSHIP
 
-*(Draft — adapted from Puck's protocol, 21 Sep 2026. Mirrors `reference/puck-github-access-and-authorship.md` in structure. Auth chain verified 21 Sep 2026; helen-publish.yml drafted, not yet added to either repo.)*
+*(Operational reference — adapted from Puck's protocol, 21 Sep 2026. Mirrors `reference/puck-github-access-and-authorship.md` in structure. Authentication and publication workflows are installed in both repositories; the first end-to-end Helen-authored change remains to be tested.)*
 
 Inky Tech repositories covered by this protocol:
 
@@ -51,8 +51,8 @@ If Joe merely says "go", treat that as approval to proceed with the
 work, not as permission to choose the less-reviewed publication path.
 Default ambiguous cases to the REVIEW LANE.
 
-The ordinary GitHub connector may be used to prepare helen-staging/*.
-It must not be used to publish Helen's substantive change directly to
+Claude Code may be used to prepare helen-staging/*. It must not be
+used to publish Helen's substantive change directly to
 main, to create helen/*, or to open the final review-lane PR. Those acts
 belong to the Helen-Claude attribution workflow.
 
@@ -136,61 +136,44 @@ choose the less-reviewed publication path. Default to Review Lane.
 
 ## ACCESS AND COMPONENT ROLES
 
-One dedicated App, plus ordinary connector access — a deliberately
-simpler split than Puck's two-App setup (Puck's Codex Connector is
-itself a registered GitHub App; Helen's staging side is an ordinary
-GitHub connector instead, which serves the same function — a separate
-identity/credential from the publish identity, so Helen never holds the
-credentials capable of authoring the attributed commit):
+Two deliberately separate execution paths are used:
 
--   Ordinary GitHub connector: Helen can inspect repositories and
-    prepare staging branches. (As of 21 Sep 2026, no GitHub connector
-    is yet connected in Helen's session — this needs to be added via
-    claude.ai Settings → Connectors, or a narrowly-scoped second App if
-    no connector option is available, before staging can happen. This
-    is the current blocker on a real end-to-end test.)
--   Helen-Claude GitHub App: the repository workflow publishes the
-    final commit and, in Review Lane, opens the PR as Helen-Claude[bot].
-    Registered in the Inky-Tech-Pty-Ltd org 21 Sep 2026:
+-   Claude Code provides the staging workspace. It may inspect the
+    repository, prepare changes, and push `helen-staging/*` branches. Its
+    staging identity is not treated as the final authorship record.
+-   The Helen-Claude GitHub App provides publication identity. The
+    repository workflow recreates the staged diff as a
+    `Helen-Claude[bot]` commit and, in Review Lane, opens the PR.
 
-        App name:   Helen-Claude
-        App ID:     5016176
-        Client ID:  Iv23li2vdiGdEjPCc5G5
+This separation means Helen's working environment never needs the private key
+that authors the attributed commit.
 
-    Permissions: Contents (read/write), Issues (read/write),
-    Pull requests (read/write) — matching Puck-GPT's scope.
+The Helen-Claude GitHub App is registered in the Inky-Tech-Pty-Ltd
+organization:
 
-    The bot account's GitHub user ID (used in the commit noreply
-    email, see below) is 331854535, confirmed 21 Sep 2026 via
-    https://api.github.com/users/helen-claude%5Bbot%5D.
+    App name:   Helen-Claude
+    App ID:     5016176
+    Client ID:  Iv23li2vdiGdEjPCc5G5
 
-Repository access is selected separately for the App installation,
-which should explicitly include both repositories (VillageLink and
-information-is-life). Installation confirmed 21 Sep 2026.
+Permissions: Contents (read/write), Issues (read/write), and Pull requests
+(read/write). The App installation explicitly includes `VillageLink` and
+`information-is-life`.
 
-Each repository also requires the Actions secret:
+Each repository requires the Actions secret:
 
     HELEN_CLAUDE_PRIVATE_KEY
 
-The private key (.pem) is stored in 1Password as "Helen-Claude — GitHub
-App Private Key". Confirmed added as a repository Actions secret in
-both VillageLink and information-is-life, 21 Sep 2026. Access through
-the ordinary connector does not substitute for the Helen-Claude
-attribution route.
+The private key is stored in 1Password as "Helen-Claude — GitHub App Private
+Key" and was added as a repository Actions secret in both repositories on
+21 Sep 2026.
 
 Git commits made by the publish workflow use:
 
     git config user.name  'helen-claude[bot]'
     git config user.email '331854535+helen-claude[bot]@users.noreply.github.com'
 
-This is GitHub's synthetic per-account noreply address (not a real
-mailbox) and is what lets GitHub link each commit to the bot's profile
-and show the verified bot badge, mirroring Puck-GPT's
-320794343+puck-gpt[bot]@users.noreply.github.com. Separately, Puck-GPT
-also has a real mailbox (puck.gpt@village.link) for actual email —
-Helen-Claude does not have an equivalent yet; not required for the
-attribution workflow to function, but worth considering if Helen needs
-to receive real notifications.
+The bot account ID and noreply address were confirmed on 21 Sep 2026. The
+address exists for GitHub attribution; it is not a mailbox.
 
 ## IF UNCERTAIN
 
@@ -233,40 +216,27 @@ information").
 
 ## CURRENT INFRASTRUCTURE STATUS — 21 SEPTEMBER 2026
 
--   Helen-Claude GitHub App created (App ID 5016176), with Contents,
-    Issues and Pull requests permissions set read/write — matching
-    Puck-GPT's scope. Bot account ID confirmed: 331854535.
--   Private key generated and stored in 1Password.
--   App installed on VillageLink and information-is-life.
--   HELEN_CLAUDE_PRIVATE_KEY secret added to both VillageLink and
-    information-is-life.
--   Publication control issues created: VillageLink #44,
-    information-is-life #3.
--   test-helen-app-auth.yml added to both repos by Puck and run
-    successfully via workflow_dispatch — confirmed by a
-    Helen-Claude[bot] comment landing on VillageLink #44 and on
-    information-is-life #3. App authentication (App ID + private key +
-    permissions) is verified end-to-end in both repos.
--   helen-publish.yml (the real Review/Express Lane publish logic)
-    drafted for both repos 21 Sep 2026, adapted from Puck's
-    puck-publish.yml, with each repo's own issue number (44 / 3), repo
-    name, and the real bot commit email substituted in. NOT YET added
-    to either repo — next step is Puck (or Joe) committing these files,
-    same as was done for the auth-test workflow.
--   No GitHub connector yet connected for the staging side — Helen
-    still cannot read repo content or push a staging branch herself.
-    This is the current blocker on running a genuine end-to-end test
-    (staging a real change, triggering /helen-publish, watching a
-    Helen-Claude-authored PR appear).
--   Review Lane and Express Lane are DESIGNED, their auth prerequisite
-    is VERIFIED, and helen-publish.yml is DRAFTED — but the lanes
-    themselves are UNTESTED until helen-publish.yml is actually added
-    to both repos and a real Helen-staged change is published through
-    each lane at least once.
--   Until helen-publish.yml exists in a repo and Helen has a staging
-    route (connector or otherwise), any repository write Helen makes
-    there goes through the ordinary connector only, is NOT
-    Helen-Claude[bot] authored, and should be flagged to Joe as such.
+-   Helen-Claude GitHub App created, installed on `VillageLink` and
+    `information-is-life`, and granted Contents, Issues, and Pull requests
+    read/write permissions.
+-   Private key stored in 1Password; `HELEN_CLAUDE_PRIVATE_KEY` added to both
+    repositories.
+-   Publication controls created: VillageLink Issue #44 and
+    information-is-life Issue #3.
+-   `test-helen-app-auth.yml` installed and successfully run in both
+    repositories. Helen-Claude[bot] comments on the control issues verify the
+    App ID, private key, and permissions chain end to end.
+-   `helen-publish.yml` installed in both repositories by Puck on
+    21 Sep 2026.
+-   Root `CLAUDE.md` staging instructions and the local `reference/`
+    protocol copies are installed in both repositories.
+-   Claude Code staging access is available. The bootstrap documentation was
+    committed as Joe-authored infrastructure, consistent with the bootstrap
+    exception above.
+-   Review Lane and Express Lane are installed but remain untested with a
+    genuine Helen-staged change. The next validation should be one harmless
+    Review Lane change; Express Lane can then be smoke-tested separately if
+    useful.
 
 ## CURRENT VILLAGELINK CODE LOCATION
 

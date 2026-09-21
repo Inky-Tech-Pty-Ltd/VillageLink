@@ -1,22 +1,20 @@
 # PUCK — GITHUB ACCESS AND AUTHORSHIP
 
-*(Source: Puck's Library, as supplied by Joe 21 Sep 2026. Reference material — this describes Puck's mechanics, not Helen's. See the companion Helen-adapted version once drafted.)*
+*(Operational reference — derived from Puck's Library and installed by Joe on 21 Sep 2026. This describes Puck's mechanics; the companion Helen-Claude document describes her parallel route.)*
 
-Inky Tech repositories covered by this protocol:
+Inky Tech project repositories covered by this local reference:
 
     Inky-Tech-Pty-Ltd/VillageLink
     Inky-Tech-Pty-Ltd/information-is-life
-    Inky-Tech-Pty-Ltd/checklist
 
-The Express Lane and Review Lane rules are identical in all three
-repositories. Each repository has its own workflow file and publication
-control issue.
+The Express Lane and Review Lane rules are identical in both repositories.
+Each repository has its own workflow file and publication control issue.
+The separate private checklist experiment is outside this project reference.
 
 ## PUBLICATION CONTROLS
 
     VillageLink          .github/workflows/puck-publish.yml   Issue #10
     information-is-life  .github/workflows/puck-publish.yml   Issue #1
-    checklist            .github/workflows/puck-publish.yml   Issue #1
 
 ## PURPOSE
 
@@ -130,7 +128,7 @@ choose the less-reviewed publication path. Default to Review Lane.
 
 ## ACCESS AND COMPONENT ROLES
 
-Two GitHub Apps are installed for all three repositories:
+Two GitHub Apps are installed for both project repositories:
 
 -   ChatGPT Codex Connector: Puck can inspect repositories and prepare
     staging branches.
@@ -138,7 +136,7 @@ Two GitHub Apps are installed for all three repositories:
     in Review Lane, opens the PR as puck-gpt[bot].
 
 Repository access is selected separately for each App installation.
-Both installations should explicitly include all three repositories.
+Both installations should explicitly include both project repositories.
 
 Each repository also requires the Actions secret:
 
@@ -175,25 +173,20 @@ Never ask Joe to paste the Puck-GPT private key into chat. Never ask Joe
 to reveal PUCK_GPT_PRIVATE_KEY. Joe may copy the complete private key
 directly from 1Password into the repository's GitHub Actions secret.
 
-## CURRENT INFRASTRUCTURE STATUS — 20 SEPTEMBER 2026
+## CURRENT INFRASTRUCTURE STATUS — 21 SEPTEMBER 2026
 
--   VillageLink: Review and Express lanes previously demonstrated.
--   information-is-life: workflow and control Issue #1 installed;
-    Review Lane verified by Puck-authored commit and PR #2.
--   checklist: workflow and control Issue #1 installed; Review Lane
-    verified by Puck-authored commit and PR #2.
--   The Puck-GPT and ChatGPT Codex Connector App installations include
-    all three repositories.
--   PUCK_GPT_PRIVATE_KEY is available to all three workflows.
--   All workflows reject staging branches not based on current main.
--   Smoke-test PR #2 in each newer repository preserves the verification
-    trail. It may be closed without merge because its proposed file is
-    only a test artefact. The staging branches were deleted automatically.
-
-The Review Lane is operational in all three repositories. The Express
-Lane is installed in all three and shares the same workflow; it has been
-demonstrated in VillageLink but was not separately smoke-tested in the
-two newer repositories on 20 September 2026.
+-   VillageLink: Review and Express lanes demonstrated.
+-   information-is-life: workflow and control Issue #1 installed; Review Lane
+    verified by Puck-authored commit and PR #2. Express Lane is installed but
+    has not been separately smoke-tested.
+-   The Puck-GPT and ChatGPT Codex Connector App installations include both
+    project repositories.
+-   `PUCK_GPT_PRIVATE_KEY` is available to both workflows.
+-   Both workflows reject staging branches not based on current `main`.
+-   information-is-life PR #2 preserves the Review Lane verification trail and
+    may remain closed because its proposed file was only a test artefact.
+-   The private checklist repository is a separate experiment/catch-all and is
+    not governed by these local project-reference copies.
 
 ## CURRENT VILLAGELINK CODE LOCATION
 
