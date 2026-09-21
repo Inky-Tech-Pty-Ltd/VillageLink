@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Helen-Claude monogram">
+  <defs>
+    <linearGradient id="tileGrad" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22385e"/>
+      <stop offset="1" stop-color="#0c1729"/>
+    </linearGradient>
+  </defs>
+  <rect width="220" height="220" rx="48" fill="url(#tileGrad)"/>
+  <text x="110" y="140" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-weight="600" font-style="italic" font-size="130" fill="#f3efe4">H</text>
+  <path d="M54,152 C90,176 130,176 166,150" fill="none" stroke="#c8a24b" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="166" cy="150" r="6" fill="#e4c77a"/>
+  <text x="176" y="156" font-family="'Fraunces', Georgia, serif" font-weight="600" font-style="italic" font-size="38" fill="#c8a24b">c</text>
+</svg>
