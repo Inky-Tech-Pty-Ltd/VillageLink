@@ -6,21 +6,23 @@
 
 ## 1. Scope
 
-This document specifies the current Village Link core primitive and the abstract structure of a Star Credential built from Village Links.
+This document specifies the current Village Link layered model: endpoint identifiers, the same-entity relation, the self-contained Village Link URI, publication on a web resource W, and the abstract structure of a Star Credential.
 
-A Village Link is a two-ended hyperlink found on a web resource W, stating that two independently meaningful identifiers refer to the same entity.
+The layers are intentionally distinct:
 
-Conceptually:
+1. **Endpoint identifier:** A.
+2. **Same-entity relation:** A ↔ B.
+3. **Encoded Village Link:** a self-contained URI carrying A and B, conceptually `<domain>[A][B]`.
+4. **Published Village Link statement:** W states the relation carried by that encoded Village Link.
+5. **Star Credential:** `SC(A,S)`, where S is a finite unordered set of B identifiers.
+6. **Star Credential serialization:** a machine-readable encoding of `SC(A,S)`.
+7. **Published Star Credential statement:** W states `SC(A,S)`.
 
-**W states A ↔ B.**
+A Trust Engine or other consumer may observe published objects from these layers together with provenance, evidence and other application-specific context.
 
-Diagrammatically:
+This specification does not define a universal identity system, truth service, reputation algorithm, governance system or application architecture.
 
-**A ← W → B**
-
-This specification defines the semantics and current structural requirements of that statement. It does not define a universal identity system, truth service, reputation algorithm, governance system or application architecture.
-
-The project requirements are recorded in [requirements.md](requirements.md). Terms are used as defined in [glossary.md](glossary.md). The architectural decision underlying the Village Link primitive is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). The Star Credential data model is recorded in [ADR-004](docs/adr/004-star-credential-data-model.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). Serialization is recorded in [ADR-006](docs/adr/006-village-link-serialization.md).
+The project requirements are recorded in [requirements.md](requirements.md). Terms are used as defined in [glossary.md](glossary.md). The two-ended URI architecture is recorded in [ADR-001](docs/adr/001-two-ended-uri.md). The Star Credential data model is recorded in [ADR-004](docs/adr/004-star-credential-data-model.md). Endpoint naming is recorded in [ADR-005](docs/adr/005-endpoint-identifiers-and-naming.md). Village Link serialization is recorded in [ADR-006](docs/adr/006-village-link-serialization.md). The separation of relation, encoding, publication and Star Credential layers is recorded in [ADR-008](docs/adr/008-layered-object-model.md).
 
 ## 2. Conventions
 
@@ -28,24 +30,53 @@ The key words **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT** and **MAY** ind
 
 Because this is Draft 0.1, syntax and some conformance rules remain unsettled. Sections explicitly marked **Open** or **Proposed** are informative and MUST NOT be interpreted as settled normative syntax.
 
-## 3. Conceptual model
+## 3. Layered conceptual model
 
-A Village Link involves:
+### 3.1 Endpoint identifiers and relation
 
-- **W — Web resource:** the resource on which the Village Link statement is found.
-- **A — Endpoint A:** an independently meaningful identifier.
-- **B — Endpoint B:** another independently meaningful identifier.
+- **A — Endpoint A:** an independently meaningful URI identifier.
+- **B — Endpoint B:** another independently meaningful URI identifier.
 - **E — Entity:** the entity referred to by both A and B.
 
-The core statement is:
+The abstract same-entity relation is:
 
-> W states that A and B refer to the same E.
+> **A ↔ B**
 
-E is semantic rather than a required encoded field. A Village Link does not require a separate canonical identifier for E.
+It states that A and B refer to the same E.
 
-W is not encoded as a third endpoint in the Village Link. A and B are encoded in the link itself; W is the web resource in which the link is found.
+E is semantic rather than a required encoded field. The standard does not require a separate canonical identifier for E.
 
-The structural relationship is therefore **A ← W → B**.
+### 3.2 Encoded Village Link
+
+A **Village Link** is a single self-contained URI encoding of one A ↔ B relation.
+
+Conceptually:
+
+```text
+<domain>[A][B]
+```
+
+The domain in this form is the **marker domain** used to construct an ordinary URI. It is not W and is not, merely by appearing in the encoding, the publisher or an authority over the relation.
+
+### 3.3 Published Village Link statement
+
+When an encoded Village Link is found on a web resource W:
+
+> **W states A ↔ B.**
+
+Diagrammatically:
+
+> **A ← W → B**
+
+W belongs to the publication layer. It is not encoded as a third endpoint in the Village Link.
+
+The same encoded Village Link may be found on multiple web resources. Those are distinct publications of the same encoded relation.
+
+### 3.4 Star Credential layer
+
+A Star Credential groups a finite set of same-entity relations around one distinguished centre A. Its abstract form and publication rules are specified in Section 11.
+
+The distinction among relation, encoding, publication and collection is normative for this draft. Implementations MUST NOT infer that the marker domain is W or that a Star Credential requires a marker domain.
 
 ## 4. Village Link semantics
 
@@ -72,11 +103,13 @@ Two serializations containing A,B and B,A may therefore differ while expressing 
 
 ### 4.3 Publication
 
-A Village Link statement occurs on W. Publication, authorship, control and provenance of W are distinct questions from the minimal relation stated by the link.
+An encoded Village Link expresses the A ↔ B relation. When that encoded link is found on W, W states that relation.
 
-The same encoded A ↔ B pair may occur on multiple web resources. Applications and indexes SHOULD preserve the identity of W where provenance, publication or trust is relevant.
+Publication, authorship, control and provenance of W are distinct questions from the relation and from its encoding.
 
-A publisher may publish W, but the publisher is not a component or symbol of the core primitive.
+The same encoded Village Link may occur on multiple web resources. Applications and indexes SHOULD preserve the identity of W where provenance, publication or trust is relevant.
+
+The marker domain inside the encoded Village Link MUST NOT be treated as W merely because it appears in the URI. A publisher may publish W, but the publisher is not an encoded endpoint or marker-domain role.
 
 ### 4.4 Truth and authority
 
@@ -131,7 +164,7 @@ A publisher MAY provide human-facing facilities for endpoint naming, including f
 
 ### 6.1 Self-contained two-ended form
 
-A Village Link MUST be a single self-contained identifier containing representations of both endpoint URIs.
+An encoded Village Link MUST be a single self-contained identifier containing representations of both endpoint URIs.
 
 Conceptually:
 
@@ -145,7 +178,13 @@ A parser MUST be able to recover A and B without dereferencing a separate Villag
 
 The project adopts `wab.` as the DNS marker prefix for the two-ended Village Link form. The prefix is deliberately independent of Village Link branding and provides a compact mnemonic for **A ← W → B**.
 
-The reference form is currently:
+The candidate general form is currently:
+
+```text
+https://wab.<domain>/<encoded-A>!<encoded-B>
+```
+
+The project's reference instance is:
 
 ```text
 https://wab.village.link/<encoded-A>!<encoded-B>
@@ -155,9 +194,12 @@ In this form:
 
 - `https` uses conventional URI and browser infrastructure;
 - `wab.` is the adopted marker convention;
-- `wab.village.link` is the reference marker implementation;
+- `<domain>` is the marker domain beneath which the encoding is carried;
+- `wab.village.link` is the project's reference marker implementation;
 - `!` is the **proposed** structural boundary between A and B; and
 - the encoded order of A and B is preserved.
+
+The marker domain is part of the encoded Village Link because the current design uses ordinary HTTPS/DNS URI machinery. It is not W and does not identify the web resource on which the link is found.
 
 `wab.village.link` is not a central registry, resolver or privileged authority. Other domain owners MAY expose the same marker convention through authorities they control, for example:
 
@@ -196,9 +238,21 @@ A marker operator MAY provide useful dereferencing behaviour for conventional br
 
 ### 7.1 W
 
-W is the web resource on which the Village Link statement is found.
+W is the web resource on which an encoded Village Link or serialized Star Credential is found.
 
-The primitive does not by itself establish who authored, controls, publishes or endorses W. Those are provenance questions about W rather than an additional endpoint of the link.
+For an encoded Village Link, publication is expressed conceptually as:
+
+```text
+W states <domain>[A][B]
+```
+
+and semantically as:
+
+```text
+W states A ↔ B
+```
+
+W is external to the encoded object. The standard does not by itself establish who authored, controls, publishes or endorses W. Those are provenance questions about W rather than an additional endpoint of the link.
 
 ### 7.2 Provenance mechanism — Open
 
@@ -234,15 +288,27 @@ Village Links can be combined into a graph. If W1 states A ↔ B and W2 states B
 
 A **Star Credential** consists of one distinguished centre noun A and a finite unordered set of nouns B.
 
-If the B set is `S = {B1, B2, ... Bn}`, then the credential is `SC(A, S)` and states `{ A ↔ B | B is a member of S }` through its constituent Village Links.
+If the B set is `S = {B1, B2, ... Bn}`, then the credential is:
 
-The abstract structure is:
+```text
+SC(A, S)
+```
+
+Its semantic content is the set of same-entity relations:
+
+```text
+{ A ↔ B | B is a member of S }
+```
+
+The compact abstract structure is:
 
 ```text
 [A]{[B1], [B2], ... [Bn]}
 ```
 
 Each noun MUST be represented by a URI endpoint identifier satisfying Section 5. A MUST be recorded once as the centre. Each B MUST be recorded as a member of the associated set.
+
+A Star Credential is domain-independent. It MUST NOT require a marker domain merely because an individual encoded Village Link uses one, and it MUST NOT require its members to be expanded into complete encoded Village Link URIs.
 
 ### 11.3 Unordered membership
 
@@ -258,6 +324,22 @@ A is distinguished because it is the centre of this Star Credential. That struct
 
 Draft 0.1 specifies the abstract Star Credential structure but does not prescribe a concrete serialization. A future serialization MUST preserve the distinction between A and the unordered B set.
 
+JSON is the current reference candidate for Composer and prototype work. JSON is a serialization of the Star Credential, not the Star Credential itself.
+
+A Star Credential serialization need not include a marker domain and need not contain a list of fully encoded Village Link URIs.
+
+### 11.6 Publication of a Star Credential
+
+When a Star Credential serialization is found on W:
+
+```text
+W states SC(A, S)
+```
+
+The publication states the constituent A ↔ B relations as members of one credential.
+
+Consumers MAY expand a Star Credential into its constituent relations for graph traversal or analysis. Where publication context or collection structure is relevant, they SHOULD preserve the fact that those relations were published together as one Star Credential on one W.
+
 ## 12. Relationship to memory systems and governance
 
 Village Link endpoints may identify entities within memory systems: systems capable of retaining traces associated with entities.
@@ -272,16 +354,19 @@ Conformance to Village Link syntax does not imply that publication is safe, ethi
 
 ## 14. Conformance
 
-A **conforming Village Link**:
+A **conforming encoded Village Link**:
 
 1. contains exactly two endpoint URIs;
-2. permits both endpoints to be recovered without dereferencing a separate Village Link resource;
-3. states that both endpoints refer to the same entity; and
-4. is found on a web resource W, which is not encoded as a third endpoint.
+2. permits both endpoints to be recovered without dereferencing a separate Village Link resource; and
+3. expresses that both endpoints refer to the same entity.
+
+A **conforming published Village Link statement** consists of a conforming encoded Village Link found on a web resource W. W is not encoded as a third endpoint and the marker domain MUST NOT be treated as W.
 
 A **conforming consumer** MUST NOT interpret syntactic conformance as proof of truth and MUST NOT require cooperation from endpoint systems merely to parse the Village Link.
 
-A conforming **Star Credential** designates exactly one centre noun A, contains a finite unordered set of B nouns without duplicates, and states one conforming Village Link A ↔ B for every B in the set.
+A conforming **Star Credential** designates exactly one centre noun A, contains a finite unordered set of B nouns without duplicates, and has semantic content consisting of one A ↔ B relation for every B in the set. A Star Credential does not require a marker domain.
+
+A conforming **published Star Credential statement** consists of a serialization of a conforming Star Credential found on a web resource W. Consumers that expand the credential into constituent relations SHOULD preserve its publication provenance and collection boundary where relevant.
 
 ## 15. Open specification issues
 
@@ -300,7 +385,18 @@ The following issues remain unresolved in Draft 0.1:
 11. privacy and harms requirements; and
 12. Star Credential serialization and signing.
 
-The current centre of the design remains deliberately small:
+The current centre of the design remains deliberately small, but layered:
+
+```text
+A                         endpoint identifier
+A ↔ B                     same-entity relation
+<domain>[A][B]            encoded Village Link
+W states <domain>[A][B]   published Village Link statement
+SC(A,{B1,...,Bn})         Star Credential
+W states SC(A,S)          published Star Credential statement
+```
+
+For an individual published Village Link, the semantic shorthand remains:
 
 **W states A ↔ B.**
 
