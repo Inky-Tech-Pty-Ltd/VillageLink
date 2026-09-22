@@ -14,8 +14,10 @@ Its intended public location is provisionally:
 
 Composer accepts a small set of supplied identifiers and produces either:
 
-- a village link; or
-- a machine-readable star credential, initially expected to include a JSON representation.
+- an encoded Village Link; or
+- a machine-readable Star Credential serialization, initially expected to use JSON.
+
+These outputs belong to different layers. An encoded Village Link currently requires a marker domain because it is constructed as an ordinary HTTPS URI. An abstract Star Credential is `SC(A,S)` and is domain-independent; its JSON or other concrete form is a serialization of that credential, not the credential itself.
 
 In deliberately simple form:
 
@@ -37,7 +39,7 @@ This is not merely an implementation convenience. Avoiding custody is part of th
 
 Composer is reference tooling, not part of the Village Link primitive.
 
-A conforming village link or star credential can be constructed by any implementation. Nobody should need to contact `village.link`, use Composer or obtain permission from the Village Link project to create one.
+A conforming Village Link or Star Credential serialization can be constructed by any implementation. Nobody should need to contact `village.link`, use Composer or obtain permission from the Village Link project to create one.
 
 Composer exists because a tiny, inspectable reference implementation makes the standard easier to test, demonstrate and use.
 
@@ -47,8 +49,8 @@ Composition is not publication.
 
 A user may take Composer's output and:
 
-- publish it through the reference MediaWiki Publisher;
-- publish it through another publisher;
+- publish it on a web resource W through the reference MediaWiki Publisher;
+- publish it on W through another publisher;
 - transmit it privately using an existing system;
 - store it using tools of their own choosing; or
 - discard it.
@@ -66,3 +68,5 @@ Features such as saved credentials, accounts, synchronisation, audience profiles
 ## Near-term objective
 
 Build the smallest useful Composer that can reliably construct examples from the evolving specification. It should make hand-encoding unnecessary while remaining simple enough to inspect and replace.
+
+For Star Credentials, the near-term task is to test a JSON representation that preserves one centre A and an unordered B set without importing a Village Link marker domain into the credential.
