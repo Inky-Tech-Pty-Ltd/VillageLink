@@ -2,11 +2,14 @@
 
 **Status:** Accepted  
 **Date:** 20 August 2026  
-**Terminology updated:** 6 September 2026
+**Terminology updated:** 6 September 2026  
+**Layering clarified:** 22 September 2026
 
 ## Context
 
 Village Link needs a minimal way for a web resource, W, to state a connection between two independently meaningful identifiers, A and B.
+
+ADR-008 later clarified the layers implicit in this decision: A ↔ B is the abstract same-entity relation; the Village Link is the self-contained URI encoding of that relation; and W belongs to the publication layer rather than the encoded object.
 
 Three broad architectures were considered:
 
@@ -14,7 +17,7 @@ Three broad architectures were considered:
 2. **A URI identifying a Village Link resource**, which must be dereferenced to discover the two endpoints.
 3. **Two independent endpoint URIs plus a separate mechanism** establishing that they form a pair.
 
-The design objective is to make the Village Link primitive as small as possible and to impose as few requirements as possible on webpages and on the systems being connected.
+The design objective is to keep the encoded Village Link as small as possible and to impose as few requirements as possible on webpages and on the systems being connected.
 
 ## Decision
 
@@ -36,13 +39,17 @@ The Village Link contains both endpoint URIs. It therefore carries the substance
 
 The webpage, W, is not encoded as a third endpoint. **W is the web resource in which the Village Link is found.**
 
-In its simplest conceptual form:
+At the relation layer:
+
+**A ↔ B.**
+
+When the encoded Village Link is found on W:
 
 **W states A ↔ B.**
 
 ## Rationale
 
-This architecture keeps the primitive unusually small.
+This architecture keeps the encoded Village Link unusually small.
 
 The endpoint systems do not need to know about Village Link or modify their existing identifiers.
 
@@ -76,3 +83,10 @@ This decision deliberately leaves several implementation questions unresolved, i
 - how search, reputation and other memory systems discover, index and interpret Village Links.
 
 These questions should be addressed separately. They do not form part of the architectural decision recorded here.
+
+
+## Later clarification
+
+ADR-008 distinguishes the marker domain inside an encoded Village Link from W. The marker domain exists because the encoding uses ordinary HTTPS/DNS URI machinery; it is not the web resource on which the link is found and is not necessarily the publisher.
+
+Current documents should therefore distinguish the same-entity relation, encoded Village Link and published Village Link statement rather than using *the primitive* ambiguously.
