@@ -25,27 +25,32 @@ Our thesis is that, for an entity, _governance_ is neither more nor less than th
 
 Parties have an incentive to reveal context, and to accept the constraints of governance, in order to reduce transaction costs.
 
-Village Link proposes a small web primitive for making a statement that two independently meaningful identifiers in different memory systems refer to the same entity.
+Village Link proposes a small web mechanism for stating that two independently meaningful identifiers in different memory systems refer to the same entity.
 
-Conceptually, for a webpage, W:
+The design now distinguishes several layers that earlier project language sometimes collapsed together:
+
+```text
+A                         endpoint identifier
+A ↔ B                     same-entity relation
+<domain>[A][B]            encoded Village Link
+W states <domain>[A][B]   published Village Link statement
+SC(A,{B1,...,Bn})         Star Credential
+W states SC(A,S)          published Star Credential statement
+```
+
+Here **W** is the web resource on which an encoded link or credential is found. The `<domain>` inside an encoded Village Link is only the marker domain used to make an ordinary URI. It is not W and is not, merely by appearing in the encoding, the publisher or a trust authority.
+
+For an individual published Village Link, the semantic shorthand remains:
 
 **W states A ↔ B.**
 
-Where:
+A conventional hyperlink says, in effect, **W points to one resource, A**. A published Village Link creates the two-ended web structure **A ← W → B**.
 
-- **A** is an identifier in one system;
-- **B** is an identifier in another system; and
-- **W** is the web resource where the statement is found.
+The project is exploring what becomes possible when these structures are available at web scale.
 
-A conventional hyperlink says, in effect, **W points to one resource, A**. 
+## Village Link encoding
 
-A Village Link extends that pattern, **W points to two resources, A ← W → B**.
-
-The project is exploring what becomes possible when this primitive is available at web scale.
-
-## The primitive
-
-A Village Link is a single, self-contained, two-ended hyperlink containing both endpoint URIs.
+A Village Link is a single, self-contained, two-ended URI containing both endpoint URIs.
 
 For example, a webpage might state that these two identifiers refer to the same entity:
 
@@ -56,7 +61,13 @@ https://www.facebook.com/joe.rasmussen.70/
 
 Conceptually:
 
-`[wab identifier] [separator] [URI A] [separator] [URI B]`
+`<domain>[A][B]`
+
+The current candidate HTTPS form is:
+
+`https://wab.<domain>/<encoded-A>!<encoded-B>`
+
+The project's `wab.village.link` form is a reference instance of this general encoding, not a required central authority.
 
 The architectural decision is recorded in [ADR-001](docs/adr/001-two-ended-uri.md).
 
@@ -94,7 +105,9 @@ Those memory systems are usually disconnected.
 
 Village Link provides a standard way to state connections between them on the web.
 
-A sufficiently rich set of connections can form a graph around an entity. We call this a **Star Credential**: not a new master identity issued by a central authority, but a collection of independently meaningful identities and memory traces that can be traversed together.
+A deliberately grouped set of connections around one centre can form a **Star Credential**: `SC(A,S)`, where A is the centre and S is a finite unordered set of B identifiers. A Star Credential is not a new master identity issued by a central authority. It is a domain-independent collection of same-entity relations that can be traversed together.
+
+A Star Credential has its own serialization layer. JSON is the current reference candidate for Composer and prototype work, but JSON is not the credential itself and a Star Credential does not require a marker domain.
 
 This may support applications including:
 
@@ -148,7 +161,8 @@ See [Roadmap](roadmap.md) and [Wishlist](wishlist.md) for the evolving work prog
 
 The project currently favours:
 
-- a minimal primitive;
+- explicit separation of relation, encoding, publication and collection layers;
+- minimal objects at each layer;
 - no required central authority;
 - compatibility with existing identifiers;
 - provenance through the web resource W;
