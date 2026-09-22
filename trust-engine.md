@@ -8,11 +8,27 @@ The Trust Engine is one of the principal Village Link concepts. It describes a p
 
 ## The idea
 
-A Village Link publisher creates an assertion of the form:
+The Trust Engine operates above the encoding and publication layers.
+
+For an individual Village Link it may observe:
+
+```text
+W states <domain>[A][B]
+```
+
+with semantic content:
 
 > **W states A ↔ B**
 
-Once enough such assertions exist, a different problem appears:
+For a Star Credential it may observe:
+
+```text
+W states SC(A,{B1,...,Bn})
+```
+
+A Star Credential contributes several A ↔ B relations while also carrying useful collection structure: those relations were published together, around one distinguished centre, on one W.
+
+Once enough such published statements exist, a different problem appears:
 
 > **Given a graph of Village Links, what can a reader compute that cannot be computed — or cannot be computed in the same way — from the conventional Web?**
 
@@ -28,11 +44,11 @@ Village Link introduces the possibility of reasoning across several representati
 
 `Joe Rasmussen` in one memory system is not the whole person Joe Rasmussen. Nor is `Joe Rasmussen` in another memory system. A Village Link states that two such inscriptions purport to refer to the same thing.
 
-A graph of those assertions may allow a reader to construct a provisional, addressable object such as:
+A graph of those statements may allow a reader to construct a provisional, addressable object such as:
 
 > **[Joe Rasmussen]**
 
-The brackets do not claim that a perfect or canonical digital Joe exists. They denote a proposed object inferred from a mountain of representations, memories and assertions.
+The brackets do not claim that a perfect or canonical digital Joe exists. They denote a proposed object inferred from a mountain of representations, memories and statements.
 
 The Trust Engine's question is therefore not merely:
 
@@ -42,7 +58,7 @@ It is closer to:
 
 > Given what this graph says or implies about this proposed object, what may this reader reasonably believe or do?
 
-The graph contains representations and assertions. The represented object is never handed to the engine as revealed truth.
+The graph contains representations and statements. The represented object is never handed to the engine as revealed truth.
 
 ## PageRank: precedent, not benchmark
 
@@ -67,7 +83,9 @@ best available inference over G0
 Where:
 
 - **G0** is the conventional Web and its existing trust machinery; and
-- **G1** is the same information environment augmented by Village Links and star credentials.
+- **G1** is the same information environment augmented by published Village Links and published Star Credentials.
+
+The engine may expand a Star Credential into its constituent A ↔ B relations for graph traversal, but should preserve the fact that those relations arrived together as one credential on one W. Flattening the credential completely would discard potentially relevant publication structure.
 
 The primary proposed innovation is **representational**, not algorithmic. Village Link changes what the graph can state explicitly. The Trust Engine should be free to use the strongest available algorithms, including methods developed long after PageRank and methods not yet invented.
 
@@ -106,7 +124,7 @@ An identity question often begins with an interested claimant:
 
 The claimant's own evidence may be necessary, but it is not sufficient merely because the claimant presents it. If the claimant is mistaken or malicious, it has every incentive to supply whatever material will cause the reader to accept the claim. A possession-based credential may establish control of a key or token, but a copied, stolen or compromised credential may be controlled by the wrong entity.
 
-A star credential supports a different move. It provides a public map from one proposed centre A to several independently meaningful Bs. Possession of that map proves nothing; a copied star credential is still only a map. Its value is that the reader or Trust Engine can select and investigate Bs independently, preferably including systems or potential referees the reader already trusts.
+A Star Credential supports a different move. Its abstract form is `SC(A,S)`: one proposed centre A and a finite unordered set of independently meaningful Bs. It does not require the Village Link marker domain. Possession of that map proves nothing; a copied Star Credential is still only a map. Its value is that the reader or Trust Engine can select and investigate Bs independently, preferably including systems or potential referees the reader already trusts.
 
 In the developing Village Link example, the shortest useful exchange is:
 
@@ -132,13 +150,13 @@ The Trust Engine discovers and ranks material already available to the reader. C
 
 A query such as `Puck-GPT` may first need to be resolved into several candidate objects. The Trust Engine may rank those candidates, but it must not silently convert a name or partial identifier into one canonical entity.
 
-A star credential or Village Link remains a statement made by its publisher. The Trust Engine should not construct and present an inferred or provisional star credential by joining discovered links. Doing so would make the Trust Engine the publisher of a new bundle of identity assertions and collapse the distinction between **Interpret** and **Publish**. Labelling the bundle provisional would express uncertainty, but would not remove the moral significance of publishing it.
+A published Star Credential or published Village Link remains a statement found on W. The Trust Engine should not construct and present an inferred or provisional Star Credential by joining discovered links. Doing so would make the Trust Engine the publisher of a new bundle of identity statements and collapse the distinction between **Interpret** and **Publish**. Labelling the bundle provisional would express uncertainty, but would not remove the moral significance of publishing it.
 
 The Trust Engine may form candidate resolutions and clusters internally in order to search and rank. Its outward claim should remain narrower:
 
 > **Given this searcher, query, purpose, graph and ranking method, these published artefacts and potential referees rank highest.**
 
-It should not silently write a derived equivalence or credential back into the graph. If a user deliberately chooses to create or publish a new Village Link or star credential, that is a separate act performed through an accountable publisher.
+It should not silently write a derived equivalence or credential back into the graph. If a user deliberately chooses to create or publish a new Village Link or Star Credential, that is a separate act performed through an accountable publisher.
 
 A potential referee is likewise an engine recommendation, not a new graph fact. The result should explain the existing path or evidence that caused the person or entity to be surfaced. It does not appoint that party as a referee, imply consent or constitute an endorsement.
 
@@ -183,12 +201,12 @@ Village Link adds a different relation:
 
 > This publisher states that these two representations denote the same object.
 
-The assertion has two distinct structural properties:
+The statement has two distinct structural properties:
 
 - the proposed equivalence **A ↔ B** is symmetric; and
 - the provenance **W states** is not.
 
-A Trust Engine must not collapse A and B into truth merely because an assertion exists. It can instead ask who published the assertion, what evidence accompanies it, which independent paths corroborate it, which claims conflict with it and how the relevant contexts have behaved.
+A Trust Engine must not collapse A and B into truth merely because an statement exists. It can instead ask who published the statement, what evidence accompanies it, which independent paths corroborate it, which claims conflict with it and how the relevant contexts have behaved.
 
 This may permit reasoning across independently governed memory systems without requiring any one system to become the canonical identity provider, reputation service or marketplace.
 
@@ -269,7 +287,7 @@ Three comparisons are useful:
 
 1. the best available methods operating over G0;
 2. matched methods with access to the additional G1 structure; and
-3. G1-native methods designed around equivalence assertions, provenance, corroboration and conflict.
+3. G1-native methods designed around equivalence statements, provenance, corroboration and conflict.
 
 Candidate evaluation tasks include existence, identity resolution, attribute inference, opportunity discovery, scam resistance and the total cost of reaching a sufficiently confident decision.
 
@@ -311,7 +329,7 @@ Important unresolved questions include:
 - Which current graph, reputation, entity-resolution and inference methods provide the strongest G0 baseline?
 - Which graph properties produce useful trust or discovery signals?
 - What advantage comes from the new information in G1, and what advantage comes from a particular algorithm?
-- How should the identity and reputation of publishers affect interpretation of their assertions?
+- How should the identity and reputation of publishers affect interpretation of their statements?
 - How should agreement, contradiction and uncertainty be represented to a reader?
 - What useful computations arise specifically from the symmetry of Village Links?
 - How much can be inferred without centralising identity or reputation?
