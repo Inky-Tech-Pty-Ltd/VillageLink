@@ -3,7 +3,8 @@
 **Status:** Proposed  
 **Date:** 4 September 2026  
 **Marker decision adopted:** 6 September 2026  
-**Candidate endpoint encoding added:** 8 September 2026
+**Candidate endpoint encoding added:** 8 September 2026  
+**Marker-domain role clarified:** 22 September 2026
 
 ## Context
 
@@ -22,7 +23,7 @@ The remaining problem is serialization: given arbitrary valid endpoint URIs A an
 7. works predictably in conventional browsers; and
 8. preserves useful human readability where practical.
 
-The project adopts `wab` as the HTTPS marker prefix for the two-ended primitive. The prefix is deliberately not derived from the Village Link project name: a neutral marker reduces unnecessary project branding in a convention intended for broad adoption by independent or competing parties. The letters also provide a compact visual mnemonic for the primitive: W between endpoints A and B, corresponding to **A ← W → B**.
+The project adopts `wab` as the HTTPS marker prefix for the two-ended Village Link encoding. The prefix is deliberately not derived from the Village Link project name: a neutral marker reduces unnecessary project branding in a convention intended for broad adoption by independent or competing parties. The letters provide a compact visual mnemonic for the published two-ended web structure **A ← W → B**. ADR-008 clarifies that W is the web resource on which the link is found, not the marker domain inside the encoded URI.
 
 An opaque Base64url encoding of each endpoint would make the boundary and round trip straightforward, for example:
 
@@ -36,7 +37,15 @@ RFC URI syntax provides reserved characters for use as delimiters. Among the ava
 
 ## Adopted marker and proposed separator
 
-The marker prefix is **adopted** as `wab`. Test the following serialization, with `!` as the leading candidate endpoint separator:
+The marker prefix is **adopted** as `wab`. Test the following general serialization, with `!` as the leading candidate endpoint separator:
+
+```text
+https://wab.<domain>/<encoded-A>!<encoded-B>
+```
+
+The `<domain>` in this form is the **marker domain**. It is part of the encoded URI because the design uses ordinary HTTPS/DNS machinery. It is not W and is not necessarily the publisher.
+
+The project's reference instance is:
 
 ```text
 https://wab.village.link/<encoded-A>!<encoded-B>
@@ -74,15 +83,17 @@ A-Z a-z 0-9 - . _ ~
 
 All other bytes are percent-encoded using two hexadecimal digits. In particular, `/`, `:`, `?`, `#`, `%` and `!` inside an endpoint are encoded.
 
-The candidate construction algorithm is therefore:
+The candidate construction algorithm is therefore parameterised by marker domain:
 
 ```text
-make(A, B) =
-    "https://wab.village.link/"
+make(A, B, domain) =
+    "https://wab." + domain + "/"
     + encode(A)
     + "!"
     + encode(B)
 ```
+
+The reference implementation uses `domain = "village.link"`.
 
 Parsing removes the recognised marker prefix, requires exactly one literal `!` in the payload, splits at that character, and percent-decodes each side exactly once as UTF-8.
 
@@ -145,7 +156,7 @@ Existing implementation tests produced by project contributors should be incorpo
 
 The outer Village Link will use conventional HTTPS and DNS machinery rather than a new URI scheme such as `wab:`.
 
-Conventional browsers will therefore have an ordinary HTTPS object to handle. Any marker operator may provide useful dereferencing behaviour, including the reference `wab.village.link` service, but dereferencing remains optional to the primitive: a Village Link-aware parser can recover A and B from the string itself.
+Conventional browsers will therefore have an ordinary HTTPS object to handle. Any marker operator may provide useful dereferencing behaviour, including the reference `wab.village.link` service, but dereferencing remains optional to the encoding: a Village Link-aware parser can recover A and B from the string itself.
 
 The candidate syntax remains partly human-readable: domain names and resource names are still visible within the percent-encoded endpoint strings, while reserved punctuation is escaped conservatively.
 
@@ -174,3 +185,5 @@ ADR-001 establishes the self-contained two-ended URI primitive.
 ADR-005 establishes endpoint URI and naming conventions.
 
 This ADR adopts the `wab` marker prefix and specifies a conservative candidate encoding for testing the serialization of the two endpoint URIs into one Village Link identifier.
+
+ADR-008 clarifies that the marker domain in that identifier is an encoding-layer component, distinct from W at the publication layer.
