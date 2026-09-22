@@ -1,7 +1,7 @@
 # Village Link Glossary
 
 **Status:** Working draft  
-**Last updated:** 16 September 2026
+**Last updated:** 22 September 2026
 
 ## Purpose
 
@@ -146,17 +146,27 @@ The split screen is a browser interaction convention, not part of the Village Li
 
 ## Star Credential
 
-**Definition:** A graph of independently meaningful identifiers and associated memory traces that can be traversed together as referring to the same entity.
+**Definition:** A domain-independent centred collection `SC(A,S)`, where A is one distinguished centre URI and S is a finite unordered set of B URIs.
 
-A Star Credential is not a new master identity issued by a central authority. Its centre may claim global context, but need not.
+Its semantic content is the set of same-entity relations `{ A ↔ B | B is a member of S }`.
+
+A Star Credential is not a new master identity issued by a central authority. Its centre may claim global context, but need not. A Star Credential does not require a marker domain and does not require its members to be expanded into complete encoded Village Link URIs.
+
+A concrete JSON or other machine-readable form is a **Star Credential serialization**, not the credential itself.
 
 ---
 
 ## Statement
 
-**Definition:** The same-entity relation expressed by a Village Link found on a web resource.
+**Definition:** Content stated by a web resource W through publication of a Village Link or Star Credential.
 
-In the core formulation, a webpage or other web resource **W states A ↔ B**.
+For an individual Village Link:
+
+**W states A ↔ B.**
+
+For a Star Credential:
+
+**W states SC(A,S).**
 
 The word *states* does not imply that W is a moral agent, that the statement is true, or that the operator or author of W warrants it.
 
@@ -192,13 +202,33 @@ The path structure is controlled by the namespace and is not assigned universal 
 
 ## Village Link
 
-**Definition:** A two-ended hyperlink, found on a web resource W, stating that two independently meaningful identifiers refer to the same entity.
+**Definition:** A single self-contained two-ended URI encoding one same-entity relation between independently meaningful endpoint identifiers A and B.
 
-Conceptually: **W states A ↔ B**.
+At the semantic layer:
 
-Diagrammatically: **A ← W → B**.
+**A ↔ B**
 
-The current architecture represents a Village Link as a single, self-contained, two-ended hyperlink containing both endpoint URIs. W is the web resource in which the statement is found rather than a third endpoint encoded in the link.
+At the encoding layer, conceptually:
+
+`<domain>[A][B]`
+
+When the encoded Village Link is found on a web resource W:
+
+**W states A ↔ B.**
+
+Diagrammatically at the publication layer: **A ← W → B**.
+
+W is external to the encoded Village Link. The marker domain inside the encoded URI is not W and is not, merely by appearing in the encoding, the publisher or a trust authority.
+
+---
+
+## Marker domain
+
+**Definition:** The domain component beneath the `wab.` marker used to construct an encoded Village Link as an ordinary HTTPS URI.
+
+General candidate form: `https://wab.<domain>/<encoded-A>!<encoded-B>`.
+
+The marker domain is part of the encoding layer. It is not W, need not be the publisher, and does not gain authority over A, B or their relation merely by appearing in the URI.
 
 ---
 
@@ -206,11 +236,13 @@ The current architecture represents a Village Link as a single, self-contained, 
 
 **Definition:** The adopted DNS-prefix convention `wab.` identifying the two-ended Village Link form within an HTTPS authority.
 
-Reference example: `https://wab.village.link/<encoded-A>!<encoded-B>`.
+General candidate form: `https://wab.<domain>/<encoded-A>!<encoded-B>`.
+
+Reference instance: `https://wab.village.link/<encoded-A>!<encoded-B>`.
 
 The prefix is deliberately not an abbreviation of *Village Link*. This reduces project-specific branding in a convention intended for adoption by independent or competing parties.
 
-`wab` also acts as a compact mnemonic for the primitive: A–W–B, corresponding to **A ← W → B**.
+`wab` remains a compact mnemonic for the two-ended web structure **A ← W → B**. The W in that mnemonic is the web resource at publication time; it is not the marker domain encoded in the URI.
 
 `wab.` is a marker convention, not a central registry, resolver, trust authority or new URI scheme. Other domain owners may use the convention beneath authorities they control.
 
@@ -220,13 +252,13 @@ The `wab.` marker is adopted; the current `!` separator and endpoint escaping re
 
 ## Web resource
 
-**Definition:** The web resource in which a Village Link statement is found.
+**Definition:** The web resource in which an encoded Village Link or serialized Star Credential is found.
 
-**Symbol:** **W** in **W states A ↔ B**.
+**Symbol:** **W** in **W states A ↔ B** or **W states SC(A,S)**.
 
-For an ordinary hyperlink, the structural relationship can be represented as **W → A**. For a Village Link it becomes **A ← W → B**.
+For an ordinary hyperlink, the structural relationship can be represented as **W → A**. For a published Village Link it becomes **A ← W → B**.
 
-The existence of the statement on W does not by itself establish who authored, controls or endorses W, or whether the statement is true.
+W is publication context, not part of the encoded Village Link. The existence of a statement on W does not by itself establish who authored, controls or endorses W, or whether the statement is true.
 
 ---
 
@@ -241,6 +273,24 @@ The project uses three conventional DNS prefixes:
 | `vc.` | Village-context endpoint naming. |
 
 These are conventions within ordinary HTTPS/DNS naming, not new URI schemes.
+
+---
+
+## Layer terminology
+
+Current documents should name the relevant layer when ambiguity is possible:
+
+| Layer | Preferred term |
+| --- | --- |
+| `A` | Endpoint identifier |
+| `A ↔ B` | Same-entity relation |
+| `<domain>[A][B]` | Village Link / encoded Village Link |
+| `W states <domain>[A][B]` | Published Village Link statement |
+| `SC(A,S)` | Star Credential |
+| JSON or another concrete form of `SC(A,S)` | Star Credential serialization |
+| `W states SC(A,S)` | Published Star Credential statement |
+
+Avoid using **the primitive** when it is unclear which of these layers is intended.
 
 ---
 
