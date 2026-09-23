@@ -129,7 +129,8 @@ Village Link is an early-stage experimental project. The repository currently co
 - an accepted architectural decision for the two-ended hyperlink primitive;
 - a [documentation map](documentation.md), roadmap and wishlist;
 - diagrams and worked examples;
-- prototype work toward creating and browsing Village Links.
+- prototype work toward creating and browsing Village Links;
+- a [testbed](testbed/README.md) for testing the primitive against deliberately different publisher implementations.
 
 The syntax, indexing model, lifecycle rules, browser behaviour, evidence model and provenance model remain under active development.
 
@@ -138,11 +139,11 @@ The syntax, indexing model, lifecycle rules, browser behaviour, evidence model a
 The work is being separated into four areas that should remain conceptually distinct:
 
 1. **Develop the standard** — define the primitive, syntax, semantics and supporting specifications.
-2. **Build and govern an initial graph** — use a MediaWiki to create and test a corpus of Village Link statements.
+2. **Test publication** — use unlike publisher implementations to discover which properties belong to the primitive and which belong only to an implementation. The first testbed implementation is the MediaWiki publisher **Anna**; it is an experimental artefact, not required Village Link infrastructure.
 3. **Interpret the graph** — investigate reader-side discovery, filtering, ranking and trust through the [Trust Engine](trust-engine.md).
 4. **Compose artefacts** — provide a small, stateless [Composer](composer.md) for constructing village links and star credentials without taking custody of a user's private identity graph.
 
-In shorthand: **Define → Publish → Interpret → Compose.**
+In shorthand: **Define → Publish/Test → Interpret → Compose.**
 
 The project previously considered a persistent **Star Credential Manager** for audience-specific identity and credential management. [ADR-007](docs/adr/007-stateless-composer.md) records the decision to separate simple composition from that much higher-risk problem and to leave persistent credential management outside the current architecture.
 
@@ -157,7 +158,8 @@ The project currently favours:
 - compatibility with existing identifiers;
 - provenance through the web resource W;
 - independent and potentially contradictory statements;
-- explicit separation between the link primitive and applications built on top of it.
+- explicit separation between the link primitive and applications built on top of it;
+- testing important semantics across unlike implementations so that a convenient first implementation does not silently become the architecture.
 
 ## Contributing
 
