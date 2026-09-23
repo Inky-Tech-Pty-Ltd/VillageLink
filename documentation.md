@@ -20,6 +20,7 @@ This page identifies the natural home of each Village Link concept. Other docume
 | Reference publisher | [ADR-003](docs/adr/003-mediawiki-reference-publisher.md) | MediaWiki publication and governance architecture |
 | Reader-side interpretation | [trust-engine.md](trust-engine.md) | Trust Engine problem and design space |
 | Trust Engine experimental model | [Research 002](docs/research/002-modelling-g1.md) | Paired G0/G1 model, evaluation tasks and falsifiable hypothesis |
+| Symmetry under the equivalence-typed baseline | [Research 003](docs/research/003-symmetry.md) | Candidate symmetries, invariants, counterexamples and domains for testing; Issue #55 explores the strictly untyped alternative |
 | Stateless construction | [composer.md](composer.md) and [ADR-007](docs/adr/007-stateless-composer.md) | Composer and the decision not to make it a persistent credential manager |
 | Governance across memory systems | [emergent-governance.md](emergent-governance.md) | Exploratory consequences, not protocol requirements |
 | AI governance | [ai-governance.md](ai-governance.md) | Possible application of the wider model to artificial agents |
