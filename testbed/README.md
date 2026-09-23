@@ -51,17 +51,19 @@ The MediaWiki experiment has already shown that:
 - an established publication system supplies useful revision history, authorship and page-level provenance without those mechanisms needing to be invented by Village Link;
 - the GitHub repository can act as source material for an automated publication bridge into another system;
 - presentation choices such as tables, namespaces, images and page naming are useful implementation experiments but should not silently become requirements of the primitive;
-- operational and privacy details of a publisher can obstruct publication of an otherwise useful test corpus and should be separated from the primitive itself.
+- operational and privacy details of a publisher can obstruct publication of an otherwise useful test corpus and should be separated from the primitive itself;
+- a publisher inherits operational dependencies from its platform: Anna stopped working when the installed MediaWiki required PHP 8.3 while its hosting domain still used PHP 8.2, and was restored by aligning the hosting runtime;
+- removing personal data from a publication system can require coordinated changes beyond the current source: the unwanted address was removed from repository source, historical MediaWiki revision text and account recovery data, then verified absent from the database;
+- the repaired and cleaned Anna corpus remains usable through the prototype browser, with project-scoped contact data preserved for legitimate account recovery.
 
 These observations are provisional. They should be expanded and corrected as the Anna experiment is reviewed, including in response to contributor discussion.
 
 ## Near-term work
 
 1. Record the Anna/MediaWiki learnings more completely.
-2. Remove or replace personal data that unnecessarily prevents the Anna test corpus from being openly inspectable.
-3. Specify the smallest useful Type 2 experiment before building it.
-4. Invite independent contributors to propose unlike Type 3 implementations.
-5. Keep publisher experimentation bounded: the larger project needs reader-side experiments, including the Trust Engine, rather than an ever-growing family of publisher products.
+2. Specify the smallest useful Type 2 experiment before building it.
+3. Invite independent contributors to propose unlike Type 3 implementations.
+4. Keep publisher experimentation bounded: the larger project needs reader-side experiments, including the Trust Engine, rather than an ever-growing family of publisher products.
 
 ## Related experiments
 
