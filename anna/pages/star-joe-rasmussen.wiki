@@ -17,10 +17,6 @@
 | wikipedia.org
 | 
 |-
-| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!mailto%3Ajoe.rasmussen%40inky.tech ↔]
-| email — joe.rasmussen@inky.tech
-| 
-|-
 | [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!mailto%3Ajoe.rasmussen%40village.link ↔]
 | email — joe.rasmussen@village.link
 | 
