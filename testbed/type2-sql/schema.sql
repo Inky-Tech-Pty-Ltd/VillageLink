@@ -1,6 +1,7 @@
 -- Village Link Type 2 testbed
 -- Minimal four-table backing store for Issue #42.
 -- This database is not W. A web publisher creates W from these records.
+-- Tested on MariaDB 10.5; utf8mb4_unicode_ci also remains portable to MySQL.
 
 SET NAMES utf8mb4;
 SET time_zone = '+00:00';
@@ -13,7 +14,7 @@ CREATE TABLE endpoints (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (endpoint_id),
     UNIQUE KEY uq_endpoints_hash (endpoint_hash)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE links (
     link_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -29,7 +30,7 @@ CREATE TABLE links (
         FOREIGN KEY (endpoint_b_id) REFERENCES endpoints (endpoint_id),
     CONSTRAINT chk_links_distinct_endpoints
         CHECK (endpoint_a_id <> endpoint_b_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE encodings (
     encoding_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -40,7 +41,7 @@ CREATE TABLE encodings (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (encoding_id),
     UNIQUE KEY uq_encodings_name_version (encoding_name, encoding_version)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE representations (
     representation_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -58,4 +59,4 @@ CREATE TABLE representations (
         FOREIGN KEY (link_id) REFERENCES links (link_id),
     CONSTRAINT fk_representations_encoding
         FOREIGN KEY (encoding_id) REFERENCES encodings (encoding_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
