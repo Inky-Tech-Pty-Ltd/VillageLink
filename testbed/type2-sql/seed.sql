@@ -26,7 +26,7 @@ INSERT IGNORE INTO encodings (
     'draft-0.1',
     'UTF-8 percent-encoding with only RFC 3986 unreserved characters literal; endpoints separated by one literal !.',
     JSON_OBJECT(
-        'marker', 'https://wab.village.link/',
+        'marker', 'https://wab.inky.tech/',
         'separator', '!',
         'literal_characters', 'A-Z a-z 0-9 - . _ ~',
         'source', 'docs/adr/006-village-link-serialization.md'
@@ -35,7 +35,7 @@ INSERT IGNORE INTO encodings (
 
 INSERT IGNORE INTO representations (link_id, encoding_id, serialized_value)
 SELECT l.link_id, e.encoding_id,
-       'https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAsha_Bhosle'
+       'https://wab.inky.tech/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAsha_Bhosle'
 FROM links AS l
 JOIN endpoints AS a ON a.endpoint_id = l.endpoint_a_id
 JOIN endpoints AS b ON b.endpoint_id = l.endpoint_b_id
