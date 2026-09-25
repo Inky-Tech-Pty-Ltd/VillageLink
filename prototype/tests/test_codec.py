@@ -10,10 +10,17 @@ class VillageLinkCodecTests(unittest.TestCase):
         self.assertEqual(parse_with_domain(link), (domain, a, b))
 
     def test_asha_bhosle_demo(self):
-        self.assert_round_trip(
-            "https://village.link/wiki/index.php/Asha_Bhosle",
-            "https://en.wikipedia.org/wiki/Asha_Bhosle",
+        a = "https://village.link/wiki/index.php/Asha_Bhosle"
+        b = "https://en.wikipedia.org/wiki/Asha_Bhosle"
+
+        link = make(a, b)
+
+        self.assertEqual(
+            link,
+            "https://wab.village.link/https://village.link/wiki/index.php/Asha_Bhosle"
+            "!https://en.wikipedia.org/wiki/Asha_Bhosle",
         )
+        self.assertEqual(parse(link), (a, b))
 
     def test_alternate_domain(self):
         a = "https://example.com/a"

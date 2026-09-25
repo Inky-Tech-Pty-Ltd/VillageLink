@@ -1,9 +1,12 @@
 """Draft Village Link serialization codec.
 
-Endpoint URIs are UTF-8 percent-encoded with only RFC 3986 unreserved
-characters left literal, then separated by a single literal ``!``.  The
-publishing domain is part of the serialized form; ``village.link`` is only
-the reference default.
+Endpoint URIs are UTF-8 percent-encoded while leaving RFC 3986 unreserved
+characters plus ``:`` and ``/`` literal, then separated by a single literal
+``!``.  The publishing domain is part of the serialized form;
+``village.link`` is only the reference default.
+
+This readable-path encoding remains experimental pending broader HTTP and
+browser interoperability testing.
 """
 
 import re

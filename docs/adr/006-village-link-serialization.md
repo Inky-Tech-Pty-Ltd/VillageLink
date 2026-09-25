@@ -66,15 +66,21 @@ The encoded order is preserved. Therefore `VL(A,B)` and `VL(B,A)` may be differe
 
 ## Candidate endpoint encoding
 
-For Draft 0.1 testing, treat each endpoint URI as an opaque Unicode string and encode it as UTF-8 bytes using conventional percent-encoding. Leave literal only the RFC 3986 unreserved character set:
+For Draft 0.1 testing, treat each endpoint URI as an opaque Unicode string and encode it as UTF-8 bytes using percent-encoding.
+
+Leave literal:
 
 ```text
-A-Z a-z 0-9 - . _ ~
+A-Z a-z 0-9 - . _ ~ : /
 ```
 
-All other bytes are percent-encoded using two hexadecimal digits. In particular, `/`, `:`, `?`, `#`, `%` and `!` inside an endpoint are encoded.
+All other bytes are percent-encoded using two hexadecimal digits.
 
-The candidate construction algorithm is therefore:
+The addition of literal `:` and `/` is deliberate. Earlier testing used the more conservative rule of leaving only the RFC 3986 unreserved character set literal. That encoding passed round-trip torture testing, but a real Apache deployment at `wab.inky.tech` returned 404 for the percent-encoded representation containing `%2F`, despite PHP successfully locating the published Village Link and attempting to return 200.
+
+A more readable candidate that leaves `:` and `/` literal was therefore tested.
+
+The candidate construction algorithm is:
 
 ```text
 make(A, B) =
@@ -86,7 +92,9 @@ make(A, B) =
 
 Parsing removes the recognised marker prefix, requires exactly one literal `!` in the payload, splits at that character, and percent-decodes each side exactly once as UTF-8.
 
-This design intentionally double-encodes percent signs already present in an endpoint URI. For example an endpoint substring `%20` is embedded as `%2520`; a single parse operation restores the original literal `%20`. This preserves the endpoint string rather than normalising it.
+Characters with outer-URI or Village Link grammar significance remain encoded. In particular, literal endpoint `!`, `%`, `?`, `#`, spaces, Unicode bytes and other reserved material are percent-encoded as required by the codec.
+
+Existing percent signs in an endpoint URI are therefore still encoded. For example an endpoint substring `%20` is embedded as `%2520`; a single parse operation restores the original literal `%20`. This preserves the endpoint string rather than normalising it.
 
 A literal endpoint `!` is encoded as `%21`, so the structural separator is the only literal `!` in a valid payload produced by `make`.
 
@@ -100,7 +108,7 @@ B = https://en.wikipedia.org/wiki/Asha_Bhosle
 produces:
 
 ```text
-https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FAsha_Bhosle!https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAsha_Bhosle
+https://wab.village.link/https://village.link/wiki/index.php/Asha_Bhosle!https://en.wikipedia.org/wiki/Asha_Bhosle
 ```
 
 The implementation criterion remains:
@@ -109,7 +117,17 @@ The implementation criterion remains:
 parse(make(A, B)) == (A, B)
 ```
 
-This encoding is a **candidate**, not yet accepted final wire syntax. It is deliberately conservative: future testing may show that additional characters can remain literal without weakening round-trip behaviour or browser interoperability.
+This encoding remains a **candidate**, not accepted final wire syntax.
+
+Testing to date includes:
+
+- the existing URI torture suite;
+- a 10,000-case deterministic generated round-trip run;
+- Apache/PHP GET and HEAD testing at `wab.inky.tech`;
+- nginx GET and HEAD testing;
+- Village Link browser parsing and resource-probe behaviour.
+
+The earlier conservative percent-unreserved form and Base64url remain useful comparison controls. Base64url is technically straightforward and transport-safe, but substantially reduces human readability.
 
 ## Acceptance tests for the remaining serialization
 
@@ -147,7 +165,7 @@ The outer Village Link will use conventional HTTPS and DNS machinery rather than
 
 Conventional browsers will therefore have an ordinary HTTPS object to handle. Any marker operator may provide useful dereferencing behaviour, including the reference `wab.village.link` service, but dereferencing remains optional to the primitive: a Village Link-aware parser can recover A and B from the string itself.
 
-The candidate syntax remains partly human-readable: domain names and resource names are still visible within the percent-encoded endpoint strings, while reserved punctuation is escaped conservatively.
+The candidate syntax remains substantially human-readable: ordinary URI structure, including scheme separators and path slashes, remains visible, while characters significant to the outer URI or Village Link grammar are percent-encoded.
 
 ## Alternatives considered
 
@@ -173,4 +191,4 @@ ADR-001 establishes the self-contained two-ended URI primitive.
 
 ADR-005 establishes endpoint URI and naming conventions.
 
-This ADR adopts the `wab` marker prefix and specifies a conservative candidate encoding for testing the serialization of the two endpoint URIs into one Village Link identifier.
+This ADR adopts the `wab` marker prefix and specifies a readable-path candidate encoding for testing the serialization of the two endpoint URIs into one Village Link identifier.
