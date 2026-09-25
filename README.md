@@ -1,170 +1,242 @@
 # Village Link
 
-## Elevator pitch
+Village Link is an experiment in connecting names across memory systems.
 
-In the Village Link project, we’ve been thinking about all of the trust graphs—digital and analogue.
-
-We have two questions:
-
-**A:** How do they connect?  
-**B:** How do the layers add up to governance?
-
-We have a candidate for **A**. 
-
-It might open a path to **B**.
-
-## Sibling project
-
-Village Link and [Information is life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life) emerged from the same body of work and have now speciated into sibling projects. Information is life develops the broader evolutionary thesis; Village Link develops a deliberately small technical primitive. Each can be evaluated independently.
-
-## Memory and trust
-
-A typical first conversation between strangers will contain an exchange of biographical information. 
-The conversation might establish that the strangers have contexts in common. It may reveal mutual acquaintances.
-A curriculum vitae is a formal example of the same ritual.
-
-An entity may leave traces in many memory systems, both online and offline. Village Link treats those systems as nodes in a graph. An edge makes a statement about an entity represented in more than one memory system: an identifier in one system refers to the same entity as an identifier in another.
-
-Our thesis is that, for an entity, _governance_ is neither more nor less than the consequences that arise from the memory systems in which it has left a trace.
-
-Parties have an incentive to reveal context, and to accept the constraints of governance, in order to reduce transaction costs.
-
-Village Link proposes a small web primitive for making a statement that two independently meaningful identifiers in different memory systems refer to the same entity.
-
-Conceptually, for a webpage, W:
-
-**W states A ↔ B.**
-
-Where:
-
-- **A** is an identifier in one system;
-- **B** is an identifier in another system; and
-- **W** is the web resource where the statement is found.
-
-A conventional hyperlink says, in effect, **W points to one resource, A**. 
-
-A Village Link extends that pattern, **W points to two resources, A ← W → B**.
-
-The project is exploring what becomes possible when this primitive is available at web scale.
-
-## The primitive
-
-A Village Link is a single, self-contained, two-ended hyperlink containing both endpoint URIs.
-
-For example, a webpage might state that these two identifiers refer to the same entity:
+A candidate Village Link looks like this:
 
 ```text
-https://github.com/Joe-Rasmussen
-https://www.facebook.com/joe.rasmussen.70/
+vl:[X]in[A]=[Y]in[B]
 ```
+
+Read it literally:
+
+> the thing called `X` in memory system `A` is the same thing as the thing called `Y` in memory system `B`
+
+That is the primitive.
+
+Everything else in this project should be judged by whether it needs to be in that statement, or can be built above it.
+
+## Why this exists
+
+The same entity is named differently in different systems.
+
+For example, one system might know a person as:
+
+```text
+Joe-Rasmussen
+```
+
+while another knows the same person by a different local name.
+
+Those systems do not need to share a global identifier, naming authority, database, ontology, or implementation.
+
+Village Link proposes a small way to state the equality directly:
+
+```text
+vl:[Joe-Rasmussen]in[GitHub]=[some-other-name]in[another-memory-system]
+```
+
+The names are local. The equality is the link.
+
+## Memory systems
+
+A **memory system** is any system capable of retaining traces associated with entities.
+
+It may be online or offline. It may be a website, database, register, organisation, family, institution, community, device, archive, or something else entirely.
+
+Village Link does not require memory systems to use the same technology.
+
+It also does not require Village Link to understand how a memory system works internally.
+
+A memory system only needs some way for an endpoint to be identified well enough for a link to refer to it.
+
+## Local names are not URLs
+
+A useful distinction is:
+
+```text
+local name
+memory system
+resource address
+```
+
+These are not necessarily the same thing.
+
+On GitHub, for example:
+
+```text
+local name:       Joe-Rasmussen
+memory system:    GitHub
+resource address: https://github.com/Joe-Rasmussen
+```
+
+A URL may be a convenient identifier for a trace or a memory system, but Village Link should not assume that every memory system is on the web, or that every local name is a URL.
+
+The square-bracketed items in the candidate notation are therefore conceptual identifiers, not necessarily web addresses.
+
+## Same-context links
+
+The same primitive also works inside one memory system:
+
+```text
+vl:[X]in[A]=[Y]in[A]
+```
+
+That is a synonym or alias assertion.
+
+No separate synonym mechanism is required.
+
+## Across systems
+
+When the contexts differ:
+
+```text
+vl:[X]in[A]=[Y]in[B]
+```
+
+the link connects two local traces across memory systems.
+
+This gives a simple form of disambiguation.
+
+There may be several people called `Joe Rasmussen` in one context, but only one of them may connect to `Joe-Rasmussen` in GitHub. Additional links can make the intended entity progressively clearer without requiring a single global name.
+
+## A link is not a publisher
+
+Earlier Village Link designs encoded or implied a publishing domain as part of the link.
+
+That made it easy to confuse two different things:
+
+1. the equality being asserted; and
+2. the system or resource that publishes an assertion about that equality.
+
+The current candidate separates them.
+
+The Village Link is:
+
+```text
+vl:[X]in[A]=[Y]in[B]
+```
+
+A publisher may publish that link, comment on it, index it, reject it, contradict it, or attach evidence to it.
+
+The publisher is not necessarily part of the identity of the link.
+
+This is closer to the role of a conventional hyperlink: the edge does not need a separate web resource whose purpose is to describe the edge.
+
+## URI scheme
+
+The project is exploring `vl:` as a dedicated URI scheme.
 
 Conceptually:
 
-`[wab identifier] [separator] [URI A] [separator] [URI B]`
+```text
+vl:<encoded village link>
+```
 
-The architectural decision is recorded in [ADR-001](docs/adr/001-two-ended-uri.md).
+The human-readable form and the machine representation do not need to be identical.
 
-The important properties are:
+A browser or library might render:
 
-- endpoint systems do not need to implement Village Link;
-- the statement can be understood without dereferencing a separate link object;
-- the webpage W supplies the web context in which the statement is found rather than being encoded as a third endpoint;
-- multiple webpages may contain matching or conflicting statements;
-- the _truth_, or perhaps better to say the _weight_ of the statement is an emergent property of the graph.
+```text
+Joe-Rasmussen in GitHub = Joe in Family
+```
 
-Like a conventional hyperlink, a Village Link carries information both through its endpoints and from the web resource in which it occurs. Its two-ended form creates graph structures that ordinary directed links do not express directly.
+while carrying a canonical encoded form underneath.
 
-### The existing web
+The encoding is still experimental.
 
-<p align="center">
-  <img src="docs/diagrams/rendered/wikipedia%20-%20pagerank.png" alt="Wikipedia PageRank diagram" width="550" />
-  <br>
-  <em>Taken from Wikipedia: PageRank. A one-headed hyperlink drives a ranking algorithm</em>
-</p>
+## Memes
 
-### New primitive, new symmetries
+A Village Link is one equality edge.
 
-<p align="center">
-  <img src="docs/diagrams/rendered/pagerank%20diagram%20adapted.png" alt="Adapted PageRank diagram" width="300" />
-  <br>
-  <em>Two web resources, E and C, both state the relation E ↔ F. For webpage E, this is a statement <strong>about itself.</strong></em>
-</p>
+A larger object can emerge from many such edges.
 
-## Why this matters
+For example:
 
-People, organisations and software agents already exist in many separate **memory systems**: systems capable of retaining traces associated with entities. A memory system may record accounts, memberships, transactions, permissions, observations, endorsements, sanctions or other history. It need not impose rules or exercise authority over the entity it remembers.
+```text
+[X]in[A] = [Y]in[B]
+[Y]in[B] = [Z]in[C]
+[Z]in[C] = [Q]in[D]
+```
 
-Those memory systems are usually disconnected.
+Together, those links identify a connected set of locally named traces.
 
-Village Link provides a standard way to state connections between them on the web.
+We are exploring the word **meme** for that distributed object: not a single canonical name, but continuity reconstructed across memory systems.
 
-A sufficiently rich set of connections can form a graph around an entity. We call this a **Star Credential**: not a new master identity issued by a central authority, but a collection of independently meaningful identities and memory traces that can be traversed together.
+In that sense, a meme is not encoded by one Village Link. It emerges from a graph of them.
 
-This may support applications including:
+This is currently a research idea, not a requirement of the primitive.
 
-- multi-path authentication;
-- reputation and fraud resistance;
-- discovery of third-party referees;
-- linking online and offline contexts;
-- organisational and agent identity;
-- research into governance and AI alignment.
+## What developers should get
 
-These are possible consequences of the primitive, not requirements of the primitive itself.
+The primitive should support small, boring, useful tools.
 
-## Memory systems and governance
+A Village Link utility kit might provide functions such as:
 
-A **memory system** is any system capable of retaining traces associated with entities. Some memory systems also contain norms about how entities should behave. Some record breaches of those norms or sanctions imposed in response. Others contain no norms, breach assessments or sanctions at all.
+```text
+parse(vl)
+validate(vl)
+left(vl)
+right(vl)
+name(endpoint)
+context(endpoint)
+isSameContext(vl)
+connectedComponent(vls, endpoint)
+equivalent(a, b, graph)
+```
 
-For an entity, **governance** is neither more nor less than the consequences that arise from the memory systems in which it has left a trace.
+The first useful package does not need to solve trust, reputation, governance, or ontology.
 
-The relevant functions do not need to live in the same place. An action may occur in one system, be assessed against a norm somewhere else, and lead to a sanction recorded or imposed somewhere else again. A person, organisation or software agent may therefore be subject to complex, overlapping layers of governance without belonging to any single "governance system".
+It can simply help developers:
 
-Village Link does not itself perform governance. It makes it possible to state connections between memories of the same entity across otherwise separate systems. A sufficiently rich graph may therefore make existing relationships of reputation, accountability and governance more visible and traversable without creating a new central identity authority.
+- create Village Links;
+- parse them;
+- validate them;
+- inspect their endpoints;
+- traverse networks of equality assertions;
+- identify aliases;
+- disambiguate locally named traces.
+
+Higher-level systems can decide what weight to give any assertion.
+
+## Browser
+
+A Village Link browser sits above the primitive.
+
+It is therefore allowed to know things that the primitive does not know: HTTP, web pages, search, publishers, natural-language input, rendering conventions, and particular memory-system adapters.
+
+That distinction matters.
+
+A useful design test is:
+
+> Is this requirement inherent to a Village Link, or merely convenient for a Village Link browser?
+
+Requirements from higher layers should not silently become requirements of the primitive.
 
 ## Current status
 
-Village Link is an early-stage experimental project. The repository currently contains:
+Village Link is experimental.
 
-- the evolving project argument in this repository;
-- an accepted architectural decision for the two-ended hyperlink primitive;
-- a [documentation map](documentation.md), roadmap and wishlist;
-- diagrams and worked examples;
-- prototype work toward creating and browsing Village Links;
-- a [testbed](testbed/README.md) for testing the primitive against deliberately different publisher implementations.
+The project is currently revisiting several earlier architectural assumptions, including:
 
-The syntax, indexing model, lifecycle rules, browser behaviour, evidence model and provenance model remain under active development.
+- whether a Village Link should contain any publishing domain;
+- the exact syntax and codec for `vl:`;
+- how endpoints identify local names and memory systems;
+- how online and offline memory systems coexist;
+- which graph operations belong in a core developer utility kit;
+- how publishers, browsers and trust systems sit above the primitive;
+- whether distributed objects such as memes should be named or merely discovered.
 
-## Project roles
+The goal is deliberately small:
 
-The work is being separated into four areas that should remain conceptually distinct:
+**make equality across memory systems expressible without requiring the systems themselves to agree on a global identity architecture.**
 
-1. **Develop the standard** — define the primitive, syntax, semantics and supporting specifications.
-2. **Test publication** — use unlike publisher implementations to discover which properties belong to the primitive and which belong only to an implementation. The first testbed implementation is the MediaWiki publisher **Anna**; it is an experimental artefact, not required Village Link infrastructure.
-3. **Interpret the graph** — investigate reader-side discovery, filtering, ranking and trust through the [Trust Engine](trust-engine.md).
-4. **Compose artefacts** — provide a small, stateless [Composer](composer.md) for constructing village links and star credentials without taking custody of a user's private identity graph.
+If that primitive is useful, the larger consequences can be investigated afterwards.
 
-In shorthand: **Define → Publish/Test → Interpret → Compose.**
+## Repository
 
-The project previously considered a persistent **Star Credential Manager** for audience-specific identity and credential management. [ADR-007](docs/adr/007-stateless-composer.md) records the decision to separate simple composition from that much higher-risk problem and to leave persistent credential management outside the current architecture.
+This repository contains the evolving specification, architectural decisions, prototypes, publisher testbeds, browser work, examples and research notes.
 
-See [Roadmap](roadmap.md) and [Wishlist](wishlist.md) for the evolving work program.
+The project is young enough that terminology and architecture remain open to challenge.
 
-## Design principles
-
-The project currently favours:
-
-- a minimal primitive;
-- no required central authority;
-- compatibility with existing identifiers;
-- provenance through the web resource W;
-- independent and potentially contradictory statements;
-- explicit separation between the link primitive and applications built on top of it;
-- testing important semantics across unlike implementations so that a convenient first implementation does not silently become the architecture.
-
-## Contributing
-
-The project is young enough that architecture, terminology and implementation remain open to challenge.
-
-Useful contributions include criticism of the primitive, edge cases, alternative architectures, privacy and abuse analysis, prototype code, test data, and examples from existing identity, reputation, memory and governance systems.
-
-If the underlying statement — **W states A ↔ B** — is useful, the next task is to discover where it breaks.
+Useful criticism is especially welcome where the primitive appears to require more machinery than the statement itself justifies.
