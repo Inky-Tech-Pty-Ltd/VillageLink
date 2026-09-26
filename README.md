@@ -7,7 +7,7 @@ A village link connects two places where an entity has left a mark on a memory s
 Superficially, a village link resembles a hyperlink, but:
 
 - A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow. It can be published by a third party
-- A village link asserts *equality*. The thing that is equal is the *idea* behind the marks in the two systems, for example, 'drosophila'. We are calling this thing, this idea, a *meme*
+- A village link asserts *equality*. The thing that is equal is the *idea* behind the marks in the two systems, for example, the idea: 'drosophila'. We are calling this thing, this idea, a *meme*
 
 ### Primitive
 
@@ -22,7 +22,7 @@ A village link is agnostic about technology, so we have:
 M=Joe
 
 > Joe-Rasmussen in GitHub  
-> joe.rasmussen.70 in Wikipedia  
+> joe.rasmussen.70 in Facebook  
 > Joseph Rasmussen in the Australian legal system  
 > Joe at Friday Drinks.
 
