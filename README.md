@@ -40,7 +40,7 @@ The project is testing a claim:
 
 > **Claim:** For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a mark
 
-It does so in the hope of saying something useful about the governance of AI.
+The project does this in the hope of saying something useful about the governance of AI.
 
 # Information is life
 
