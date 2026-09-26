@@ -50,7 +50,7 @@ A sister-project, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/inf
 
 > **Claim:** A gene is a special case of a meme.
 
-That project rests on the existing body of work about the way that memes are governed by fitness landscapes.
+That project rests on the existing body of work about the way that memes are governed in a feedback loop with fitness landscapes.
 
 # Artefacts
 
