@@ -65,6 +65,7 @@ Planned:
 
 - A developer utility kit
 - A star credential manager
+- A test graph of many publishers, with publisher reputation an emergent property of the graph
 - A trust engine
 - An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot and its conversational partners.
 
