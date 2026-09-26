@@ -12,7 +12,7 @@ Superficially, a village link resembles a hyperlink, but:
 ### Primitive
 
 ```text
-vl:[A]in[X]=[B]in[Y]
+vl:[AinX]=[BinY]
 ```
 
 The marks A and B, in the memory systems X and Y, have the same referent, M.
