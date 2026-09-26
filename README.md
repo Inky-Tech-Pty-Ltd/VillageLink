@@ -64,6 +64,7 @@ Existing, in draft:
 Planned:
 
 - A developer utility kit
+- A star credential manager
 - A trust engine
 - An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot.
 
