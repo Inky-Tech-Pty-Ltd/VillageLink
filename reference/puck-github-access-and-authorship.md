@@ -197,3 +197,42 @@ Composer source: villagelink/composer.py
 
 Before editing, locate the corresponding current GitHub branch and
 files rather than inferring that prototype is a separate repository.
+
+
+## GITHUB DISCUSSIONS — SAME PUBLICATION BUS
+
+GitHub Discussions uses the same Puck-GPT attribution path rather than a
+separate identity or control mechanism.
+
+Control surface:
+
+    VillageLink Issue #10
+
+Discussion requests are staged on:
+
+    puck-staging/discussion/<short-name>
+
+with a request payload at:
+
+    .puck/discussion-request.json
+
+Joe triggers the request by commenting on Issue #10:
+
+    /puck-discussion puck-staging/discussion/<short-name>
+
+The Discussion workflow authenticates with the same Puck-GPT GitHub App
+and publishes or reads through the GitHub Discussions GraphQL API.
+
+Supported request operations:
+
+-   `create` — create a Discussion as puck-gpt[bot];
+-   `comment` — add a top-level comment or reply as puck-gpt[bot];
+-   `edit-comment` — edit a Puck-GPT Discussion comment;
+-   `read` — read a Discussion and return its thread to Issue #10.
+
+This is an extension of the existing publication bus, not a separate
+Puck identity or publication pathway. Issue #38 tracks the capability;
+Issue #10 remains the control bus.
+
+The Puck-GPT GitHub App installation must have repository Discussions
+permission sufficient for these operations (write for publication).
