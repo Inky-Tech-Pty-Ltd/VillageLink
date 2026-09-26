@@ -7,7 +7,7 @@ A village link connects two places where an entity has left a mark on a memory s
 Superficially, a village link resembles a hyperlink, but:
 
 - A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow. It can be published by a third party
-- A village link asserts *equality*. The thing that is equal is the *idea* behind the marks in the two systems, for example, 'drosophila'. We are calling this thing a *meme*
+- A village link asserts *equality*. The thing that is equal is the *idea* behind the marks in the two systems, for example, 'drosophila'. We are calling this thing, this idea, a *meme*
 
 ### Primitive
 
@@ -32,13 +32,13 @@ M=Rover
 
 > Rover in the family home  
 > Rover at the vet  
-> Rover, the source of all those smells up and down Cooper street.
+> Rover, the source of all those marks up and down Cooper Street.
 
 A collection of village links of the type above is called a *star credential*.
 
 The project is testing a claim:
 
-> **Claim:** For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a trace
+> **Claim:** For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a mark
 
 It does so in the hope of saying something useful about the governance of AI.
 
@@ -66,5 +66,5 @@ Planned:
 - A developer utility kit
 - A star credential manager
 - A trust engine
-- An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot.
+- An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot and its conversational partners.
 
