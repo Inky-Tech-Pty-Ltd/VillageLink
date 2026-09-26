@@ -1,0 +1,180 @@
+# Extends Issue #10, tracked by Issue #38.
+name: Puck-GPT GitHub Discussions
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  discussion:
+    if: >-
+      github.event.issue.number == 10 &&
+      github.event.comment.user.login == 'Joe-Rasmussen' &&
+      startsWith(github.event.comment.body, '/puck-discussion ')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Parse request
+        id: request
+        shell: bash
+        env:
+          BODY: ${{ github.event.comment.body }}
+        run: |
+          set -euo pipefail
+          source_branch="${BODY#/puck-discussion }"
+
+          if [[ ! "$source_branch" =~ ^puck-staging/discussion/[A-Za-z0-9._/-]+$ ]]; then
+            echo "Invalid request. Expected /puck-discussion puck-staging/discussion/<name>" >&2
+            exit 1
+          fi
+
+          echo "source_branch=$source_branch" >> "$GITHUB_OUTPUT"
+
+      - name: Create Puck-GPT installation token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: '4708095'
+          private-key: ${{ secrets.PUCK_GPT_PRIVATE_KEY }}
+          owner: Inky-Tech-Pty-Ltd
+          repositories: VillageLink
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Load and validate request
+        id: payload
+        shell: bash
+        env:
+          SOURCE_BRANCH: ${{ steps.request.outputs.source_branch }}
+        run: |
+          set -euo pipefail
+
+          git fetch origin             "refs/heads/$SOURCE_BRANCH:refs/remotes/origin/$SOURCE_BRANCH"             "refs/heads/main:refs/remotes/origin/main"
+
+          main_sha="$(git rev-parse origin/main)"
+          merge_base="$(git merge-base origin/main "origin/$SOURCE_BRANCH")"
+
+          if [[ "$merge_base" != "$main_sha" ]]; then
+            echo "Discussion staging branch is not based on current main. Restage before publishing." >&2
+            exit 1
+          fi
+
+          git show "origin/$SOURCE_BRANCH:.puck/discussion-request.json" > "$RUNNER_TEMP/discussion-request.json"
+          jq -e '.operation | type == "string"' "$RUNNER_TEMP/discussion-request.json" >/dev/null
+          echo "path=$RUNNER_TEMP/discussion-request.json" >> "$GITHUB_OUTPUT"
+
+      - name: Execute Discussion request as Puck-GPT
+        id: execute
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          REQUEST_PATH: ${{ steps.payload.outputs.path }}
+        run: |
+          set -euo pipefail
+
+          owner='Inky-Tech-Pty-Ltd'
+          repo='VillageLink'
+          operation="$(jq -r '.operation' "$REQUEST_PATH")"
+
+          repo_query='query($owner:String!,$repo:String!){repository(owner:$owner,name:$repo){id discussionCategories(first:100){nodes{id name slug}}}}'
+          repo_json="$(gh api graphql -f query="$repo_query" -F owner="$owner" -F repo="$repo")"
+          repository_id="$(jq -r '.data.repository.id' <<<"$repo_json")"
+
+          case "$operation" in
+            create)
+              title="$(jq -er '.title' "$REQUEST_PATH")"
+              body="$(jq -er '.body' "$REQUEST_PATH")"
+              category="$(jq -er '.category' "$REQUEST_PATH")"
+              category_id="$(jq -r --arg category "$category" '.data.repository.discussionCategories.nodes[] | select(.slug == $category or .name == $category) | .id' <<<"$repo_json" | head -n1)"
+              if [[ -z "$category_id" ]]; then
+                echo "Discussion category not found: $category" >&2
+                exit 1
+              fi
+
+              mutation='mutation($repositoryId:ID!,$categoryId:ID!,$title:String!,$body:String!){createDiscussion(input:{repositoryId:$repositoryId,categoryId:$categoryId,title:$title,body:$body}){discussion{id number url title}}}'
+              result="$(gh api graphql -f query="$mutation" -F repositoryId="$repository_id" -F categoryId="$category_id" -f title="$title" -f body="$body")"
+              summary="$(jq -r '.data.createDiscussion.discussion | "Created Discussion #\(.number): \(.title)\n\(.url)"' <<<"$result")"
+              ;;
+
+            comment)
+              discussion_number="$(jq -er '.discussion_number' "$REQUEST_PATH")"
+              body="$(jq -er '.body' "$REQUEST_PATH")"
+              reply_to_id="$(jq -r '.reply_to_id // empty' "$REQUEST_PATH")"
+
+              discussion_query='query($owner:String!,$repo:String!,$number:Int!){repository(owner:$owner,name:$repo){discussion(number:$number){id}}}'
+              discussion_json="$(gh api graphql -f query="$discussion_query" -F owner="$owner" -F repo="$repo" -F number="$discussion_number")"
+              discussion_id="$(jq -er '.data.repository.discussion.id' <<<"$discussion_json")"
+
+              if [[ -n "$reply_to_id" ]]; then
+                mutation='mutation($discussionId:ID!,$replyToId:ID!,$body:String!){addDiscussionComment(input:{discussionId:$discussionId,replyToId:$replyToId,body:$body}){comment{id url}}}'
+                result="$(gh api graphql -f query="$mutation" -F discussionId="$discussion_id" -F replyToId="$reply_to_id" -f body="$body")"
+              else
+                mutation='mutation($discussionId:ID!,$body:String!){addDiscussionComment(input:{discussionId:$discussionId,body:$body}){comment{id url}}}'
+                result="$(gh api graphql -f query="$mutation" -F discussionId="$discussion_id" -f body="$body")"
+              fi
+              summary="$(jq -r '.data.addDiscussionComment.comment | "Published Discussion comment: \(.url)\nComment node ID: \(.id)"' <<<"$result")"
+              ;;
+
+            edit-comment)
+              comment_id="$(jq -er '.comment_id' "$REQUEST_PATH")"
+              body="$(jq -er '.body' "$REQUEST_PATH")"
+              mutation='mutation($commentId:ID!,$body:String!){updateDiscussionComment(input:{commentId:$commentId,body:$body}){comment{id url}}}'
+              result="$(gh api graphql -f query="$mutation" -F commentId="$comment_id" -f body="$body")"
+              summary="$(jq -r '.data.updateDiscussionComment.comment | "Updated Discussion comment: \(.url)\nComment node ID: \(.id)"' <<<"$result")"
+              ;;
+
+            read)
+              discussion_number="$(jq -er '.discussion_number' "$REQUEST_PATH")"
+              discussion_query='query($owner:String!,$repo:String!,$number:Int!){repository(owner:$owner,name:$repo){discussion(number:$number){id number url title body author{login} comments(first:100){nodes{id url body author{login} replies(first:100){nodes{id url body author{login}}}}}}}}'
+              result="$(gh api graphql -f query="$discussion_query" -F owner="$owner" -F repo="$repo" -F number="$discussion_number")"
+              jq '.data.repository.discussion' <<<"$result" > "$RUNNER_TEMP/discussion.json"
+              summary="$(jq -r '
+                "Read Discussion #\(.number): \(.title)\n\(.url)\n\nAuthor: @\(.author.login)\n\n" +
+                .body +
+                "\n\n---\n\n" +
+                ([.comments.nodes[]? |
+                  "COMMENT " + .id + " — @" + (.author.login // "unknown") + "\n" + .body +
+                  (if (.replies.nodes | length) > 0 then
+                    "\n" + ([.replies.nodes[] | "  REPLY " + .id + " — @" + (.author.login // "unknown") + "\n  " + (.body | gsub("\n"; "\n  "))] | join("\n"))
+                   else "" end)
+                ] | join("\n\n"))
+              ' "$RUNNER_TEMP/discussion.json")"
+              ;;
+
+            *)
+              echo "Unsupported operation: $operation" >&2
+              exit 1
+              ;;
+          esac
+
+          {
+            echo 'summary<<EOF'
+            printf '%s\n' "$summary"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Report result as Puck-GPT
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          SUMMARY: ${{ steps.execute.outputs.summary }}
+        run: |
+          set -euo pipefail
+          gh issue comment 10             --repo Inky-Tech-Pty-Ltd/VillageLink             --body "$SUMMARY"
+
+      - name: Remove successful staging request
+        if: success()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          SOURCE_BRANCH: ${{ steps.request.outputs.source_branch }}
+        run: |
+          set -euo pipefail
+          git push origin --delete "$SOURCE_BRANCH"
