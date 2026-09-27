@@ -5,19 +5,19 @@
 {| class="wikitable"
 ! Village Link !! Memory system !! Image
 |-
-| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!https%3A%2F%2Fgithub.com%2FJoe-Rasmussen ↔]
+| [vl:https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!https%3A%2F%2Fgithub.com%2FJoe-Rasmussen ↔]
 | github.com
 | 
 |-
-| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!https%3A%2F%2Fwww.facebook.com%2Fjoe.rasmussen.70%2F ↔]
+| [vl:https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!https%3A%2F%2Fwww.facebook.com%2Fjoe.rasmussen.70%2F ↔]
 | facebook.com
 | 
 |-
-| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUser%3AJoerasmussen ↔]
+| [vl:https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUser%3AJoerasmussen ↔]
 | wikipedia.org
 | 
 |-
-| [https://wab.village.link/https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!mailto%3Ajoe.rasmussen%40village.link ↔]
+| [vl:https%3A%2F%2Fvillage.link%2Fwiki%2Findex.php%2FJoe_Rasmussen!mailto%3Ajoe.rasmussen%40village.link ↔]
 | email — joe.rasmussen@village.link
 | 
 |}
