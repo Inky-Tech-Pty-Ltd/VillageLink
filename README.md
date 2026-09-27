@@ -36,7 +36,7 @@ M=Rover
 > Rover, the source of all those marks up and down Cooper Street  
 > Rover in the recollections of Spot.
 
-A collection of village links of the type above is called a *star credential*.
+A collection of village links of the type above is called a *star credential*: 🞵JoeRasmussen
 
 The project is testing a claim:
 
