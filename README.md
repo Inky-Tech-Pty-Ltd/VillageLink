@@ -15,7 +15,7 @@ Superficially, a village link resembles a hyperlink, but:
 vl:[A in X]=[B in Y]
 ```
 
-The marks A and B, in the memory systems X and Y, have the same referent, M.
+The marks A and B, in the memory systems X and Y, have the same referent, M. M = [A in X]
 
 A village link is agnostic about technology, so we have:
 
