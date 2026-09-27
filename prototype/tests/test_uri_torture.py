@@ -4,15 +4,15 @@ import random
 import string
 import unittest
 
-from villagelink.codec import make, marker_for, parse, parse_with_domain
+from villagelink.codec import make, parse
 
 
 class VillageLinkUriTortureTests(unittest.TestCase):
-    def assert_round_trip(self, a: str, b: str, domain: str = "village.link") -> None:
-        link = make(a, b, domain)
+    def assert_round_trip(self, a: str, b: str) -> None:
+        link = make(a, b)
         self.assertEqual(link.count("!"), 1)
         self.assertEqual(parse(link), (a, b))
-        self.assertEqual(parse_with_domain(link), (domain.lower().rstrip("."), a, b))
+        self.assertTrue(link.startswith("vl:"))
 
     def test_reserved_characters_and_existing_escapes(self):
         cases = [
@@ -29,11 +29,6 @@ class VillageLinkUriTortureTests(unittest.TestCase):
         self.assert_round_trip(
             "https://例え.テスト/路径/雪?q=नमस्ते#片🙂",
             "urn:例:Δοκιμή:مرحبا:🚲",
-        )
-        self.assert_round_trip(
-            "https://example.com/a",
-            "https://example.net/b",
-            "例え.テスト",
         )
 
     def test_asymmetric_hierarchies(self):
@@ -59,48 +54,15 @@ class VillageLinkUriTortureTests(unittest.TestCase):
             b = "x-test:" + "".join(rng.choice(alphabet) for _ in range(rng.randint(1, 120)))
             self.assert_round_trip(a, b)
 
-    def test_userinfo_is_rejected(self):
-        with self.assertRaises(ValueError):
-            parse("https://user@wab.village.link/a!b")
-        with self.assertRaises(ValueError):
-            parse("https://user:password@wab.village.link/a!b")
-
-    def test_explicit_port_is_rejected(self):
-        with self.assertRaises(ValueError):
-            parse("https://wab.village.link:443/a!b")
-        with self.assertRaises(ValueError):
-            parse("https://wab.village.link:8443/a!b")
-
-    def test_extra_leading_path_slashes_are_rejected(self):
-        with self.assertRaises(ValueError):
-            parse("https://wab.village.link//a!b")
-        with self.assertRaises(ValueError):
-            parse("https://wab.village.link///a!b")
-
     def test_malformed_percent_encoding_is_rejected(self):
         for payload in ("%ZZ!b", "%!b", "%2!b", "a!%GG"):
             with self.subTest(payload=payload), self.assertRaises(ValueError):
-                parse(f"https://wab.village.link/{payload}")
+                parse(f"vl:{payload}")
 
     def test_invalid_utf8_percent_encoding_is_value_error(self):
         with self.assertRaises(ValueError):
-            parse("https://wab.village.link/%E2%98!b")
+            parse("vl:%E2%98!b")
 
-    def test_invalid_dns_domains_are_rejected(self):
-        invalid = (
-            "example..com",
-            ".example.com",
-            "foo_bar.com",
-            "-example.com",
-            "example-.com",
-            ("a" * 64) + ".example",
-        )
-        for domain in invalid:
-            with self.subTest(domain=domain), self.assertRaises(ValueError):
-                marker_for(domain)
-
-    def test_trailing_dot_domain_is_canonicalised(self):
-        self.assertEqual(marker_for("Example.COM."), "https://wab.example.com/")
 
 
 if __name__ == "__main__":
