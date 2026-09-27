@@ -1,13 +1,13 @@
 # Village links
 
-A village link connects two places where an entity has left a mark on a memory system, say:
+A village link connects two places where an entity has left a trace in a memory system, say:
 
 > _drosophila_ in Wikipedia <------> _drosophila_ in Britannica
 
 Superficially, a village link resembles a hyperlink, but:
 
 1. A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow. It can be published by a third party
-2. A village link asserts *equality*. The thing that is equal is the *idea* behind the marks in the two systems, for example, the idea: 'drosophila'. We are calling this thing, this idea, a *meme*
+2. A village link asserts *equality*. The thing that is equal is the *idea* behind the traces in the two systems, for example, the idea: 'drosophila'. We are calling this thing, this idea, a *meme*
 
 ### Primitive
 
@@ -15,9 +15,15 @@ Superficially, a village link resembles a hyperlink, but:
 vl:[A in X]=[B in Y]
 ```
 
-The marks A and B, in the memory systems X and Y, have the same referent, M. M = [A in X]
+The traces A and B, in the memory systems X and Y, have the same referent, M. 
 
-A village link is agnostic about technology, so we have:
+```text
+M = [A in X]
+```
+
+### Star credentials
+
+A village link is agnostic about the technology of memory, so we have:
 
 M=Joe
 
@@ -33,14 +39,16 @@ M=Rover
 
 > Rover in the family home  
 > Rover at the vet  
-> Rover, the source of all those marks up and down Cooper Street  
+> Rover, the source of all those traces up and down Cooper Street  
 > Rover in the recollections of Spot.
 
-A collection of village links of the type above is called a *star credential*: 🞵JoeRasmussen
+A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`
+
+### Governance
 
 The project is testing a claim:
 
-> **Claim:** For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a mark
+> **Claim:** For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a trace
 
 The project does this in the hope of saying something useful about the governance of AI.
 
@@ -52,7 +60,7 @@ A sister-project, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/inf
 
 > **Claim:** A gene is a special case of a meme.
 
-That project rests on the existing body of work about the way that memes are governed in a feedback loop with a fitness landscape.
+That project rests on the existing body of work about the way that a memes is governed in a feedback loop with a fitness landscape.
 
 # Artefacts
 
