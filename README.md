@@ -6,8 +6,8 @@ A village link connects two places where an entity has left a mark on a memory s
 
 Superficially, a village link resembles a hyperlink, but:
 
-- A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow. It can be published by a third party
-- A village link asserts *equality*. The thing that is equal is the *idea* behind the marks in the two systems, for example, the idea: 'drosophila'. We are calling this thing, this idea, a *meme*
+1. A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow. It can be published by a third party
+2. A village link asserts *equality*. The thing that is equal is the *idea* behind the marks in the two systems, for example, the idea: 'drosophila'. We are calling this thing, this idea, a *meme*
 
 ### Primitive
 
