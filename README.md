@@ -24,8 +24,8 @@ M=Joe
 > Joe-Rasmussen in GitHub  
 > joe.rasmussen.70 in Facebook  
 > Joseph Rasmussen in the Australian legal system  
-> Joe at Friday Drinks
-> Joe in the memory of his sister, Brigid.
+> Joe at Friday Drinks  
+> Joe in the recollections of his sister, Brigid.
 
 But also:
 
