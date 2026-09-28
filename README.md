@@ -17,11 +17,12 @@ A village link has a superficial resemblance to a hyperlink, but:
 vl:[A in X]=[B in Y]
 ```
 
-The traces A and B, in the memory systems X and Y, have the same referent, a meme, M. 
+In other words, the traces A and B, in the memory systems X and Y, have the same referent, a meme, M. 
 
 ```text
 M = [A in X] = [B in Y]
 ```
+In other words, and more carefully, the trace-in-the-memory-system _is_ the meme. The test is: Can it reproduce?
 
 ### Star credentials
 
