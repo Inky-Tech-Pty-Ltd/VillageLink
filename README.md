@@ -29,10 +29,10 @@ A village link is agnostic about technology; about the medium that carries the m
 
 M=Joe
 
-> Joe-Rasmussen in GitHub  
-> joe.rasmussen.70 in Facebook  
+> Joe-Rasmussen in GitHub    
 > Joseph Rasmussen in the Australian legal system  
-> Joe at Friday Drinks  
+> Joe at Friday Drinks
+> Joe's fridge (seems ridiculous until you think of Hadrian's Wall)   
 > Joe in the recollections of his sister, Brigid.
 
 But also:
