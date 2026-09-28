@@ -78,6 +78,7 @@ Existing, in draft:
 Planned:
 
 - A test graph of many publishers, with publisher reputation an emergent property of the graph
-- A trust engine: Opportunity/threat. Marketplace/firewall.
+- A trust engine: Opportunity/threat. Marketplace/firewall
+- AI governance model.
 
 
