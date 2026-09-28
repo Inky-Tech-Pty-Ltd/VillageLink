@@ -34,7 +34,7 @@ M=Joe
 > joe.rasmussen.70 in Facebook   
 > Joseph Rasmussen in the Australian legal system  
 > Joe at Friday Drinks  
-> Joe's bicycle (which seems ridiculous until you consider Hadrian's Wall)   
+> Joe's bicycle (which seems ridiculous until you consider Hadrian's Wall)[^1]   
 > The idea of Joe in the recollections of his sister, Brigid
 
 But also:
@@ -83,4 +83,5 @@ Planned:
 - A Trust Engine: Opportunity/threat. Marketplace/firewall
 - A model of AI governance.
 
+[^1] Notice how the bicycle disambiguates Joe. There's only one Joe that can produce this bicycle.
 
