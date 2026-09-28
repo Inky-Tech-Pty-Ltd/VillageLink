@@ -74,7 +74,6 @@ Existing, in draft:
 Planned:
 
 - A developer utility kit
-- A star credential manager
 - A test graph of many publishers, with publisher reputation an emergent property of the graph
 - A trust engine
 - An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot and its conversational partners. Does this create a discrete, persistent entity that has a reputational asset, and can be held to account? Can it learn in the wild?
