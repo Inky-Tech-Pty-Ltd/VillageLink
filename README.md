@@ -25,7 +25,7 @@ M = [A in X] = [B in Y]
 
 ### Star credentials
 
-A village link is agnostic about technology, about the medium that carries the meme, so we have:
+A village link is agnostic about technology; about the medium that carries the meme, so we have:
 
 M=Joe
 
