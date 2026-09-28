@@ -26,7 +26,7 @@ In other words, and more carefully, the trace-in-the-memory-system _is_ the meme
 
 ### Star credentials
 
-A village link is agnostic about technology; about the medium that carries the meme, so we have:
+A village link is agnostic about technology; about the medium that expresses the meme, so we have:
 
 M=Joe
 
