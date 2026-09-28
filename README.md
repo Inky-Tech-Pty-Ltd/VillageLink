@@ -60,7 +60,7 @@ The project does this in the hope of saying something useful about the governanc
 
 A sister-project, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), is testing a related claim, motivated by the following provocation:
 
-*Life is a set of competing 'copy' instructions. Genes are copy instructions encoded in DNA. Memes are copy instructions encoded in **any medium**.*
+*Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in DNA. Memes are copy instructions expressed in **any medium**.*
 
 > **Claim:** A gene is a special case of a meme.
 
