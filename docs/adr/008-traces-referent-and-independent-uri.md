@@ -1,61 +1,208 @@
-# ADR-008: Link traces by a shared referent with a publisher-independent URI
+# ADR-008: A village link asserts equality between two expressions of a meme
 
 **Status:** Proposed  
 **Date:** 28 September 2026
 
 ## Context
 
-The first Village Link model described a publisher's web resource W stating that two endpoint identifiers represented the same entity: **W states A ↔ B**. Its candidate serialization placed the assertion beneath a publisher-controlled HTTPS `wab.` host. This helped establish the two-ended, self-contained link, but bundled the link's identity with one location of publication and described its ends primarily as representations of an entity.
+A Village Link began with a compact idea:
 
-The project now needs to distinguish three things: a trace in a memory system, the relation asserted between two traces, and the act of publishing that assertion. The same relation can be published by different parties, and a publisher can make several statements about it. A memory system need not be a website, although software needs URI identifiers for the traces it addresses.
+```text
+W states A ↔ B
+```
 
-The prototype codec, Composer, browser and two test publishers have been adapted to a publisher-independent `vl:` link. This ADR records the architectural decision those implementations are testing. The README's compact notation is an explanation of the idea, not a byte-for-byte serialization rule.
+That formulation contained two ideas that were useful, but became entangled.
+
+First, there is the **assertion itself**: two traces in two memory systems are expressions of the same thing.
+
+Second, there is the **publication of that assertion**: somebody, somewhere, says so.
+
+Early candidate serializations placed the link beneath a publisher-controlled HTTPS domain. That made the publisher's location appear to be part of the identity of the link. In effect, the project had allowed **W**, the publication, and **<domain>**, a component of the serialization, to collapse into one another.
+
+They are not the same thing.
+
+A Village Link must be able to exist independently of any one place in which it is published. The same link may be published by many parties, in many systems, each acquiring its own provenance, context and reputation.
+
+At the same time, the project has sharpened what the two ends of the link are. They are not merely "representations of an entity". They are **traces in memory systems**. The thing that is equal is not the traces themselves, nor the systems that contain them, but the idea to which both traces refer.
+
+We call that idea a **meme**.
 
 ## Decision
 
-A Village Link relates **two URI-identified traces in memory systems** and asserts that they have the **same referent**, M. Conceptually:
+A Village Link asserts equality between two expressions of a meme.
+
+Conceptually:
 
 ```text
 vl:[A in X]=[B in Y]
 ```
 
-A is a trace in memory system X; B is a trace in memory system Y. The equality sign asserts sameness of referent, not textual equality of A and B, equivalence of X and Y, or agreement between everything those systems say. M is not a required third endpoint or a privileged canonical identifier.
+A is a trace in memory system X.  
+B is a trace in memory system Y.
 
-The relation is symmetric in meaning. An implementation preserves the order of A and B in the encoded link for presentation and exact round trips; that order gives neither endpoint greater authority.
+Both have the same referent, M:
 
-Let P be the URI identifier for [A in X], and Q the URI identifier for [B in Y]. The Village Link identifier is **independent of its publisher**. In the current draft codec it is a self-contained URI:
+```text
+M = [A in X]
+M = [B in Y]
+```
+
+Therefore:
+
+```text
+[A in X] = [B in Y]
+```
+
+The equality is **referential equality**.
+
+It does not assert that:
+
+- A and B are textually identical;
+- X and Y are equivalent memory systems;
+- X and Y agree about everything they record;
+- either trace is complete, authoritative or true;
+- M has a privileged canonical identifier.
+
+It asserts one thing only: **these two traces are expressions of the same meme**.
+
+## The primitive and its publication are separate
+
+The Village Link itself is the relation between the two trace identifiers.
+
+Its publication is a separate act.
+
+If W publishes a Village Link, then W is evidence about **who published the assertion, where, when, and under what governance**. W is not part of the primitive merely because it published it.
+
+This distinction resolves the earlier confusion between:
+
+```text
+W states A ↔ B
+```
+
+and serializations of the form:
+
+```text
+https://<domain>/...
+```
+
+In the earlier model, `<domain>` appeared inside the serialized identifier of the link. Because W was also imagined as the web resource that published the assertion, the identity of the link became entangled with the place of publication.
+
+ADR-008 separates them.
+
+The same Village Link may be published at W1, W2 and W3. Those are three publication acts of one relation, not three different relations.
+
+A publisher domain may still identify an ordinary web resource. It simply does not define the identity of the Village Link.
+
+## Serialization
+
+Let:
+
+```text
+P = URI identifying [A in X]
+Q = URI identifying [B in Y]
+```
+
+The current draft serialization is:
 
 ```text
 vl:<percent-encoded-P>!<percent-encoded-Q>
 ```
 
-The codec percent-encodes each URI as UTF-8, leaving only RFC 3986 unreserved characters literal, and uses one literal `!` as the separator. Parsing recovers P and Q without dereferencing a publisher or a separate assertion object. This records the tested draft format; the specification remains the place for detailed conformance rules and any future revision of wire syntax.
+The `vl:` URI is self-contained and publisher-independent.
 
-A publisher may place the same Village Link in a wiki page, a database-backed publication, or another medium. The publication supplies provenance, context and an opportunity for governance. Neither the publisher's domain nor the publication location is part of the link's two-ended URI. Repetition of one link by several publishers produces distinct publication acts, not distinct endpoint relations merely because the hosts differ.
+The codec percent-encodes P and Q as UTF-8, leaving RFC 3986 unreserved characters literal, and separates the two encoded operands with one literal `!`.
 
-The link expresses an assertion. Its syntax alone does not establish truth, consent, authority, trust or permanence. A trace or its memory system may change, disappear, contradict another trace, or have no directly dereferenceable web page.
+Parsing the URI recovers P and Q. It does not require dereferencing a publisher, resolving a `wab.` host, or retrieving a separate assertion object.
 
-## Rationale
+The README notation:
 
-Separating the relation from publication lets independent publishers quote, challenge and contextualise the same link without minting different link identifiers for the same encoded endpoint pair. It also lets the browser recognise a Village Link before attempting ordinary navigation, while the publishers retain their own governance and reputations.
+```text
+vl:[A in X]=[B in Y]
+```
 
-The shared-referent statement stays deliberately narrow. Applications can infer richer meanings from traces and memory systems; the primitive does not need a general predicate grammar to encode them.
+describes the meaning of the primitive.
+
+The codec notation:
+
+```text
+vl:<percent-encoded-P>!<percent-encoded-Q>
+```
+
+describes its current machine serialization.
+
+The two should not be confused.
+
+## Symmetry
+
+The asserted relation is symmetric in meaning.
+
+If:
+
+```text
+[A in X] = [B in Y]
+```
+
+then neither endpoint is semantically primary.
+
+An implementation may preserve the encoded order of P and Q for presentation and exact round trips. That ordering does not confer greater authority on either endpoint.
+
+## Publication, provenance and governance
+
+A publisher may publish a Village Link in a wiki, a database-backed service, a plain web page, a signed record, or another medium entirely.
+
+That publication can contribute:
+
+- provenance;
+- context;
+- authorship;
+- timing;
+- reputation;
+- challenge or endorsement;
+- consequences within a memory system.
+
+These properties belong to the publication environment, not to the minimal equality relation itself.
+
+The primitive therefore remains small enough to be repeated across systems while publishers remain free to accumulate their own governance and reputation.
+
+## What the primitive does not claim
+
+A Village Link is an assertion, not a proof.
+
+Its syntax does not establish truth, consent, authority, trust or permanence.
+
+A trace may change or disappear. A memory system may be unreliable. Different publishers may publish contradictory links. A meme may have many traces, and those traces may reveal different aspects of it.
+
+Those are not failures of the primitive. They are the conditions under which reputation and governance become meaningful.
 
 ## Consequences
 
-- The codec and browser recognise `vl:` directly. A conventional browser need not render that scheme without additional handling; publisher pages can still expose ordinary HTTPS pages and links.
-- Publishers store or display the link along with their own publication record. The URI by itself does not identify who made or endorsed a particular publication.
-- Endpoint URIs are handles for traces. The mechanism by which a non-web trace gets such a handle, and the reliability of that handle over time, remain questions for memory systems and publishers.
-- A Star Credential can continue to distinguish one centre A and an unordered set of Bs. This ADR does not revise its data model. ADR-007 keeps Composer stateless and removes a persistent Star Credential Manager from the current architecture and roadmap; this decision does not reopen that question.
-- The specification, glossary, examples and older ADR cross-references should be reconciled with this decision in a separate documentation pass. Until then, they contain historical wording and candidate syntax that conflict with the current implementation.
+- Village Links are identified independently of their publishers.
+- The same Village Link can be published repeatedly without being reminted for each publisher.
+- Publishers can acquire reputation for the assertions they choose to publish.
+- The browser and codec can recognise and parse a Village Link without first navigating to a publisher-controlled host.
+- URI endpoints remain handles for traces in memory systems, including systems that are not themselves websites.
+- The primitive remains deliberately narrow: equality of referent only.
+- Richer meaning is left to applications, memory systems, publication context and the graph that emerges from many assertions.
+- A Star Credential remains a composition of Village Links around one centre; this ADR does not alter the Star Credential data model.
+- ADR-007 remains intact: composition is stateless, and the project does not require a persistent Star Credential Manager.
 
 ## Relationship to earlier decisions
 
-- **ADR-001:** Retains the self-contained, two-ended link and the separation between the assertion and its publication. Supersedes the framing of W as necessarily the web resource in which the link is found and clarifies that W is not encoded in the link.
-- **ADR-002:** Retains one narrow relation. Refines “equivalence of entity representations” to an assertion that two traces have the same referent; it does not introduce arbitrary predicates or explicit non-equivalence.
-- **ADR-005:** Retains URI endpoints. The `gc.` and `vc.` naming examples are possible endpoint conventions, not required trace types or privileged authorities.
-- **ADR-006:** Supersedes the adopted `wab.` HTTPS marker and its publisher-domain form as the Village Link identifier. The current draft uses the `vl:` scheme and an encoded `!`-separated pair. A `wab.` host may still be an ordinary publisher address.
-- **ADR-004:** Retains the centred, unordered Star Credential model.
-- **ADR-007:** Retains stateless composition and the decision not to build a persistent Star Credential Manager as part of the current architecture.
+- **ADR-001:** Retains the two-ended primitive and the distinction between an assertion and its publication. Refines the role of W: W is a publication of the assertion, not a component required to identify the assertion.
+- **ADR-002:** Retains one narrow relation. Equality is now stated more precisely as equality of referent between two traces.
+- **ADR-004:** Retains the centred Star Credential model.
+- **ADR-005:** Retains URI identifiers for endpoints. They identify traces; naming conventions such as `gc.` and `vc.` are not privileged trace types.
+- **ADR-006:** Supersedes the `wab.` publisher-domain serialization as the identity of a Village Link. A `wab.` host may remain a publisher, but its domain is not part of the primitive.
+- **ADR-007:** Retains stateless composition and the decision not to build a persistent Star Credential Manager.
 
-The earlier ADRs remain in the repository as the record of how the architecture developed. This ADR states which decisions now govern the primitive; detailed specification updates should follow rather than silently rewriting those historical records.
+Earlier ADRs remain as the architectural history of the project.
+
+ADR-008 records the point at which the primitive becomes fully separable from its publication:
+
+```text
+vl:[A in X]=[B in Y]
+```
+
+Two traces.  
+Two memory systems.  
+One meme.
