@@ -1,13 +1,15 @@
 # Village links
 
-A village link connects two places where an entity has left a trace in a memory system, say:
+A village link asserts equality between two expressions of a meme:
 
-> _drosophila_ in Wikipedia <------> _drosophila_ in Britannica
+> _Drosophila_ in Wikipedia <------> _Drosophila_ in Britannica
+
+This does not mean the animal, _Drosophila melanogaster_. It does not mean the Wikipedia entry, and it does not mean the Britannica entry. It means the _idea_ of Drosophila, the _meme_.
 
 Superficially, a village link resembles a hyperlink, but:
 
-1. A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow. It can be published by a third party
-2. A village link asserts *equality*. The thing that is equal is the *idea* behind the traces in the two systems, for example, the idea: 'drosophila'. We are calling this thing, this idea, a *meme*
+* A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow
+* A village link asserts equality.
 
 ### Primitive
 
@@ -15,15 +17,15 @@ Superficially, a village link resembles a hyperlink, but:
 vl:[A in X]=[B in Y]
 ```
 
-The traces A and B, in the memory systems X and Y, have the same referent, M. 
+The traces A and B, in the memory systems X and Y, have the same referent, a meme, M. 
 
 ```text
-M = [A in X]
+M = [A in X] = [B in Y]
 ```
 
 ### Star credentials
 
-A village link is agnostic about the technology of memory, so we have:
+A village link is agnostic about the technology of memory, the medium, so we have:
 
 M=Joe
 
