@@ -44,7 +44,7 @@ M=Rover
 > Rover in the family home  
 > Rover at the vet  
 > Rover, the source of all those traces up and down Cooper Street  
-> The idea of Rover in the recollections of Spot (as Spot walks along Cooper Street).
+> The idea of Rover in the recollections of Spot (especially while Spot is walking along Cooper Street).
 
 A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`
 
