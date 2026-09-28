@@ -22,7 +22,7 @@ In other words, the traces A and B, in the memory systems X and Y, have the same
 ```text
 M = [A in X] = [B in Y]
 ```
-In other words, and more carefully, the trace-in-the-memory-system _is_ the meme. The test is: Can it reproduce? Can it spread from X to Y?
+In other words, and more carefully, the trace-in-the-memory-system _is_ the meme. It is a distributed The test is: Can it reproduce? Can it spread from X to Y?
 
 ### Star credentials
 
@@ -64,7 +64,8 @@ A sister-project, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/inf
 
 > **Claim:** A gene is a special case of a meme.
 
-That project rests on the existing body of work about the way a meme is governed in a feedback loop with a fitness landscape.
+That project rests on the existing body of work about the way a meme is governed in a feedback loop with a fitness landscape. 
+If we use the word 'governance' we would usually think of the fitness landscape as _the rules_ - the institutions and norms - but the concept affords a broader interpretation.
 
 # Artefacts
 
