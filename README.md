@@ -83,5 +83,5 @@ Planned:
 - A Trust Engine: Opportunity/threat. Marketplace/firewall
 - A model of AI governance.
 
-[^1] Notice how the bicycle disambiguates Joe. There's only one Joe that can produce this bicycle.
+[^1]: Notice how the bicycle disambiguates Joe. There's only one Joe that can produce this bicycle.
 
