@@ -1,6 +1,6 @@
 # ADR-008: A village link asserts equality between two expressions of a meme
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Date:** 28 September 2026
 
 ## Context
@@ -17,9 +17,9 @@ First, there is the **assertion itself**: two traces in two memory systems are e
 
 Second, there is the **publication of that assertion**: somebody, somewhere, says so.
 
-Early candidate serializations placed the link beneath a publisher-controlled HTTPS domain. That made the publisher's location appear to be part of the identity of the link. In effect, the project had allowed **W**, the publication, and **<domain>**, a component of the serialization, to collapse into one another.
+Early candidate serializations placed the link beneath a publisher-controlled HTTPS domain. That made the publisher's location appear to be part of the identity of the link. In effect, the project had allowed **W**, the publication, and **<domain>**, a component of the serialization, to be confused with one another.
 
-They are not the same thing.
+They were never the same thing ... but the new serialization has removed **<domain>**, so the earlier confusion has become a moot point. The confusion was probably pointing at the necessary architectural refinement.
 
 A Village Link must be able to exist independently of any one place in which it is published. The same link may be published by many parties, in many systems, each acquiring its own provenance, context and reputation.
 
