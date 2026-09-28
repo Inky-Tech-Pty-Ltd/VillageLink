@@ -6,7 +6,7 @@ A village link asserts equality between two expressions of a meme:
 
 This does not mean the animal, _Drosophila melanogaster_. It does not mean the Wikipedia entry, and it does not mean the Britannica entry. It means the _idea_ of drosophila, the _meme_.
 
-Superficially, a village link resembles a hyperlink, but:
+A village link has a superficial resemblance to a hyperlink, but:
 
 * A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow
 * A village link asserts equality.
