@@ -2,7 +2,7 @@
 
 A village link asserts equality between two expressions of a meme:
 
-> _drosophila_ in Wikipedia <------> _drosophila_ in Britannica
+> _drosophila_ in Wikipedia <-----> _drosophila_ in Britannica
 
 This does not mean the animal, _Drosophila melanogaster_. It does not mean the Wikipedia entry, and it does not mean the Britannica entry. It means the _idea_ of drosophila, the _meme_.
 
