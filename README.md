@@ -2,9 +2,9 @@
 
 A village link asserts equality between two expressions of a meme:
 
-> _Drosophila_ in Wikipedia <------> _Drosophila_ in Britannica
+> _drosophila_ in Wikipedia <------> _drosophila_ in Britannica
 
-This does not mean the animal, _Drosophila melanogaster_. It does not mean the Wikipedia entry, and it does not mean the Britannica entry. It means the _idea_ of Drosophila, the _meme_.
+This does not mean the animal, _Drosophila melanogaster_. It does not mean the Wikipedia entry, and it does not mean the Britannica entry. It means the _idea_ of drosophila, the _meme_.
 
 Superficially, a village link resembles a hyperlink, but:
 
@@ -25,7 +25,7 @@ M = [A in X] = [B in Y]
 
 ### Star credentials
 
-A village link is agnostic about the technology of memory, the medium, so we have:
+A village link is agnostic about technology, about the medium that carries the meme, so we have:
 
 M=Joe
 
