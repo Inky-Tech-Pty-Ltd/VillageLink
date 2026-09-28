@@ -35,7 +35,7 @@ M=Joe
 > Joseph Rasmussen in the Australian legal system  
 > Joe at Friday Drinks  
 > Joe's bicycle (seems ridiculous until you think of Hadrian's Wall)   
-> Joe in the recollections of his sister, Brigid
+> The idea of Joe in the recollections of his sister, Brigid
 
 But also:
 
@@ -44,7 +44,7 @@ M=Rover
 > Rover in the family home  
 > Rover at the vet  
 > Rover, the source of all those traces up and down Cooper Street  
-> Rover in the recollections of Spot.
+> The idea of Rover in the recollections of Spot.
 
 A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`
 
