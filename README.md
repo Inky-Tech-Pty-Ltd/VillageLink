@@ -66,7 +66,7 @@ That project rests on the existing body of work about the way that a meme is gov
 
 Existing, in draft:
 
-- A codec for the primitive, `vl:[A in X]=[B in Y]`
+- A codec for the primitive: `vl:<percent-encoded-P>!<percent-encoded-Q>`, where P and Q are URI identifiers of the two traces
 - A composer of village links and star credentials
 - Two test publishers of village links. One is a [MediaWiki](https://village.link/wiki/index.php/Main_Page). The other is a 'raw' [publication page](https://wab.inky.tech/) with no additional editing furniture
 - A browser.
