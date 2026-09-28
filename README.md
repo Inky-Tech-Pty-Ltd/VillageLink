@@ -67,7 +67,7 @@ That project rests on the existing body of work about the way a meme is governed
 
 # Artefacts
 
-Existing in this repo in draft:
+Existing artefacts in this repo (in draft):
 
 - A codec for the primitive: `vl:<percent-encoded-P>!<percent-encoded-Q>`, where P and Q are URI identifiers of the two traces
 - A composer of village links and star credentials
