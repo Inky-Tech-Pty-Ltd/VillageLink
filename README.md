@@ -22,7 +22,7 @@ In other words, the traces A and B, in the memory systems X and Y, have the same
 ```text
 M = [A in X] = [B in Y]
 ```
-In other words, and more carefully, the trace-in-the-memory-system _is_ the meme. The test is: Can it reproduce?
+In other words, and more carefully, the trace-in-the-memory-system _is_ the meme. The test is: Can it reproduce? Can it spread from X to Y?
 
 ### Star credentials
 
