@@ -70,16 +70,13 @@ The project is testing a claim:
 
 The project does this in the hope of saying something useful about the governance of AI.
 
-# Information is life
+### Information is life
 
 A sister-project, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), is testing a related claim, motivated by the following provocation:
 
-*Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in **any medium**.*
+*Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in any medium.*
 
 > **Claim:** A gene is a special case of a meme.
-
-That project rests on the existing body of work about the way a meme is governed in a feedback loop with a fitness landscape. 
-If we use the word 'governance' we would usually think of the fitness landscape as _the rules_ - the constraints, institutions and norms - but the concept affords a broader interpretation.
 
 # Artefacts
 
