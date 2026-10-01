@@ -1,9 +1,13 @@
 # ADR-006: Use an HTTPS Village Link form with `wab` marker and `!` as the candidate endpoint separator
 
-**Status:** Proposed  
+**Status:** Superseded in part by [ADR-008](008-traces-referent-and-independent-uri.md)  
 **Date:** 4 September 2026  
 **Marker decision adopted:** 6 September 2026  
 **Candidate endpoint encoding added:** 8 September 2026
+
+## Current status
+
+[ADR-008](008-traces-referent-and-independent-uri.md) supersedes the publisher-domain HTTPS serialization with `vl:<percent-encoded-P>!<percent-encoded-Q>`. The percent-encoding, single literal `!` separator, exact round-trip recovery and presentation-order rationale developed here remain relevant to the current draft codec. The `wab.` marker, HTTPS wrapper and associated browser behaviour below record the earlier candidate, not the current wire format.
 
 ## Context
 

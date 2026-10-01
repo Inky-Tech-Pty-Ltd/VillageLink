@@ -195,7 +195,7 @@ Those are not failures of the primitive. They are the conditions under which rep
 - **ADR-006:** Supersedes the `wab.` publisher-domain serialization as the identity of a Village Link. A `wab.` host may remain a publisher, but its domain is not part of the primitive.
 - **ADR-007:** Retains stateless composition and the decision not to build a persistent Star Credential Manager.
 
-Earlier ADRs remain as the architectural history of the project.
+Earlier ADRs remain as the architectural history of the project. ADR-006's percent-encoding, single literal `!` separator, exact round-trip recovery and presentation-order rationale carry forward into the current draft serialization; its publisher-domain HTTPS wrapper and `wab.` marker do not.
 
 ADR-008 records the point at which the primitive becomes fully separable from its publication:
 
