@@ -1,3 +1,11 @@
+<p align="right">
+  <img
+    src="https://raw.githubusercontent.com/Inky-Tech-Pty-Ltd/VillageLink/main/docs/assets/Village%20Link%20Heritage%20Bridge%20Logo.png"
+    alt="VL logo"
+    width="130"
+  />
+</p>
+
 # Village links
 
 A village link asserts equality between two expressions of a meme:
