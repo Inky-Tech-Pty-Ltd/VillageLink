@@ -32,6 +32,12 @@ M = [A in X] = [B in Y]
 ```
 In other words, and more carefully, the trace-in-the-memory-system _is_ the meme.
 
+  <img
+    src="https://github.com/Inky-Tech-Pty-Ltd/VillageLink/blob/main/docs/assets/Star%20credential%20logo%20small.png"
+    alt="SC logo"
+    align="right"
+    width="80"
+  />
 ### Star credentials
 
 A village link is agnostic about technology; about the medium that expresses the meme, so we have:
