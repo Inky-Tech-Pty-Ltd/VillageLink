@@ -74,21 +74,19 @@ A sister-project, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/inf
 
 # Artefacts
 
-Existing artefacts in this repo (in draft):
+Existing artefacts (in draft):
 
 - A codec for the primitive: `vl:<percent-encoded-P>!<percent-encoded-Q>`, where P and Q are URI identifiers of the two traces
 - A composer of village links and star credentials
 - A developer utility kit
 - Two test publishers of village links. One is a [MediaWiki](https://village.link/wiki/index.php/Main_Page). The other is a 'raw' [publication page](https://wab.inky.tech/) with no additional editing furniture
-- A browser.
+- A browser
+- An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot and its conversational partners. 
+Does this create a coherent, persistent entity that has a reputational asset, and can be held to account? (This experiment is now in its own repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble)).
 
 Planned:
 
 - A test graph of many publishers, with publisher reputation an emergent property of the graph
 - A Trust Engine: Opportunity/threat. Marketplace/firewall
-- A model of AI governance
-- An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot and its conversational partners. 
-Does this create a coherent, persistent entity that has a reputational asset, and can be held to account?
-
-(This experiment is now in its own repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble))
+- A model of AI governance.
 
