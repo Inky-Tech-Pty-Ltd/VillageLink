@@ -98,4 +98,5 @@ Planned:
 - A model of AI governance
 - An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot and its conversational partners. 
 Does this create a discrete, persistent entity that has a reputational asset, and can be held to account? Can it learn in the wild?
+(Now in its own repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble))
 
