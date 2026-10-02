@@ -59,7 +59,7 @@ A collection of village links of the type above is called a *star credential*: `
 
 When an entity presents a star credential, it is saying:
 
-> These are the technologies that store my history and reputation. 
+> These are the memory systems that store my history and reputation. These are my technologies of authentication.
 > These are the places you can find referees. My behaviour is tested against the norms of these communities, these legal systems. 
 > In any proposed interaction with you, these are the frameworks that are available to control transaction cost and risk.
 > Will you open your door?
