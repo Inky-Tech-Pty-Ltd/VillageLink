@@ -86,7 +86,7 @@ The project is testing the claim in the hope of saying something useful about th
 
 - A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), where village links are used to cobble-together a memory graph between memes in the records created by an AI chatbot and its conversational partner. 
 Does this graph create a coherent, persistent entity that has a reputational asset, and can be held to account?
-- A repo, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), motivated by the following provocation and claim-to-be-tested:
+- A repo, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), motivated as follows:
     > **Provocation:** Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in _any medium_.  
     > **Claim:** A gene is a special case of a meme.
 
