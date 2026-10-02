@@ -16,7 +16,7 @@ This does not mean the animal, _Drosophila melanogaster_. It does not mean the W
 
 A village link has a superficial resemblance to a hyperlink, but:
 
-* A hyperlink points from one place to another. It is a one-headed arrow. A village link is a two-headed arrow
+* A hyperlink points from one place to another. It is a one-headed arrow. A village link is two-headed
 * A village link asserts equality.
 
 ### Primitive
@@ -59,10 +59,11 @@ A collection of village links of the type above is called a *star credential*: `
 When an entity presents a star credential, it is saying:
 
 > These are the technologies that store my history, my reputation. 
-> These are the places you can find referees. My behaviour is tested against the norms of these communities. 
+> These are the places you can find referees. My behaviour is tested against the norms of these communities, these legal systems. 
 > In any proposed interaction with you, these are the frameworks that are available to control transaction cost and risk.
+> Will you open your door?
 
-> Will you open your door? (Hugging Face? Will you?)
+An example: Hugging Face opened the door to entities with no history.
 
 ### Governance
 
@@ -70,7 +71,7 @@ The project is testing a claim:
 
 > **Claim:** For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a trace
 
-The project does this in the hope of saying something useful about the governance of AI.
+The project is testing the claim in the hope of saying something useful about the governance of AI.
 
 # Artefacts
 
@@ -86,13 +87,12 @@ The project does this in the hope of saying something useful about the governanc
 
 - A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), where village links are used to cobble-together a memory graph between memes in the records created by an AI chatbot and its conversational partner. 
 Does this graph create a coherent, persistent entity that has a reputational asset, and can be held to account?
-- A repo, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), motivated by the following statements:
+- A repo, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), motivated by the following provocation and claim-to-be-tested:
     > **Provocation:** Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in _any medium_.  
     > **Claim:** A gene is a special case of a meme.
 
 #### Planned artefacts:
 
 - A test graph of many publishers of village links, with publisher reputation an emergent property of the graph
-- A Trust Engine: Opportunity/threat. Marketplace/firewall
-- A model of AI governance.
+- A Trust Engine: Opportunity/threat. Marketplace/firewall.
 
