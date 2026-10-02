@@ -93,5 +93,5 @@ Does this graph create a coherent, persistent entity that has a reputational ass
 ### Planned artefacts:
 
 - A test graph of many publishers of village links, with publisher reputation an emergent property of the graph
-- A Trust Engine: Opportunity/threat. Marketplace/firewall.
+- A Trust Engine: Opportunity supplied by a marketplace. Threat defended by a firewall.
 
