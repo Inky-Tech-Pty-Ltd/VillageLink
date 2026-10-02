@@ -6,8 +6,9 @@
   />
 </p>
 
-# Village links
+# Project: Village Link
 
+### Village links
 A village link asserts equality between two expressions of a meme:
 
 > _drosophila_ in Wikipedia <-----> _drosophila_ in Britannica
@@ -71,7 +72,7 @@ The project is testing a claim:
 
 The project is testing the claim in the hope of saying something useful about the governance of AI.
 
-# Artefacts
+## Artefacts
 
 ### Draft artefacts in this repo:
 
