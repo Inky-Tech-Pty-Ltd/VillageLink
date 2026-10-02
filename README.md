@@ -44,7 +44,7 @@ M=Joe
 > Joseph Rasmussen in the Australian legal system  
 > Joe at Friday Drinks  
 > Joe's bicycle (which seems a ridiculous meme-carrier until you consider Hadrian's Wall)   
-> The idea of Joe, the meme, in the recollections of his sister, Brigid
+> The idea of Joe in the recollections of his sister, Brigid
 
 But also:
 
