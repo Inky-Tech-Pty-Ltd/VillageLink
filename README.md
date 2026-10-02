@@ -79,7 +79,7 @@ The project is testing the claim in the hope of saying something useful about th
 - [A codec](prototype/villagelink/codec.py) for the primitive: `vl:<percent-encoded-P>!<percent-encoded-Q>`, where P and Q are the URIs of the two traces
 - [A composer](prototype/villagelink/composer.py) of village links and star credentials
 - [A utility kit](prototype/UTILITY.md) for developers
-- Two test publishers of village links. The rationale is [here](testbed/README.md). One publisher is a [MediaWiki](https://village.link/wiki/index.php/Main_Page). The other is a 'raw' [publication page](https://wab.inky.tech/) with no additional editing furniture
+- Two test publishers of village links. The approach has its own [README](testbed/README.md). The two publishers are exposed online. One is a [MediaWiki](https://village.link/wiki/index.php/Main_Page). The other is a [minimal publication page](https://wab.inky.tech/) with no additional editing furniture
 - [A browser](prototype/villagelink/browser.py).
 
 ### Experiments that have been spun off elsewhere:
