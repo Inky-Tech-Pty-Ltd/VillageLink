@@ -56,6 +56,10 @@ M=Rover
 
 A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`
 
+When an entity presents a star credential, it is saying, "These are the technologies that store my history. 
+These are the places you can find referees. These are the sets of norms that I am tested against. 
+In any proposed interaction, these are the legal frameworks available to control transaction costs."
+
 ### Governance
 
 The project is testing a claim:
