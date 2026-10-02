@@ -30,7 +30,7 @@ In other words, the traces A and B, in the memory systems X and Y, have the same
 ```text
 M = [A in X] = [B in Y]
 ```
-In other words, and more carefully, the trace-in-the-memory-system _is_ the meme.
+Or, and more carefully, the trace-in-the-memory-system _is_ the meme.
 
 ### Star credentials
 
@@ -43,7 +43,7 @@ M=Joe
 > Joseph Rasmussen in the Australian legal system  
 > Joe at Friday Drinks  
 > Joe's bicycle (which seems a ridiculous meme-carrier until you consider Hadrian's Wall)   
-> The idea of Joe in the recollections of his sister, Brigid
+> The idea of Joe, the meme, in the recollections of his sister, Brigid
 
 But also:
 
@@ -52,13 +52,17 @@ M=Rover
 > Rover in the family home  
 > Rover at the vet  
 > Rover, the source of all those traces up and down Cooper Street  
-> The idea of Rover in the recollections of Spot; perhaps especially while Spot is walking down Cooper Street.
+> The idea of Rover in the recollections of Spot.
 
-A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`
+A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`, `🞵Rover`
 
-When an entity presents a star credential, it is saying, "These are the technologies that store my history. 
-These are the places you can find referees. These are the sets of norms that I am tested against. 
-In any proposed interaction, these are the legal frameworks available to control transaction costs."
+When an entity presents a star credential, it is saying:
+
+> These are the technologies that store my history, my reputation. 
+> These are the places you can find referees. My behaviour is tested against the norms of these communities. 
+> In any proposed interaction with you, these are the frameworks that are available to control transaction cost and risk.
+
+> Will you open your door? (Hugging Face? Will you?)
 
 ### Governance
 
@@ -68,29 +72,27 @@ The project is testing a claim:
 
 The project does this in the hope of saying something useful about the governance of AI.
 
-### Information is life
-
-A sister-project, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), is testing a related claim, motivated by the following provocation:
-
-*Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in any medium.*
-
-> **Claim:** A gene is a special case of a meme.
-
 # Artefacts
 
-Existing artefacts (in draft):
+#### Draft artefacts in this repo:
 
 - A codec for the primitive: `vl:<percent-encoded-P>!<percent-encoded-Q>`, where P and Q are URI identifiers of the two traces
 - A composer of village links and star credentials
 - A developer utility kit
 - Two test publishers of village links. One is a [MediaWiki](https://village.link/wiki/index.php/Main_Page). The other is a 'raw' [publication page](https://wab.inky.tech/) with no additional editing furniture
-- A browser
-- An experiment where village links are used to make a memory graph between memes in the records created by an AI chatbot and its conversational partners. 
-Does this create a coherent, persistent entity that has a reputational asset, and can be held to account? (This experiment is now in its own repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble)).
+- A browser.
 
-Planned:
+#### Experiments that have been spun off elsewhere:
 
-- A test graph of many publishers, with publisher reputation an emergent property of the graph
+- A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), where village links are used to cobble-together a memory graph between memes in the records created by an AI chatbot and its conversational partner. 
+Does this graph create a coherent, persistent entity that has a reputational asset, and can be held to account?
+- A repo, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), motivated by the following statements:
+    > **Provocation:** Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in _any medium_.  
+    > **Claim:** A gene is a special case of a meme.
+
+#### Planned artefacts:
+
+- A test graph of many publishers of village links, with publisher reputation an emergent property of the graph
 - A Trust Engine: Opportunity/threat. Marketplace/firewall
 - A model of AI governance.
 
