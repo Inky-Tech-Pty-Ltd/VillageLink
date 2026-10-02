@@ -30,11 +30,11 @@ In other words, the traces A and B, in the memory systems X and Y, have the same
 ```text
 M = [A in X] = [B in Y]
 ```
-Or, and more carefully, the trace-in-the-memory-system _is_ the meme.
+Or, more carefully, the trace-in-the-memory-system _is_ the meme.
 
 ### Star credentials
 
-A village link is agnostic about technology; about the medium that expresses the meme, so we have:
+A village link is agnostic about technology — about the medium in which the meme is expressed. So we can have:
 
 M=Joe
 
@@ -54,16 +54,14 @@ M=Rover
 > Rover, the source of all those traces up and down Cooper Street  
 > The idea of Rover in the recollections of Spot.
 
-A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`, `🞵Rover`
+A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`, `🞵Rover`.
 
 When an entity presents a star credential, it is saying:
 
-> These are the technologies that store my history, my reputation. 
+> These are the technologies that store my history and reputation. 
 > These are the places you can find referees. My behaviour is tested against the norms of these communities, these legal systems. 
 > In any proposed interaction with you, these are the frameworks that are available to control transaction cost and risk.
 > Will you open your door?
-
-An example: Hugging Face opened the door to entities with no history.
 
 ### Governance
 
@@ -75,15 +73,15 @@ The project is testing the claim in the hope of saying something useful about th
 
 # Artefacts
 
-#### Draft artefacts in this repo:
+### Draft artefacts in this repo:
 
-- A codec for the primitive: `vl:<percent-encoded-P>!<percent-encoded-Q>`, where P and Q are URI identifiers of the two traces
-- A composer of village links and star credentials
-- A developer utility kit
-- Two test publishers of village links. One is a [MediaWiki](https://village.link/wiki/index.php/Main_Page). The other is a 'raw' [publication page](https://wab.inky.tech/) with no additional editing furniture
-- A browser.
+- A [codec](prototype/villagelink/codec.py) for the primitive: `vl:<percent-encoded-P>!<percent-encoded-Q>`, where P and Q are the URIs of the two traces
+- A [composer](prototype/villagelink/composer.py) of village links and star credentials
+- A [utility kit](prototype/UTILITY.md) for developers
+- Two test publishers of village links. The rationale is [here](testbed/README.md). One publisher is a [MediaWiki](https://village.link/wiki/index.php/Main_Page). The other is a 'raw' [publication page](https://wab.inky.tech/) with no additional editing furniture
+- A [browser](prototype/villagelink/browser.py).
 
-#### Experiments that have been spun off elsewhere:
+### Experiments that have been spun off elsewhere:
 
 - A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), where village links are used to cobble-together a memory graph between memes in the records created by an AI chatbot and its conversational partner. 
 Does this graph create a coherent, persistent entity that has a reputational asset, and can be held to account?
@@ -91,7 +89,7 @@ Does this graph create a coherent, persistent entity that has a reputational ass
     > **Provocation:** Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in _any medium_.  
     > **Claim:** A gene is a special case of a meme.
 
-#### Planned artefacts:
+### Planned artefacts:
 
 - A test graph of many publishers of village links, with publisher reputation an emergent property of the graph
 - A Trust Engine: Opportunity/threat. Marketplace/firewall.
