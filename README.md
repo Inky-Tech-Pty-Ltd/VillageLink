@@ -6,7 +6,17 @@
   />
 </p>
 
-# Project: Village Link
+# Village Link
+Village Link is an Inky Tech project.
+
+**Inky Tech Pty Ltd**   
+Infrastructure of memory.
+
+**Mission:** Defend memory against intelligence.
+
+_Memory is the masterpiece.  
+Intelligence is paint._
+
 
 ### Village links
 A village link asserts equality between two expressions of a meme:
