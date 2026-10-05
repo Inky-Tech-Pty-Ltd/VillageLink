@@ -12,8 +12,6 @@ Village Link is an Inky Tech project.
 **Inky Tech Pty Ltd**   
 Infrastructure of memory.
 
-**Mission:** Defend memory against intelligence.
-
 _Memory is the masterpiece.  
 Intelligence is paint._
 
