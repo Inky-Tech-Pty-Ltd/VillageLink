@@ -65,7 +65,7 @@ M=Rover
 
 A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`, `🞵Rover`. 
 
-The star credential identifies a set over which the meme is invariant.
+A star credential asserts a set over which a meme is invariant.
 
 When an entity presents a star credential, it is saying:
 
