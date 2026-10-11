@@ -63,7 +63,9 @@ M=Rover
 > Rover, the source of all those traces up and down Cooper Street  
 > The idea of Rover in the recollections of Spot.
 
-A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`, `🞵Rover`.
+A collection of village links of the type above is called a *star credential*: `🞵JoeRasmussen`, `🞵Rover`. 
+
+The star credential identifies a set over which the meme is invariant.
 
 When an entity presents a star credential, it is saying:
 
