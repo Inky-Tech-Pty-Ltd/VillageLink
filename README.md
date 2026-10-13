@@ -74,13 +74,19 @@ When an entity presents a star credential, it is saying:
 > In any proposed interaction with you, these are the frameworks that are available to control transaction cost and risk.
 > Will you open your door?
 
+From the perspective of the primitive, the centre of a star is a meme like any other. 
+In practice, we have found it useful to call this meme the _hypothesis_.
+In Cobble, the hypothesis may be a candidate memory. In authentication, an entity might present 
+the hypothesis _Joe Rasmussen_ to a gatekeeper, such as Hugging Face, as the centrepiece of a star credential. 
+The gatekeeper assesses the evidence and decides whether to open the door. 
+
 ### Governance
 
 The project is testing a claim:
 
 > **Claim:** For an entity, governance is neither more nor less than the consequences that arise from the memory systems in which it has left a trace
 
-The project is testing the claim in the hope of saying something useful about the governance of AI.
+We are testing the claim in the hope of saying something useful about the governance of AI.
 
 ## Artefacts
 
@@ -94,7 +100,7 @@ The project is testing the claim in the hope of saying something useful about th
 
 ### Experiments that have been spun off elsewhere:
 
-- A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), where village links are used to cobble-together a memory graph between memes in the records created by an AI chatbot and its conversational partner. 
+- A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), where village links are used to cobble together a memory graph between memes in the records created by an AI chatbot and its conversational partner. 
 Does this graph create a coherent, persistent entity that has a reputational asset, and can be held to account?
 - A repo, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), motivated as follows:
     > **Provocation:** Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in _any medium_.  
@@ -103,5 +109,4 @@ Does this graph create a coherent, persistent entity that has a reputational ass
 ### Planned artefacts:
 
 - A test graph of many publishers of village links, with publisher reputation an emergent property of the graph
-- A Trust Engine: Opportunity discoverable in a marketplace. Threats defended by a firewall.
-
+- A Trust Engine that introduces a marketplace of opportunities defended by a firewall of trust.
