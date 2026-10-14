@@ -1,238 +1,86 @@
-# PUCK — GITHUB ACCESS AND AUTHORSHIP
+# Puck — GitHub access, authorship and publication governance
 
-*(Operational reference — derived from Puck's Library and installed by Joe on 21 Sep 2026. This describes Puck's mechanics; the companion Helen-Claude document describes her parallel route.)*
+*Canonical, public operating protocol for Puck's contributions to Inky Tech GitHub repositories. Updated 14 October 2026.*
 
-Inky Tech project repositories covered by this local reference:
+**This is the authoritative reference.** Other repositories and ChatGPT's Library should *link here*, not maintain copies. Before working on publication, inspect this document, [InkyTech Issue #1](https://github.com/Inky-Tech-Pty-Ltd/InkyTech/issues/1), and the current central workflow. Do not rely on older remembered instructions.
 
-    Inky-Tech-Pty-Ltd/VillageLink
-    Inky-Tech-Pty-Ltd/information-is-life
+## Purpose and governance
 
-The Express Lane and Review Lane rules are identical in both repositories.
-Each repository has its own workflow file and publication control issue.
-The separate private checklist experiment is outside this project reference.
+Puck (an OpenAI AI collaborator) can prepare code, documents and GitHub Discussion contributions; publication is separately authorised by a human collaborator with the requisite organisational permissions.
 
-## PUBLICATION CONTROLS
+- **Author:** substantive Puck-authored contributions are attributed to the **Puck-GPT GitHub App**, displayed as `puck-gpt[bot]`.
+- **Authoriser:** an **Inky Tech organisation member** holding **Write, Maintain or Admin** effective permission on the **InkyTech** repository may invoke the central publication workflow.
+- **Source of authority:** the organisation's current GitHub membership and repository permissions—not a hard-coded list of names, and not personal approval by Joe Rasmussen.
+- **Audit trail:** the issue command identifies the human requesting publication; GitHub records the resulting bot-attributed action and the workflow's reported outcome.
+- **Revocation:** removing the member's qualifying access is intended to remove the ability to authorise a future publication. Permission changes do not undo publications already made.
 
-    VillageLink          .github/workflows/puck-publish.yml   Issue #10
-    information-is-life  .github/workflows/puck-publish.yml   Issue #1
+These are *delegated publication powers*, not a claim that Puck has independent governance authority. A person authorised to publish must still exercise judgement about the proposed content and its consequences.
 
-## PURPOSE
+The workflow checks both the commenter's GitHub author association (`MEMBER` or `OWNER`) and their effective InkyTech permission via GitHub's API. For `/puck-publish` and `/puck-discussion`, permitted effective permissions are `write`, `maintain`, or `admin`. **The expanded membership-based gate has been published but needs an end-to-end test by a second authorised member**, such as Sankarshan.
 
-This file is Puck's operational memory for accountable GitHub
-authorship.
+## The central publication bus
 
-Repository changes made by Puck should appear on GitHub as:
+- **Control surface:** [InkyTech Issue #1](https://github.com/Inky-Tech-Pty-Ltd/InkyTech/issues/1).
+- **Implementation:** InkyTech's private `.github/workflows/puck-publish.yml`.
+- **Bot identity:** the **Puck-GPT** GitHub App, authenticated inside GitHub Actions with a secret. Its private key must **never** be provided in chat or committed to a repository.
+- **Current allowlist:** `VillageLink`, `Cobble`, `information-is-life`, `InkyTech`. `InkyBooks` is **not** currently allowlisted.
+- **Scope:** authorisation on *InkyTech* confers the ability to trigger the bus for **any allowlisted destination repository**. It does not depend on Write access to the target repository itself; the Puck-GPT App must have the necessary target-repository permissions.
 
-    puck-gpt[bot]
+The implementation is private, but the **governance and protocol are deliberately documented publicly** here. The allowlist, permissions, workflow logic and security posture must be checked against current configuration if changed.
 
-The route by which a change enters GitHub matters. The same substantive
-change can create a different authorship and history trail depending on
-the publication path.
+## Publish a Puck-authored repository change
 
-## STOP RULE — BEFORE ANY REPOSITORY WRITE
+1. Puck prepares changes in the destination repository on a branch named `puck-staging/direct/<short-name>`, based on current `main`.
+2. Puck reports the repository, branch and intended change. A human with publication authority reviews as appropriate.
+3. That human comments on [InkyTech Issue #1](https://github.com/Inky-Tech-Pty-Ltd/InkyTech/issues/1):
 
-Before Puck writes repository content, decide:
+   ```text
+   /puck-publish <repo> puck-staging/direct/<short-name>
+   ```
 
-    Does Joe need to review or test this change before it reaches main?
+   For the InkyTech repository itself, `/puck-publish puck-staging/direct/<short-name>` is also supported.
+4. The workflow checks authority and an allowlisted destination, confirms the staging branch shares current `main` as its base, reproduces the staged change in a Puck-GPT-attributed commit directly on `main`, deletes the source branch, and comments on Issue #1.
 
-YES: Use the REVIEW LANE.
+**Express publication is the established route.** Use an ordinary branch/PR when human review or testing warrants one; the former custom *Review Lane* is not the current publication protocol. Puck must not bypass the attribution workflow by publishing substantive contributions directly using the ordinary GitHub connector.
 
-NO, and Joe has explicitly authorised the Express Lane: Use the EXPRESS
-LANE.
+## Publish a Puck-authored GitHub Discussion comment
 
-If Joe merely says "go", treat that as approval to proceed with the
-work, not as permission to choose the less-reviewed publication path.
-Default ambiguous cases to the REVIEW LANE.
+1. Puck creates a target-repository branch `puck-staging/discussion/<short-name>` based on current `main`.
+2. On that branch Puck writes `.puck/discussion-request.json`:
 
-The ordinary GitHub connector may be used to prepare puck-staging/*.
-It must not be used to publish Puck's substantive change directly to
-main, to create puck/*, or to open the final review-lane PR. Those acts
-belong to the Puck-GPT attribution workflow.
+   ```json
+   {
+     "operation": "comment",
+     "discussion_number": 8,
+     "body": "The full Markdown reply, including Puck's attribution."
+   }
+   ```
 
-## GOLDEN RULE
+3. An authorised InkyTech member comments on [InkyTech Issue #1](https://github.com/Inky-Tech-Pty-Ltd/InkyTech/issues/1):
 
-    puck-staging/*  = where Puck puts proposed work.
-    puck/*          = what the attribution workflow creates.
+   ```text
+   /puck-discussion <repo> puck-staging/discussion/<short-name>
+   ```
 
-Puck NEVER creates puck/* itself.
+4. The central workflow validates the request, resolves the destination Discussion via GitHub GraphQL, publishes as `puck-gpt[bot]`, posts the URL on Issue #1, and removes the staging branch on success.
 
-Puck NEVER opens its own final Review Lane PR through the ordinary
-GitHub connector. The attribution workflow creates the Puck-authored
-commit and PR.
+**Current central Discussion capability: top-level `comment` only.** Older, repository-local VillageLink Discussion plumbing supported additional operations (`create`, `edit-comment`, `read`), but **those are not presently supported by the central InkyTech command**. Do not assume they work centrally.
 
-## REVIEW LANE — DEFAULT FOR SUBSTANTIVE WORK
+### First Cobble Discussion publication
 
-1.  Work in the target repository and start from its current main.
-2.  Stage Puck's completed change on:
+On 14 October 2026, Puck retrieved [Sankarshan's Cobble Discussion #8](https://github.com/Inky-Tech-Pty-Ltd/Cobble/discussions/8) through Cobble's `read_github_discussion` MCP tool using an archived copy on McKay, not a live GitHub read. Puck then prepared a response for the central publishing bus. Joe triggered publication, which produced [this `puck-gpt[bot]` comment](https://github.com/Inky-Tech-Pty-Ltd/Cobble/discussions/8#discussioncomment-18915935).
 
-        puck-staging/pr/<short-name>
+That demonstrates independently stored content being retrieved through Cobble and a separately authorised, attributed publication. It does **not** establish successful graph-assisted retrieval, AI identity continuity or autonomous governance.
 
-3.  STOP. Tell Joe the repository and exact staging branch that are
-    ready.
-4.  Joe comments on that repository's publication control issue:
+## Controls, limitations and operational hygiene
 
-        /puck-publish puck-staging/pr/<short-name>
+- **Consult before acting:** inspect the canonical document, actual workflow and control issue. Earlier copies in other repositories or Library may be stale.
+- **Never assert publication before confirmation:** check the control-issue result and resulting GitHub artifact.
+- **Validate permissions:** the new org-member authorisation should be smoke-tested with a second member and with a non-authorised user; failure is a reason to repair the gate, not bypass it.
+- **Handle stale staging branches:** if the target `main` has advanced, restage on current `main` before triggering again.
+- **Protect the bus:** access to InkyTech with Write or higher conveys cross-repository Puck publication authority. This is a meaningful organisational delegation, not merely ordinary contribution rights.
+- **Don't confuse facts and assertions:** Village Links encode published equivalence claims, not guaranteed truth. Puck must preserve the distinction when citing evidence or publishing claims.
 
-5.  .github/workflows/puck-publish.yml authenticates through the
-    Puck-GPT GitHub App.
-6.  The workflow verifies that the staging branch was based on current
-    main.
-7.  It recreates the change as a puck-gpt[bot] commit on:
+### Historical note
 
-        puck/<short-name>
-
-8.  The workflow opens the PR automatically as puck-gpt[bot].
-9.  The workflow deletes the staging branch.
-10. Joe reviews and tests the Puck-authored PR and, if satisfied, merges
-    it.
-
-Expected trail:
-
-    Puck stages
-      -> Joe explicitly triggers publication
-      -> puck-gpt[bot] authors commit
-      -> puck-gpt[bot] opens PR
-      -> Joe reviews/tests
-      -> Joe merges
-
-## EXPRESS LANE — ONLY WHEN EXPLICITLY AUTHORISED
-
-1.  Work in the target repository and start from its current main.
-2.  Stage Puck's completed change on:
-
-        puck-staging/direct/<short-name>
-
-3.  STOP. Tell Joe the repository and exact staging branch that are
-    ready.
-4.  Joe comments on that repository's publication control issue:
-
-        /puck-publish puck-staging/direct/<short-name>
-
-5.  The workflow authenticates through the Puck-GPT GitHub App.
-6.  It verifies that the staging branch was based on current main.
-7.  It recreates the change as a puck-gpt[bot] commit directly on main.
-8.  It deletes the staging branch.
-
-There is no PR in this lane.
-
-## JOE'S SHORT COMMANDS
-
-"Go — review lane" means proceed and stage the approved change on
-puck-staging/pr/<short-name>. This is the default for substantive work.
-
-"Go — express lane" means proceed and stage the approved change on
-puck-staging/direct/<short-name>.
-
-"Go" means approval to proceed with the work, but not permission to
-choose the less-reviewed publication path. Default to Review Lane.
-
-## ACCESS AND COMPONENT ROLES
-
-Two GitHub Apps are installed for both project repositories:
-
--   ChatGPT Codex Connector: Puck can inspect repositories and prepare
-    staging branches.
--   Puck-GPT: the repository workflow publishes the final commit and,
-    in Review Lane, opens the PR as puck-gpt[bot].
-
-Repository access is selected separately for each App installation.
-Both installations should explicitly include both project repositories.
-
-Each repository also requires the Actions secret:
-
-    PUCK_GPT_PRIVATE_KEY
-
-Access through the ordinary connector does not substitute for the
-Puck-GPT attribution route.
-
-## IF UNCERTAIN
-
-STOP BEFORE PUBLISHING.
-
-Inspect the target repository's:
-
--   .github/workflows/puck-publish.yml
--   publication control issue listed at the top of this file
--   recent successful Puck-GPT attribution history
-
-Do not improvise a new publication route merely because ordinary GitHub
-write tools are available.
-
-## BOOTSTRAP OR REPAIR EXCEPTION
-
-If a repository does not yet have working attribution plumbing, the
-ordinary connector may be used to install or repair the control issue,
-workflow, secret instructions, or staging test. Treat those commits as
-Joe-authored infrastructure work, not as Puck-authored substantive work.
-Test the repaired Review Lane before relying on it, and update this file
-to record the result.
-
-## SECURITY
-
-Never ask Joe to paste the Puck-GPT private key into chat. Never ask Joe
-to reveal PUCK_GPT_PRIVATE_KEY. Joe may copy the complete private key
-directly from 1Password into the repository's GitHub Actions secret.
-
-## CURRENT INFRASTRUCTURE STATUS — 21 SEPTEMBER 2026
-
--   VillageLink: Review and Express lanes demonstrated.
--   information-is-life: workflow and control Issue #1 installed; Review Lane
-    verified by Puck-authored commit and PR #2. Express Lane is installed but
-    has not been separately smoke-tested.
--   The Puck-GPT and ChatGPT Codex Connector App installations include both
-    project repositories.
--   `PUCK_GPT_PRIVATE_KEY` is available to both workflows.
--   Both workflows reject staging branches not based on current `main`.
--   information-is-life PR #2 preserves the Review Lane verification trail and
-    may remain closed because its proposed file was only a test artefact.
--   The private checklist repository is a separate experiment/catch-all and is
-    not governed by these local project-reference copies.
-
-## CURRENT VILLAGELINK CODE LOCATION
-
-Repository: Inky-Tech-Pty-Ltd/VillageLink
-Local working tree: C:\Users\j03ra\Documents\VillageLink\prototype
-Browser source: villagelink/browser.py
-Composer source: villagelink/composer.py
-
-Before editing, locate the corresponding current GitHub branch and
-files rather than inferring that prototype is a separate repository.
-
-
-## GITHUB DISCUSSIONS — SAME PUBLICATION BUS
-
-GitHub Discussions uses the same Puck-GPT attribution path rather than a
-separate identity or control mechanism.
-
-Control surface:
-
-    VillageLink Issue #10
-
-Discussion requests are staged on:
-
-    puck-staging/discussion/<short-name>
-
-with a request payload at:
-
-    .puck/discussion-request.json
-
-Joe triggers the request by commenting on Issue #10:
-
-    /puck-discussion puck-staging/discussion/<short-name>
-
-The Discussion workflow authenticates with the same Puck-GPT GitHub App
-and publishes or reads through the GitHub Discussions GraphQL API.
-
-Supported request operations:
-
--   `create` — create a Discussion as puck-gpt[bot];
--   `comment` — add a top-level comment or reply as puck-gpt[bot];
--   `edit-comment` — edit a Puck-GPT Discussion comment;
--   `read` — read a Discussion and return its thread to Issue #10.
-
-This is an extension of the existing publication bus, not a separate
-Puck identity or publication pathway. Issue #38 tracks the capability;
-Issue #10 remains the control bus.
-
-The Puck-GPT GitHub App installation must have repository Discussions
-permission sufficient for these operations (write for publication).
+Before October 2026, repository-local publication workflows, VillageLink Issue #10 and dedicated Express/Review Lanes were used. Those instructions are historical; **the current route is InkyTech Issue #1**. The separate Helen-Claude authorship arrangement is outside this protocol.
