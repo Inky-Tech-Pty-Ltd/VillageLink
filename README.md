@@ -41,7 +41,7 @@ M = [A in X] = [B in Y]
 Or, more carefully, the trace-in-the-memory-system _is_ the meme.
 
 The equality is strict, but a village link is an assertion made by an entity in context, not an established fact. 
-An entity or process may evaluate that assertion as TRUE or FALSE, and use the result in Boolean operations.
+An entity or process may evaluate that assertion as TRUE or FALSE and use the result in Boolean operations.
 
 ### Star credentials
 
@@ -94,8 +94,8 @@ We are testing the claim in the hope of saying something useful about the govern
 
 ### 1. Authentication
 
-A multi-factor authentication system that is technology-agnostic, and indeed can recruit _any_ existing or future technology.
-The project aims to deliver gold-standard 'family celebration' authentication.
+The project will deliver a multi-factor authentication system that is technology-agnostic, and indeed can recruit _any_ existing or future technology.
+We are aiming for a gold standard of 'family celebration' authentication.
 'Family celebration' is authentication _in the graph_ with thousands of tiny factors acting in concert.
 It should have the breeziness and sense of infallibility of greeting Uncle John at the door. 
 
@@ -103,14 +103,15 @@ For contrast and conceptual testing, we are using the [July 2026 Hugging Face at
 
 ### 2. A self-sovereign AI entity
 
-An AI entity that is instantiated in a body of work rather than in a supplier of intelligence:
-* At its centre is a graph of memories connected by Village Links, preserving context across interactions and changes of supplier
-* The entity is self-sovereign: as independent as possible of the risks associated with particular suppliers
+The project aims to build an AI entity that is instantiated in a body of work rather than in a supplier of intelligence:
+
+* The centre of the entity is a graph of memories connected by Village Links. The AI will use links to preserve context over time
+* The entity is self-sovereign: as independent as possible of the risks associated with a specific jurisdiction or domicile
 * The entity is interoperable and portable. It can recruit intelligence from competing suppliers and move between hosting environments without surrendering its accumulated memory and identity.
   
 ### 3. A Trust Engine
 
-The analogy here is not a search engine spanning the whole web, but the membrane of an organism exposed to opportunities and risks in its environment.
+The analogy here is not a search engine spanning the whole web, but with the membrane of an organism exposed to opportunities and risks in its environment.
    
 Inside the membrane is a coherent entity, connected by Village Links. Outside is the world. 
 The problem is to decide where to extend the internal graph to maximise opportunities and minimise risks.
@@ -121,22 +122,22 @@ Trust Engine = f(internal graph, external graph, problem vector)
  
 The graphs provide the context. The user supplies the problem vector: the opportunity, transaction or question to be assessed.
 
-The ideal interface is an existing search-engine or chatbot query box, requiring no change in the user's habits. The Trust Engine could be delivered as a plugin to those interfaces.
+The ideal interface is the query box of an existing search-engine or chatbot, requiring no change in the user's habits. The ideal Trust Engine would be delivered as a plugin to those interfaces.
 
 ### 4. Governance
 
 _(The three items above are value propositions with benefits that accrue to an individual entity.
 This item is more properly understood as a public good, with benefits that accrue to a community, sometimes represented by a governance entity.)_
 
-The Trust Engine described in (3) above is designed to help navigate the risks and opportunities faced by an entity.
+The Trust Engine described in (3) above is designed to navigate the risks and opportunities faced by an entity.
 The entity may be human, or it may be a coherent self-sovereign AI of the type described in (2) above. 
 
 In either case, the entity accesses resources through a series of transactions.
-In each transaction, the entity faces another party, which has risks.
+In each transaction, the entity faces another party. The other party experiences risk.
 
-The authentication system described in (1) above is designed to present evidence about those risks.
-The entity has an incentive to present evidence that is checkable or otherwise acceptable to the other party.
-The entity can use the standard to assert, "Your risk is controlled because I am constrained by the rules and norms of these memory-system communities."
+Our entity maximises its opportunity by minimising transaction costs. 
+The authentication system described in (1) above is the key asset in this effort.
+It says, "Your risk is controlled because I am constrained by the rules and norms of these communities."
 
 This is the source of the core governance claim of the project:
 
