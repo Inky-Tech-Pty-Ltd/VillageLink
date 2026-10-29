@@ -277,6 +277,14 @@ Selection, identity assignment and publication are separate acts. A minted trace
 
 An aspiration being tested by Cobble, not a property conferred merely by using Village Links.
 
+### Sense
+
+**Definition:** An application-level capability through which an experimental entity can encounter or inspect information in its retained memory or adjacent environment.
+
+A sense may expose source records, their metadata, incoming messages, or observations of the external world. The *sense* is the access mechanism; an *observation* is what it returns; and an *experience* is what the entity actually takes into its ongoing history. Having a source copied into a corpus does not, by itself, mean that the entity has sensed or understood it.
+
+Cobble's initial Arena source catalogue is an **operator diagnostic** over archived file metadata, not yet an autonomously exercised or resource-metered sense of the juvenile learner. Future internal-memory and web-adjacent senses are experimental capabilities whose use must respect source permissions, privacy boundaries and explicit budgets for attention, retrieval, intelligence and external operations. A sense neither proves the truth of what is observed nor creates a Village Link assertion automatically.
+
 ### Theory of mind
 
 **Definition:** An entity's revisable model of other entities' perspectives, interests, histories and likely responses, inferred from available traces and interactions.
