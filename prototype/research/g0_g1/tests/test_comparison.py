@@ -19,9 +19,9 @@ class G1BenchmarkTests(unittest.TestCase):
         a, b = 'urn:left', 'urn:right'
         c = tuple(Claim(a, b, 'copy:' + str(i), 'origin:same')
                   for i in range(10))
-        self.assertEqual(link_signal(c)[(a, b)], 1)
+        self.assertEqual(link_signal(c)[frozenset((a, b))], 1)
         other = Claim(a, b, 'independent', 'origin:other')
-        self.assertEqual(link_signal(c + (other,))[(a, b)], 2)
+        self.assertEqual(link_signal(c + (other,))[frozenset((a, b))], 2)
 
     def test_evaluation_abstains_on_ambiguous_lookups(self):
         world = World(
@@ -67,6 +67,20 @@ class G1BenchmarkTests(unittest.TestCase):
         self.assertEqual(hostile['decisions'], 240)
         self.assertIn('hostile_fixed_optimistic_weight', hostile)
 
+    def test_reversed_claims_have_same_effect(self):
+        world = generate(5)
+        reversed_claims = tuple(
+            Claim(c.right, c.left, c.publisher, c.origin)
+            for c in world.claims
+        )
+        flipped = World(world.left, world.right, reversed_claims, world.truth)
+        self.assertEqual(link_signal(world.claims), link_signal(reversed_claims))
+        self.assertEqual(rank(world, augmented=True, link_weight=.3),
+                         rank(flipped, augmented=True, link_weight=.3))
+        self.assertNotEqual(rank(world, augmented=True, link_weight=.3),
+                            rank(world, augmented=False, link_weight=0))
+
 
 if __name__ == '__main__':
     unittest.main()
+    
