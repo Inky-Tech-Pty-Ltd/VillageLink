@@ -92,11 +92,11 @@ def content_score(a: Trace, b: Trace) -> float:
             + .16 * (a.topic == b.topic))
 
 
-def link_signal(claims: tuple[Claim, ...]) -> dict[tuple[str, str], int]:
+def link_signal(claims: tuple[Claim, ...]) -> dict[frozenset[str], int]:
     # Count declared origins, never duplicated publisher handles.
     origins = defaultdict(set)
     for claim in claims:
-        origins[(claim.left, claim.right)].add(claim.origin)
+        origins[frozenset((claim.left, claim.right))].add(claim.origin)
     return {key: min(len(value), 2) for key, value in origins.items()}
 
 
@@ -107,7 +107,7 @@ def rank(world: World, *, augmented: bool, link_weight: float):
     for a in world.left:
         scored = [(b.identifier,
                    round(content_score(a, b) +
-                         link_weight * signal.get((a.identifier, b.identifier), 0), 8))
+                         link_weight * signal.get(frozenset((a.identifier, b.identifier)), 0), 8))
                   for b in world.right]
         result[a.identifier] = sorted(scored, key=lambda x: (-x[1], x[0]))
     return result
