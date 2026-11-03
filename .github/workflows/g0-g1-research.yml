@@ -1,0 +1,41 @@
+name: G0-G1 research benchmark
+
+on:
+  pull_request:
+    paths:
+      - "prototype/research/g0_g1/**"
+      - ".github/workflows/g0-g1-research.yml"
+  push:
+    branches: [main]
+    paths:
+      - "prototype/research/g0_g1/**"
+      - ".github/workflows/g0-g1-research.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run paired research and negative-control tests
+        env:
+          PYTHONPATH: prototype/research/g0_g1
+        run: python -m unittest discover -s prototype/research/g0_g1/tests -v
+      - name: Generate machine-readable held-out evidence
+        run: |
+          mkdir -p research-output
+          for regime in mixed hostile none; do
+            python prototype/research/g0_g1/g1_comparison.py --regime "$regime" --output "research-output/$regime.json"
+          done
+      - name: Retain reproducible per-seed evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g0-g1-synthetic-heldout
+          path: research-output/*.json
+          retention-days: 30
