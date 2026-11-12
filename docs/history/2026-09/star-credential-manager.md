@@ -2,7 +2,7 @@
 
 ## Status
 
-**Superseded by [ADR-007](docs/adr/007-stateless-composer.md), 7 September 2026.**
+**Superseded by [ADR-007](../../adr/007-stateless-composer.md), 7 September 2026.**
 
 This file is retained as a historical concept document because it records the line of thought that led to an important architectural reversal.
 
@@ -13,7 +13,7 @@ The project originally grouped two functions under the working name **Star Crede
 
 Further analysis showed that these functions have radically different trust and security characteristics.
 
-The first has become **Composer**, a small stateless reference tool described in [composer.md](composer.md).
+The first has become **Composer**, a small stateless reference tool described in [composer.md](../../concepts/composer.md).
 
 The second is **not part of the current Village Link architecture**. A persistent store of private cross-context equivalence relationships could reveal exactly the connections that users depend upon keeping separate. Any future proposal to build such a system requires a fresh architectural and security decision rather than continuation of this concept.
 
@@ -47,4 +47,4 @@ In shorthand:
 
 > **Define → Publish → Interpret → Compose**
 
-For the current architecture, see [documentation.md](documentation.md), [composer.md](composer.md) and [ADR-007](docs/adr/007-stateless-composer.md).
+For the current architecture, see [documentation.md](documentation.md), [composer.md](../../concepts/composer.md) and [ADR-007](../../adr/007-stateless-composer.md).

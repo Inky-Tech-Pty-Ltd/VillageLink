@@ -88,7 +88,7 @@ The project currently separates its work into three roles:
 
 These roles have different objectives and constraints. Keeping them separate is part of the project design.
 
-See the [Roadmap](../roadmap.md), [Wishlist](../wishlist.md), and [ADR-001](adr/001-two-ended-uri.md) for current work and architectural decisions.
+See the [Roadmap](history/2026-09/roadmap.md), [Wishlist](history/2026-09/wishlist.md), and [ADR-001](adr/001-two-ended-uri.md) for current work and architectural decisions.
 
 ## What happens next
 

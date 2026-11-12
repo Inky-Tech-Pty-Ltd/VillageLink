@@ -301,7 +301,7 @@ Risk belongs within transaction cost rather than being a separate category that 
 
 **Definition:** A proposed reader-side service that uses available evidence, published graph assertions and a *problem vector*—the reader's question, opportunity or proposed transaction—to discover and assess relevant objects, paths and potential referees.
 
-The working formulation is `Trust Engine = f(internal graph, external graph, problem vector)`. A Trust Engine interprets and ranks; it does not make an inferred equivalence true or automatically publish new Village Links or star credentials. See [trust-engine.md](trust-engine.md).
+The working formulation is `Trust Engine = f(internal graph, external graph, problem vector)`. A Trust Engine interprets and ranks; it does not make an inferred equivalence true or automatically publish new Village Links or star credentials. See [trust-engine.md](docs/concepts/trust-engine.md).
 
 ### Value function
 

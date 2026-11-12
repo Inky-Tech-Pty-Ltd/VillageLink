@@ -383,4 +383,4 @@ Partial or domain-specific success is also possible. G1 may help some long-tail 
 
 - Sergey Brin and Lawrence Page, [*The Anatomy of a Large-Scale Hypertextual Web Search Engine*](https://research.google/pubs/the-anatomy-of-a-large-scale-hypertextual-web-search-engine/), 1998.
 - Google Search Central, [*A guide to Google Search ranking systems*](https://developers.google.com/search/docs/appearance/ranking-systems-guide).
-- [Trust Engine](../../trust-engine.md).
+- [Trust Engine](../concepts/trust-engine.md).
