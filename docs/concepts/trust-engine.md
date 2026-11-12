@@ -273,7 +273,7 @@ Three comparisons are useful:
 
 Candidate evaluation tasks include existence, identity resolution, attribute inference, opportunity discovery, scam resistance and the total cost of reaching a sufficiently confident decision.
 
-The formal model is developed in [Research 002: Modelling G1](docs/research/002-modelling-g1.md).
+The formal model is developed in [Research 002: Modelling G1](../research/002-modelling-g1.md).
 
 ## Relationship to the Village Link roles
 
@@ -290,7 +290,7 @@ These can be summarised as:
 
 The Trust Engine occupies the third position: interpretation.
 
-The previously proposed Star Credential Manager is not a current project area; [ADR-007](docs/adr/007-stateless-composer.md) records the decision to separate stateless composition from persistent credential management.
+The previously proposed Star Credential Manager is not a current project area; [ADR-007](../adr/007-stateless-composer.md) records the decision to separate stateless composition from persistent credential management.
 
 ## Architectural restraint
 

@@ -59,7 +59,7 @@ Composer does not decide which audience should receive an artefact.
 
 The project previously considered a **Star Credential Manager** that combined construction with persistent management of identity relationships and audience-specific disclosure.
 
-[ADR-007](docs/adr/007-stateless-composer.md) records the decision to split those concerns sharply. Composer retains the small construction function. Persistent private credential management is outside the current project architecture.
+[ADR-007](../adr/007-stateless-composer.md) records the decision to split those concerns sharply. Composer retains the small construction function. Persistent private credential management is outside the current project architecture.
 
 Features such as saved credentials, accounts, synchronisation, audience profiles, private identity graphs or cloud backup would materially change Composer's security model and require a new architectural decision.
 
