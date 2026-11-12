@@ -1,24 +1,8 @@
 # AI collaboration reference
 
-This directory contains operational reference material for accountable AI
-collaboration: identity, authorship, publication controls, and the mechanics
-shared by Puck and Helen-Claude.
+This directory contains current operational material for accountable AI collaboration and repository authorship.
 
-Project specifications, research, product documentation, and general notes
-belong elsewhere in the repository.
+- [Puck — GitHub access, authorship and publication governance](puck-github-access-and-authorship.md) is the canonical active protocol.
+- The retired September 2026 Helen-Claude experiment is preserved under [project history](../docs/history/2026-09/helen-claude/).
 
-## Local and shared material
-
-The companion protocol documents are maintained as matched copies in
-`VillageLink` and `information-is-life` so that either repository remains
-independently intelligible to a newly opened coding-agent session.
-
-- Shared protocol and rationale should remain synchronized across both
-  repositories.
-- Repository-specific routing, including the active publication control issue,
-  is summarized in the repository's root `CLAUDE.md`.
-- Executable behavior lives in `.github/workflows/`.
-
-If documentation conflicts with a live workflow or publication control issue,
-stop before publishing, treat the live control as authoritative, and reconcile
-the documentation in both repositories.
+Historical files are retained for provenance, but they are not current instructions. Before any repository mutation, verify the authenticated GitHub principal and the live repository permissions and protections.
