@@ -47,3 +47,57 @@ bound and dataset. Traversal never repeats a trace in a path.
 remains traversable and its publication remains inspectable. Contradiction,
 corroboration, trust, evidence assessment, indexing and remote discovery are
 outside this version.
+
+
+## First result without the desktop browser
+
+From the repository root, using Python 3.11 or newer:
+
+```sh
+PYTHONPATH=prototype python -m unittest discover -s prototype/tests -p 'test_utility.py' -v
+PYTHONPATH=prototype python -m unittest discover -s prototype/tests -p 'test_star_interchange_boundary.py' -v
+```
+
+These exercises use the standard library and synthetic URI endpoints; they
+do not need the desktop browser, a publisher account or network access.
+
+## Inspect a disputed path before making a decision
+
+The following example deliberately includes a false bridge. Its ground truth
+is known only to the fixture author, not inferred by the utility.
+
+```python
+from villagelink.codec import make
+from villagelink.utility import Graph, Publication
+
+a, b, c = ("urn:fixture:" + x for x in ("a", "b", "c"))
+records = [
+    Publication(make(a, b), "urn:publisher:one"),
+    Publication(make(b, a), "urn:publisher:two"),
+    Publication(make(b, c), "urn:publisher:mistaken"),
+]
+g = Graph(records)
+assert g.connected(a, c, 2)
+assert not g.connected(a, c, 1)
+assert len(g.adjacent(a)[0].publications) == 2
+for step in g.paths(a, c, 2)[0]:
+    print(step.source, step.target, [p.source_uri for p in step.publications])
+```
+
+The positive result is structural reachability; the negative result is a
+depth-bound check. Neither decides referential equality. Two publications
+are not necessarily independent corroboration. A consumer must establish
+the evidence and policy needed for its particular decision outside this kit.
+Do not use connected() as an authentication or authorization predicate.
+
+## Using the utility alongside Cobble
+
+Cobble's experimental local hypothesis graph consumes Village Link rays.
+Its source observations, local persistence and retrieval are application
+responsibilities, not properties of the Village Link URI. The Star centre
+must be supplied independently when reconstructing membership; an anonymous
+connected component is not a Star. Local Cobble records are not public
+publication acts. Any synthetic projection into Publication records must
+label its local provenance rather than invent an external publisher.
+See the [Cobble boundary review](https://github.com/Inky-Tech-Pty-Ltd/Cobble/blob/main/docs/research/villagelink-cobble-star-boundary.md).
+No new Star wire format or production trust guarantee is implied.
