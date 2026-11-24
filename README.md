@@ -1,6 +1,6 @@
 <p align="right">
   <img
-    src="docs/assets/Village%20Link%20Heritage%20Bridge%20Logo%20transparent.png"
+    src="https://raw.githubusercontent.com/Inky-Tech-Pty-Ltd/VillageLink/main/docs/assets/Village%20Link%20Heritage%20Bridge%20Logo.png"
     alt="VL logo"
     width="130"
   />
@@ -78,9 +78,10 @@ When an entity presents a star credential, it is saying:
 
 From the perspective of the primitive, the centre of a star is a meme like any other. 
 In practice, we have found it useful to call this meme the _hypothesis_.
-In Cobble, the hypothesis may be a candidate memory. In authentication, an entity might present 
+In the sister-project of Village Link, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble/blob/main/README.md), the hypothesis may be a _room_. 
+In an authentication process, an entity might present 
 the hypothesis _Joe Rasmussen_ to a gatekeeper, such as Hugging Face, as the centrepiece of a star credential. 
-The gatekeeper assesses the evidence and decides whether to open the door. 
+The gatekeeper assesses the evidence and decides whether to open a door. 
 
 ## Governance
 
@@ -101,28 +102,20 @@ It should have the breeziness and sense of infallibility of greeting Uncle John 
 
 For contrast and conceptual testing, we are using the [July 2026 Hugging Face attack](https://openai.com/index/hugging-face-incident-and-the-road-ahead/).
 
-### 2. A self-sovereign AI entity
+### 2. A self-sovereign entity (See [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble/))
 
-The project aims to build an AI entity that is instantiated in a body of work rather than in a supplier of intelligence:
-
-* The centre of the entity is a graph of memories connected by Village Links. The AI will use links to preserve context over time
-* The entity is self-sovereign: as independent as possible of the risks associated with a specific jurisdiction or domicile
-* The entity is interoperable and portable. It can recruit intelligence from competing suppliers and move between hosting environments without surrendering its accumulated memory and identity.
+The project aims to build an entity that is instantiated in a body of work rather than in a supplier of intelligence:
   
 ### 3. A Trust Engine
 
 The analogy here is not a search engine spanning the whole web, but with the membrane of an organism exposed to opportunities and risks in its environment.
    
-Inside the membrane is a coherent entity, connected by Village Links. Outside is the world. 
-The problem is to decide where to extend the internal graph to maximise opportunities and minimise risks.
+Inside the membrane is a coherent entity. Outside is the world. 
+The problem is to decide where to admit the possiility of change in the internal state to maximise opportunities and minimise threats.
    
 ```
-Trust Engine = f(internal graph, external graph, problem vector)
+Trust Engine = f(internal graph, evidence at the membrane, problem vector)
 ```
- 
-The graphs provide the context. The user supplies the problem vector: the opportunity, transaction or question to be assessed.
-
-The ideal interface is the query box of an existing search-engine or chatbot, requiring no change in the user's habits. The ideal Trust Engine would be delivered as a plugin to those interfaces.
 
 ### 4. Governance
 
@@ -130,7 +123,7 @@ _(The three items above are value propositions with benefits that accrue to an i
 This item is more properly understood as a public good, with benefits that accrue to a community, sometimes represented by a governance entity.)_
 
 The Trust Engine described in (3) above is designed to navigate the risks and opportunities faced by an entity.
-The entity may be human, or it may be a coherent self-sovereign AI of the type described in (2) above. 
+The entity may be human, or it may be a coherent self-sovereign entity of the type described in (2) above. 
 
 In either case, the entity accesses resources through a series of transactions.
 In each transaction, the entity faces another party. The other party experiences risk.
@@ -155,8 +148,8 @@ This is the source of the core governance claim of the project:
 
 ### Experiments that have been spun off elsewhere:
 
-- A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), where village links are used to cobble together a memory graph between memes in the records created by an AI chatbot and its conversational partner. 
-Does this graph create a coherent, persistent entity that has a reputational asset, and can be held to account?
+- A repo, [Cobble](https://github.com/Inky-Tech-Pty-Ltd/Cobble), with a prototype app to cobble together an entity from information sources and intelligence sources. 
+Does this functionality create a coherent, persistent entity that has a reputational asset, and can be held to account?
 - A repo, [information-is-life](https://github.com/Inky-Tech-Pty-Ltd/information-is-life), motivated as follows:
   
     > **Provocation:** Life is a set of competing 'copy' instructions. Genes are copy instructions expressed in nucleic acids. Memes are copy instructions expressed in _any medium_.  
@@ -164,5 +157,5 @@ Does this graph create a coherent, persistent entity that has a reputational ass
 
 ### Planned artefacts:
 
-- A test graph of many publishers of village links, with publisher reputation an emergent property of the graph
-- A Trust Engine that introduces a marketplace of opportunities defended by a firewall of trust.
+- A test graph of entities with market incentives and reputational constraints
+- A Trust Engine that assesses oppotunities and threats at the membrane of an entity.
